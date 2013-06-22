@@ -1,0 +1,217 @@
+
+Warn user if run wgreindex as root when index files are owned differently
+
+*** 'Name this page' in search box, just save keywords in page itself next time we reindex!  Then glimpse can index them normally, search fast, and using initial keyword place high in ranking (but don't print the actual keyword line)
+USERKEYWORDS:uname:key1,key2,etc
+USERKEYWORDS:anonymous:key1:#votes,key2:#votes,etc
+later will need to be ableto manage/delete/timeout keywords, for now just add them
+
+handle " " quoted string search phrase (don't translate AND/NOT/OR in between quotes)
+
+DONE Highlighting query words
+DONE  -pass highlight to mfs and to getfile
+DONE  - need to form-encode highlight, should be simple pack command!
+
+sometimes after adding new root, reindex with -f messes up the index
+  need to delete .glimpse_index if new root was just added
+
+need BASE HREF tag at start of search results to fix relative paths
+
+copy wgindex.html to docroot if prompted/adding search boxes/ from wgcmd?
+DONE test in demo area, live wg2, release 3.4.0
+
+DONE Add search boxes/make neighborhoods
+DONEsuck down a linktree to test with...need local files for add boxes
+
+DONE: get wgconvert working on .nh files
+     ? warn user about .nh* files in web area?
+DONE test on http://localhost/webglimpse/webglimpse.net, why .wg_madenh size 0?
+*** test addsearch by itself, add back into wgreindex if addboxes = 1
+install: not askign about register when should, also stop recompiling every time!
+warn from web interface that search boxes may not be added unless run with appropriate perms
+provide help text describing how to run addsearch all by itself
+
+   LATER can be wgRoot variable because # hops comes from root also
+   LATER store which root generated each page, we will use for hops, ranking
+   
+Search within results
+
+"Trunk" pages, traversed but not indexed
+
+Use Filters should be an admin choice, not a user choice
+save filtered version (as per Ravi) to save space & serach time
+only problem will be with JumpToLine, make sure linebreaks within tags are preserved so that we can jump to the actual line
+May not be able to jump to line for remote files unless we retrieve onthefly.
+
+DONE output separate tables, not one big table
+   include: checkbox for search within results
+   down-arrow for not-good-result (ranklower), up-arrow for yes-good-result (rankhigher)
+
+rank higher if keywords near each other
+
+option to copy search page to docroot automatically if perms allow
+
+do PDF files automatically
+
+make archives - options for filtering, diff custom output templates
+
+register at end of install?  (will keep track of main query page) 
+
+Minimal, Typical, Custom installs
+DONE- Redirects are broken??  (but every other time, not every time?  Has to do with zero-byte file deletion...? (was robots redirects)
+
+- add switch to wgreindex when run from web
+   check in wginstall.pl if web user can : run httpget, wusage
+   if not httpget, warn that only directory style indexes can be done from web interface
+   if not wusage, remove from web user version of wgreindex
+
+TEST - RULE for gathering domains, use any variant of this primary domain, including xxx.site.com
+=======
+ - fix mfs jump-to-line on files w/spaces; replace mfs?
+
+DONE - RULE for gathering domains, use any variant of this primary domain, including xxx.site.com
+   (can we do this as a regexp for LimitPrefix? )
+   (yes, I think so - need to test exactly as documented in tmplEditSite.html)
+
+ - nice way of controlling & presenting stats from the webministration interface
+
+ - templates or other rules to control what stats are gathered.
+
+DONE  named ranking formulas 
+ - option to print score for each hit
+ - why not include LINK, TITLE, etc all in wgoutput.cfg
+
+- allow both var name and nicename for ranking formulas??
+*** - use real avail Ranking formulas in wgindex.html, not hardcoded list
+
+ - when generating new wgindex.html, use actual available formulas, do not  hardcode
+
+TEST linkpop var
+
+DONE 12/9/01 *** - MONITORING component - send email to admin when things break
+	done - archive not successfully built
+	done - search returns basic error
+DONE - wgTextMsgs.pm  write all messages used in wgarcmin.cgi command line **
+
+DONE - run from command line (in case not root on install, also if want to)
+
+ - error when return in initial description for archive
+
+ - use temp dir to keep archive active during reindexing
+
+ - fix glimpse to limit length of title when no </title> tag
+ 
+DONE 12/1/01- fix names of .remote files to end at the ?
+
+DONE 12/3/01 - when webglimpse run w/o path, print wgindex.html
+
+DONE - Statistics module
+
+======================================================================================
+
+- fix makenh to make .madenh again...
+
+- if not using cache, limit hits returned by glimpse to save time (using -L switch)
+
+- remember which filter was chosen last time on an upgrade
+
+- Either hae other index for roots than StartURL, or don't allow 2 roots w/same StartURL.
+
+TEST - link popularity for RankHits
+
+TEST - RankHits: named formulas, let user choose between on search
+
+- warn if cannot create wusage directory when creating a new archive and if using wusage.
+ 
+DONE - ADD LANGUAGE SUPPORT at least multiple wgindex.html pages, output page
+
+DONE - ask for translation of output config file, whatis page
+
+DONE - change names to webglimpse.cgi, mfs.cgi, wgarcmin.cgi
+
+
+ - add link to wgindex.html in wgbox.html for Search Options
+
+  - Warn people about permissions for Build Index, describe how to run by hand
+  - test permissions before running from web
+
+  - Option to update all archive templates on upgrade
+
+- make sure to include options in search box at end of each results page
+
+ - would be very nice to add search box to specific page, copy over wgindex.html,
+provide source code in a documented format, OR add searchboxes to all pages 
+
+ - Edit Root & change URL - delete & add new
+ 
+DONE  - LimitPrefix -either set explicitly or default better on subdirs
+
+ - do we need .glimpse_filehash_index?  Seems very large on v. small indexes...
+
+DONE - v 2.0.07 3/27/01 - don't gather pages that haven't been updated since the last time! 
+DONE - if Max Hops left blank in site-type archive, make sure behaves correctly
+DONE  -  remove config.pl 
+DONE  -  replace $DIRECTORYOPTIONS in wgall.html
+DONE  -  fix GuessCacheFile
+  - TEST fix addsearch
+  - fix makenh to create neighborhoods if requested
+  - DOCS to tell people to run addsearch by hand
+
+--------------------------------------------------
+DONE - tmplEditTree & tmplEditSite
+
+DONE - test & fix makenh on combination archives: linktree + dir, etc
+
+DONE - unnecessary .remote gathering on local LinkTree type archives
+
+DONE - why is ":archive not found" coming up initially ?
+
+DONE - check password for manage archives - need to return HTTP code 401, how?
+
+DONE - add option for REMOTE domains, also fix Add Domain button
+
+DONE - integrate latest fixes to Webglimpse script 1.X
+
+---------------------------------------------------
+
+DONE - on New archive, keep Title & Desc on reload page for category change
+
+- add "Change Category" page
+
+DONE - give credit to DMOZ, explain we ship with a slimmed-down version of top 3 levels
+
+- if > x pages, don't show all results in window
+
+DONE - rewrite ResultCache
+
+- auto-retrieve glimpse
+
+DONE - compile all html2txt options
+
+- DOCS for config files, bring up in webmin at least for viewing
+
+- more sample files, esp RankHits formulas, CustomOutputs
+
+- autoinstall shared lib solution
+
+- really nice docs with specific pointers in error messages, stored/installed locally
+
+- create crontab line
+
+DONE - for DIR type roots, offer to guess equiv URL (automatically if left blank)
+
+- username for managing each archive, master usernames in main .wgpasswd
+
+---------------------------------------------------
+
+- logging module
+
+****************************************************
+
+DONE * category support - dmoz cats built-in
+
+DONE	- use 3-level cats by default (takes ~ 250K)
+
+- add support for multiple categories for each archive
+
+* whois++ protocol expansion

@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<TITLE>.wgfilter-index Help Page</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<table cellpadding="3" bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+
+	<tr><td align=center valign=middle><font size="+1">Help on .wgfilter-index</font><br>
+</td></tr>
+
+<tr><td>
+
+<b>.wgfilter-index</b> contains a set of rules for allowing and denying files based on regular expressions matching the link (for Site and Tree type archives) or filename (for Dir type archives).  There is a .wgfilter-index file for each archive, in the main archive directory (defaults to /usr/local/wg2/archives/N where N = archive #).
+<p>
+The syntax is as follows
+<blockquote>
+<PRE>
+Allow|Deny	[regexp]
+</PRE>
+</blockquote>
+It is used to prevent makenh from gathering and attempting to index various nontext files, and from indexing its own control files. For example, the lines
+<blockquote>
+<PRE>
+Deny (^|/)JavaScript:
+Deny \.gif$
+Deny \.jpeg$
+Deny \.mpeg$
+Deny \.jpg$
+Deny \.ppt$
+</PRE>
+</blockquote>
+prevent indexing links beginning with "Javascript:" or containing "/Javascript:"; and all files/links ending with .gif, .jpeg, .mpeg, .jpg and .ppt.
+<p>
+&nbsp;
+<p>
+       </td></tr>
+</table>
+<A HREF="|WGARCMIN|">Back to WGmin home</A>
+</center>
+</BODY>
+</HTML>

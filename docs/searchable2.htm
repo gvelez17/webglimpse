@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Making a Searchable Site</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Making A Searchable Site  </h3>
+</div>
+<hr align="left" width="65%" />
+<p class="Sub-Heading"><a name="integrate" id="integrate"></a>Integrating the Search Interface into your Site </p>
+<p>Now that you've set up an archive and configured your domain, you are ready to build your archive indexes and integrate them into your site.</p>
+<p>Highlight the archive that you configured and click the &quot;Manage&quot; button. The status message should now say 'Ready to build index'.   </p>
+<p>There are a few more options on the page that you can optionally select:</p>
+<ul>
+  <li>
+    <p>The <strong>Add search boxes</strong> checkbox tells the reindexing script to add a small   query form to the bottom of each <br />
+    local page indexed, if permissions allow. </p>
+  </li>
+  <li>
+    <p>The <strong>Prefilter filetypes</strong> input areas tells the reindexing script which   file extensions to process ahead of time. <br />
+      In order to prefilter and index <a href="pdf.htm">PDF files</a>, you must also install a separate   PDF-to-Text program. (the same <br />
+      is true for <a href="catdoc.htm">word</a> and <a href="catdoc.htm">excel</a> documents) </p>
+  </li>
+</ul>
+<p>At this point, you can simply press the 'Build Index' button in the lower part of the screen. The archive will build in the background. You can click the &quot;Update Status&quot; link or reload the page until the 'Last Built...' message appears with the number of files indexed. <br />
+</p>
+<p><span class="SubHeading2">Searching and Testing your Archive</span><br />
+From the 'Manage Archive' screen, you can press the 'Search Archive' button to search your archive. This will launch the search form where you can do some keyword testing. </p>
+<p>You can also enter 'http://yourdomain.com/cgi/path/to/webglimpse.cgi' into your browser to generate a default search form automatically!</p>
+<p>Some instructional comments can be found in the 'view source' of the 
+  search form and as a general rule, if you view the source of any config file we've tried to put useful 
+comments there.</p>
+<p><span class="SubHeading2"><a name="formoptions" id="formoptions"></a>Integrating the Search Boxes into your Existing Pages</span><br />
+Clicking the &quot;Add a search box or page to your website&quot; link at the bottom of the 'Manage Archive' screen will give you form samples and the exact codes you need to cut and paste into your website in order to add search capabilities to this particular archive. It  will also tell you the exact locations on your server where the sample search forms reside. You may edit those forms in any way you desire, simply preserve the FORM tag and the names of the input tags. The types of form examples that are automatically generated are listed below: </p>
+<ul>
+  <li>Default search form: This form has the most options for advanced searching, including ranking, case sensitivity, misspellings, etc.</li>
+  <li>Simplified version: Less options than the default search form, this form has options for ALL, ANY or EXACT searching.</li>
+  <li>Bare query box: As the name implies, it is simply a keyword input field with a link to the advanced search form and a submit button.</li>
+</ul>
+<p><a name="regularindexing" id="regularindexing"></a><span class="SubHeading2">Setting Up Regular Reindexing</span> </p>
+<p>Now that you have successfully set up an archive, how will you keep it up to date? You can manually build your archives as you did the first time, but to make it easier, you can click the &quot;Reindex automatically from your crontab&quot; link at the bottom of the 'Manage Archive' screen. A screen will be displayed giving you the exact command syntax to reindex your archive from your unix/linux cron. <strong>Note:</strong> Clicking this link will not place an entry into your cron file as that would create a security risk, it will only display the exact syntax for you to copy into your crontab manually. If you are not familiar with using the unix/linux cron file, you can use the MAN pages in your system for more information.</p>
+<p>It is important to also note that the crontab may run as a different user than the web user. For this 
+  reason you may have to choose between ALWAYS reindexing via cron or ALWAYS 
+  reindexing via the web interface. You may also have to change the 
+ownership/permissions of the archive in order to run the indexing via your crontab.</p>
+<p>&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="install.htm">&lt;&lt; Installation and Configuration </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="configure.htm">Configuring and Customizing   &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

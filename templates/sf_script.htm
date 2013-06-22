@@ -1,0 +1,62 @@
+<!--Below is JavaScript which is used for bringing results from SearchFeed-->
+<script>
+ var listings = new Array ();
+ var RelatedSearches = new Array();
+ var TopSearches = new Array();
+ var Searchfeed = new Object();
+
+ var params = new Array();
+ function escapeStr(str){
+   var s = escape(str);
+   s = s.replace( /\//g,"%2F" );
+   s = s.replace( "#", "%23" );
+   return s;
+ }
+ function unescapeStr(str){
+   var s = unescape(str);
+   s = s.replace( /\+/g," " );
+   return s;
+ }
+
+ function parseParams(s) {
+   var v = 1;
+   q = s.indexOf('?');
+   if (q != -1) {
+     t = s.slice(q+1);
+     t = t.replace(/%26/gi, "&");
+     z = t.split('&');
+     for (i=0;i<z.length;i++) {
+       if (z[i] != "") {
+         v = z[i].split('=');
+         params[v[0]] = v[1];
+       }
+     }
+   }
+ }
+ parseParams(document.location.href);
+ function getParam(s) {
+   return params[s];
+ }
+
+ var keyword = getParam("keyword");
+ if (keyword == null || keyword == "undefined") {
+   keyword = "entertainment";
+ }
+
+ var page = getParam("page");
+
+ if (page == null || page == "undefined") {
+   page = 1;
+ }
+ page = parseInt(page);
+ if (isNaN(page)) {
+   page = 1;
+ }
+ if (page < 0) {
+   page = 1;
+ }
+ var numRes = 3;
+ var partnerId = 15105;
+ var rndStr = Math.random()*100000;
+ document.write("<scr" + "ipt src='http://www.searchfeed.com/rd/feed/JavaScriptFeedRel.jsp?rnd=" + rndStr + "&adult=0&cat=" + keyword + "&trackID=W5313115333&pID=" + partnerId + "&nl=" + numRes + "&p=" + page + "'>" + "</scr" + "ipt>");
+</script>

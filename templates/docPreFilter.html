@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<TITLE>PreFiltering Help Page</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<table cellpadding="3" bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+
+	<tr><td align=center valign=middle><font size="+1">Help for PreFiltering Files for Speed<font><br>
+</td></tr>
+<tr><td>
+
+The <b>Prefilter filetypes</b> input areas tells the reindexing script which file extensions to process ahead of time.  Any file extension with a corresponding filter script in the
+<blockquote>
+	|DIR|/.glimpse_filters
+</blockquote>
+file is a candidate for prefiltering.  Entering the special term 
+<blockquote>
+<b>all</b>
+</blockquote> in the input area tells the script to prefilter all files with an extension found in the .glimpse_filters file.
+<p>
+Currently prefiltering is incompatible with jump-to-line.  So, if you wish to filter only pdf but not html docments, you could enter
+<blockquote>
+<b>	pdf PDF</b>
+</blockquote> 
+in the input area.
+<p>
+In order to prefilter and index PDF files, you must  also install a separate PDF-to-Text program.  Please see 
+<blockquote>
+<b>	<A HREF="http://webglimpse.net/docs/howto_xpdf.html">How To Index PDF Documents with XPDF</A></b>
+</blockquote>
+for specific instructions.
+<p>
+<p>
+In order to prefilter and index HTML files while preserving links, you should make sure that <b>htuml2txt.pl</b> is the filter that will be applied.  You should see lines like
+<blockquote><pre>
+*.html  |WGHOME|/lib/htuml2txt.pl <
+*.shtml |WGHOME|/lib/htuml2txt.pl <
+*.sht   |WGHOME|/lib/htuml2txt.pl <
+*.php   |WGHOME|/lib/htuml2txt.pl <
+*.PHP   |WGHOME|/lib/htuml2txt.pl <
+*.php3  |WGHOME|/lib/htuml2txt.pl <
+*.php4  |WGHOME|/lib/htuml2txt.pl <
+*.htm   |WGHOME|/lib/htuml2txt.pl <
+*.HTM   |WGHOME|/lib/htuml2txt.pl <
+*.HTML  |WGHOME|/lib/htuml2txt.pl <
+*.jhtml |WGHOME|/lib/htuml2txt.pl <
+</pre>
+</blockquote>
+in the file |DIR|/.glimpse_filters.  When you return to the Manage archive page you can simply enter
+<blockquote>
+	all
+</blockquote>
+in the "Prefilter" input area, and all the extensions listed in your .glimpse_filters file will be prefiltered.
+        </td></tr>
+</table>
+<A HREF="|WGARCMIN|">Back to WGmin home</A>
+</center>
+</BODY>
+</HTML>

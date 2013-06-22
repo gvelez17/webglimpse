@@ -1,0 +1,71 @@
+
+%%Searchline%%:         Ricerca l'archivio 
+%%usingwebg%%:	        usando Webglimpse
+%%SimpleSearch%%:       Semplice ricerca d'archivio
+%%VerySimpleSearch%%:   Ricerca d'archivio molto semplificata 
+%%searchfor%%:   	ricerca
+%%lookfor%%:   		cerca 
+%%typedabove%%: 	scritto sopra 
+
+%%allwords%%:		TUTTE le parole 
+%%anyword%%:		QUALSIASI parola 
+%%exactphrase%%:	FRASE ESATTA
+%%rankby%%:		Classifica per
+%%combinedscore%%:	punteggio combinato
+%%mostrecent%%:		Dal più recente
+%%linkpop%%:		Popolarità del Link 
+%%titlemeta%%:		Accoppiamento di Titoli e Meta 
+%%verysimple%%:		molto semplice
+%%go%%:			Vai
+%%withoutwords%%:   	Opzione - trova solo riscontri SENZA le parole:  
+%%advancedsearch:    La ricerca avanzata ti permette di creare le tue proprie espressioni boolean, usa regexps, specificando eventuali errori ortografici, riscontri parziali, case sensitivity ed altre opzioni.
+%%justlinks%%:	   	Solo il link di questa pagina
+%%entirearchive%%:   	Archivio intero
+%%selectone%%:	   	Seleziona uno o più archivi di cui sopra. 
+%%availablearchs%%:	archivi disponibili su questo server
+%%examplesearch%%:	Esempio di ricerca in ITALIANO
+
+%%fullsearch%%:		Ricerca completa dell'archivio  
+%%search%%:		cerca
+%%searchfull%%:		Ricerca tutto l'archivio: 
+%%stringto%%:		String da ricercare per: 
+%%casesensitive%%:	Case sensitive
+%%partialmatch%%:	match parziale
+%%jumptoline%%:		Salta alla linea
+%%misspellings%%:	errori ortografici permessi
+%%usefilters%%:		Usa i filtri
+%%returnfiles%%:	Mostra solo i file modificati entro -- giorni
+%%maxfiles%%:		Numero massimo di file mostrati:
+%%maxmatches%%:		numero massimo di riscontri  per file mostrato:
+%%maxchars%%:		Numero massimo di output di caratteri per file:
+%%onlykeywords%%:	Prova a stampare solo frasi contenenti keywords.
+%%onepage:		mostra solo una pagina di risultati per massima velocità. 
+			Solo i file più recenti verranno mostrati.
+%%and%%:		e
+%%copyright%%:		Copyright
+%%uofa%%:		Università dell'Arizona
+
+
+%%searchresults%%:      Risultati di ricerca
+%%lookingfor%%:		cerca
+%%in%%:			in
+%%Found%%:		trovati
+%%matchesin%%:		riscontri in
+%%files%%:		file
+%%showingres%%:		mostra risultati
+%%neighof%%:        	circa di
+%%newquery%%:		nuova interrogazione
+%%limitof%%:		limite di
+%%filesreached%%:	file raggiunti
+%%linesreached%%:	linee raggiunte, le linee di riscontro aggiuntive non vengono mostrate 
+
+%%introtitle%%: Italiano Introduzione a Webglimpse 
+%%welcome%%: Benvenuti a Webglimpse.Net 
+%%intro1%%: Webglimpse e Glimpse sono motori di ricerca Unix. Si può usare glimpse per indicizzare file locali oppure nell' hard drive, e Webglimpse indicizzare siti web e renderli ricercabili su Internet. 
+%%intro2%%: La maggior parte di questo sito è ancora solo in inglese, ma Webglimpse può essere utilizzato per indicizzare documenti in ogni linguaggio single-byte, incluso l'ITALIANO. La persona che installa e configura Webglimpse dovrà probabilmente conoscere l'inglese, ma gli utenti che ricercheranno sul tuo sito non ne avranno bisogno. Il modulo di ricerca e l'output dei risultati può essere generato in Italiano. 
+%%intro3%%: Webglimpse e Glimpse sono gratuiti per uso non profit, e per istituti di educazione. Ad altri utenti viene richiesto di comperare una licenza o di scambiare del lavoro in cambio di questa. Necessitiamo di traduttori  - quindi 5 pagine di documentazione tradotte in qualsiasi lingua che non abbiamo ancora è  considerato uno scambio più che valido! %%docs%%: Documentazione 
+%%downloads%%: Downloads 
+%%demos%%: Online Demo 
+%%devnews%%: News di sviluppo 
+%%buy%%: acquisto 
+

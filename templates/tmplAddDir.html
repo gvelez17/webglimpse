@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+<TITLE>Archive Search</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<table bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+<FORM method=GET action="|WGARCMIN|">
+<input type=hidden name=ID value=|ID|>
+	<tr><td align=center valign=middle><font size="+1">Add Directory to Archive # |ID|: |TITLE|</font><br>
+		 <A HREF="|WGARCMIN|?NEXTPAGE=D&DOC=docAddDir.html"TARGET="docwin">help how does this work?</a></td></tr>
+	<tr><td align=left valign=middle><font size="+1">Directory Path :</font><input type=text name=STARTDIR size=50><br>
+
+	<input type=hidden name="TYPE" value="DIR">
+
+	<font size="+1">Equivalent URL :</font><input type=text name=STARTURL size=50><br>
+	<font size="+1">Max #Pages :</font><input type=text name=MAXLOCAL size=7 value=250><br>
+	<tr><td align=center valign=middle><input type=submit name=CONTINUE value=Continue></td></tr>
+
+<INPUT TYPE=HIDDEN NAME=ACTION VALUE='A'>
+<INPUT TYPE=HIDDEN NAME=NEXTPAGE VALUE='M'>
+
+</FORM>
+</table>
+</center>
+</BODY>
+</HTML>

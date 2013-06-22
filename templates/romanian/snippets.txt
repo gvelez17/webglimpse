@@ -1,0 +1,81 @@
+
+%%Searchline%%:	    Cautã în arhivã
+%%usingwebg%%:	    folosind Webglimpse
+%%SimpleSearch%%:   Cãutare simplã în arhivã
+%%VerySimpleSearch%%:   Cãutare foarte simplã în arhivã
+%%searchfor%%:   		Cautã
+%%lookfor%%:   		cautã  
+%%typedabove%%: 	scrisã deasupra. 
+
+%%allwords%%:		TOATE cuvintele
+%%anyword%%:		ORICARE din cuvinte
+%%exactphrase%%:	FRAZA EXACTA
+%%rankby%%:		Aranjeazã dupã
+%%combinedscore%%:	Scorul combinat
+%%mostrecent%%:		Cel mai recent primul
+%%linkpop%%:		Popularitatea linkului
+%%titlemeta%%:		Titlul ºi Meta se potrivesc
+%%verysimple%%:		foarte simplu
+%%go%%:			Porneºte
+%%withoutwords%%:   	Opþional - cautã numai potrivirile FARA cuvintele:
+%%advancedsearch:       Cãutarea avansatã vã permite sã vã creaþi propriile dv. expresii boolene, sã folosiþi
+			expresiile regulate, sã specificaþi eventuale greºeli de ortografie, potriviri
+			parþiale, sã þineþi cont sau nu de majuscule/minuscule, precum ºi alte opþiuni.
+%%justlinks%%:	   	Numai link-urile din aceasta paginã
+%%entirearchive%%:   	Toata arhiva
+%%selectone%%:	   	Selectaþi una sau mai multe din arhivele de deasupra.
+%%availablearchs%%:	arhive disponibile pe acest server
+%%examplesearch%%:	Exemplu de cãutare în româneºte
+
+%%fullsearch%%:		Cãutare completã în arhivã
+%%search%%:		Cautã
+%%searchfull%%:		Cautã în toatã arhiva:
+%%stringto%%:		  Sirul de caractere de cãutat:
+%%casesensitive%%:	Tine cont de majuscule/minuscule
+%%partialmatch%%:		Concordanþã parþialã
+%%jumptoline%%:		Salt la linia
+%%misspellings%%:	greºeli de ortografie acceptate
+%%usefilters%%:		Folosiþi filtre
+%%returnfiles%%:	Returneazã numai fiºierele modificate în ultimele -- zile.
+%%maxfiles%%:		Numãrul maxim de fiºiere returnate:
+%%maxmatches%%:		Numãrul maxim de concordante per fiºier gãsite:
+%%maxchars%%:		Numãrul maxim de caractere per fiºier:
+%%onlykeywords%%:	Imprimã numai frazele conþinând cuvinte-cheie.
+%%onepage:		Intoarce numai o paginã pentru a avea viteza maximã.
+			Sunt gãsite numai fiºierele cele mai recente.
+%%and%%:		ºi
+%%copyright%%:		Copyright
+%%uofa%%:		University din Arizona
+
+%%searchresults%%:      Rezultate gãsite
+%%lookingfor%%:		Cãutând
+%%in%%:			în
+%%Found%%:		Gãsite
+%%matchesin%%:		concordanþe în
+%%files%%:		fiºiere.
+
+%%showingres%%:		arãtând rezultatele
+%%neighof%%:        	vecinãtatea lui
+%%newquery%%:		noua cãutare
+%%limitof%%:		limitã de
+%%filesreached%%:	fiºiere cãutate
+%%linesreached%%:	linii cãutate, restul de linii care se potrivesc nu sunt arãtate
+
+%%introtitle%%: Introducere la Webglimpse în româneºte
+
+%%welcome%%: Bine aþi venit la Webglimpse.Net
+
+%%intro1%%: Webglimpse ºi Glimpse sunt motoare de cãutare Unix. Puteþi folosi glimpse pentru a indexa fiºiere locale din calculatorul dv., ºi Webglimpse pentru a indexa situri Web ºi a le face explorabile din Internet.
+
+
+%%intro2%%: Cea mai mare parte a acestui sit e în Englezã, dar Webglimpse însuºi poate fi folosit pentru a indexa documente în orice limbã care utilizeazã caractere pe un octet. Persoana care instaleaza Webglimpse va avea probabil nevoie sã cunoascã engleza, dar utilizatorii care cautã pe situl dumneavoastra nu vor avea nevoie. Formularul de cãutare ºi rezultatul pot fi generate în româneste.
+
+
+%%intro3%%: Webglimpse ºi Glimpse sunt gratuite pentru o folosire non-profit sau pentru instituþii de învãþãmânt. Ceilalti utilizatori sunt invitaþi sã cumpere o licenþã, sau sã presteze ceva muncã în schimbul ei. Avem nevoie de traducatori - asa cã 5 pagini de documentaþie traduse în orice altã limbã pe care n-o avem reprezintã o licenþã comercialã!
+
+%%docs%%: Documentaþie
+%%downloads%%: Descãrcari
+%%demos%%: Demonstraþie online
+%%devnews%%: Noutãþi
+%%buy%%: Cumpãraþi
+

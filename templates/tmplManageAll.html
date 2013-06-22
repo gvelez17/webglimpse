@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Archive Search</TITLE>
+
+<Script Language="Javascript">
+<!--
+
+function ExtraWin() {
+
+	var contents = '|EXTRAWIN|';	// Set at run-time by wgarcmin script
+
+	var wname = 'WGEXTRA';
+
+	var w;
+
+	if (contents != '')  {
+
+		w = window.open("", wname, "resizable, status, width=400, height=400");
+
+		w.document.write(contents);
+
+		w.document.close();
+
+	}
+
+	return true;
+
+}
+
+
+//-->
+</Script>
+
+</HEAD>
+
+<BODY bgcolor="#76AAAA" onLoad="ExtraWin()"> 
+<center>
+<FORM method=GET action="|WGARCMIN|">
+<table bgcolor="#EBEACA" border=1> 
+	<CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+	<tr><td>
+		<table width="100%">
+		<tr><td></td>
+		    <td align=left><font size="+1">Select archive to manage, or </font>
+			    <input type=submit onClick="this.form.NEXTPAGE.value='N'" value="Add New Archive">
+		    </TD>
+		</tr>
+		<tr><td align=left>
+			<input type=submit onClick="this.form.NEXTPAGE.value='M'" value="Manage">
+			<br>
+			<input type=submit onClick="this.form.NEXTPAGE.value='S'" value="Search">
+		    </td>
+		    <td align=left>
+			<select name=ID size=6>
+				~ARCHIVES~ <option value=|ID|> |ID|: |TITLE|: |STATUSMSG|
+			</select>
+		    </td>
+		</tr>
+		</table>
+	</td></tr>
+	<tr><td align=center>
+		<table width="100%">
+			<tr><td colspan=3 align=center><font size="+1">Domain Info</font></td>
+			</tr>			
+			<tr>
+			    <td align=center colspan=3>
+<input type=submit onClick="this.form.NEXTPAGE.value='L'" value="Configure Local Domain">
+			    &nbsp;&nbsp;&nbsp;&nbsp;
+<input type=submit onClick="this.form.NEXTPAGE.value='R'" value="Configure Remote Domain">
+			    </td>
+			</tr>
+			<tr> <td colspan=3 align=center>
+			<hr width="65%">
+			</td></tr>
+
+			<tr><td align=right> Known <br> Domains:</td> <td align=center>
+			    <select name=BASEURL size=6>
+				~SITES~ <option value="|BASEURL|">|ISLOCAL|: |SERVERNAME| |NOTDEFAULT| 
+			    </select></td>
+
+			    <td colspan=1  align=left><input type=submit onClick="this.form.NEXTPAGE.value='H'" value="Edit domain configuration">
+			    <br><input type=submit onClick="this.form.ACTION.value='E';this.form.NEXTPAGE.value='O'"  value="  Delete  "></td>
+			</tr>
+		</table>
+		<input type=submit value="Test Path Translations" onClick="this.form.NEXTPAGE.value='T'">
+	</td></tr>
+ </table>
+
+<INPUT TYPE=HIDDEN NAME=ACTION VALUE=''>
+<INPUT TYPE=HIDDEN NAME=NEXTPAGE VALUE='M'>
+
+</FORM>
+</center>
+</BODY>
+</HTML>

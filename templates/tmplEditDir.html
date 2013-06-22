@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<TITLE>Archive Search</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<table bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+<FORM method=get action="|WGARCMIN|">
+<input type=hidden name=ID value=|ID|>
+<input type=hidden name="TYPE" value="DIR">
+
+	<tr><td align=center valign=middle><font size="+1">Edit Directory in Archive # |ID|</font><br>
+		<A HREF="|WGARCMIN|?NEXTPAGE=D&DOC=docEditDir.html" TARGET="docwin">help how does this work?</a></td></tr>
+	<tr><td align=left valign=middle><font size="+1">Directory Path :</font><input type=text name=STARTDIR value="|STARTDIR|" size=25><br>
+	<input type="HIDDEN" name="OLDURL" value="|STARTURL|">
+	<font size="+1">Equivalent URL :</font><input type=text name=STARTURL value="|STARTURL|"size=25><br>
+	<font size="+1">Max #Pages :</font><input type=text name=MAXLOCAL VALUE="|MAXLOCAL|" size=7><br>
+		<table>
+			<tr><td align=center valign=middle><font size="+1">Reindex Freq</font><br>(You must re-select the index freq on edit):</td>
+		    	<td>
+				<table>
+			       		<tr><td align=center valign=middle>day</td>
+				   	    <td align=center valign=middle>hrs</td>
+				   	    <td align=center valign=middle>min</td>
+				   	    <td align=center valign=middle>date</td></tr>
+			       	   	<tr><td><select name=FREQ>
+			 		   	<option> Sun
+			  		   	<option> Mon
+				    	   	<option> Tue
+				    	   	<option> Wed
+				    	   	<option> Thu
+				    	   	<option> Fri
+				    	   	<option> sat
+			        	   	</select></td>
+			           	    <td><select name=HRS>
+					   	<option> 00
+					   	<option> 01
+					   	<option> 02
+					   	<option> 03
+  					        <option> 04
+					   	<option> 05
+					   	<option> 06
+					   	<option> 07
+					   	<option> 08
+					   	<option> 09
+					   	<option> 10
+					   	<option> 11
+					   	<option> 12
+					   	<option> 13
+					   	<option> 14
+					   	<option> 15
+					   	<option> 16
+					   	<option> 17
+					   	<option> 18
+					   	<option> 19
+					   	<option> 20
+					   	<option> 21
+					   	<option> 22
+					   	<option> 23
+					   	</select></td>
+			       		    <td><input type=text name=MIN value=00 size=4></td>
+			           	    <td><select name=DATE>
+					   	<option> any
+					   	<option> 01
+					   	<option> 02
+					   	<option> 03
+					   	<option> 04
+					   	<option> 05
+					   	<option> 06
+					   	<option> 07
+					   	<option> 08
+					   	<option> 09
+					  	<option> 10
+					   	<option> 11
+					   	<option> 12
+					   	<option> 13
+					   	<option> 14
+					   	<option> 15
+					   	<option> 16
+					   	<option> 17
+					   	<option> 18
+					   	<option> 19
+					   	<option> 20
+					   	<option> 21
+					   	<option> 22
+					   	<option> 23
+					   	<option> 24
+					   	<option> 25
+					   	<option> 26
+					   	<option> 27
+					   	<option> 28
+					   	<option> 29
+					   	<option> 30
+					   	<option> 31
+					   	</select></td></tr></table></td></tr></table>
+	<tr><td align=center valign=middle><input type=submit name=CONTINUE value=Continue></td></tr>
+
+<INPUT TYPE=HIDDEN NAME=ACTION VALUE='T'>
+<INPUT TYPE=HIDDEN NAME=NEXTPAGE VALUE='M'>
+
+</FORM>
+</table>
+</center>
+</BODY>
+</HTML>

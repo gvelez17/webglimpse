@@ -1,0 +1,2192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Support</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Typical File Listing </h3>
+</div>
+<hr align="left" width="65%" />
+<p>This section contains a listing of files that Webglimpse installs and the appropriate owner, group and permissions. </p>
+<p>Webglimpse has two parts : Glimpse, the fast C engine which does the text indexing and pattern matching, and Webglimpse proper, the flexible Perl spider, archive manager and user interface script. 
+When you build an index, you first specify some rules for which files should be included. You might index by directory, by following links from a starting page, or a combination of both. The indexing script first makes a complete list of all files to be indexed, and retrieves any remote links. Then it feeds this list to the glimpseindex program, which builds a keyword index for fast searching. </p>
+<p>When a user runs a search, the webglimpse.cgi script first gets the query, checks all the options and does some pre-processing. Then it sends the query to glimpse for a fast search of the index and files. Finally, it parses the raw results, formats them nicely according to the customized format on that site, ranks them, highlights keywords and presents the results back to the user. </p>
+<p>Webglimpse 2.X has been out for almost two years and is in wide use, with new development continuing steadily and new releases about once a month. </p>
+<p>In the webserver's document root, the directory named 'wg2' (if you accepted the default name) will contain a listing similar to this: </p>
+<table width="80%"  border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td><p>./wg2:<br />
+  total 100</p></td>
+    <td><p>&nbsp;</p></td>
+    <td><p>&nbsp;</p></td>
+    <td><p>&nbsp;</p></td>
+    <td><p>&nbsp;</p></td>
+    <td><p>&nbsp;</p></td>
+    <td><p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td><p>-rwxr-xr-x</p></td>
+    <td><p>1</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>6952</p></td>
+    <td><p>Feb 17 12:54</p></td>
+    <td><p>addsearch</p></td>
+  </tr>
+  <tr>
+    <td><p>drwxr-xr-x</p></td>
+    <td><p>3</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>4096</p></td>
+    <td><p>Feb 27 14:38</p></td>
+    <td><p>archives</p></td>
+  </tr>
+  <tr>
+    <td><p>drwxr-xr-x</p></td>
+    <td><p>2</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>4096</p></td>
+    <td><p>Feb 17 12:42</p></td>
+    <td><p>dist</p></td>
+  </tr>
+  <tr>
+    <td><p>drwxr-xr-x</p></td>
+    <td><p>2</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>4096 </p></td>
+    <td><p>Feb 14 13:26</p></td>
+    <td><p>glimpse</p></td>
+  </tr>
+  <tr>
+    <td><p>drwxr-xr-x</p></td>
+    <td><p>2</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>4096</p></td>
+    <td><p>Feb 17 13:25</p></td>
+    <td><p>lib</p></td>
+  </tr>
+  <tr>
+    <td><p>-rwxr-xr-x</p></td>
+    <td><p>1</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>1779</p></td>
+    <td><p>Feb 14 11:50</p></td>
+    <td><p>Makefile</p></td>
+  </tr>
+  <tr>
+    <td><p>-rwxr-xr-x</p></td>
+    <td><p>1</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>45702</p></td>
+    <td><p>Feb 17 12:51 </p></td>
+    <td><p><a href="filtering.htm#makenh">makenh</a></p></td>
+  </tr>
+  <tr>
+    <td><p>drwxr-xr-x</p></td>
+    <td><p>14</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>4096</p></td>
+    <td><p>Feb 17 13:26</p></td>
+    <td> <p>templates</p></td>
+  </tr>
+  <tr>
+    <td><p>drwxr-xr-x</p></td>
+    <td><p>2</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>4096 </p></td>
+    <td><p>Feb 14 11:50</p></td>
+    <td><p>tests</p></td>
+  </tr>
+  <tr>
+    <td><p>-rwxr-xr-x</p></td>
+    <td><p>1</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>15893</p></td>
+    <td><p>Feb 14 11:50</p></td>
+    <td><p>wgcmd</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%"  border="0" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="15%"><p>./archives:<br />
+  total 12</p></td>
+    <td width="6%"><p>&nbsp;</p></td>
+    <td width="13%"><p>&nbsp;</p></td>
+    <td width="13%"><p>&nbsp;</p></td>
+    <td width="12%"><p>&nbsp;</p></td>
+    <td width="23%"><p>&nbsp;</p></td>
+    <td width="18%"><p>&nbsp;</p></td>
+  </tr>
+  <tr>
+    <td><p>drwxr-xr-x</p></td>
+    <td><p>5</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>4096</p></td>
+    <td><p>Feb 28 11:28</p></td>
+    <td><p>1</p></td>
+  </tr>
+  <tr>
+    <td><p>-rw-r--r--</p></td>
+    <td><p>1</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>61</p></td>
+    <td><p>Feb 27 14:38</p></td>
+    <td><p>archives.list</p></td>
+  </tr>
+  <tr>
+    <td><p>-rw-r--r--</p></td>
+    <td><p>1</p></td>
+    <td><p>apache</p></td>
+    <td><p>apache</p></td>
+    <td><p>650</p></td>
+    <td><p>Feb 21 10:56</p></td>
+    <td><p><a href="samples.htm#wgsitesconf">wgsites.conf</a></p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="93" valign="top"><p>./archives/1:<br />
+      total48 </p>    </td>
+    <td width="36" valign="top"><p>&nbsp; </p></td>
+    <td width="76" valign="top"><p>&nbsp; </p></td>
+    <td width="81" valign="top"><p>&nbsp; </p></td>
+    <td width="73" valign="top"><p>&nbsp; </p></td>
+    <td width="126" valign="top"><p>&nbsp; </p></td>
+    <td width="105" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>82</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_filehash</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>262144 </p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_filehash_index</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>80</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_filenames</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>4</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_filenames_index</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>4</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_filetimes</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>80</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_filetimes.index</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>4590</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_index</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>116</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_messages</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>908</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_partitions</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>3593</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_statistics</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>262144 </p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.glimpse_turbo</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>drwxr-xr-x</p></td>
+    <td valign="top"><p>2 </p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>4096 </p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p><a href="troubleshooting.htm#remote">.remote</a></p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>0</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>searches.log</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>drwxr-xr-x</p></td>
+    <td valign="top"><p>2 </p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>4096 </p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>.remote.old</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>0</p></td>
+    <td valign="top"><p>Feb 27 13:48</p></td>
+    <td valign="top"><p>searches.lastlog</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>97</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p><a href="troubleshooting.htm#glimpsefilters">.glimpse_filters</a></p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>532</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>newquery.html</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>3316</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>.tips.html</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>2515</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wgall.html</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>608</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wgbox.html</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>179</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>.wgfilter-box</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>648</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p><a href="samples.htm#wgfilterindex">.wgfilter-index</a></p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>3207</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wgindex.html</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>157</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>.wginputfields</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>4096</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>.wgODP3.dbm.dir</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>524288 </p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>.wgODP3.dbm.pag</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>244</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wgoutput.cfg</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>1103</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>.wgoutputfields</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>221</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>.wgrankhits.cfg</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rwxr-xr-x</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>2205</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wgreindex</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>1995</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wgsimple.html</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>1204</p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wgverysimple.html</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>10827 </p></td>
+    <td valign="top"><p>Feb 17 13:49</p></td>
+    <td valign="top"><p>wusage.conf</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>0</p></td>
+    <td valign="top"><p>Feb 17 13:46</p></td>
+    <td valign="top"><p><a href="troubleshooting.htm#wgerr">.wg_err</a></p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>1550</p></td>
+    <td valign="top"><p>Feb 17 13:46</p></td>
+    <td valign="top"><p><a href="troubleshooting.htm#wglog">.wg_log</a></p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>0</p></td>
+    <td valign="top"><p>Feb 17 13:46</p></td>
+    <td valign="top"><p>.wg_madenh</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>367</p></td>
+    <td valign="top"><p>Feb 17 13:46</p></td>
+    <td valign="top"><p>.wgmapfile</p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>382</p></td>
+    <td valign="top"><p>Feb 17 13:46</p></td>
+    <td valign="top"><p><a href="samples.htm#wgtoindex">.wg_toindex</a></p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>-rw-r--r--</p></td>
+    <td valign="top"><p>1</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>334</p></td>
+    <td valign="top"><p>Feb 17 13:46</p></td>
+    <td valign="top"><p><a href="samples.htm#archivecfg">archive.cfg</a></p></td>
+  </tr>
+  <tr>
+    <td valign="top"><p>drwxr-xr-x</p></td>
+    <td valign="top"><p>2 </p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>apache</p></td>
+    <td valign="top"><p>4096 </p></td>
+    <td valign="top"><p>Feb 17 12:52</p></td>
+    <td valign="top"><p>.cache</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="98" valign="top"><p>./dist<br />
+        :total 544 </p></td>
+    <td width="31" valign="top"><p>&nbsp; </p></td>
+    <td width="77" valign="top"><p>&nbsp; </p></td>
+    <td width="87" valign="top"><p>&nbsp; </p></td>
+    <td width="76" valign="top"><p>&nbsp; </p></td>
+    <td width="130" valign="top"><p>&nbsp; </p></td>
+    <td width="113" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>3316 </p></td>
+    <td width="130" valign="top"><p>Feb1411:50 </p></td>
+    <td width="113" valign="top"><p>tips.html </p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>179 </p></td>
+    <td width="130" valign="top"><p>Feb1411:50 </p></td>
+    <td width="113" valign="top"><p>wgfilter-box </p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>648 </p></td>
+    <td width="130" valign="top"><p>Feb1712:41 </p></td>
+    <td width="113" valign="top"><p><a href="samples.htm#wgtoindex">wgfilter-index </a></p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>157 </p></td>
+    <td width="130" valign="top"><p>Feb1411:50 </p></td>
+    <td width="113" valign="top"><p>wginputfields </p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>4096 </p></td>
+    <td width="130" valign="top"><p>Feb1411:50 </p></td>
+    <td width="113" valign="top"><p>wgODP3.dbm.dir </p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>524288 </p></td>
+    <td width="130" valign="top"><p>Feb1411:50 </p></td>
+    <td width="113" valign="top"><p>wgODP3.dbm.pag </p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>1103 </p></td>
+    <td width="130" valign="top"><p>Feb1411:50 </p></td>
+    <td width="113" valign="top"><p>wgoutputfields </p></td>
+  </tr>
+  <tr>
+    <td width="98" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>2211 </p></td>
+    <td width="130" valign="top"><p>Feb1411:50 </p></td>
+    <td width="113" valign="top"><p>wgrankhits.cfg </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="87" valign="top"><p>./glimpse: <br />
+      total 12572 </p>
+    </td>
+    <td width="30" valign="top"><p>&nbsp; </p></td>
+    <td width="64" valign="top"><p>&nbsp; </p></td>
+    <td width="83" valign="top"><p>&nbsp; </p></td>
+    <td width="69" valign="top"><p>&nbsp; </p></td>
+    <td width="123" valign="top"><p>&nbsp; </p></td>
+    <td width="112" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>355211 </p></td>
+    <td width="123" valign="top"><p>Feb1411:50 </p></td>
+    <td width="112" valign="top"><p>glimpse </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>293603 </p></td>
+    <td width="123" valign="top"><p>Feb1411:50 </p></td>
+    <td width="112" valign="top"><p>glimpseindex </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>1062624 </p></td>
+    <td width="123" valign="top"><p>Feb1413:22 </p></td>
+    <td width="112" valign="top"><p>pdffonts </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>1061161 </p></td>
+    <td width="123" valign="top"><p>Feb1413:22 </p></td>
+    <td width="112" valign="top"><p>pdfimages </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>1062894 </p></td>
+    <td width="123" valign="top"><p>Feb1413:22 </p></td>
+    <td width="112" valign="top"><p>pdfinfo </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>1135987 </p></td>
+    <td width="123" valign="top"><p>Feb1413:22 </p></td>
+    <td width="112" valign="top"><p>pdftotext </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>235029 </p></td>
+    <td width="123" valign="top"><p>Feb1411:50 </p></td>
+    <td width="112" valign="top"><p>wgconvert </p></td>
+  </tr>
+  <tr>
+    <td width="87" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="64" valign="top"><p>apache </p></td>
+    <td width="83" valign="top"><p>apache </p></td>
+    <td width="69" valign="top"><p>7606330 </p></td>
+    <td width="123" valign="top"><p>Feb1413:22 </p></td>
+    <td width="112" valign="top"><p>xpdf </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="95" valign="top"><p>./lib: <br />
+      total 416 </p>
+    </td>
+    <td width="34" valign="top"><p>&nbsp; </p></td>
+    <td width="71" valign="top"><p>&nbsp; </p></td>
+    <td width="91" valign="top"><p>&nbsp; </p></td>
+    <td width="76" valign="top"><p>&nbsp; </p></td>
+    <td width="115" valign="top"><p>&nbsp; </p></td>
+    <td width="128" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>1342 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>AllowDeny.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>3050 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>CatTree.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>10930 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>CommandWeb.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>21962 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>CustomOutputTool.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>21397 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>ftplib.pl </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>1422 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>glimpse-eye.jpg </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>5038 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>html2txt </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>304 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>html2txt.c </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>13722 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>httpget </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>15196 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>httpget.c </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>52855 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>htuml2txt </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>13480 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>htuml2txtc </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>18301 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>htuml2txt.c </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>5388 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>htuml2txt.pl </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>3079 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>InputSyntax.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>2822 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>LangUtils.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>3592 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>OutputTool.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>807 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>parsefields.pl </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>2280 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>PreFilter.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>14061 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>RankHits.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-r--r--r-- </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>2356 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>req </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>6058 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>ResultCache.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>4155 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>SearchFeed.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>4064 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>URL.pl </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>1336 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>usexpdf.sh </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>651 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>utils.h </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>5120 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgAgent.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>18670 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgArch.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>5475 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgConf.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>1715 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgErrors.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>2561 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgFilter.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>5930 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p><a href="filtering.htm#wgheaderpm">wgHeader.pm </a></p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>1373 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgLog.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>9433 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgRoot.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>17492 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgSiteConf.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>8580 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgSite.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>10855 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgStats.pm </p></td>
+  </tr>
+  <tr>
+    <td width="95" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="34" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="76" valign="top"><p>19824 </p></td>
+    <td width="115" valign="top"><p>Feb1411:50 </p></td>
+    <td width="128" valign="top"><p>wgTextMsgs.pm </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="97" valign="top"><p>./templates:<br />
+        total208 </p></td>
+    <td width="29" valign="top"><p>&nbsp; </p></td>
+    <td width="76" valign="top"><p>&nbsp; </p></td>
+    <td width="91" valign="top"><p>&nbsp; </p></td>
+    <td width="77" valign="top"><p>&nbsp; </p></td>
+    <td width="101" valign="top"><p>&nbsp; </p></td>
+    <td width="141" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>bulgarian </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1263 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docAddBoxes.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1497 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docAddDir.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1715 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docAddSite.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3868 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docAddTree.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1174 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docCrontab.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1517 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docEditDir.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>2473 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docEditSite.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3872 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docEditTree.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1305 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docFilterIndex.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1961 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docMakeForms.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>144 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docMakeNeigh.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>2228 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>docPreFilter.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>estonian </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>finnish </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>french </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>german </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>hebrew </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>italian </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>529 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>newquery.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>norwegian </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>polish </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>portuguese </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>romanian </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>drwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>2 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4096 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>spanish </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1053 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplAddDir.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3162 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplAddSite.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3582 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplAddTree.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3187 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplEditDir.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3537 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplEditSite.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3720 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplEditTree.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>2714 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplLocalDomain.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1033 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplLoginPage.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>2401 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplManageAll.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>6168 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplManageArch.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>4592 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplNewArch.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>758 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplSearchFeedBox.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1852 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>tmplTestTrans.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>611 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>wgbox.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>3204 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>2460 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1646 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>wgreindex </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1989 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>wgsimple.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1201 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>wgverysimple.html </p></td>
+  </tr>
+  <tr>
+    <td width="97" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="91" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>10797 </p></td>
+    <td width="101" valign="top"><p>Feb1411:50 </p></td>
+    <td width="141" valign="top"><p>wusage.conf </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="123" valign="top"><p>./templates/bulgarian:
+        total16 </p></td>
+    <td width="20" valign="top"><p>&nbsp; </p></td>
+    <td width="76" valign="top"><p>&nbsp; </p></td>
+    <td width="99" valign="top"><p>&nbsp; </p></td>
+    <td width="87" valign="top"><p>&nbsp; </p></td>
+    <td width="104" valign="top"><p>&nbsp; </p></td>
+    <td width="145" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="20" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="99" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>3125 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="145" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="20" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="99" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>1842 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="145" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="20" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="99" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>1962 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="145" valign="top"><p>wgsimple.html </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="20" valign="top"><p>1 </p></td>
+    <td width="76" valign="top"><p>apache </p></td>
+    <td width="99" valign="top"><p>apache </p></td>
+    <td width="87" valign="top"><p>1214 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="145" valign="top"><p>wgverysimple.html </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="118" valign="top"><p>./templates/estonian:
+      total12 </p></td>
+    <td width="26" valign="top"><p>&nbsp; </p></td>
+    <td width="67" valign="top"><p>&nbsp; </p></td>
+    <td width="94" valign="top"><p>&nbsp; </p></td>
+    <td width="77" valign="top"><p>&nbsp; </p></td>
+    <td width="96" valign="top"><p>&nbsp; </p></td>
+    <td width="144" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="118" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="26" valign="top"><p>1 </p></td>
+    <td width="67" valign="top"><p>apache </p></td>
+    <td width="94" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>2998 </p></td>
+    <td width="96" valign="top"><p>Feb1411:50 </p></td>
+    <td width="144" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="118" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="26" valign="top"><p>1 </p></td>
+    <td width="67" valign="top"><p>apache </p></td>
+    <td width="94" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1267 </p></td>
+    <td width="96" valign="top"><p>Feb1411:50 </p></td>
+    <td width="144" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+  <tr>
+    <td width="118" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="26" valign="top"><p>1 </p></td>
+    <td width="67" valign="top"><p>apache </p></td>
+    <td width="94" valign="top"><p>apache </p></td>
+    <td width="77" valign="top"><p>1713 </p></td>
+    <td width="96" valign="top"><p>Feb1411:50 </p></td>
+    <td width="144" valign="top"><p>wgsimple.html </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="107" valign="top"><p>./templates/finnish:
+      total8 </p></td>
+    <td width="35" valign="top"><p>&nbsp; </p></td>
+    <td width="71" valign="top"><p>&nbsp; </p></td>
+    <td width="95" valign="top"><p>&nbsp; </p></td>
+    <td width="78" valign="top"><p>&nbsp; </p></td>
+    <td width="92" valign="top"><p>&nbsp; </p></td>
+    <td width="146" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="107" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="35" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="78" valign="top"><p>2468 </p></td>
+    <td width="92" valign="top"><p>Feb1411:50 </p></td>
+    <td width="146" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="107" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="35" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="78" valign="top"><p>1191 </p></td>
+    <td width="92" valign="top"><p>Feb1411:50 </p></td>
+    <td width="146" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellspacing="0" cellpadding="1">
+  <tr>
+    <td width="104" valign="top"><p>./templates/french:
+      total16 </p></td>
+    <td width="38" valign="top"><p>&nbsp; </p></td>
+    <td width="72" valign="top"><p>&nbsp; </p></td>
+    <td width="96" valign="top"><p>&nbsp; </p></td>
+    <td width="80" valign="top"><p>&nbsp; </p></td>
+    <td width="90" valign="top"><p>&nbsp; </p></td>
+    <td width="149" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="38" valign="top"><p>1 </p></td>
+    <td width="72" valign="top"><p>apache </p></td>
+    <td width="96" valign="top"><p>apache </p></td>
+    <td width="80" valign="top"><p>3068 </p></td>
+    <td width="90" valign="top"><p>Feb1411:50 </p></td>
+    <td width="149" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="38" valign="top"><p>1 </p></td>
+    <td width="72" valign="top"><p>apache </p></td>
+    <td width="96" valign="top"><p>apache </p></td>
+    <td width="80" valign="top"><p>1882 </p></td>
+    <td width="90" valign="top"><p>Feb1411:50 </p></td>
+    <td width="149" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="38" valign="top"><p>1 </p></td>
+    <td width="72" valign="top"><p>apache </p></td>
+    <td width="96" valign="top"><p>apache </p></td>
+    <td width="80" valign="top"><p>1775 </p></td>
+    <td width="90" valign="top"><p>Feb1411:50 </p></td>
+    <td width="149" valign="top"><p>wgsimple.html </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="38" valign="top"><p>1 </p></td>
+    <td width="72" valign="top"><p>apache </p></td>
+    <td width="96" valign="top"><p>apache </p></td>
+    <td width="80" valign="top"><p>1232 </p></td>
+    <td width="90" valign="top"><p>Feb1411:50 </p></td>
+    <td width="149" valign="top"><p>wgverysimple.html </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="113" valign="top"><p>./templates/german:
+      total12 </p></td>
+    <td width="30" valign="top"><p>&nbsp; </p></td>
+    <td width="71" valign="top"><p>&nbsp; </p></td>
+    <td width="95" valign="top"><p>&nbsp; </p></td>
+    <td width="88" valign="top"><p>&nbsp; </p></td>
+    <td width="89" valign="top"><p>&nbsp; </p></td>
+    <td width="131" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="113" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="88" valign="top"><p>2206 </p></td>
+    <td width="89" valign="top"><p>Feb1411:50 </p></td>
+    <td width="131" valign="top"><p>wgall.html </p></td>
+  </tr>
+  <tr>
+    <td width="113" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="88" valign="top"><p>2135 </p></td>
+    <td width="89" valign="top"><p>Feb1411:50 </p></td>
+    <td width="131" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="113" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="30" valign="top"><p>1 </p></td>
+    <td width="71" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="88" valign="top"><p>1907 </p></td>
+    <td width="89" valign="top"><p>Feb1411:50 </p></td>
+    <td width="131" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="111" valign="top"><p>./templates/hebrew:
+      total12 </p></td>
+    <td width="24" valign="top"><p>&nbsp; </p></td>
+    <td width="82" valign="top"><p>&nbsp; </p></td>
+    <td width="98" valign="top"><p>&nbsp; </p></td>
+    <td width="95" valign="top"><p>&nbsp; </p></td>
+    <td width="98" valign="top"><p>&nbsp; </p></td>
+    <td width="127" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="111" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="24" valign="top"><p>1 </p></td>
+    <td width="82" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>2429 </p></td>
+    <td width="98" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgall.html </p></td>
+  </tr>
+  <tr>
+    <td width="111" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="24" valign="top"><p>1 </p></td>
+    <td width="82" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>2538 </p></td>
+    <td width="98" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="111" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="24" valign="top"><p>1 </p></td>
+    <td width="82" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>1330 </p></td>
+    <td width="98" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="108" valign="top"><p>./templates/italian:<br />
+      total24 </p></td>
+    <td width="27" valign="top"><p>&nbsp; </p></td>
+    <td width="85" valign="top"><p>&nbsp; </p></td>
+    <td width="95" valign="top"><p>&nbsp; </p></td>
+    <td width="98" valign="top"><p>&nbsp; </p></td>
+    <td width="99" valign="top"><p>&nbsp; </p></td>
+    <td width="127" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="108" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="27" valign="top"><p>1 </p></td>
+    <td width="85" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>3173 </p></td>
+    <td width="99" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgany.html </p></td>
+  </tr>
+  <tr>
+    <td width="108" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="27" valign="top"><p>1 </p></td>
+    <td width="85" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>612 </p></td>
+    <td width="99" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgbox.html </p></td>
+  </tr>
+  <tr>
+    <td width="108" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="27" valign="top"><p>1 </p></td>
+    <td width="85" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>3003 </p></td>
+    <td width="99" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="108" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="27" valign="top"><p>1 </p></td>
+    <td width="85" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>1854 </p></td>
+    <td width="99" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+  <tr>
+    <td width="108" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="27" valign="top"><p>1 </p></td>
+    <td width="85" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>1925 </p></td>
+    <td width="99" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgsimple.html </p></td>
+  </tr>
+  <tr>
+    <td width="108" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="27" valign="top"><p>1 </p></td>
+    <td width="85" valign="top"><p>apache </p></td>
+    <td width="95" valign="top"><p>apache </p></td>
+    <td width="98" valign="top"><p>1215 </p></td>
+    <td width="99" valign="top"><p>Feb1411:50 </p></td>
+    <td width="127" valign="top"><p>wgverysimple.html </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="128" valign="top"><p>./templates/norwegian:
+      total8 </p></td>
+    <td width="14" valign="top"><p>&nbsp; </p></td>
+    <td width="74" valign="top"><p>&nbsp; </p></td>
+    <td width="96" valign="top"><p>&nbsp; </p></td>
+    <td width="103" valign="top"><p>&nbsp; </p></td>
+    <td width="98" valign="top"><p>&nbsp; </p></td>
+    <td width="119" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="128" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="14" valign="top"><p>1 </p></td>
+    <td width="74" valign="top"><p>apache </p></td>
+    <td width="96" valign="top"><p>apache </p></td>
+    <td width="103" valign="top"><p>2398 </p></td>
+    <td width="98" valign="top"><p>Feb1411:50 </p></td>
+    <td width="119" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="128" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="14" valign="top"><p>1 </p></td>
+    <td width="74" valign="top"><p>apache </p></td>
+    <td width="96" valign="top"><p>apache </p></td>
+    <td width="103" valign="top"><p>1168 </p></td>
+    <td width="98" valign="top"><p>Feb1411:50 </p></td>
+    <td width="119" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="104" valign="top"><p>./templates/polish:
+      total24 </p></td>
+    <td width="31" valign="top"><p>&nbsp; </p></td>
+    <td width="79" valign="top"><p>&nbsp; </p></td>
+    <td width="101" valign="top"><p>&nbsp; </p></td>
+    <td width="105" valign="top"><p>&nbsp; </p></td>
+    <td width="104" valign="top"><p>&nbsp; </p></td>
+    <td width="105" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="79" valign="top"><p>apache </p></td>
+    <td width="101" valign="top"><p>apache </p></td>
+    <td width="105" valign="top"><p>589 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>newquery.html </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="79" valign="top"><p>apache </p></td>
+    <td width="101" valign="top"><p>apache </p></td>
+    <td width="105" valign="top"><p>616 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgbox.html </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="79" valign="top"><p>apache </p></td>
+    <td width="101" valign="top"><p>apache </p></td>
+    <td width="105" valign="top"><p>3170 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="79" valign="top"><p>apache </p></td>
+    <td width="101" valign="top"><p>apache </p></td>
+    <td width="105" valign="top"><p>1757 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="79" valign="top"><p>apache </p></td>
+    <td width="101" valign="top"><p>apache </p></td>
+    <td width="105" valign="top"><p>2028 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgsimple.html </p></td>
+  </tr>
+  <tr>
+    <td width="104" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="31" valign="top"><p>1 </p></td>
+    <td width="79" valign="top"><p>apache </p></td>
+    <td width="101" valign="top"><p>apache </p></td>
+    <td width="105" valign="top"><p>1279 </p></td>
+    <td width="104" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgverysimple.html </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="135" valign="top"><p>./templates/portuguese:
+      total 12 <br /> 
+    </p></td>
+    <td width="18" valign="top"><p>&nbsp; </p></td>
+    <td width="73" valign="top"><p>&nbsp; </p></td>
+    <td width="106" valign="top"><p>&nbsp; </p></td>
+    <td width="113" valign="top"><p>&nbsp; </p></td>
+    <td width="106" valign="top"><p>&nbsp; </p></td>
+    <td width="100" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="135" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="18" valign="top"><p>1 </p></td>
+    <td width="73" valign="top"><p>apache </p></td>
+    <td width="106" valign="top"><p>apache </p></td>
+    <td width="113" valign="top"><p>2183 </p></td>
+    <td width="106" valign="top"><p>Feb1411:50 </p></td>
+    <td width="100" valign="top"><p>wgall.html </p></td>
+  </tr>
+  <tr>
+    <td width="135" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="18" valign="top"><p>1 </p></td>
+    <td width="73" valign="top"><p>apache </p></td>
+    <td width="106" valign="top"><p>apache </p></td>
+    <td width="113" valign="top"><p>2445 </p></td>
+    <td width="106" valign="top"><p>Feb1411:50 </p></td>
+    <td width="100" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="135" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="18" valign="top"><p>1 </p></td>
+    <td width="73" valign="top"><p>apache </p></td>
+    <td width="106" valign="top"><p>apache </p></td>
+    <td width="113" valign="top"><p>1121 </p></td>
+    <td width="106" valign="top"><p>Feb1411:50 </p></td>
+    <td width="100" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="123" valign="top"><p>./templates/romanian:
+      total 16 <br /> 
+    </p></td>
+    <td width="29" valign="top"><p>&nbsp; </p></td>
+    <td width="77" valign="top"><p>&nbsp; </p></td>
+    <td width="106" valign="top"><p>&nbsp; </p></td>
+    <td width="111" valign="top"><p>&nbsp; </p></td>
+    <td width="100" valign="top"><p>&nbsp; </p></td>
+    <td width="105" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="106" valign="top"><p>apache </p></td>
+    <td width="111" valign="top"><p>3037 </p></td>
+    <td width="100" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgindex.html </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="106" valign="top"><p>apache </p></td>
+    <td width="111" valign="top"><p>1831 </p></td>
+    <td width="100" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgoutput.cfg </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="106" valign="top"><p>apache </p></td>
+    <td width="111" valign="top"><p>1782 </p></td>
+    <td width="100" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgsimple.html </p></td>
+  </tr>
+  <tr>
+    <td width="123" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="77" valign="top"><p>apache </p></td>
+    <td width="106" valign="top"><p>apache </p></td>
+    <td width="111" valign="top"><p>1226 </p></td>
+    <td width="100" valign="top"><p>Feb1411:50 </p></td>
+    <td width="105" valign="top"><p>wgverysimple.html </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="117" valign="top"><p>./templates/spanish
+      total8 </p></td>
+    <td width="39" valign="top"><p>&nbsp; </p></td>
+    <td width="80" valign="top"><p>&nbsp; </p></td>
+    <td width="117" valign="top"><p>&nbsp; </p></td>
+    <td width="116" valign="top"><p>&nbsp; </p></td>
+    <td width="86" valign="top"><p>&nbsp; </p></td>
+    <td width="94" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="117" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="39" valign="top"><p>1 </p></td>
+    <td width="80" valign="top"><p>apache </p></td>
+    <td width="117" valign="top"><p>apache </p></td>
+    <td width="116" valign="top"><p>2208 </p></td>
+    <td width="86" valign="top"><p>Feb1411:50 </p></td>
+    <td width="94" valign="top"><p>wgall.html </p></td>
+  </tr>
+  <tr>
+    <td width="117" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="39" valign="top"><p>1 </p></td>
+    <td width="80" valign="top"><p>apache </p></td>
+    <td width="117" valign="top"><p>apache </p></td>
+    <td width="116" valign="top"><p>2471 </p></td>
+    <td width="86" valign="top"><p>Feb1411:50 </p></td>
+    <td width="94" valign="top"><p>wgindex.html </p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="122" valign="top"><p>./tests:<br />
+      total20 </p></td>
+    <td width="32" valign="top"><p>&nbsp; </p></td>
+    <td width="82" valign="top"><p>&nbsp; </p></td>
+    <td width="121" valign="top"><p>&nbsp; </p></td>
+    <td width="114" valign="top"><p>&nbsp; </p></td>
+    <td width="83" valign="top"><p>&nbsp; </p></td>
+    <td width="95" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="122" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="32" valign="top"><p>1 </p></td>
+    <td width="82" valign="top"><p>apache </p></td>
+    <td width="121" valign="top"><p>apache </p></td>
+    <td width="114" valign="top"><p>813 </p></td>
+    <td width="83" valign="top"><p>Feb1411:50 </p></td>
+    <td width="95" valign="top"><p>Gen_T.pl </p></td>
+  </tr>
+  <tr>
+    <td width="122" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="32" valign="top"><p>1 </p></td>
+    <td width="82" valign="top"><p>apache </p></td>
+    <td width="121" valign="top"><p>apache </p></td>
+    <td width="114" valign="top"><p>290 </p></td>
+    <td width="83" valign="top"><p>Feb1411:50 </p></td>
+    <td width="95" valign="top"><p>URL_T.pl </p></td>
+  </tr>
+  <tr>
+    <td width="122" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="32" valign="top"><p>1 </p></td>
+    <td width="82" valign="top"><p>apache </p></td>
+    <td width="121" valign="top"><p>apache </p></td>
+    <td width="114" valign="top"><p>138 </p></td>
+    <td width="83" valign="top"><p>Feb1411:50 </p></td>
+    <td width="95" valign="top"><p>wgA_T.pl </p></td>
+  </tr>
+  <tr>
+    <td width="122" valign="top"><p>-rw-r--r-- </p></td>
+    <td width="32" valign="top"><p>1 </p></td>
+    <td width="82" valign="top"><p>apache </p></td>
+    <td width="121" valign="top"><p>apache </p></td>
+    <td width="114" valign="top"><p>5411 </p></td>
+    <td width="83" valign="top"><p>Feb1411:50 </p></td>
+    <td width="95" valign="top"><p>wgR_T.pl </p></td>
+  </tr>
+</table>
+<p><br />In the webserver's cgi-bin, the directory named 'wg2' (if you accepted the default name) will contain a listing similar to this: </p>
+<table width="80%" cellpadding="1" cellspacing="0">
+  <tr>
+    <td width="124" valign="top"><p>./cgi-bin/wg2 </p></td>
+    <td width="29" valign="top"><p>: </p></td>
+    <td width="84" valign="top"><p>&nbsp; </p></td>
+    <td width="123" valign="top"><p>&nbsp; </p></td>
+    <td width="113" valign="top"><p>&nbsp; </p></td>
+    <td width="83" valign="top"><p>&nbsp; </p></td>
+    <td width="90" valign="top"><p>&nbsp; </p></td>
+  </tr>
+  <tr>
+    <td width="124" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="84" valign="top"><p>apache </p></td>
+    <td width="123" valign="top"><p>apache </p></td>
+    <td width="113" valign="top"><p>45178 </p></td>
+    <td width="83" valign="top"><p>Feb1713:06 </p></td>
+    <td width="90" valign="top"><p>webglimpse.cgi </p></td>
+  </tr>
+  <tr>
+    <td width="124" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="84" valign="top"><p>apache </p></td>
+    <td width="123" valign="top"><p>apache </p></td>
+    <td width="113" valign="top"><p>7573 </p></td>
+    <td width="83" valign="top"><p>Feb1411:50 </p></td>
+    <td width="90" valign="top"><p>mfs.cgi </p></td>
+  </tr>
+  <tr>
+    <td width="124" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="84" valign="top"><p>apache </p></td>
+    <td width="123" valign="top"><p>apache </p></td>
+    <td width="113" valign="top"><p>95 </p></td>
+    <td width="83" valign="top"><p>Feb1411:50 </p></td>
+    <td width="90" valign="top"><p>showimg.cgi </p></td>
+  </tr>
+  <tr>
+    <td width="124" valign="top"><p>-rwxr-xr-x </p></td>
+    <td width="29" valign="top"><p>1 </p></td>
+    <td width="84" valign="top"><p>apache </p></td>
+    <td width="123" valign="top"><p>apache </p></td>
+    <td width="113" valign="top"><p>28660 </p></td>
+    <td width="83" valign="top"><p>Feb1411:50 </p></td>
+    <td width="90" valign="top"><p>wgarcmin.cgi </p></td>
+  </tr>
+</table>
+<p class="SubHeading2"><strong>Important Files</strong></p>
+<p>Under the webglimpse home directory (e.g. <strong>/var/www/html/wg2/</strong>) </p>
+<table cellspacing="0" cellpadding="5" width="100%" align="center" border="0">
+  <tbody>
+    <tr>
+      <td><p>wgsites.conf </p></td>
+      <td><p>Contains domain/site info, such as DocumentRoot Normally edited through the   web interface</p></td>
+    </tr>
+    <tr>
+      <td><p>archives.list </p></td>
+      <td><p>Contains list of all archives, titles and where they are   located</p></td>
+    </tr>
+  </tbody>
+</table>
+<p align="left">Under each archive directory (e.g. <strong>/var/www/html/wg2/archives/1/</strong>) </p>
+<table cellspacing="0" cellpadding="5" width="100%" align="center" border="0">
+  <tbody>
+    <tr>
+      <td><p>archive.cfg </p></td>
+      <td><p>Archive configuration, normally edited through the web interface </p></td>
+    </tr>
+    <tr>
+      <td><p>wgreindex </p></td>
+      <td><p>Script for reindexing this archive,can be placed in your crontab </p></td>
+    </tr>
+    <tr>
+      <td><p>wgindex.html </p></td>
+      <td><p>Sample search form, you can copy this to your website </p></td>
+    </tr>
+    <tr>
+      <td><p>wgall.html </p></td>
+      <td><p>Sample form to search by subdirectory</p></td>
+    </tr>
+    <tr>
+      <td><p>.glimpse_filters </p></td>
+      <td><p>Programs to filter non-ascii files into text for indexing You can add   programs here for PDF, Word, compressed, and other file formats </p></td>
+    </tr>
+    <tr>
+      <td><p>wgoutput.cfg </p></td>
+      <td><p>Custom output configuration file (with commercial version only)</p></td>
+    </tr>
+    <tr>
+      <td><p>.wgrankhits.cfg </p></td>
+      <td><p>Custom ranking formula for ordering results (commercial   only)</p></td>
+    </tr>
+  </tbody>
+</table>
+<p align="left">Under the webglimpse cgi-bin directory (e.g. <strong>/var/www/cgi-bin/wg2</strong>) </p>
+<table cellspacing="0" cellpadding="5" width="100%" align="center" border="0">
+  <tbody>
+    <tr>
+      <td><p>webglimpse.cgi </p></td>
+      <td><p>the cgi script to perform searches (calls glimpse)</p></td>
+    </tr>
+    <tr>
+      <td><p>wgarcmin.cgi </p></td>
+      <td><p>the cgi script to manage archives</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>The only files that you generally want to edit by hand, are the special   configuration files in each archive directory, including .glimpse_filters,   .wgoutput.cfg, .wgrankhits.cfg, .wginputfields, .wgoutputfields. </p>
+<p>&nbsp;</p>
+<div align="right">
+  <table width="80%" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="faqs.htm">&lt;&lt;FAQ's      </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="licensing.htm">Licensing      &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

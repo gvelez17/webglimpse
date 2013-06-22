@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>Archive Search</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<form method=GET action="|WGARCMIN|">
+<table border=1 bgcolor="#EBEACA"> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+		<tr><td align=left valign=middle colspan=3><center><font size="+1">New Archive</font></center>
+		<font size="+1">Title :</font><input type=text name=TITLE value="|TITLE|" size=30><p>
+
+		<font size="+1">Category:</font> <b>|CATSTRING|</b><br>
+
+		<input type=HIDDEN name=CATCODE value="|CATCODE|">
+
+		<table><tr><td align=top>
+		Select<br>Subcategory :
+		</td>
+		<td>
+
+			<input type=HIDDEN name=OFFSET value="1">
+			<select size=5 name=CATEGORY>
+			~CATS~ <option value="|CATID|"> |WORD|
+	  	       </select><br>
+		</td>
+		<td valign=center>
+			<input type=SUBMIT value="/\" onClick="this.form.OFFSET.value='-1'; this.form.NEXTPAGE.value='N'; this.form.ACTION.value=''"><br>
+
+			<input type=SUBMIT value="\/" onClick="this.form.OFFSET.value='1'; this.form.NEXTPAGE.value='N'; this.form.ACTION.value=''">
+		</td>
+		</tr></table>
+		<table>
+			<tr><td><font size="+1">Description</font>:</td>
+			    <td><textarea name=DESCRIPTION rows=4 cols=28>|DESCRIPTION|</textarea></td>
+			</tr>
+		</table><br>
+
+		<font size="+1">Language for search forms and results output:</font>
+		<!-- VALUEs for LANG should not be changed, they match code internal to webglimpse-->
+		<select name="LANG">
+		<OPTION value="arabic">Arabic
+		<OPTION value="bulgarian">Bulgarian
+		<OPTION value="estonian">Eesti
+		<OPTION SELECTED value="english">English
+		<OPTION value="german">Deutsch
+		<OPTION value="spanish">Español
+		<OPTION value="french">Français
+		<OPTION value="hebrew">Hebrew
+		<OPTION value="italian">Italiano
+		<OPTION value="dutch">Nederlandse
+		<OPTION VALUE="norwegian">Norsk
+		<OPTION VALUE="polish">Polsku
+		<OPTION value="portuguese">Português
+		<OPTION value="romanian">Romanian
+		<OPTION value="russian">Russian
+		<OPTION value="finnish">Suomi
+		</select>
+		<br>
+
+<!-- Admins - uncomment below if you do not want to use the default WGHOME/archives directory to store archive-related files.  This setting does NOT determine which directory or url is indexed, only where the indexes are stored. -->
+<!--		<font size="+1">Location to store archive files</font>:<input type=text name=DIR size=30</td> <br> -->
+
+		<table>
+
+<INPUT TYPE=HIDDEN NAME=ACTION VALUE='C'>
+<INPUT TYPE=HIDDEN NAME=NEXTPAGE VALUE='A'>
+<INPUT TYPE=HIDDEN NAME=TYPE>
+
+			<tr><td align=center valign=middle><input type=submit name=INDDIR onClick='this.form.TYPE.value = "DIR"' value="Index by Directory">
+<br><A HREF="|WGARCMIN|?NEXTPAGE=D&DOC=docAddDir.html"TARGET="docwin">Help on Dir</A></td>
+            		<td align=center valign=middle><input type=submit name=INDSITE onClick='this.form.TYPE.value = "SITE"' value="Index by Site">
+<br>
+<A HREF="|WGARCMIN|?NEXTPAGE=D&DOC=docAddSite.html"TARGET="docwin">Help on Site</A></td>
+            		<td align=center valign=middle><input type=submit name=INDTREE onClick='this.form.TYPE.value = "TREE"' value="Index by Traversing Link">
+<br><A HREF="|WGARCMIN|?NEXTPAGE=D&DOC=docAddTree.html"TARGET="docwin">Help on Tree</A></td>
+		</table></td>
+	</tr>
+</table>
+</FORM>
+<hr>
+Thanks to the Open Directory Project for making a high-quality category hierarchy publicly available!  To save space, we distribute with a reduced set - just the top three levels of the dmoz categories, and just the titles and ids.  We can make deeper levels available in our format (we convert to a dewey-decimal style id and store it in an SDBM file) and will probably do so soon.
+
+<p>
+<p><table border="0" bgcolor="#336600" cellpadding="3" cellspacing="0">
+         <tr>
+         <td>
+             <table width="100%" cellpadding="2" cellspacing="0" border="0">
+                 <tr align="center">
+                 <td><font face="sans-serif, Arial, Helvetica" size="2"
+                     color="#FFFFFF">Help build the largest human-edited
+                     directory on the web.</font></td></tr>
+                 <tr bgcolor="#CCCCCC" align="center">
+                 <td><font face="sans-serif, Arial, Helvetica" size="2"> <a
+                     href="http://dmoz.org/cgi-bin/add.cgi">Submit
+                     a Site</a> - <a href="http://dmoz.org/about.html"><b>Open Directory
+                     Project</b></a> -
+                     <a href="http://dmoz.org/cgi-bin/apply.cgi">Become
+                     an Editor</a> </font>
+                 </td></tr>
+             </table>
+         </td>
+         </tr>
+         </table>
+
+
+</center>
+</BODY>
+</HTML>

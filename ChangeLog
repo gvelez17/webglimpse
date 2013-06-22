@@ -1,0 +1,3869 @@
+2009-09-17 05:30  golda
+
+	* lib/CustomOutputTool.pm: Include files before ReplaceVars so we
+	can use variables in the include files
+
+2009-04-23 00:46  golda
+
+	* lib/: CustomOutputTool.pm, wgAgent.pm: Reduced timeout from
+	default 180 secs to 5 secs for wgAgent.pm, to speed up spidering by
+	skipping slow sites.
+
+2008-10-28 22:23  golda
+
+	* cgi-bin/webglimpse.cgi: wgall.html using QS_filter was broken by
+	a security enhancement, now make sure to allow '/' char in the
+	filter input (in order to search specific directories)
+
+2008-10-28 22:19  golda
+
+	* templates/wgreindex: remove inoperative -C switch on glimpseindex
+
+2008-10-28 22:19  golda
+
+	* lib/CommandWeb.pm: Correct template replacement variable
+	characters
+
+2008-08-16 00:12  golda
+
+	* cgi-bin/: mfs.cgi, wgarcmin.cgi: Didn't we have -T on these? 
+	Added now.  Will check back archives.
+
+2008-08-15 23:46  golda
+
+	* cgi-bin/: wrrepos.cgi, wrsearch.cgi: Added -T switch!
+
+2008-08-05 03:09  golda
+
+	* lib/wgHeader.pm: Update version
+
+2008-08-05 02:48  golda
+
+	* lib/CommandWeb.pm: Allow ':' in variable names so that we can use
+	ModuleName::FunctionName type names.  Also add subroutines from
+	Abra project so the Webglimpse version of ComamdnWeb is compatible
+	with the Abra version.
+
+2008-08-05 02:46  golda
+
+	* lib/CustomOutputTool.pm: fix getting eval() of external
+	admin-defined module to evaluate properly
+
+2008-08-05 02:33  golda
+
+	* lib/CustomOutputTool.pm: minor syntax change
+
+2008-07-23 00:04  golda
+
+	* lib/RankHits.pm: skip blank lines in config file
+
+2008-06-18 04:34  golda
+
+	* templates/wgoutput.cfg: Added HOOK variable - see files for docs
+
+2008-06-18 04:34  golda
+
+	* lib/CustomOutputTool.pm: Added two parameters to makeNewQuery in
+	order to preserve autosyntax setting
+	
+	Also added new output variable HOOK for interfacing with external
+	modules.  This allows insertion of externally generated output
+	anywhere in the results page, using the query, link of each hit
+	result and other results variables.
+
+2008-06-18 04:33  golda
+
+	* cgi-bin/webglimpse.cgi: Added two parameters to makeNewQuery in
+	order to preserve autosyntax setting
+
+2008-06-18 04:32  golda
+
+	* wginstall.pl: Normally we no longer need html2txt and httpget
+	compiled C programs, avoid including by default so as not to get
+	compiler warnings.  The makefiles are so old for these two bits
+	that they generate conflicts on most modern systems.  Instead we
+	use LWP for retrieval and htuml2txt.pl for prefiltering html.
+
+2008-06-06 05:01  golda
+
+	* cgi-bin/webglimpse.cgi, lib/CustomOutputTool.pm: keep autosyntax
+	settings in new query box
+
+2008-02-29 16:23  golda
+
+	* cgi-bin/webglimpse.cgi: remove leading comments unless in debug
+	mode
+
+2008-01-27 23:24  golda
+
+	* makenh: normalize links to remove trailing '#top' as otherwise
+	those may be redundant links actually we should probably remove any
+	'#stuff' from the end
+
+2008-01-03 03:52  golda
+
+	* lib/wgHeader.pm: update version
+
+2008-01-03 03:49  golda
+
+	* lib/URL.pl: Add URI->query when assembling a URI using the URI
+	module
+
+2008-01-03 03:49  golda
+
+	* makenh: Use cpan module URI->abs() function instead of assembing
+	the uri parts ourselves (we were chopping off the query when using
+	the URI module)
+
+2007-12-02 06:57  golda
+
+	* cgi-bin/webglimpse.cgi: move configurable variables to top and
+	add comments.  Need to be configured for GoodURLs and Static Search
+	Pages
+
+2007-12-01 09:05  golda
+
+	* cgi-bin/webglimpse.cgi: Enable Good URLs even without ability to
+	write static search pages
+
+2007-11-30 13:55  golda
+
+	* templates/: , html, er.pl, Msgs.pm, wgall.html, wgany.html,
+	wgindex.html, wgindex.html.tmpl: webglimpse.org ->webglimpse.net in
+	all template files
+
+2007-11-29 06:07  golda
+
+	* wginstall.pl: Corrected behaviour on finding an old version of
+	glimpse - it wasn't giving the user a chance to override the
+	location
+
+2007-11-25 05:22  golda
+
+	* docs/: TOC.htm, contents.htm, howtos.htm, troubleshooting.htm:
+	Change all references from webglimpse.org -> webglimpse.net
+
+2007-11-25 05:22  golda
+
+	* wginstall.pl: Removed unnecessary warnings about not finding
+	wgconvert.  We don't need it anyway and the warnings were highly
+	annoying. --GV
+
+2007-10-09 12:44  golda
+
+	* cgi-bin/webglimpse.cgi: Add support for generating static web
+	pages from search result sets. This can greatly increase the
+	indexable content of your site, and exposes the intelligence of
+	your ranking algorithms in a way that Google can find.
+
+2007-10-09 12:42  golda
+
+	* lib/SqlMergeConf.pm: add ability to search text dump of SQL table
+	for approximate matches.  This is much faster and also more
+	flexible than doing a "field LIKE '%string%'" search in mysql. the
+	text dump should be prepared ahead of time and indexed with
+	glimpseindex
+
+2007-10-09 12:40  golda
+
+	* lib/htuml2txt.pl: skip inline css
+
+2007-10-09 12:39  golda
+
+	* lib/wgHeader.pm: Added STATIC_SEARCH variables for optional
+	generation of static search results pages
+
+2007-10-09 12:38  golda
+
+	* makenh: Add security check to make sure we only remove our own
+	.remote.old directory
+
+2007-10-09 12:22  golda
+
+	* lib/SqlMerge.pm: Added templates for customizable output routines
+	for SQL data
+
+2007-10-09 12:02  golda
+
+	* lib/RankHits.pm: Added $HasExactMatch variable to allow result
+	weighting when an exact match is present to the original query
+	(which may have been searched as an ANDed combination of keywords)
+
+2007-04-27 03:11  golda
+
+	* cgi-bin/webglimpse.cgi: Separate out some of the initial output
+	so that we can insert SQL results in an appropriate place
+
+2007-04-27 03:11  golda
+
+	* lib/SqlMergeConf.pm: warn user to backup changes
+
+2007-04-27 03:10  golda
+
+	* lib/: CustomOutputTool.pm, SqlMerge.pm, SqlMergeConf.pm: Fixes to
+	SQL results system - working now at http://btucson.com/
+
+2007-04-24 23:10  golda
+
+	* lib/: SqlMerge.pm, SqlMergeConf.pm: New modules for merging SQL
+	results with full text search
+
+2007-04-24 23:10  golda
+
+	* docs/: contents.htm, install.htm, install4.htm: Remove references
+	to FTP or cPanel installs - we are now ssh only
+
+2007-04-24 23:09  golda
+
+	* cgi-bin/webglimpse.cgi: Adding hooks to call SQL queries
+
+2007-04-24 23:09  golda
+
+	* wginstall.pl: Added new Sql modules
+
+2007-03-30 03:29  golda
+
+	* makenh: Don't store large FILELINKS hash unless we need it for
+	making neighborhoods (neighborhoods are off by default)
+
+2007-03-27 08:35  golda
+
+	* makenh: don't splice a temporary array when we just want to skip
+	a line!  geez!
+
+2007-03-22 01:09  golda
+
+	* lib/: URL.pl, wgSiteConf.pm: Fix for undefined scheme URI's, use
+	eval first to avoid fatal errors (necessary now we are using URI
+	from cpan if available)
+
+2007-03-22 01:08  golda
+
+	* cgi-bin/webglimpse.cgi: Fix for multiple-archive search.  Use the
+	VALUE of archid_N not just the 'N'
+
+2007-03-22 01:07  golda
+
+	* makenh: Provide option to tie large hashes to DBM files
+
+2007-03-15 18:16  golda
+
+	* lib/: htfilter.pl, htuml2txt.pl: Fix problem where <BASE HREF..>
+	tags not preserved correctly after filtering
+
+2007-03-14 21:46  golda
+
+	* lib/URL.pl: Use URI module from cpan if its available.  If not,
+	keep our fallback old url-parsing stuff.
+
+2007-01-23 22:45  golda
+
+	* lib/wgAgent.pm: Don't 'use' after 'require' - just note that we
+	found the module
+
+2006-12-04 09:28  dkreil
+
+	* BibGlimpse.SETUP: fixed permission setting in BibGlimpse.SETUP
+	[TT]
+
+2006-12-01 14:01  dkreil
+
+	* BibGlimpse.README: [no log message]
+
+2006-12-01 13:56  dkreil
+
+	* BibGlimpse.README, BibGlimpse.SETUP: Renamed BibGlimpse.INSTALL
+	to BibGlimpse.SETUP [TT]
+
+2006-12-01 13:47  dkreil
+
+	* BibGlimpse.README: BibGlimpse install script [TT]
+
+2006-11-30 07:35  dkreil
+
+	* BibGlimpse.README: [no log message]
+
+2006-11-21 01:13  golda
+
+	* lib/wgHeader.pm: version #
+
+2006-11-21 01:13  golda
+
+	* cgi-bin/webglimpse.cgi: fix for  google analytics solution
+	w/security
+
+2006-11-20 08:57  dkreil
+
+	* lib/wrRepos.pm: [no log message]
+
+2006-11-20 08:13  dkreil
+
+	* cgi-bin/: wrrepos.cgi, wrsearch.cgi: [no log message]
+
+2006-11-13 10:32  dkreil
+
+	* templates/wrwgreindex: abras are only removed if have really
+	become redundant after reindexing, ie. if there is no more
+	corresponding .glimpse_filenames entry!
+
+2006-11-13 10:23  dkreil
+
+	* templates/wrwgreindex: [no log message]
+
+2006-11-10 06:35  dkreil
+
+	* wrREADME: removed the old file, because of renaming to
+	Bibglimpse.README [TT]
+
+2006-11-10 05:39  dkreil
+
+	* wginstall.pl: fixed a parsing bug in wginstall.pl
+
+2006-11-09 12:41  dkreil
+
+	* lib/: limpse.README, stall.pl, bin/wrrepos.cgi, bin/wrsearch.cgi,
+	wrRepos.pm, wrSearchterms.pm: WebRepository
+
+2006-10-24 22:02  golda
+
+	* lib/ResultCache.pm: close the pointer file explicitly
+
+2006-10-11 08:26  dkreil
+
+	* wginstall.pl, wrREADME, cgi-bin/wrrepos.cgi, docs/install4.htm,
+	lib/CustomOutputTool.pm, lib/medlars2bib.pl, lib/wgArch.pm,
+	lib/wgHeader.pm, lib/wrHygiene.sh, lib/wrMedline.pl,
+	lib/wrRepos.pm, lib/wrSearchterms.pm, lib/wrusexpdf.sh,
+	templates/wrwgreindex: WebRepository, initial code import [TT]
+
+2006-10-02 23:36  golda
+
+	* lib/: bin/webglimpse.cgi, CustomOutputTool.pm, wgHeader.pm:
+	eliminate pathinfo variable from makeNextHits, use ID instead
+
+2006-09-30 21:21  golda
+
+	* cgi-bin/webglimpse.cgi: Eliminate possible control chars from
+	(deprecated) 'pathinfo' variable.
+
+2006-09-17 22:30  golda
+
+	* lib/CustomOutputTool.pm: add my
+
+2006-09-17 22:23  golda
+
+	* lib/CustomOutputTool.pm: Additional sanitization for output
+	variables to prevent XSS/HTML injection
+
+2006-09-13 22:12  golda
+
+	* lib/: wgArch.pm, wgHeader.pm: Support spaces in values for
+	archive variables
+
+2006-09-13 22:11  golda
+
+	* lib/RankHits.pm: Fix off-by-one error that missed keywords at the
+	end of a line when requiring 'Within X words' criteria
+
+2006-08-18 03:49  golda
+
+	* makenh: Skip links starting with mailto: or javascript: before
+	normalizing.  Later we may want to pick up someof the javascript
+	ones...
+
+2006-08-18 02:34  golda
+
+	* dist/wgfilter-index, templates/.glimpse_filters: Deny javascript
+	links before checking for .html ; add common filetypes .asp and
+	.jsp to be recognized as HTML
+
+2006-08-14 06:40  golda
+
+	* lib/: htuml2txt.pl, wgAgent.pm, wgHeader.pm: Keep correct base
+	href in filtered file.	Could involve redirects, be different from
+	the URL corresponding to the gathered file
+
+2006-08-14 06:12  golda
+
+	* makenh: force use of correct base href when gathering links
+
+2006-08-14 04:02  golda
+
+	* lib/wgHeader.pm: version
+
+2006-08-14 04:02  golda
+
+	* docs/: contents.htm, preface.htm: Uncommenting areas in docs that
+	came from lj article
+
+2006-08-01 22:51  golda
+
+	* lib/: wgHeader.pm, wgTextMsgs.pm: always install using
+	htuml2txt.pl to avoid confusion; explain to user that other filters
+	are optional
+
+2006-08-01 22:51  golda
+
+	* wginstall.pl: always install using htuml2txt.pl to avoid
+	confusion
+
+2006-07-28 03:58  golda
+
+	* lib/RankHits.pm: fix scoping problem
+
+2006-07-28 02:14  golda
+
+	* lib/: /wgrankhits.cfg, RankHits.pm, wgHeader.pm: make query
+	keywords available to ranking formula
+
+2006-07-28 02:14  golda
+
+	* makenh: don't 'use' WWW::Mechanize, just require in eval
+
+2006-07-22 23:12  golda
+
+	* lib/: htuml2txt.pl, wgFilter.pm: Skip Javascript to avoid ugly
+	search results.  Fix to wgFilter.pm to make the SkipSection
+	function work correctly when the start and end patterns occur on
+	the same line.
+
+2006-07-21 04:25  golda
+
+	* lib/wgHeader.pm: version
+
+2006-07-21 04:25  golda
+
+	* makenh: use url_abs() function of WWW::Mechanize rather than
+	url(), in order to apply the current base href
+
+2006-07-19 05:35  golda
+
+	* lib/: wgArch.pm, wgRoot.pm: Fix bug of not traversing TREE type
+	archives because of blank LimitPrefix
+
+2006-07-19 03:35  golda
+
+	* lib/wgHeader.pm: version #
+
+2006-07-19 03:35  golda
+
+	* makenh: use WWW::Mechanize if available to get links from each
+	page (we alrady retrieve using UserAgent if its there; but this
+	lets us take advantage of better BASE HREF and other HTML parsing
+	support in Mechanize)
+
+2006-07-18 01:04  golda
+
+	* lib/wgHeader.pm: [no log message]
+
+2006-07-18 01:04  golda
+
+	* docs/licensing.htm: web page update
+
+2006-07-18 01:04  golda
+
+	* wginstall.pl: Correct contact information link to use online form
+
+2006-05-30 00:12  golda
+
+	* cgi-bin/webglimpse.cgi: The XSS vulnerability fix broke the next
+	hits toolbar - now fixed.
+
+2006-05-24 21:52  golda
+
+	* lib/: CustomOutputTool.pm, RankHits.pm, wgHeader.pm: Fixes for
+	CenterOutput routine in CustomOutputTool, Bug in centering output
+	code fixed, also avoids centering altogether if entire matching
+	string is to be output.  Was testing chars past end of string in
+	certain cases!
+	
+	RankHits now avoids tests involving processing of entire matching
+	string if we don't need them.
+
+2006-05-24 21:50  golda
+
+	* docs/preface.htm: [no log message]
+
+2006-05-24 21:50  golda
+
+	* wginstall.pl: More helpful error message when Glimpse files not
+	found
+
+2006-05-05 11:59  golda
+
+	* lib/CustomOutputTool.pm: Fix for links and other values with
+	literal [ ] chars.  These were being munged by our [variable]
+	replacement routine
+
+2006-04-21 01:08  golda
+
+	* lib/wgHeader.pm: Version...
+
+2006-04-21 01:08  golda
+
+	* lib/htuml2txt.pl: Added comments pointing user to wgFilter.pm for
+	eliminating repetitive text
+
+2006-04-21 01:07  golda
+
+	* docs/: appendix.htm, catdoc.htm, configure.htm, contents.htm,
+	faqs.htm, figures.htm, files.htm, filtering.htm,
+	gettingstarted.htm, howtos.htm, install.htm, install2.htm,
+	install3.htm, install4.htm, install5.htm, integrate.htm,
+	licensing.htm, pdf.htm, preface.htm, searchable.htm,
+	searchable2.htm, simpletutorial.htm, simpletutorial2.htm,
+	support.htm, troubleshooting.htm, verify.htm, wgfilter-index.htm,
+	zip.htm: Doc updates; remove in-doc links since we are now frames
+
+2006-04-19 05:21  golda
+
+	* docs/: Main.htm, contents.htm, filtering.htm, gettingstarted.htm,
+	preface.htm: cleaning up filtering section
+
+2006-04-18 02:41  golda
+
+	* lib/wgArch.pm, templates/tmplManageArch.html: Format
+	troubleshooting suggestions more nicely.
+
+2006-04-18 02:40  golda
+
+	* docs/: E, Main.htm, TOC.htm, appendix.htm, catdoc.htm,
+	compare.htm, configure.htm, faqs.htm, figures.htm, files.htm,
+	filtering.htm, gettingstarted.htm, howtos.htm, install.htm,
+	install2.htm, install3.htm, install4.htm, install5.htm,
+	integrate.htm, licensing.htm, pdf.htm, preface.htm,
+	processpdf.sh.txt, samples.htm, searchable.htm, searchable2.htm,
+	simpletutorial.htm, simpletutorial2.htm, support.htm,
+	troubleshooting.htm, usexpdf.sh.txt, verify.htm,
+	wgfilter-index.htm, wgvshtdig.htm, zip.htm: Adding documentation
+	into release tarball, using organized docs from Edis Feldhouse -
+	thanks, Edis!
+
+2006-04-17 18:15  golda
+
+	* lib/wgArch.pm: Add simple troubleshooting suggestions when 0
+	files are indexed
+
+2006-04-17 18:06  golda
+
+	* cgi-bin/mfs.cgi: fix double-spacing in PRE sections of
+	jump-to-line code - thanks Steve Cochran!
+
+2006-04-14 03:29  golda
+
+	* lib/PreFilter.pm: Change way we load filters to allow for filter
+	programs that accept the filename as parameter instead of filtering
+	STDIN.	Thanks again to D.P. Kreil!
+
+2006-04-14 03:28  golda
+
+	* lib/wgArch.pm: Check the startURL not the bare hostname, make
+	sure we get non-standard ports
+
+2006-04-14 03:28  golda
+
+	* lib/wgSiteConf.pm: use fully qualified subroutine name
+
+2006-04-14 02:27  golda
+
+	* cgi-bin/mfs.cgi: Don't retrieve original URL for jump-to-line if
+	original URL appears to be a binary format (pdf, doc, xls) - thanks
+	to Dr D.P. Kreil for pointing this out!
+
+2006-04-13 12:45  golda
+
+	* cgi-bin/webglimpse.cgi: Off by one error on num line matches! 
+	Stupid error $#arrayname is the index of the last element, not the
+	# of elements...
+
+2006-04-10 01:49  golda
+
+	* lib/: htuml2txt.pl, wgAgent.pm: wgAgent: corresponding to mfs.cgi
+	call - Fix to jump-to-line to avoid off-by-3 errors caused by
+	header lines htuml2txt.pl : make sure <lineno> prefixes all lines,
+	otherwise jump-to-line will fail entirely on some lines
+
+2006-04-10 01:49  golda
+
+	* cgi-bin/mfs.cgi: Fix to jump-to-line to avoid off-by-3 errors
+	caused by header lines
+
+2006-04-08 01:46  golda
+
+	* cgi-bin/webglimpse.cgi: Added input sanitization to avoid XSS
+	vulnerability
+
+2006-03-24 23:47  golda
+
+	* lib/wgHeader.pm: version
+
+2006-03-24 16:02  golda
+
+	* lib/wgRoot.pm: Don't require LimitPrefix for TREE type roots
+
+2006-03-23 23:46  golda
+
+	* lib/wgRoot.pm: correct error in evaluating links as remote vs
+	local in some cases in TREE archive.  We had been gathering some
+	TREE links that we should not have been.
+
+2006-03-23 23:45  golda
+
+	* cgi-bin/webglimpse.cgi: support 'insertbefore' input tag for use
+	with munging hit result URLs
+
+2006-03-06 09:40  golda
+
+	* templates/wgindex.html: Add new optional hidden tags to
+	wgindex.html for modifying output URL - used with shopping carts
+	such as SoftCart or Minivend.
+
+2006-02-27 23:28  golda
+
+	* cgi-bin/webglimpse.cgi, lib/CustomOutputTool.pm:  Added support
+	for path modification to results output
+
+2006-02-14 00:32  golda
+
+	* templates/tmplAddTree.html: [no log message]
+
+2006-02-14 00:32  golda
+
+	* lib/wgRoot.pm: Support LimitPrefix for TREE type roots
+
+2005-08-09 00:12  golda
+
+	* lib/: CustomOutputTool.pm, InputSyntax.pm, RankHits.pm: Add
+	routing to center output around the keywords; add PATH to output
+	variables; correct for eliminated lines in RankHits
+
+2005-08-09 00:07  golda
+
+	* cgi-bin/: webglimpse.cgi, wgarcmin.cgi: Fix for wgarcmin.cgi on
+	IE
+
+2005-07-06 16:45  golda
+
+	* makenh: better regexp for gathering link descriptions
+
+2005-04-03 15:33  golda
+
+	* lib/usexpdf.sh: NOT in test mode - leaves files around
+
+2005-02-27 18:26  golda
+
+	* lib/usexpdf.sh: problem with shell escapes - don't try to run
+	string in shell
+
+2005-02-17 14:22  golda
+
+	* lib/htfilter.pl: Version of htuml2txt.pl that uses wgFilter.pm to
+	process chunks of input files in addition to removing tags.
+
+2005-01-16 23:37  golda
+
+	* templates/german/wgoutput.cfg: Update output results style for
+	German language template
+
+2004-12-28 19:07  golda
+
+	* templates/intro.tmpl: Template for 'Welcome to Webglimpse' for
+	translation
+
+2004-12-28 18:55  golda
+
+	* makenh: Added code to save link text (maybe for later ranking of
+	hits, or automatically associating keywords with pages).
+	
+	Also better normalizing of /A/.. type links (avoid redundant links)
+
+2004-12-28 18:15  golda
+
+	* lib/LangUtils.pm, templates/tmplNewArch.html: Added support for
+	Dutch (Nederlandse), thanks to David Morris of GentleWare Studios
+
+2004-11-26 13:53  golda
+
+	* lib/RankHits.pm: match keywords on word boundaries (maybe should
+	only do this if lang=English)
+
+2004-11-26 13:53  golda
+
+	* cgi-bin/webglimpse.cgi: Can't use limit for speed if we may
+	eliminate some hits
+
+2004-11-26 12:18  golda
+
+	* lib/RankHits.pm: 
+	typo
+
+2004-11-26 11:59  golda
+
+	* templates/: wgindex.html, wgsimple.html: Add 'wordspan' option to
+	search forms
+
+2004-11-26 11:39  golda
+
+	* cgi-bin/webglimpse.cgi, lib/RankHits.pm: Eliminate lines that are
+	outside params (right now our only 'rule' of this type is
+	wordspan).  Also included code for a score 'threshold' so we can
+	eliminate low-scoring lines for any ranking formula.
+
+2004-11-23 22:39  golda
+
+	* lib/RankHits.pm: Wordspan algorithm
+
+2004-11-23 22:20  golda
+
+	* makenh: Eliminate PHPSESSID redundant links, make sure to look up
+	securified url in hash not raw.
+
+2004-11-21 21:49  golda
+
+	* cgi-bin/webglimpse.cgi: If user specifies a 'window' in which all
+	search terms should appear, then make scope of booleans a record
+	not whole file.  (the 'window' must be in a single record)
+
+2004-11-21 21:48  golda
+
+	* lib/: CustomOutputTool.pm, RankHits.pm, wgConf.pm:
+	CustomOutputTool : if user uses HREF directly, assume they know
+	what they're doing and don't automatically insert our link
+	
+	RankHits: started modifications to measure 'window' in which search
+	terms appear
+	
+	wgConf: fixed which module to call
+
+2004-11-17 22:06  golda
+
+	* cgi-bin/webglimpse.cgi: Allow user-specified template file for
+	default search form that webglimpse.cgi returns without a query.
+	
+	Also correct highlighting of keywords for complex queries in
+	non-English languages
+
+2004-10-19 21:38  golda
+
+	* lib/OutputTool.pm: Update old link
+
+2004-10-19 21:07  golda
+
+	* templates/wgoutput.cfg: Add credits to end of search results by
+	default (user can remove with commercial version - just edit
+	wgoutput.cfg)
+
+2004-10-14 15:26  golda
+
+	* cgi-bin/webglimpse.cgi: Save original query just how user typed
+	it for re-display in search output results.  We have to do so much
+	munging to the query string for security and to protect
+	regexp/special chars, it can be ugly if we print it after we are
+	done with it...
+
+2004-10-14 15:09  golda
+
+	* lib/wgFilter.pm, templates/wgoutput.cfg: Make filter patterns
+	case-insensitive add some docs to wgoutput.cfg file
+
+2004-10-09 02:22  golda
+
+	* cgi-bin/webglimpse.cgi, cgi-bin/wgarcmin.cgi,
+	lib/CustomOutputTool.pm: When highlighting matching keywords, don't
+	break words on escaped non-alphanumeric characters.  Also make sure
+	to trim spaces from highlight tags.
+	
+	wgarcmin.cgi always runs from web currently - remove option to run
+	on command line - wgcmd does that
+
+2004-10-07 15:24  golda
+
+	* cgi-bin/webglimpse.cgi, lib/CustomOutputTool.pm: Support
+	alternate output for structured queries.  Currently the only
+	available alternate output is the first maxchars from the file (not
+	including tags).  That way we do not output lines like	   
+	stockticker{4}: ASFT on queries for "stockticker=ASFT".  However we
+	still may output lines like that on NON-structured queries that
+	happen to match meta data.
+
+2004-10-04 14:12  golda
+
+	* lib/InputSyntax.pm: Substitutions in wrong place...
+
+2004-09-28 23:32  golda
+
+	* lib/InputSyntax.pm: Fix typo
+
+2004-09-17 07:15  golda
+
+	* cgi-bin/webglimpse.cgi, lib/InputSyntax.pm: Escape regexp chars
+	when doing a simple search with automatic syntax (ALL, ANY, PHRASE)
+	This allows users to search for string containing . * ! without
+	having to use \. to escape the characthers in their search query
+
+2004-08-27 00:46  golda
+
+	* lib/ResultCache.pm: typos
+
+2004-08-27 00:17  golda
+
+	* lib/ResultCache.pm: Fix problem with cache files being used for
+	non-identical searches, causing erroneous results
+
+2004-08-19 21:39  golda
+
+	* lib/wgFilter.pm: Add ability to munge a section of the indexed
+	file (for field-based output, for example)
+
+2004-07-29 08:37  golda
+
+	* lib/httpget.c: 
+	Don't print last-modified line twice if already printing headers
+
+2004-07-29 08:36  golda
+
+	* lib/wgAgent.pm: mimic httpget behaviour on redirects and errors
+
+2004-07-26 11:37  golda
+
+	* makenh: Eliminate redundant links of form /?X=Y/ - these are
+	commonly generated by some HTML editors, apparently.
+
+2004-07-22 13:06  golda
+
+	* dist/wgfilter-index: skip .png files
+
+2004-07-22 11:00  golda
+
+	* lib/wgAgent.pm: adding header parameters
+
+2004-07-22 10:56  golda
+
+	* lib/wgAgent.pm: fix typo, disable LWP for now
+
+2004-07-21 10:44  golda
+
+	* lib/: PreFilter.pm, wgAgent.pm: Allow default filter *.* to be
+	used in .glimpse_filters also changes to wgAgent.pm to handle
+	header lines
+
+2004-07-20 17:18  golda
+
+	* lib/wgAgent.pm: in progress...setting up If-Modified-Since header
+
+2004-07-20 09:34  golda
+
+	* lib/wgAgent.pm: Remove unnecessary line so we can use ua->get
+	instead of setting up the request in advance
+
+2004-07-15 11:15  golda
+
+	* cgi-bin/mfs.cgi: add returns back in, fix regexp loop
+
+2004-07-15 07:02  golda
+
+	* cgi-bin/mfs.cgi: Changes to make sure not to insert our bolding
+	and line markers within other tags.
+
+2004-07-15 07:00  golda
+
+	* lib/wgAgent.pm: skip HTTP headers
+
+2004-07-06 12:30  golda
+
+	* cgi-bin/mfs.cgi: use new wgAgent (uses LWP if avail) instead of
+	calling HTTPGET directly
+
+2004-07-06 12:26  golda
+
+	* lib/wgAgent.pm: Option not to save to file (for use by mfs)
+
+2004-07-01 13:17  golda
+
+	* wginstall.pl: Make sure only copy htuml2txt.pl once, and replace
+	path to perl - was being copied again without correct replacement.
+
+2004-06-29 17:37  golda
+
+	* makenh, wginstall.pl, lib/wgAgent.pm, lib/wgSite.pm,
+	templates/tmplRemoteDomain.html: Use LWP and HTTP.pm if available -
+	allows us to use cookie-based access
+
+2004-06-23 22:42  golda
+
+	* lib/LangUtils.pm: Romanian
+
+2004-06-23 22:41  golda
+
+	* makenh, wginstall.pl: remove wgLog from makenh, it is not
+	available in all versions; duplicate makeTimeStamp routine instead.
+
+2004-05-25 16:31  golda
+
+	* templates/romanian/: intro.html, snippets.txt, wgindex.html,
+	wgoutput.cfg, wgsimple.html, wgverysimple.html: Added Romanian text
+	- thanks Marian-Nicolae V. Ion !
+
+2004-05-25 16:30  golda
+
+	* templates/french/: intro.html, snippets.txt, wgindex.html,
+	wgoutput.cfg, wgsimple.html, wgverysimple.html: UPdated french text
+
+2004-05-25 16:30  golda
+
+	* templates/tmplNewArch.html: Add Romanian option
+
+2004-04-29 12:54  golda
+
+	* lib/: stall.pl, CustomOutputTool.pm, wgHeader.pm: Fix minor typos
+
+2004-04-29 12:36  golda
+
+	* makenh: Pull out interrupt handling.	Was causing index failure
+	on some systems.
+
+2004-04-26 12:33  golda
+
+	* cgi-bin/webglimpse.cgi, lib/CustomOutputTool.pm: make
+	jump-to-line links work with next hits toolbar!
+
+2004-03-20 20:15  golda
+
+	* lib/ResultCache.pm: Fix taint check errors on constructing
+	wgcache filename.
+
+2004-03-20 09:25  golda
+
+	* lib/CustomOutputTool.pm: Use individual archive wgoutput.cfg file
+	even in cases where searching multiple or alternate archives; do
+	not use the template file instead.
+
+2004-03-18 09:41  golda
+
+	* lib/: nh, wgLog.pm: makeTimeStamp now a subroutine
+
+2004-03-11 20:01  golda
+
+	* lib/wgHeader.pm: version #
+
+2004-03-11 13:20  golda
+
+	* cgi-bin/webglimpse.cgi: Fix bug where end_files was printed twice
+	on live searches and files_exceeded failed to print on cached
+	searches.
+
+2004-03-07 11:25  golda
+
+	* cgi-bin/webglimpse.cgi: Allow site admin to modify SearchFeed
+	hits box separately for each archive by copying the template file
+	into the archive directory.
+
+2004-03-06 21:41  golda
+
+	* lib/CustomOutputTool.pm: Cleaning up non-matching [var]'s was
+	accidentally deleting the [INCLUDE file] tag!  Fixed.
+
+2004-01-22 18:55  golda
+
+	* templates/tmplRemoteDomain.html: fix typo
+
+2004-01-15 20:47  golda
+
+	* dist/wgfilter-index: Skip mailto's!
+
+2003-12-19 08:24  golda
+
+	* wginstall.pl: Install wgFilter.pm
+
+2003-12-13 00:14  golda
+
+	* lib/wgHeader.pm: [no log message]
+
+2003-12-13 00:01  golda
+
+	* templates/: ts.pm, Feed.pm, tmplManageArch.html,
+	tmplSearchFeedBox.html: Adjust ordering, clean up box
+
+2003-12-12 23:13  golda
+
+	* templates/tmplManageArch.html: Correct gateway page
+
+2003-12-12 23:11  golda
+
+	* lib/SearchFeed.pm, templates/tmplSearchFeedBox.html: Adding
+	modules to handle SearchFeed results
+
+2003-12-12 22:42  golda
+
+	* templates/: pl, bglimpse.cgi, arcmin.cgi, dWeb.pm, ter.pm, .pm,
+	.pm, tmplManageArch.html, wgoutput.cfg: Adding support for optional
+	sponsored links from SearchFeed ; lets portal-type sites generate
+	relevent text ads based on the keyword searched for.
+
+2003-12-10 15:06  golda
+
+	* cgi-bin/webglimpse.cgi: Fixed dumb error - use last not break
+
+2003-12-06 13:50  golda
+
+	* cgi-bin/webglimpse.cgi: Fix typo varnames
+
+2003-12-06 12:09  golda
+
+	* cgi-bin/webglimpse.cgi, templates/wgany.html: Add 'alternate'
+	option to Webglimpse to search in first available archive, to allow
+	for two equivalent archives to be indexed at different times.  This
+	will allow you to keep a large index available 100% of the time -
+	when one is indexing, the other will be used.  Thanks to Peter
+	Moore for the clever idea!
+
+2003-12-03 14:37  golda
+
+	* lib/: stall.pl, bin/webglimpse.cgi, CustomOutputTool.pm,
+	ResultCache.pm: Limit number of groups of hits showing up in "Next
+	Hits" toolbar, add <<<prev and next>>> links to move between
+	groups.
+
+2003-11-18 17:57  golda
+
+	* wginstall.pl: Only modify 1st line of htuml2txt.pl, perl 5.8
+	gives errors on regexp using some other chars
+
+2003-11-15 13:45  golda
+
+	* lib/CustomOutputTool.pm: Be able to process multiple INCLUDE
+	files
+
+2003-11-15 10:54  golda
+
+	* lib/htuml2txt.pl: Make sure NOT to insert our line numbers inside
+	multiple-line tags
+
+2003-11-12 13:07  golda
+
+	* cgi-bin/webglimpse.cgi: cleaner defaults when parsing search
+	results - we were assuming the right pattern of glimpse output, but
+	in cases like when they changed the FILE_END_MARK, the pattern
+	could be wrong.  This used to result in glimpse command lines in
+	the search results output.  Now the output will be blank if the
+	FILE_END_MARK doesn't match.
+
+2003-11-02 20:51  golda
+
+	* lib/: stall.pl, wgFilter.pm: Check for glimpse version in
+	wginstall.pl; add wgFilter.pm module for customized pre-filtering
+	of header, footer and other repeated text out of files before
+	indexing.
+
+2003-11-02 20:50  golda
+
+	* lib/wgHeader.pm: version number
+
+2003-11-02 19:59  golda
+
+	* wginstall.pl: Check glimpse version in the install.
+
+2003-11-02 19:25  golda
+
+	* templates/newquery.html: fix hardcoded error
+
+2003-10-26 23:30  golda
+
+	* templates/newquery.html: Path in newquery.html was not using
+	CGIBIN setting from install
+
+2003-09-18 16:46  golda
+
+	* lib/ResultCache.pm: Fix dumb error in naming cachefile - we store
+	the # of hits IN the first line of the file, not in the filename!
+	mfu
+
+2003-09-18 16:45  golda
+
+	* cgi-bin/webglimpse.cgi: Generate cachefile after all results are
+	printed, not before; recognize cache=no|off as meaning 'don't use a
+	cachefile'
+
+2003-09-08 12:21  golda
+
+	* templates/wgreindex: On some systems files are created w/o read
+	permissions; make sure we set entire archive directory to
+	world-readable so web searches will work.
+
+2003-09-02 12:17  golda
+
+	* templates/: tmplNewArch.html, wgindex.html.tmpl,
+	wgsimple.html.tmpl, wgverysimple.html.tmpl: Adding metacharset tag
+	to search forms, Bulgarian to new archive template
+
+2003-09-02 11:27  golda
+
+	* lib/PreFilter.pm: Quote file &urls in shell commands
+
+2003-09-02 11:25  golda
+
+	* makenh: Quote $file and $url in shell commands
+
+2003-09-02 10:46  golda
+
+	* templates/: pl, bglimpse.cgi, ogler/htuml2txt.lex, ils.pm, f.sh,
+	.pm, langterms.tmpl, newquery.html, wgindex.html,
+	wgindex.html.tmpl, wgoutput.cfg, wgoutput.cfg.tmpl,
+	wgsimple.html.tmpl, wgverysimple.html, wgverysimple.html.tmpl,
+	bulgarian/trans.txt, bulgarian/wgindex.html,
+	bulgarian/wgoutput.cfg, bulgarian/wgsimple.html,
+	bulgarian/wgverysimple.html, italian/trans.txt,
+	italian/wgoutput.cfg: Moving repository; adding language templates
+	for easier update, adding Bulgarian
+
+2003-08-06 12:03  golda
+
+	* templates/wgreindex: Index numbers by default
+
+2003-08-06 12:03  golda
+
+	* dist/wgfilter-index: Index PHP files by default
+
+2003-07-21 11:12  golda
+
+	* templates/.glimpse_filters: add .asp and .ASP to html-type files
+	for filtering
+
+2003-06-19 10:19  golda
+
+	* lib/: LangUtils.pm, ResultCache.pm: Added code  to convert the
+	Russian ISO characters of the month to Russian Windows-1251 -
+	Thanks to Adeena Ascher, and Rouslan and Andrey from Reuven Lerner
+	Consulting!  Plus minor fix to avoid # chars in cache filenames.
+
+2003-06-17 12:08  golda
+
+	* cgi-bin/webglimpse.cgi: Don't allow <!-- to get into output!! 
+	(Regardless of whether we want tag removals or not - having the
+	beginning of a comment kills the rest of the page...)
+
+2003-06-16 15:55  golda
+
+	* templates/polish/: wgindex.html, wgsimple.html,
+	wgverysimple.html: [no log message]
+
+2003-06-11 10:29  golda
+
+	* lib/LangUtils.pm: Just use DD/MM/YYYY format for non-English
+	dates
+
+2003-06-09 05:21  golda
+
+	* lib/LangUtils.pm: Oops!  Fixes to date hanlding in Russian -
+	apparently I left out some lines the first time I copied over
+	Andrei's code.	--GV
+
+2003-06-09 05:20  golda
+
+	* cgi-bin/webglimpse.cgi: When using link as title, don't use hex
+	chars (www_form_decode first)
+
+2003-05-15 09:06  golda
+
+	* templates/polish/: , , Arch.html, newquery.html, wgbox.html,
+	wgindex.html, wgoutput.cfg, wgoutput.cfg~, wgsimple.html,
+	wgverysimple.html: Adding support/templates for Polish
+
+2003-05-14 14:33  golda
+
+	* lib/ResultCache.pm: Eliminate " chars from cache file names
+
+2003-05-14 14:32  golda
+
+	* cgi-bin/webglimpse.cgi: Correct errors involving queries
+	containing quote characters
+
+2003-05-01 19:58  golda
+
+	* makenh: Correct NumRemoteCollected also!
+
+2003-05-01 19:56  golda
+
+	* makenh: Correct count of local files - we were counting some
+	duplicate links twice on site-type archives.
+	
+	--G
+
+2003-04-09 10:16  golda
+
+	* wginstall.pl: Remove refrence to docNonascii.html
+
+2003-04-06 19:10  golda
+
+	* templates/: docNonascii.html, docPreFilter.html: updating docs
+
+2003-04-05 00:08  golda
+
+	* templates/tmplManageAll.html: fix for doing Manage Archive after
+	Search Archive
+
+2003-04-05 00:08  golda
+
+	* lib/wgHeader.pm: Add .asp to known likely html extensions
+
+2003-04-05 00:07  golda
+
+	* cgi-bin/: mfs.cgi, webglimpse.cgi: default to suppressing html
+	tags in results output for all files, regargless of extension - too
+	many different extensions possible nowadays.  But is a very easy
+	switch back if youw ant to show the tags.
+	
+	Also corect line count. (can't use $. var anymore)
+
+2003-04-04 10:11  golda
+
+	* cgi-bin/mfs.cgi, cgi-bin/webglimpse.cgi, lib/htuml2txt.pl: Fix
+	jump-to-line in cases where we prefiltered the file - basically, we
+	have to do a live retrieve in that case.  Also have to store
+	original line number in <#> tag at beginning of each line in
+	prefiltered file, as we often delete a lot of lines while
+	prefiltering.
+
+2003-03-24 19:46  golda
+
+	* cgi-bin/wgarcmin.cgi, templates/tmplManageArch.html: [no log
+	message]
+
+2003-03-24 09:14  golda
+
+	* lib/wgTextMsgs.pm, templates/italian/wgoutput.cfg: typo
+
+2003-03-24 09:13  golda
+
+	* makenh: Preserve last-modified date on prefiltered files
+
+2003-03-24 09:00  golda
+
+	* templates/: estonian/intro.html, estonian/wgindex.html,
+	estonian/wgoutput.cfg, estonian/wgsimple.html,
+	italian/wgoutput.cfg: Checking in...
+
+2003-03-24 09:00  golda
+
+	* lib/usexpdf.sh: Adding new shell script from Tong Sun!
+
+2003-03-24 08:57  golda
+
+	* lib/PreFilter.pm: New module for Pre-filtering files for maximum
+	search speed. Also speeds up indexing.
+
+2003-03-24 08:56  golda
+
+	* templates/tmplManageArch.html: tell user about requiring
+	htuml2txt.pl for prefiltering
+
+2003-03-24 08:56  golda
+
+	* lib/: wgHeader.pm, wgTextMsgs.pm: include .abra as html type file
+	for suppressing tags; tell user about requiring htuml2txt.pl for
+	prefiltering
+
+2003-03-24 08:55  golda
+
+	* wginstall.pl: Added italian
+
+2003-03-24 08:31  golda
+
+	* makenh: splice screws up foreach (@list) loop!  Was dropping
+	valid links next to duplicates - this was bad (pages not getting
+	indexed in TREE & SITE type indexes).  Fixed by changing to while()
+	loop.
+
+2003-03-24 07:58  golda
+
+	* templates/italian/: wgany.html, wgbox.html, wgindex.html,
+	wgsimple.html, wgverysimple.html: Adding Italian translations -
+	Thanks William Maddler!
+
+2003-03-24 07:57  golda
+
+	* templates/: docPreFilter.html, tmplManageArch.html,
+	tmplNewArch.html, tmplRemoteDomain.html: Add docs for Prefiltering,
+	Login info, Italian
+
+2003-03-24 07:56  golda
+
+	* lib/wgSiteConf.pm: Add routine to determine site from a Url
+
+2003-03-24 07:55  golda
+
+	* lib/wgSite.pm: Add support for Login (username/pass) and make
+	baseurl on per-site basis, not universally
+
+2003-03-24 07:53  golda
+
+	* lib/LangUtils.pm: Add support for Italian!  Thanks William
+	Maddler for the translation!
+
+2003-03-24 07:53  golda
+
+	* cgi-bin/webglimpse.cgi: Deal with cases that the ENV PATHINFO
+	variable is set erroneously (go by our archive ID first, if we have
+	it)
+
+2003-03-24 07:51  golda
+
+	* makenh: Added support for username/password as configured in
+	wgsites.conf
+
+2003-03-05 10:08  golda
+
+	* makenh: Support client-side imagemaps!
+
+2003-03-04 20:20  golda
+
+	* lib/htuml2txt.pl: Typo in new replace statement...
+
+2003-03-04 20:08  golda
+
+	* templates/: tmplManageArch.html, wgreindex: Let user know
+	Prefilter is for speed
+
+2003-03-04 20:08  golda
+
+	* lib/: htuml2txt.pl, wgTextMsgs.pm: Preserve <A and <FRAME tags
+	along with <TITLE - we need those for links.
+
+2003-03-04 20:07  golda
+
+	* makenh: use GetArchByPath instead of new wgArch() so that we make
+	sure to read any config stuff in archives.list
+
+2003-03-03 15:31  golda
+
+	* templates/.glimpse_filters: Add php to default filter list
+
+2003-03-03 15:30  golda
+
+	* lib/wgArch.pm: Do NOT default to prefiltering on existing
+	archives
+
+2003-03-03 15:30  golda
+
+	* cgi-bin/webglimpse.cgi: Correct file count if we go over maxfiles
+
+2003-03-03 15:29  golda
+
+	* makenh: Correct test for visiting link in TREE type roots
+
+2003-03-03 15:28  golda
+
+	* cgi-bin/mfs.cgi: Highlight keyword anywhere in page, not only
+	matched line
+
+2003-02-13 11:10  golda
+
+	* dist/glimpse_filters: Correct file is in /templates subdirectory
+
+2003-02-13 11:09  golda
+
+	* dist/wgrankhits.cfg: Document new LinkString variable
+
+2003-02-13 11:08  golda
+
+	* templates/: docAddBoxes.html, docPreFilter.html: Add docs for Add
+	Search Boxes and Prefilter File options
+
+2003-02-13 11:08  golda
+
+	* templates/tmplManageArch.html: Add input for prefilter file
+	extensions
+
+2003-02-13 11:07  golda
+
+	* lib/wgTextMsgs.pm: Add note that htuml2txt.pl preserves TITLE
+	tags
+
+2003-02-13 11:07  golda
+
+	* lib/wgRoot.pm: Fix to handling of "Follow Same Site" checkbox -
+	in some cases links were not being followed that should have been
+
+2003-02-13 11:06  golda
+
+	* lib/wgHeader.pm: Add explicit setting for /tmp directory (can be
+	edited by admin)
+	
+	Add special extension for prefiltered files  - .abra - will be
+	recognized by glimpseindex as html for purposes of extracting
+	title; but we know has already had html tags filtered out
+
+2003-02-13 11:05  golda
+
+	* lib/wgConf.pm: Add 'prefilter' variable to archive
+
+2003-02-13 11:05  golda
+
+	* lib/htuml2txt.pl: Preserve TITLE tags when filtering out most
+	HTML tags.  Needed for glimpseindex
+
+2003-02-13 11:04  golda
+
+	* lib/RankHits.pm: Allow access to actual matching URL when
+	calculating score - allows site admin to make some sites come up
+	first
+
+2003-02-13 11:03  golda
+
+	* lib/InputSyntax.pm: Support " " around query string when
+	auto-creating boolean query
+
+2003-02-13 11:01  golda
+
+	* cgi-bin/wgarcmin.cgi: Do not overwrite archive configuration
+	files on 'Save Changes' -- too many customized .glimpse_filters and
+	.wgfilter-index entries being lost.
+
+2003-02-13 11:00  golda
+
+	* lib/wgArch.pm: Do not overwrite archive configuration files on
+	'Save Changes' -- too many customized .glimpse_filters and
+	.wgfilter-index entries being lost.
+
+2003-02-13 11:00  golda
+
+	* wginstall.pl: Add new PreFilter.pm module
+
+2003-02-13 10:59  golda
+
+	* makenh: Add support for caching filtered files and
+	filtering-in-place of remote retrieved files.  Will speed up
+	indexing some, and greatly speed up searching, especially of PDF
+	files.
+
+2003-02-02 23:52  golda
+
+	* dist/wgoutputfields: Updating documentation
+
+2003-02-02 14:54  golda
+
+	* lib/wgHeader.pm: [no log message]
+
+2003-01-29 07:02  golda
+
+	* makenh: Correct error in collecting links with ' type quotes,
+	quotes in links
+
+2003-01-26 11:27  golda
+
+	* lib/CommandWeb.pm: Accurate comments & function descriptions
+
+2003-01-19 01:22  golda
+
+	* lib/: wgHeader.pm, wgSite.pm, wgSiteConf.pm: Main change is to
+	wgSiteConf.pm - don't load all passwd entries for goodness sake! 
+	This can take a looong time on some systems.  Was done since
+	ancient times to process UserDir settings but way too much overhead
+	to do every time on startup.
+	
+	Also add index.php to default DirectoryIndexes.
+
+2003-01-19 01:21  golda
+
+	* cgi-bin/webglimpse.cgi: minor switch tweak - accept 'on' or 'yes'
+	for nonascii checkbox value
+
+2003-01-19 01:20  golda
+
+	* wginstall.pl: More robust if user had to hand-compile httpget,
+	html2txt for some reason; also don't die if can't find wgconvert,
+	its only needed for neighborhoods.  Warn user about possible old
+	version of glimpse instead.
+
+2003-01-07 03:35  golda
+
+	* templates/wgoutput.cfg: add comment about [INCLUDE ..] tag, use
+	explicit vars for [LINK] and [DATE] to give user more control.
+
+2003-01-07 03:34  golda
+
+	* lib/wgTextMsgs.pm: Add new warning messages
+
+2003-01-07 03:33  golda
+
+	* lib/wgHeader.pm: Consider .php files to be HTML for parsing
+	purposes (though in other code we know they are dynamic and have to
+	be retrieved)
+
+2003-01-07 03:32  golda
+
+	* lib/ResultCache.pm: Quote the filename...
+
+2003-01-07 03:32  golda
+
+	* lib/CustomOutputTool.pm: Two major changes -
+	
+		1) now allow [INCLUDE: filename] in begin_html and end_html
+	vars, so user can get their own look & feel without doing a lot of
+	hand-editing of twgoutput.cfg
+	
+		2) Now allow .wgoutputfields to include var of type TEXT or
+	VARTEXT, so a user can define a fixed text custom output field or
+	one containing other available variables.
+
+2003-01-07 03:30  golda
+
+	* cgi-bin/webglimpse.cgi: Provide internal flags for SHOWing rather
+	than SUPPRESSing html tags.
+
+2003-01-07 03:29  golda
+
+	* wginstall.pl: Print warning messages if httpget or html2txt fail
+	to compile.
+
+2003-01-07 03:28  golda
+
+	* makenh: Recognize file extensions other than .html for purposes
+	of finding directory.
+
+2002-12-30 16:37  golda
+
+	* lib/wgSite.pm: Recognize .phpand similar extensions, even if
+	followed by ?var=val string
+
+2002-12-30 16:17  golda
+
+	* lib/wgSite.pm: Default to considering .php files dynamic
+
+2002-11-29 16:53  golda
+
+	* makenh: Check in fix from Renfrew, handle the case of links like
+	<a href=#ABC>
+
+2002-11-27 23:51  golda
+
+	* lib/httpget.c: Add 3 new checks for runaway data streams:	-
+	stop after one "Location:" line       - sanity check on number of
+	header lines (1000)	    - sanity check on total filesize
+	retrieved (100Mb)
+
+2002-11-17 16:31  golda
+
+	* templates/spanish/wgindex.html: Search => Busque
+
+2002-11-17 16:30  golda
+
+	* templates/: tmplAddTree.html, tmplEditTree.html, wgany.html,
+	wgverysimple.html: 
+	tmpl*:	for 'IndexTrunk' flag on TREE type roots wgany.html: add
+	'limit hits' option wgverysimple: increase chars output
+
+2002-11-17 16:29  golda
+
+	* lib/: CustomOutputTool.pm, wgArch.pm, wgHeader.pm, wgRoot.pm:
+	CustomOutputTool: Fix typo
+	
+	wgRoot: add support for 'IndexTrunk' flag on TREE type roots
+
+2002-11-17 16:28  golda
+
+	* cgi-bin/webglimpse.cgi: Increase default chars output for each
+	hit
+
+2002-11-17 16:28  golda
+
+	* TODO, makenh: Support option not to index the starting or 'trunk'
+	pages of a tree type root.
+
+2002-10-18 22:38  golda
+
+	* templates/: bglimpse.cgi, OutputTool.pm, wgoutput.cfg: Use
+	wgany.html template for combined archive searches, replace title
+	with 'Combined'; no support right now for Metacharset for combined
+	archive searches (ie, Russian & Hebrew right now are not supported
+	this way, but can be hardcoded into your own wgany.html file)
+
+2002-10-16 09:39  golda
+
+	* templates/wgany.html: Form to search any combination of archives
+
+2002-10-16 09:13  golda
+
+	* templates/: tmplNewArch.html, wgindex.html, wgsimple.html: Change
+	of wording, focus input into query box
+
+2002-10-16 09:11  golda
+
+	* lib/: CustomOutputTool.pm, LangUtils.pm, wgHeader.pm: [no log
+	message]
+
+2002-10-16 09:10  golda
+
+	* cgi-bin/webglimpse.cgi: Accept multiple archive ids and search
+	multiple archives
+
+2002-09-30 23:02  golda
+
+	* lib/wgTextMsgs.pm: Minor text changes
+
+2002-09-30 16:18  golda
+
+	* templates/: newquery.html, tmplNewArch.html: Fix to keep settings
+	on new query, add Estonian to language list for new archives
+
+2002-09-30 16:18  golda
+
+	* lib/: LangUtils.pm, wgArch.pm, wgHeader.pm, wgTextMsgs.pm: Added
+	Estonian to language list, update version number, add warning
+	prompt aboutoverwriting files.
+
+2002-09-30 16:17  golda
+
+	* cgi-bin/webglimpse.cgi: minor typo
+
+2002-09-30 16:17  golda
+
+	* wginstall.pl: Added warning that .wg* files will be overwritten
+	by upgrade
+
+2002-09-17 19:33  golda
+
+	* templates/: bglimpse.cgi, wgindex.html, wgsimple.html,
+	wgverysimple.html: Changes to LIMIT code to speed up some queries.
+
+2002-09-12 08:22  golda
+
+	* templates/wgindex.html: Add option to limit results to 1 page of
+	hits for greater speed.
+
+2002-09-12 08:21  golda
+
+	* templates/tmplNewArch.html: Added option for Arabic
+
+2002-09-12 08:21  golda
+
+	* templates/newquery.html: Put ID into 'new query' box!  Dumb
+	bug..new query was going to all archive search form.
+
+2002-09-12 08:20  golda
+
+	* lib/htuml2txt.pl: fix DOS-style line breaks; also try to paste
+	lines back together and end only at sentence breaks
+
+2002-09-12 08:18  golda
+
+	* lib/LangUtils.pm: Add lang codes for Arabic
+
+2002-09-12 08:18  golda
+
+	* lib/InputSyntax.pm: Only consider 'not' a boolean var if it
+	follows 'and' or 'or' - otherwise it may be part of the query
+	keywords
+
+2002-09-12 07:56  golda
+
+	* dist/wgfilter-index: Deny .js (Javascript includes)
+
+2002-09-12 07:54  golda
+
+	* cgi-bin/webglimpse.cgi: Added option to use -L switch to limit
+	hits for greater speed.
+
+2002-09-12 07:54  golda
+
+	* TODO, wginstall.pl: [no log message]
+
+2002-08-10 04:04  golda
+
+	* lib/wgSiteConf.pm: Check exactly what the local filename will be
+	before deciding if static or dynamic.
+
+2002-08-09 18:00  golda
+
+	* cgi-bin/wgarcmin.cgi, lib/wgSiteConf.pm: Check for permissions in
+	wgarcmin.cgi so we don't die mysteriously if we can't reach our
+	libraries
+	
+	wgSiteConf.pm: Don't consider dynamic files local, so we are forced
+	to retrieve them.
+
+2002-07-31 22:39  golda
+
+	* templates/tmplLoginPage.html: method=POST on initial login page
+	so we don't show the password!
+
+2002-07-31 22:39  golda
+
+	* lib/wgTextMsgs.pm: Give better help message if glimpse not found
+
+2002-07-31 22:39  golda
+
+	* dist/wgfilter-index: exclude /cgi-bin and *.cgi by default
+
+2002-07-31 22:39  golda
+
+	* TODO, wgcmd, wginstall.pl: wginstall.pl: Check for Glimpse early
+	on, not after poor user answered 10 questions! wgcmd: correct error
+	message on invalid archive id
+
+2002-07-31 01:55  golda
+
+	* TODO, getfile, makenh, wgcmd, wginstall.pl: wginstall.pl: Find
+	writable directories, reduce errors when running as non-root user
+	wgcmd: prompt to build archive after add files
+
+2002-07-31 01:47  golda
+
+	* lib/: CustomOutputTool.pm, httpget.c, wgArch.pm, wgSiteConf.pm,
+	wgTextMsgs.pm: wginstall.pl: find writable directory before
+	prompting user; avoid errors when running install as non-root user.
+	 wgcmd: prompt automatically to build archive when adding roots,
+	also output search info
+	
+	wgArch: use first line of .glimpse_filenames for count rather than
+	calling wc
+	
+	other minor fixes & formatting/language changes
+
+2002-07-17 00:00  golda
+
+	* cgi-bin/webglimpse.cgi: Check for old-style text file output from
+	glimpse was erroneously picking up URL's with :port ; change check
+	to avoid :## type  patterns.  Thanks to tromer for reporting this!
+	(bug #69)
+
+2002-07-14 22:37  golda
+
+	* cgi-bin/webglimpse.cgi: www-form-encode filename and link before
+	putting on mfs.cgi URL; fixes problem where jump-to-line was broken
+	with filenames with spaces
+	
+	also note we try to avoid printing the hard drive path as part of
+	the URL, use archive id if available instead (improves security)
+
+2002-07-14 22:29  golda
+
+	* cgi-bin/mfs.cgi, cgi-bin/webglimpse.cgi, lib/CustomOutputTool.pm,
+	lib/OutputTool.pm, templates/wgoutput.cfg: Several changes to allow
+	customizable highlighting of query words, both in returned matching
+	lines and in the page linked to by a jump-to-line link (using local
+	copy thru mfs.cgi)
+	
+	Also merged getfile code into mfs.cgi, eliminated exec() of
+	getfile.  Should improve security, speed slightly.
+
+2002-07-10 19:07  golda
+
+	* lib/: httpget.c, wgHeader.pm: httpget.c : Fix to add port back
+	into Host: line sent with request - required by Zope, probably
+	others. Thanks to tromer for the patch!
+	
+	wgHeader.pm : minor variable name edit
+
+2002-07-02 20:42  golda
+
+	* templates/: newquery.html, wgoutput.cfg: Minor format changes,
+	comments
+
+2002-07-02 20:41  golda
+
+	* lib/wgArch.pm: Added 'newquery.html' file to list of
+	archive=specific files
+
+2002-07-02 20:41  golda
+
+	* wginstall.pl: Added 'newquery.html' file to installation
+
+2002-07-02 20:21  golda
+
+	* makenh: Add check for loops in redirection for gathering robot
+	files.	We were only checking on gathering regular links...
+
+2002-07-02 19:57  golda
+
+	* templates/newquery.html: Adding template for 'new query' box at
+	the end of the results page, so this can be modified by the
+	administrator.
+
+2002-06-26 19:51  golda
+
+	* templates/: wgindex.html, wgoutput.cfg: Changed dfeault chars to
+	3000 from 1000, added option to parse sentences.  Changed output
+	spacing to put <p> tag between separate hits.
+
+2002-06-26 19:50  golda
+
+	* lib/: CustomOutputTool.pm, wgSiteConf.pm: Added 'FindSentences()'
+	subroutine to CustomOutputTool, also allow user to provide custom
+	"New Query" box instead of using fixed query.  (Replace all hidden
+	tags at once).	Added CompleteURL() routine to wgSiteConf.pm to
+	create full URL's from relative paths.
+
+2002-06-26 19:48  golda
+
+	* cgi-bin/webglimpse.cgi: Added option to break by sentences
+	(.-delimited) rather than limiting by character count.
+
+2002-06-26 19:48  golda
+
+	* makenh: Make sure dynamic filetypes are http-retrieved when doing
+	a DIR type index.
+
+2002-06-17 23:32  golda
+
+	* lib/wgHeader.pm: Updated version #
+
+2002-06-17 01:54  golda
+
+	* lib/: wgArch.pm, wgTextMsgs.pm: Fix typos in text messages
+
+2002-06-17 01:54  golda
+
+	* cgi-bin/webglimpse.cgi: Fix problem with parsing glimpse output
+	on text files with no titles.
+
+2002-06-11 15:40  golda
+
+	* lib/ResultCache.pm: Pipe 2>/dev/null when using ls to guess cache
+	file names, so if we don't see one we don't get noise in the error
+	logs.  Thx to Derek Pomery for the suggestion!
+
+2002-06-09 00:01  golda
+
+	* dist/wgfilter-index: Avoid finding our own search forms in case
+	they have been copied directly into document space.
+
+2002-06-08 22:40  golda
+
+	* cgi-bin/wgarcmin.cgi, templates/docMakeForms.html: Corrected some
+	paths in the docs
+
+2002-06-08 22:39  golda
+
+	* lib/wgTextMsgs.pm: Added instructions for using new search forms
+	to wgcmd interface
+
+2002-06-06 22:54  golda
+
+	* lib/: InputSyntax.pm, htuml2txt.pl, wgArch.pm: New routine,
+	autoBuildQuery to create boolean expressions for ALL, ANY, NEGATE
+	terms
+	
+	replace <br>, <p> tags with \n instead of space when filtering,
+	should help with long lines in glimpse
+	
+	add wgsimple.html, wgverysimple.html to each archive along with
+	wgindex.html
+
+2002-06-06 22:53  golda
+
+	* cgi-bin/webglimpse.cgi: Check for request to automatically build
+	query
+
+2002-06-06 22:52  golda
+
+	* wginstall.pl: Add wgsimple.html, wgverysimple.html to install
+	list
+
+2002-06-06 00:32  golda
+
+	* templates/: bglimpse.cgi, Msgs.pm, docMakeForms.html: Add
+	wgsimple.html and wgverysimple.html search forms correct minor typo
+	in installation message do not try to use new SetNumHits routine
+	unless we have CustomOutputTool module
+
+2002-06-04 21:48  golda
+
+	* templates/: wgsimple.html, wgverysimple.html: Add two new search
+	templates, which allow the use of ANY, ALL to automatically build
+	boolean searches.
+
+2002-05-31 07:39  golda
+
+	* templates/wgreindex: Do not use -f (incremental index) by
+	default; can make inefficient index after a while, especiall if
+	files are removed as well as added.  Also in at least 1 case has
+	been associated with index errors (not reproducible yet). 
+	Generally we ssume search speed is more important than indexing
+	speed, so default to clean full reindex.
+
+2002-05-16 21:20  golda
+
+	* templates/wgoutput.cfg: Eliminate final summary of # hits, etc,
+	this was just confusing to most users.	Shrink the header stuff so
+	more room to show actual results.
+
+2002-05-16 21:19  golda
+
+	* lib/: CustomOutputTool.pm, ResultCache.pm: Clean up appearance of
+	Next Hits toolbar, start counting at 1 not 0, make sure
+	MATCHED_FILES and MATCHED_LINES settings are available throughout
+	the output template
+
+2002-05-16 21:18  golda
+
+	* cgi-bin/webglimpse.cgi: Don't display next hits toolbar if <
+	maxfiles hits (even if using cache)
+
+2002-05-16 21:18  golda
+
+	* TODO: Note some minor misbehaviours when run from non-home domain
+
+2002-05-10 11:07  golda
+
+	* lib/CustomOutputTool.pm, lib/wgArch.pm, templates/wgoutput.cfg:
+	Make the 'limit exceeded' messages customizable
+
+2002-05-07 14:14  golda
+
+	* lib/: wgArch.pm, wgHeader.pm: Correction to sendmail command line
+	for optional archive registration
+
+2002-05-05 18:00  golda
+
+	* templates/: tmplAddSite.html, tmplManageAll.html, wgindex.html,
+	wgoutput.cfg: Generally making interface crisper.  Split output
+	into multiple tables instead of one big table because it will come
+	up faster.  Default to 1000 chars per file instead of 10000, makes
+	output more readable for files with long lines.
+
+2002-05-05 17:59  golda
+
+	* lib/: AllowDeny.pm, CustomOutputTool.pm, ResultCache.pm,
+	wgArch.pm, wgSite.pm, wgStats.pm: Correct syntax for hash of arrays
+	- [] not ()
+
+2002-05-05 17:58  golda
+
+	* dist/wgrankhits.cfg: Tweak default ranking formula to weight
+	title more heavily
+
+2002-05-05 17:57  golda
+
+	* cgi-bin/: webglimpse.cgi, wgarcmin.cgi: Webglimpse.cgi - provide
+	data to output module so that the output header can tell number of
+	matches, which set we are displaying now
+	
+	wgarcmin.cgi - minor fixes to make sure defaults for domain
+	configuration come thru
+
+2002-05-05 17:53  golda
+
+	* TODO, addsearch, makenh, wgcmd: Make sure search boxes are only
+	added if user chose "Add Boxes" option
+
+2002-05-04 12:54  golda
+
+	* templates/tmplAddSite.html: make neighborhoods checkbox is now on
+	manage archive page, affects entire archive
+
+2002-05-01 22:04  golda
+
+	* addsearch: Use newer template format with |VARIABLE|
+
+2002-05-01 22:01  golda
+
+	* templates/wgbox.html: Use newer template format for 2.X
+
+2002-05-01 21:59  golda
+
+	* TODO: [no log message]
+
+2002-05-01 21:59  golda
+
+	* makenh: correct subroutine name
+
+2002-05-01 21:58  golda
+
+	* addsearch: Updated for use with 2.X
+
+2002-05-01 12:44  golda
+
+	* templates/: ogler/htuml2txt.so, dWeb.pm, er.pm,
+	tmplManageAll.html, tmplManageArch.html, wgbox.html, wgoutput.cfg:
+	Fixing neighborhood searching & addboxes
+
+2002-04-30 17:06  golda
+
+	* lib/CustomOutputTool.pm: Quotes around query string in "next
+	hits" toolbar
+
+2002-04-30 16:58  golda
+
+	* lib/RankHits.pm: Ranking on title should be case-insensitive
+
+2002-04-23 01:01  golda
+
+	* templates/: er.pm, s.pm, docEditSite.html, wgoutput.cfg,
+	wgreindex: change output format to separate tables for each hit, so
+	that early hits can show up while later are still on the way. 
+	Putting everything in one big table was a bad idea (done long time
+	ago...)
+	
+	wgreindex, uncomment addsearch, we are allowing add search boxes
+	and neighborhood searching again
+
+2002-04-19 12:18  golda
+
+	* makenh: Correct routine name for get whois/registrant info
+
+2002-04-19 12:18  golda
+
+	* lib/wgRoot.pm: fix for regexp-type constraints on site traversal
+
+2002-04-11 23:29  golda
+
+	* TODO, makenh, lib/CommandWeb.pm, lib/wgArch.pm, lib/wgConf.pm,
+	templates/tmplManageArch.html: Getting neighborhoods working
+	again...
+
+2002-04-10 23:04  golda
+
+	* lib/: , earch, nh, stall.pl, /wgfilter-box, wgArch.pm,
+	wgHeader.pm, wgTextMsgs.pm: Added option to register archives with
+	central repository (us)
+
+2002-04-09 16:30  golda
+
+	* templates/: tmplAddDir.html, tmplAddSite.html, tmplAddTree.html,
+	tmplEditSite.html, tmplEditTree.html, tmplLocalDomain.html,
+	tmplLoginPage.html, tmplManageAll.html, tmplManageArch.html,
+	tmplNewArch.html, tmplRemoteDomain.html, tmplTestTrans.html:
+	Changed method from POSt to GET in wgarcmin templates so that we
+	keep REMOTE_USER variable (that lets us avoid cookies if the
+	administrator puts wgarcmin.cgi under an access-protected
+	directory)
+
+2002-04-04 16:20  golda
+
+	* templates/: , .pm, Conf.pm, tmplAddDir.html, tmplManageArch.html:
+	partial changes to add search boxes to pages again
+
+2002-03-28 15:45  golda
+
+	* templates/wgindex.html: More format changes
+
+2002-03-28 15:40  golda
+
+	* templates/tmplLoginPage.html: Shorten input boxes to make page
+	look nicer
+
+2002-03-22 01:18  golda
+
+	* lib/wgArch.pm: Add additional allowed chars
+
+2002-03-22 00:54  golda
+
+	* lib/: wgArch.pm, wgSiteConf.pm: Untaint dir path after security
+	check, so we can check for num files thru web interface
+
+2002-03-21 23:53  golda
+
+	* lib/: , stall.pl, wgHeader.pm, wgTextMsgs.pm: Don't fail from
+	install if can't chmod, just warn user to do it manually
+
+2002-03-17 06:08  golda
+
+	* makenh: Treat directories as dynamic so we retrieve them
+
+2002-03-17 05:56  golda
+
+	* makenh: Send file to CheckURL if we have it; directories should
+	be treated as dynamic so they wlil be retrieved via http (we don't
+	know what the index file should be, or if just dirlist)
+
+2002-03-17 05:19  golda
+
+	* templates/: tmplEditSite.html, tmplEditTree.html: allow changes
+	to URL of Site & Tree type roots
+
+2002-03-17 05:18  golda
+
+	* lib/wgRoot.pm: minor typo
+
+2002-03-14 22:24  golda
+
+	* TODO, makenh: Don't use $1 for so many lines...can get
+	overwritten
+
+2002-03-14 21:37  golda
+
+	* templates/: , .pm, docAddSite.html, docEditSite.html,
+	tmplEditSite.html: Allow limitprefix to be interpreted as a regexp,
+	giving more flexible ways to define a 'site'
+
+2002-03-13 13:58  golda
+
+	* lib/wgArch.pm: Added # files indexed to status message
+
+2002-03-11 02:09  golda
+
+	* makenh: Check in signal handling, still needs some testing.  But
+	now we can catch Ctrl-C and end cleanly with useful files; so if we
+	were doing a long retrieve the stuff we downloaded can still be
+	used next time if its still up to date, and we'll have a workable
+	partial index.
+
+2002-03-06 18:51  golda
+
+	* TODO: mfs
+
+2002-02-18 23:25  golda
+
+	* makenh: [no log message]
+
+2002-02-17 23:13  golda
+
+	* lib/: stall.pl, wgStats.pm: Added module for gathering &
+	reporting site statistics
+
+2002-02-17 23:11  golda
+
+	* TODO, makenh: Merged in statistics reporting capabilities into
+	makenh
+
+2002-02-15 05:30  golda
+
+	* templates/tmplManageAll.html: Corrected link for 'Configure Local
+	Domain' button
+
+2002-02-13 00:19  golda
+
+	* templates/: wgany.html, wgbox.html: minor wording change
+
+2002-02-13 00:19  golda
+
+	* wginstall.pl: Updated supported lang list
+
+2002-02-12 23:51  golda
+
+	* lib/LangUtils.pm, templates/tmplNewArch.html: Added French &
+	NORSK to the list
+
+2002-02-12 23:51  golda
+
+	* cgi-bin/wgarcmin.cgi: Removing debug statements...
+
+2002-02-12 23:51  golda
+
+	* makenh: When redirected to bare filename, prepend last known
+	protocol + host
+
+2002-02-12 01:34  golda
+
+	* templates/: french/wgindex.html, french/wgoutput.cfg,
+	norwegian/wgindex.html, norwegian/wgoutput.cfg: Added support for
+	French & Norwegian (Francais & NORSK), thanks to Cortina Jone and
+	Arnfinn Anda!
+
+2002-02-06 22:54  golda
+
+	* templates/: , , , bglimpse.cgi, khits.cfg, OutputTool.pm, ts.pm,
+	Conf.pm, wgbox.html, wgindex.html, wgoutput.cfg: Fix a few variable
+	name typos, add a 'do-nothing' line that apparently was necessary
+	for the eval to work!  Now Ranking hits should work correctly,
+	using the new named ranking formulas.  Users can now pick how to
+	rank (sort) the results on each search, and re-sort if they like.
+
+2002-02-02 00:22  golda
+
+	* TODO, lib/RankHits.pm, templates/wgany.html: Fix typo that was
+	preventing formulas from being read
+
+2002-02-01 23:57  golda
+
+	* lib/httpget.c: Match "Last-Modified" or "Last-modified"
+
+2002-02-01 01:12  golda
+
+	* cgi-bin/webglimpse.cgi, dist/wgrankhits.cfg: Make sure "rankby"
+	input is clean, then untaint so we can use as part of cache file
+	name.  Otherwise user will be unable to re-sort hits.
+
+2002-01-30 23:37  golda
+
+	* Makefile, TODO, makenh, wgcmd, cgi-bin/webglimpse.cgi,
+	dist/wgrankhits.cfg, lib/RankHits.pm, lib/ResultCache.pm,
+	lib/wgArch.pm, lib/wgConf.pm, templates/wgindex.html: Major new
+	release (well, will be first minor number,2.2-> 2.3) including
+	
+		- internals change to get rid of monster regexp and replace
+	with smaller regexp and
+	some splits, when matching the raw Glimpse output.  Should fix some
+	problems finding titles, speed things up and make easier to
+	maintain. Thanks to Derek Pomery for suggestion!
+	
+		- Added Named Ranking formulas, will allow user to choose
+	how to rank hits
+	
+		- Added Link Popularity rating = # of links to each page
+
+2001-12-26 17:18  golda
+
+	* lib/: stall.pl, wgErrors.pm, wgHeader.pm: Single quotes around
+	admin email because may contain @ char
+
+2001-12-22 23:32  golda
+
+	* lib/httpget.c: Added -h switch for printing headers to stdout
+
+2001-12-17 22:58  golda
+
+	* makenh: only replace for commas in the link, not extra text
+	beyond that
+
+2001-12-09 22:05  golda
+
+	* TODO, wginstall.pl, cgi-bin/webglimpse.cgi, lib/wgArch.pm,
+	lib/wgErrors.pm, lib/wgHeader.pm, lib/wgTextMsgs.pm,
+	templates/wgreindex: Notify administrator if archives fails to
+	build or if user tries to search in a directory where no archive
+	exists.
+
+2001-12-04 22:57  golda
+
+	* cgi-bin/webglimpse.cgi, templates/wgany.html: getting 'search any
+	archive' to work
+
+2001-12-04 21:58  golda
+
+	* templates/wgany.html: Template for searching any available
+	archive
+
+2001-12-04 21:58  golda
+
+	* cgi-bin/webglimpse.cgi: If called without a query, print the
+	search form; if called without an archive id, print a form to
+	search any available archive
+
+2001-12-04 21:58  golda
+
+	* wginstall.pl: Added wgany.html, template for searching any
+	available archive
+
+2001-12-03 11:55  golda
+
+	* cgi-bin/webglimpse.cgi: Fix for problem with URL's containing
+	commas, thanks to Gerry Magennis!
+	
+	Also checking in beginning of noquery() routine so that webglimpse
+	can return a search form if no query is submitted.
+
+2001-12-03 11:53  golda
+
+	* makenh: Fix for problem with URL's containing commas, thanks to
+	Gerry Magennis!
+
+2001-12-01 21:17  golda
+
+	* wgcmd: Fix typo preventing correct servername from being printed
+
+2001-11-29 21:28  golda
+
+	* templates/wgall.html: Just changing text to "WebglimpseII"
+
+2001-11-29 21:28  golda
+
+	* lib/wgSiteConf.pm: LocalFile2URL now looks for the longest match
+	to the directory path in all known local domains.  Before it was
+	just returning the first one found,which might not be what you want
+	if you have a subdirectory aliased to another domain.  We sort the
+	list of possible paths ahead of time so it doesn't take longer than
+	before.
+
+2001-11-28 22:05  golda
+
+	* templates/wgindex.html: minor text updates
+
+2001-11-27 02:12  golda
+
+	* makenh: Put filename in single-quotes too just to be safe (though
+	we have now chopped off extra-long extensions that had had escape
+	chars)
+
+2001-11-27 01:59  golda
+
+	* makenh: Add important security checks to prevent shell escapes in
+	URLs
+
+2001-11-27 01:57  golda
+
+	* lib/wgSite.pm: Correct error in loop checking for scriptaliases
+
+2001-11-07 14:39  golda
+
+	* dist/wgfilter-index: Avoid loops when using Zeus webserver,
+	thanks to Gerry Magennis for the fix!
+
+2001-11-04 17:15  golda
+
+	* lib/: d, wgTextMsgs.pm: Search from command-line interface
+
+2001-11-03 18:46  golda
+
+	* lib/: wgSiteConf.pm, wgTextMsgs.pm: Minor typo fixes
+
+2001-11-03 14:09  golda
+
+	* lib/AllowDeny.pm: Allow spaces before comments.
+
+2001-11-03 14:09  golda
+
+	* TODO: [no log message]
+
+2001-10-31 14:17  golda
+
+	* lib/: d, stall.pl, wgSite.pm, wgSiteConf.pm, wgTextMsgs.pm:
+	command-line interface working
+
+2001-10-22 23:44  golda
+
+	* TODO, wgcmd, wginstall.pl, cgi-bin/wgarcmin.cgi,
+	lib/CommandWeb.pm, lib/wgArch.pm, lib/wgConf.pm, lib/wgHeader.pm,
+	lib/wgSiteConf.pm, lib/wgTextMsgs.pm, templates/tmplManageAll.html:
+	Added command-line interface, wgcmd, for managing archives.
+	
+	You can use wgcmd instead of the web interface, wgarcmin.cgi.  It
+	doesn't do quite as many things for you, because you can also edit
+	the configuration files directly.  wgcmd is mainly useful for
+	creating new archives, adding docs to an existing archive, and
+	listing all the archives on your server.  If you have multiple
+	indexes it is very useful to list them all in one place!
+	
+	Other changes are support for new wgcmd.  Also wginstall.pl now has
+	an option to create archive at end of install, like in 1.7.
+
+2001-10-22 17:24  golda
+
+	* templates/hebrew/wgoutput.cfg: Minor text corrections - thanks to
+	Adeena!
+
+2001-10-17 00:25  golda
+
+	* cgi-bin/webglimpse.cgi: Removed second substitution of + to
+	space!	Now you can search for 'C++'
+
+2001-09-12 11:01  golda
+
+	* dist/wgfilter-index: Added explicit allow for .html type files to
+	increase effciency, as per Robert Lupton.
+
+2001-08-30 18:29  golda
+
+	* wginstall.pl, cgi-bin/webglimpse.cgi, lib/wgHeader.pm: Added
+	version info to comments at beginning of search results
+
+2001-08-30 18:13  golda
+
+	* templates/finnish/wgindex.html: Minor language update
+
+2001-08-26 23:40  golda
+
+	* templates/finnish/wgoutput.cfg: Some corrections to finnish
+	output templates. Thanks to Marko Asplund!
+
+2001-08-26 23:40  golda
+
+	* lib/LangUtils.pm, templates/tmplNewArch.html: Correction -
+	language name for finnish is "suomi" (lower case)
+
+2001-08-26 23:39  golda
+
+	* TODO: [no log message]
+
+2001-08-25 00:09  golda
+
+	* wginstall.pl, lib/LangUtils.pm, templates/tmplNewArch.html:
+	Adding finnish (Suomenkielinen) to list of supported languages
+
+2001-08-25 00:00  golda
+
+	* templates/finnish/: wgindex.html, wgoutput.cfg: Adding templates
+	in Finnish, thanks to Marko Asplund for translations!
+
+2001-08-22 20:47  golda
+
+	* templates/: arcmin.cgi, dWeb.pm, OutputTool.pm, rs.pm, .pm,
+	Conf.pm, tmplEditDir.html, wgoutput.cfg: Mostly changes to allow
+	user to specify protocol, port for local directory->URL
+	translations.
+	
+	Correct bugs when changing host,prot or port on existing domain, or
+	StartURL for existing root.
+	
+	Allow user to cancel addition of domain config.
+	
+	Allow customization of "New Query" text (useful for non-English
+	archives)
+
+2001-08-22 19:33  golda
+
+	* templates/: tmplLocalDomain.html, tmplManageAll.html,
+	tmplRemoteDomain.html: Changes to allow 'Cancel' of a new domain
+	config, allow the user to enter the protocol and port for local
+	directory -> URL translation, and (most significantly to the code)
+	index domains internally by protocol+host+port rather than just
+	host.
+
+2001-08-22 18:25  golda
+
+	* lib/: CustomOutputTool.pm, wgArch.pm: Move METACHARSET tag into
+	wgArch since it is fixed for each archive, does not depend on any
+	search variable.
+
+2001-08-22 18:09  golda
+
+	* templates/hebrew/wgoutput.cfg: Updated wgoutput.cfg contributed
+	by Adeena Ascher, with better right-justification.
+
+2001-08-22 18:06  golda
+
+	* cgi-bin/webglimpse.cgi: Don't try to highlight based on word
+	breaks for non-english languages, Perl will think most characters
+	are word breaks.
+
+2001-08-20 20:55  golda
+
+	* Makefile: Added section for freebsd (identical to linux for
+	simple progs we need)
+
+2001-08-05 13:59  golda
+
+	* templates/tmplLocalDomain.html: Add option for protocol for local
+	domains (dir type roots)
+
+2001-08-05 13:59  golda
+
+	* lib/wgSite.pm: Correct typo
+
+2001-08-05 13:58  golda
+
+	* TODO: [no log message]
+
+2001-07-28 23:10  golda
+
+	* templates/portuguese/: , , .html, wgall.html, wgindex.html,
+	wgoutput.cfg: Added Portuguese support
+
+2001-07-23 19:55  golda
+
+	* lib/OutputTool.pm: Make bg color white
+
+2001-07-23 18:59  golda
+
+	* wginstall.pl: Correct regexp for trimming trailing slashes off
+	CGIBIN, don't ask about wusage if we don't have wgLog module.
+
+2001-07-22 23:43  golda
+
+	* lib/: stall.pl, bin/webglimpse.cgi, CustomOutputTool.pm,
+	OutputTool.pm, wgTextMsgs.pm: Created expiring demo so people don't
+	have to register in order to download a copy...
+
+2001-07-20 23:30  golda
+
+	* templates/: wgall.html, wgindex.html: Add "Use filters" checkbox
+	into wgall.html
+
+2001-07-19 13:08  golda
+
+	* wginstall.pl: Move wgLog.pm into optlibfiles list (only
+	distributed with commercial/contrb version)
+
+2001-07-19 13:04  golda
+
+	* dist/: tall.pl, wgrankhits.cfg: Check if files exist so we don't
+	get system error messages on optional libraries.
+
+2001-07-19 13:03  golda
+
+	* templates/: tmplManageAll.html, wgoutput.cfg: Added comments to
+	wgoutput.cfg
+
+2001-07-19 13:01  golda
+
+	* lib/CustomOutputTool.pm: Allow comments in wgoutput.cfg
+
+2001-07-11 19:18  golda
+
+	* lib/wgTextMsgs.pm: Added note about compiling glimpse with
+	ISO_CHAR_SET=1
+
+2001-07-08 23:44  golda
+
+	* templates/tmplManageArch.html: Clean up HTML and compress form
+	for manage archive page.
+
+2001-07-07 23:02  golda
+
+	* templates/tmplManageArch.html: Adding Language to Manage Archive
+	scree
+
+2001-07-07 23:02  golda
+
+	* lib/: LangUtils.pm, wgArch.pm, wgConf.pm: Adding Language to
+	Manage Archive screen; remove returns from multi-line descriptions
+
+2001-07-07 23:01  golda
+
+	* cgi-bin/wgarcmin.cgi: Adding Language to Manage Archive screen
+
+2001-07-07 23:00  golda
+
+	* wginstall.pl: Default to htuml2txt lex script from Christian
+	Vogler; it is fastest filter that has been thoroughly tested.
+
+2001-07-06 23:27  golda
+
+	* templates/.glimpse_filters: Adding '.jhtml' to the list of
+	html-type extensions to filter
+
+2001-07-06 23:25  golda
+
+	* templates/hebrew/wgindex.html: Defaulting to Use Filters=yes
+
+2001-07-06 23:25  golda
+
+	* cgi-bin/webglimpse.cgi, lib/RankHits.pm: Correcting regexp
+	matching glimpse lines, when there is no title Glimpse doesn't
+	output the file-end-mark after the URL.  We can safely treat the
+	url as [^\s]+ because URL's never have spaces (they're converted to
+	%20's).  This was really slowing down some searches, as much as
+	30seconds.  It only affected files not ending in html/htm.
+
+2001-07-06 23:21  golda
+
+	* wginstall.pl: Version #
+
+2001-07-03 23:55  golda
+
+	* templates/: docAddDir.html, docAddSite.html, tmplNewArch.html:
+	Removed references to Reindex Freq, we are letting users edit their
+	own crontabs
+
+2001-07-03 23:55  golda
+
+	* wginstall.pl: Add 'Search Tips' doc page to install. Note: why do
+	we need to list files explicitly?  We could just copy directory
+	contents instead...
+
+2001-07-03 23:54  golda
+
+	* makenh: Recognize bare domain names http://domain.com as
+	html-type files for filtering.
+
+2001-07-02 23:08  golda
+
+	* dist/tips.html: Search tips documentation for end user
+
+2001-07-02 22:03  golda
+
+	* cgi-bin/webglimpse.cgi: [no log message]
+
+2001-07-02 22:03  golda
+
+	* wginstall.pl: Avoid running 'ps -a' on Solaris platforms, we had
+	a report of a hang and anyway the command is different there.
+
+2001-07-02 11:30  golda
+
+	* templates/hebrew/: wgall.html, wgindex.html: Adding translated
+	templates
+
+2001-07-02 11:30  golda
+
+	* templates/: tmplAddSite.html, tmplAddTree.html, tmplNewArch.html,
+	wgreindex: Add choice of language, set env variables in wgreindex
+	(glimpse needs to see LANG and LC_ALL settings)
+
+2001-07-02 11:29  golda
+
+	* lib/: LangUtils.pm, wgArch.pm, wgConf.pm: LangUtils has generic
+	routines for returning codes, modifying dates, etc for different
+	languages.
+	
+	wgArch and wgConf now use language-specific templates when
+	available, keep a language variable stored for each archive
+
+2001-07-02 11:27  golda
+
+	* cgi-bin/webglimpse.cgi: Language support: Set ENV variables and
+	use language-specific templates when available
+
+2001-07-02 11:27  golda
+
+	* wginstall.pl: Added code to handle language templates
+
+2001-06-29 23:35  golda
+
+	* templates/: german/wgall.html, german/wgindex.html,
+	german/wgoutput.cfg, hebrew/wgall.html, hebrew/wgindex.html,
+	hebrew/wgoutput.cfg, spanish/wgall.html, spanish/wgindex.html:
+	Adding the translated templates we have so far...
+
+2001-06-27 22:36  golda
+
+	* templates/: , pl, bglimpse.cgi, OutputTool.pm, ils.pm, Tool.pm,
+	.pm, er.pm, Msgs.pm, tmplNewArch.html, wgoutput.cfg, wgreindex:
+	Adding language support, currently for Hebrew, Spanish & German but
+	will be simple to add other languages as info is available.
+
+2001-06-27 21:02  golda
+
+	* cgi-bin/webglimpse.cgi: Use \S instead of \w in matching date
+	strings, since in some languages the date may upper-ascii
+	characters.
+
+2001-06-14 19:59  golda
+
+	* lib/htuml2txt.pl: Added missing semicolon in 2 html codes
+
+2001-05-28 23:14  golda
+
+	* templates/docMakeForms.html: [no log message]
+
+2001-05-27 23:40  golda
+
+	* templates/: , docCrontab.html, docMakeForms.html,
+	tmplAddDir.html, tmplAddSite.html, tmplAddTree.html,
+	tmplManageArch.html: Added documentation for reindexing from
+	crontab, commented out nonfunctional 'Reindex Freq' sections in
+	AddRoot pages.	We might later want to use the www user's crontab
+	and set from wgarcmin, but need to look into security issues first.
+	 Right now just let user do it manually.
+
+2001-05-27 23:38  golda
+
+	* addsearch: look up archive first before guessing where config
+	file is located...
+
+2001-05-26 22:40  golda
+
+	* templates/: , arcmin.cgi, docMakeForms.html, tmplManageArch.html:
+	Wrote doc for adding forms to your site; modified wgarcmin to allow
+	context-sensitive docs with variables from each ardhive.  That way
+	we can provide exact code examples to cut & paste.
+
+2001-05-26 21:20  golda
+
+	* templates/: docCrontab.html, docMakeForms.html,
+	docMakeNeigh.html, docNonascii.html: Adding docs for Manage Arch
+	page.  Will be referenced as templates so they will be customized
+	for each archive.
+
+2001-05-26 21:16  golda
+
+	* templates/: , pl, bglimpse.cgi, Msgs.pm, tmplEditDir.html,
+	tmplManageArch.html, wgall.html, wgindex.html: fix minor typos and
+	add documentation links on Manange Archive page
+
+2001-05-24 23:49  golda
+
+	* lib/: CustomOutputTool.pm, wgArch.pm: Moving .wgoutput.cfg from
+	dist to wgoutput.cfg in templates.  Don't need to hide all files if
+	archive dir is separate from docroot...
+
+2001-05-24 23:45  golda
+
+	* lib/wgArch.pm: Add 'Lang' new member var at end, so doesn't screw
+	up existing archives
+
+2001-05-24 23:38  golda
+
+	* templates/tmplNewArch.html: [no log message]
+
+2001-05-24 23:35  golda
+
+	* templates/Español/: , wgall.html, wgindex.html: Clean up template
+	files and make sure Espanol directory is created correctly
+
+2001-05-24 23:19  golda
+
+	* lib/wgArch.pm: Correct typo LANG->Lang
+
+2001-05-24 23:15  golda
+
+	* templates/tmplManageArch.html: Don't save changes to archive
+	unless users presses "Save Changes" button explicitly
+
+2001-05-24 22:49  golda
+
+	* lib/: stall.pl, /wgoutput.cfg, wgArch.pm, wgHeader.pm: Adding
+	language support, starting with Spanish & Hebrew
+
+2001-05-24 22:47  golda
+
+	* templates/: tmplNewArch.html, wgoutput.cfg, Español/wgall.html,
+	Español/wgindex.html, Hebrew/wgindex.html: Moving wgoutput.cfg to
+	templates directory, so we can add variables & language support;
+	moving language directories to more clear names.
+
+2001-05-23 00:04  golda
+
+	* templates/: , pl, .pm, wgall.html, es/wgall.html,
+	es/wgindex.html, il/wgindex.html: Adding directories for templates
+	in non-English languages, starting with Spanish and Hebrew (we have
+	contributed pages in those, thanks to Victor Gonzales and Adeena
+	Ascher)
+
+2001-05-22 22:59  golda
+
+	* INSTALL_MODULES: Added instructions for adding commercial modules
+	to an existing installation
+
+2001-05-16 00:04  golda
+
+	* cgi-bin/: l.pl, webglimpse.cgi: Update version #
+
+2001-05-15 23:35  golda
+
+	* wginstall.pl, lib/wgRoot.pm, lib/wgSiteConf.pm,
+	templates/tmplEditSite.html: Fix to wginstall.pl to report correct
+	servername on upgrades; Changed wgRoot, EditSite screen to include
+	subdirectory in the LimitPrefix for Site-type archives, and also
+	allow editing of the LimitPrefix (this defines which links are
+	indexed).
+
+2001-05-15 23:17  golda
+
+	* templates/wgreindex: Rotate log files after each analysis update
+
+2001-05-15 22:56  golda
+
+	* makenh: makenh still had old-style setting for webglimpse lib
+	directory!  Would not have worked at other than default
+	/usr/local/wg2.
+
+2001-05-15 11:18  golda
+
+	* README: Correct error in README
+
+2001-05-15 02:44  golda
+
+	* lib/wgTextMsgs.pm: At end of install, tell user path to wgarcmin
+	using the servername, not 'localhost'
+
+2001-05-11 23:38  golda
+
+	* templates/wgindex.html: Finally no more grey color - used slight
+	colored background, white table so it can be easily cut & pasted
+	into white page.
+
+2001-05-11 23:38  golda
+
+	* lib/CustomOutputTool.pm: Found another place where webglimpse ->
+	webglimpse.cgi
+
+2001-05-11 23:37  golda
+
+	* cgi-bin/wgarcmin.cgi: Set to demo mode automatically if user is
+	logged in as 'guest'
+
+2001-05-11 23:37  golda
+
+	* TODO: [no log message]
+
+2001-05-10 01:15  golda
+
+	* cgi-bin/wgarcmin: [no log message]
+
+2001-05-10 01:13  golda
+
+	* cgi-bin/: mfs, mfs.cgi, showimg.cgi, showimg.sh, webglimpse,
+	webglimpse.cgi, wgarcmin.cgi: Changing names of all cgi script to
+	end with .cgi ; some people have their web servers configured to
+	require this.
+
+2001-05-10 01:11  golda
+
+	* templates/: , pl, Msgs.pm, wgall.html, wgbox.html, wgindex.html:
+	Changing names of all cgi scripts to end with ".cgi" for systems
+	that need it this way.
+
+2001-05-10 00:17  golda
+
+	* templates/: , wgreindex: unset GATEWAY_INTEREFACE environment
+	variable in wgreindex so that wusage will just update stats and not
+	try to run in server mode
+
+2001-05-08 02:01  golda
+
+	* wginstall.pl, lib/wgArch.pm, templates/wusage.conf: Corrections
+	to wusage dir (separate for each archive)
+
+2001-05-08 00:39  golda
+
+	* templates/: arcmin, .pm, .pm, Conf.pm, tmplManageArch.html,
+	wusage.conf: Add link to usage reports on Manage Archive page, if
+	available
+
+2001-05-07 23:26  golda
+
+	* templates/: arcmin, .pm, tmplManageArch.html: Add link to
+	configure domain directly from Manage Archive page
+
+2001-05-06 09:18  golda
+
+	* templates/tmplManageAll.html: [no log message]
+
+2001-05-04 23:29  golda
+
+	* INSTALL, README: Combined the README & INSTALL files into one, as
+	per suggestion by Seth C.
+
+2001-05-04 23:16  golda
+
+	* wginstall.pl: Don't chown wusage dir if not using wusage...
+
+2001-05-04 23:11  golda
+
+	* wginstall.pl: Fix typo on glimpseindex location...had causd
+	problems in installs where glimpse was not in a common place.
+
+2001-04-27 22:05  golda
+
+	* cgi-bin/webglimpse: Use 'require' instead of 'use' so that we can
+	test for existence of optional modules.
+
+2001-04-26 23:35  golda
+
+	* wginstall.pl: Set docroot & servername according to existing
+	configuration
+
+2001-04-26 23:24  golda
+
+	* lib/: , stall.pl, wgLog.pm: Preparing to use wusage command with
+	-b switch for on-demand updates.
+
+2001-04-25 22:52  golda
+
+	* templates/: , pl, .pm, er.pm, Msgs.pm, wgreindex, wusage.conf:
+	Install wgLog module, ask user if they have/want to use wusage,
+	automate running usage reports from wgreindex script.
+
+2001-04-17 17:43  golda
+
+	* lib/: stall.pl, wgSiteConf.pm: Trying to avoid uninitialized
+	variable errors (some don't seem like real errors, though)
+
+2001-04-17 16:34  golda
+
+	* lib/wgSiteConf.pm: Trying to pin down uninitialized value error
+	on some systems
+
+2001-04-16 22:57  golda
+
+	* wginstall.pl: [no log message]
+
+2001-04-16 22:55  golda
+
+	* wginstall.pl, lib/wgHeader.pm, lib/wgTextMsgs.pm,
+	templates/wusage.conf: Adding option to use wusage to process
+	webglimpse log file, if it is installed.
+
+2001-04-14 23:21  golda
+
+	* lib/wgHeader.pm: Log a NOT MODIFIED (304) when the cache is used
+	to return a search result
+
+2001-04-14 23:07  golda
+
+	* lib/: stall.pl, bin/webglimpse, wgHeader.pm, wgLog.pm: Added
+	wgLog.pm module to log searches in similar to common log format, so
+	that programs such as wusage from boutell.com can parse & analyze
+	the log files.
+
+2001-04-09 22:41  golda
+
+	* INSTALL: Updated instructions for using wgarcmin instead of
+	confarc.
+
+2001-03-27 18:34  golda
+
+	* lib/: , nh, wgArch.pm: Don't use rm -rf in a script!	Change to
+	explicitly delete just the files we put there, then rmdir.  Also
+	don't complain about unconfigured domains for SITE, TREE type
+	roots.
+
+2001-03-26 23:37  golda
+
+	* makenh: Use $FILE_END_MARK in .wgmapfile to match .wg_toindex. 
+	Actually, I think we can remote .wgmapfile altogether - looks like
+	it is an old artifact now replaced by .wg_toindex.  Except, that
+	now we are using it to read list of saved files, could use
+	.wg_toindex instead.
+
+2001-03-26 22:35  golda
+
+	* lib/: file, nh, httpget.c: Touch retrieved files with
+	Last-Modified: time from http header line.  We need this so we can
+	compare exact times when doing an If-Modified-Since, because many
+	httpd servers only return Unmodified if the timestamp matches
+	exactly.  (This is in case someone replaces a file with an older
+	version, so that it will seem to be modified if the timestamp does
+	not match exactly).
+
+2001-03-26 17:44  golda
+
+	* templates/tmplAddTree.html: Use value of 1 for follow-to-remote
+	flags rather than text strings.
+
+2001-03-26 15:16  golda
+
+	* lib/: nh, stall.pl, httpget.c, wgHeader.pm, wgRoot.pm: Don't
+	retrieve remote files if we have a current copy saved.	Now we move
+	.remote to .remote.old temporarily during indexing, and if a file
+	we want to retrieve is there we use the date HTTP parameter to
+	retrieve a new version only if more current.
+
+2001-03-07 16:47  golda
+
+	* templates/wgreindex: Put -o switch back into glimpseindex command
+	line!  Had been accidentally left out of wgreindex template.
+
+2001-02-08 20:15  golda
+
+	* lib/wgSiteConf.pm: use "my" instead of "local" - old code hanging
+	around
+
+2001-02-08 20:15  golda
+
+	* wginstall.pl: modified to use require instead of use
+	Term::ReadKey
+
+2001-02-08 19:51  golda
+
+	* wginstall.pl: Changed use Term::ReadKey to require, because
+	returns value for eval.  Not sure why eval("use Term::ReadKey") was
+	returning false even when the use succeeded - maybe compile-time vs
+	runtime issue?
+
+2001-01-31 21:25  golda
+
+	* lib/wgHeader.pm: Fix HTMLFILE_RE to have \. instead of . in the
+	pattern - can't believe this went uncaught for so many years! 
+	Thanks to Brett Bendickson for pointing it out!
+
+2001-01-31 21:25  golda
+
+	* makenh: Check explicitly if StartDir is a file or directory,
+	don't depend on matching a pattern!  Thanks to Brett Bendickson for
+	pointing this out.
+
+2001-01-31 00:07  golda
+
+	* cgi-bin/wgarcmin, lib/wgArch.pm, lib/wgErrors.pm, lib/wgRoot.pm,
+	templates/tmplManageArch.html: Index in background instead of
+	foreground; the browser dropping the session in the middle of long
+	index processes was causing problems.
+	
+	Added an "update status" link so the user can check when indexing
+	is complete.
+	
+	Should also provide a report on the last index...
+
+2001-01-30 00:05  golda
+
+	* lib/wgSiteConf.pm: Recognize sites as "configured" if they are
+	either in the primary Sites array or in DomainAliases.
+
+2001-01-30 00:04  golda
+
+	* TODO: [no log message]
+
+2001-01-29 23:31  golda
+
+	* cgi-bin/wgarcmin: Do not add domains in demomode (was being done
+	through Nextpage rather than Action)
+
+2001-01-29 23:19  golda
+
+	* cgi-bin/wgarcmin: Add code for easy enabling of "demo" mode
+	(read-only) for wgarcmin
+
+2001-01-29 23:14  golda
+
+	* TODO, cgi-bin/wgarcmin, lib/wgArch.pm: Fixed problem with
+	Category not saving properly in archives.list file.
+	
+	Why do templates always appear changed? cvs diff does not show any
+	changes...strange...
+
+2001-01-29 22:57  golda
+
+	* lib/wgRoot.pm: If user adds a DIR type root without specifying
+	the equiv URL, try to guess it; if unsuccessful, do not add the
+	root. (Was adding a root with blank URL, this caused problems
+	because the URL is the unique identifier of a root.)
+	
+	Minor style change to templates.
+
+2001-01-29 21:38  golda
+
+	* templates/: docAddDir.html, docAddSite.html, docAddTree.html,
+	docEditDir.html, docEditSite.html, docEditTree.html,
+	docFilterIndex.html, tmplAddDir.html, tmplAddSite.html,
+	tmplAddTree.html, tmplEditDir.html, tmplEditSite.html,
+	tmplEditTree.html: Make docs pop up in separate window; added
+	docFilterIndex.html
+
+2001-01-29 21:11  golda
+
+	* templates/: docAddDir.html, docAddSite.html, docAddTree.html,
+	docEditDir.html, docEditSite.html, docEditTree.html,
+	docFilterIndex.html: Documentation for the various types of Roots.
+
+2001-01-29 21:10  golda
+
+	* templates/: , , pl, arcmin, .pm, .pm, tmplAddDir.html,
+	tmplAddSite.html, tmplAddTree.html, tmplEditDir.html,
+	tmplEditSite.html, tmplEditTree.html: makenh, wgRoot.pm: use
+	wgRoot->Get{Hops} instead of raw value; a large value will be
+	substituted for a Site type archive with 0 hops (interpreted as no
+	limit based on hops).
+	
+	wgarcmin: added 'D' option for Nextpage to return page of docs.
+	
+	tmpl*.html: "help how does this work" links now work
+	
+	wginstall.pl: added doc*.html to templates list
+	
+	wgArch.pm: strengthened Validate(), now actually attempts to load
+	roots.
+
+2001-01-28 23:16  golda
+
+	* lib/: GES, , ile, wgArch.pm: modified getfile to no longer
+	require config.pl (actually was required but unused)
+	
+	added LoadRoots to wgArch->Validate, does several checks
+	automatically
+	
+	removed old CHANGES file, this was from 1998 and can just live in
+	the Webglimpse project, it doesn't need to be here also.
+
+2001-01-24 22:09  golda
+
+	* TODO, makenh: Reset NumLocalCollected & NumRemoteCollected for
+	each root, since we now have independent maximums for each root of
+	an archive.
+	
+	Also noticed that the search box at teh bottom of the resutls page
+	does not maintain the search options, should. (TODO)
+
+2001-01-24 21:21  golda
+
+	* TODO, wginstall.pl: Remove unused entries for rmarc and confarc
+	from wginstall.pl
+
+2001-01-23 19:30  golda
+
+	* TODO, TODO: [no log message]
+
+2001-01-23 12:34  golda
+
+	* addsearch, confarc, rmarc, lib/wgHeader.pm, templates/wgreindex:
+	Modifying addsearch to use new wgConf, wgArch modules instead of
+	manually looking for archive info.  Will need to be run by hand,
+	not as the web user, on most installations.
+	
+	wgreindex no longer tries to call addsearch itself for now
+	
+	confarc has been replaced by wgarcmin
+	
+	rmarc is no longer needed, archives can be removed by a call to
+	wgArch->Destroy
+
+2001-01-22 13:37  golda
+
+	* TODO, addsearch, cgi-bin/webglimpse, lib/ResultCache.pm,
+	lib/wgArch.pm, lib/wgRoot.pm, templates/wgall.html: Added
+	MakeDirOptions procedure to generate the options in wgall.html
+	(limit search by subdirectory)
+	
+	Fixed GuessCacheFile so that first-time searches can use a cache if
+	one happens to exist; this will also help users who like to arrow
+	back & forth & press the search button again
+	
+	Note, wgall.html is not automatically linked to from wgarcmin
+	interface at this point
+
+2001-01-18 21:21  golda
+
+	* lib/RankHits.pm: Remove use strict from distribution to avoid
+	warnings in error log
+
+2001-01-16 02:29  golda
+
+	* lib/ResultCache.pm: Fixed bug in expiring old cache files, was
+	not appending the directory path correctly.
+
+2001-01-16 01:58  golda
+
+	* cgi-bin/webglimpse, lib/ResultCache.pm: Try to find cache file
+	even on first time doing a search; the exact same search may have
+	already been done.
+
+2001-01-15 01:11  golda
+
+	* lib/: , bin/webglimpse, CustomOutputTool.pm, OutputTool.pm,
+	ResultCache.pm: Rewrote ResultCache.pm (& calling Webglimpse
+	routines) to:	     - expire old cache files every time it is run 
+	 - read arbitrary N lines from cache without modifying the cache
+	file	- name cache files by glimpse cmd so they can be used by
+	other users    - CustomOutputTool now outputs toolbar for jumping
+	to arbitrary N hits  (instead of always "Next N hits")	     - use
+	ptr file to speed cache accesses Still a few bugs - doesn't work
+	correctly in conjunction with RankHits.pm.
+	
+	Mostly works, pretty fast.
+
+2000-12-26 23:59  golda
+
+	* templates/tmplNewArch.html: Added Open Directory Project credits
+	& link box
+
+2000-12-26 22:40  golda
+
+	* templates/tmplManageAll.html: [no log message]
+
+2000-12-26 20:01  golda
+
+	* lib/: stall.pl, /wgODP3.db, /wgODP3.dbm.dir, /wgODP3.dbm.pag,
+	CatTree.pm, wgHeader.pm: Switched to SDBM after all, because it
+	turns out that compressed, the SDBM data files are actually smaller
+	than DB_File format so the download time will be a bit faster, and
+	SDBM is bundled with Perl so it will be supported on all systems.
+
+2000-12-26 19:49  golda
+
+	* dist/wgODP3.db, lib/CatTree.pm: Added category module &
+	distribute w/1st 3 levels of dmoz cats in DB_File format.  (Only
+	takes 274Kb; SDBM format is about 450Kb, the original RDF files are
+	huge - 100's of Mb)
+
+2000-12-26 19:45  golda
+
+	* templates/: , pl, arcmin, .pm, er.pm, tmplManageArch.html,
+	tmplNewArch.html: Added category support.
+
+2000-12-14 00:25  golda
+
+	* lib/: stall.pl, wgHeader.pm: Keep FILE_END_MARK setting when
+	upgrading.
+
+2000-12-14 00:15  golda
+
+	* cgi-bin/webglimpse: FILE_END_MARK is now set only in one place,
+	wgHeader.pm
+
+2000-12-14 00:04  golda
+
+	* TODO: TODO notes
+
+2000-12-13 23:50  golda
+
+	* wginstall.pl: Minor typo in guessing path to httpd.conf
+
+2000-12-13 23:47  golda
+
+	* wginstall.pl: minor scoping bug
+
+2000-12-13 23:38  golda
+
+	* templates/: pt, , tmplLoginPage.html: Makefile.opt is used to
+	compile htuml2txt.c
+	
+	tmplLoginPage.html is the new cookie-based login page
+	
+	getfile is still used by mfs, should be updated
+
+2000-12-13 23:34  golda
+
+	* templates/: , pl, bglimpse, arcmin, ter-index, khits.cfg,
+	dWeb.pm, OutputTool.pm, yntax.pm, ts.pm, Cache.pm, e-eye.jpg, .pm,
+	rs.pm, er.pm, .pm, Conf.pm, Msgs.pm, tmplManageAll.html,
+	tmplManageArch.html, tmplRemoteDomain.html, tmplTestTrans.html:
+	Added cookie-based authentication in case user doesn't have access
+	to use regular httpd server auth for wgarcmin.
+	
+	Integrated latest 1.X fixes for Webglimpse, RankHits,
+	CustomOutputModule
+	
+	Fixed template for adding Remote domains
+	
+	Added test path translations screen
+	
+	After this, changes will be checked in in smaller increments! 
+	Ready for alpha-testers...
+
+2000-12-05 23:53  golda
+
+	* dist/glimpse-eye.jpg: Moved glimpse-eye.jpg into /lib
+	subdirectory for easier access by cgi scripts.	(WEBGLIMPSE_LIB is
+	the only variable replaced in all files, so we can access it with
+	more certainty.)
+
+2000-12-05 23:52  golda
+
+	* lib/wgArch.pm, templates/tmplManageArch.html: Removed -q switch
+	when wgreindex is run from web so results will show up in window. 
+	May want to make this optional for really large archives.  Removed
+	extra "Search" button.
+
+2000-12-05 23:40  golda
+
+	* templates/: , pl, owimg.sh, arcmin, .pm, tmplAddDir.html,
+	wgindex.html: Added showimg.sh script to be able to display the
+	glimpse eye logo from a cgi script without having to make the user
+	set up an "images" directory under document root just for this one
+	file.
+	
+	Also modified wgarcmin to regenerate template files each time "Save
+	Changes" is pressed.  This way the new archive name, etc can get
+	put into the search page.  If a user wants to hand-edit these
+	files, they should make copies not in the archive directory, or
+	edit the master copies in the webglimpse home dir.
+
+2000-12-05 22:03  golda
+
+	* templates/: , dWeb.pm, .pm, Conf.pm, tmplEditTree.html,
+	wgall.html, wgindex.html: Inserted variables into
+	tmplEditTree.html, fixed various typos, updated URL to
+	webglimpse.org instead of glimpse.cs.arizona.edu (no longer exists)
+
+2000-12-04 00:31  golda
+
+	* templates/: arcmin, dWeb.pm, .pm, tmplEditDir.html,
+	tmplEditSite.html: Support checkboxes in page templates.
+
+2000-12-03 22:55  golda
+
+	* lib/: stall.pl, wgSiteConf.pm, wgTextMsgs.pm: Corrected parsing
+	of httpd.conf file to match keywords precisely.
+
+2000-11-29 19:34  golda
+
+	* templates/: pl, .pm, Conf.pm, Msgs.pm, tmplAddDir.html,
+	tmplAddSite.html, tmplAddTree.html: Fixes to correctly save new
+	Siteconf info in wgsites.conf, default max pages to a positive # to
+	prevent common error of creating empty archive.
+
+2000-11-29 18:44  golda
+
+	* lib/: stall.pl, wgHeader.pm, wgSite.pm, wgSiteConf.pm: Working on
+	getting httpd.conf parsing to work.  Checking in so files can be
+	transferred to another box.
+
+2000-11-28 01:20  golda
+
+	* addsearch, makenh, wginstall.pl, cgi-bin/webglimpse,
+	cgi-bin/wgarcmin, lib/wgArch.pm, lib/wgConf.pm, lib/wgRoot.pm,
+	lib/wgSite.pm, templates/tmplNewArch.html: Get correct
+	WEBGLIMPSE_LIB path, correct URL for site-type archives, other
+	fixes to get multiple archive searches & install working.
+
+2000-11-27 21:15  golda
+
+	* templates/: .glimpse_filters, glimpse_filters: Can't change name
+	of .glimpse_filters, because it is hardcoded into glimpse.  (With
+	WG 2.0 we are trying to make most config files easily visible in
+	the archive directory, since it is now separate from the directory
+	where the indexed files are.)
+
+2000-11-27 20:44  golda
+
+	* templates/: , pl, ogler/Makefile.att, ogler/Makefile.flex,
+	ogler/Makefile.linux, ogler/README, ogler/htuml2txt.lex,
+	ogler/htuml2txt.so, ogler/makecron.patch, ogler/sotest.c, Cache.pm,
+	.pl, Msgs.pm, glimpse_filters, tmplEditTree.html: Checking in
+	contrib area, install files, standard lib files, and new file
+	wgTextMsgs.pm which tries to keep all text messages in one file for
+	easier translation.
+
+2000-11-27 20:28  golda
+
+	* lib/: nh, wgErrors.pm, wgHeader.pm, wgSite.pm, wgSiteConf.pm:
+	Multiple fixes while debugging installation; at this point the
+	install runs and completes successfully in the most common cases.
+
+2000-11-20 00:09  golda
+
+	* lib/: wgSite.pm, wgSiteConf.pm: Debugging install for v2.0.01
+
+2000-11-19 23:28  golda
+
+	* addsearch, confarc, rmarc, cgi-bin/mfs, cgi-bin/webglimpse,
+	cgi-bin/wgarcmin, lib/wgArch.pm, lib/wgConf.pm, lib/wgErrors.pm,
+	lib/wgHeader.pm, lib/wgSite.pm, lib/wgSiteConf.pm,
+	templates/wgreindex: Ready to test install v2.0.01
+
+2000-10-30 19:20  golda
+
+	* templates/: arcmin, t.c, .pm, rs.pm, er.pm, .pm, Conf.pm,
+	tmplManageAll.html, tmplManageArch.html: Added status messages for
+	archives.  Tells if error, if valid roots exist, if domain needs to
+	be configured, when last built.
+
+2000-09-28 14:29  golda
+
+	* templates/: .pm, tmplAddSite.html, tmplEditSite.html: Set
+	MaxLocal and MaxRemote to same value for SITE type roots, since in
+	that case we don't care if the pages are local or remote.  Need to
+	make sure both are filled in, though, so makenh will gather the
+	correct # of pages in either case.
+
+2000-09-27 22:30  golda
+
+	* templates/tmplEditSite.html: Adding template for editing
+	Site-type roots.
+
+2000-09-27 22:29  golda
+
+	* makenh: Corrected function call and variable name typos.
+
+2000-09-27 22:28  golda
+
+	* lib/wgSiteConf.pm: Turn off warnings in CheckURL routine to avoid
+	"Use of uninitialized.." messages when checking the existence of a
+	hash value.
+
+2000-09-27 17:22  golda
+
+	* lib/CommandWeb.pm: For multiple-line substitutions, do not print
+	anything if the corresponding hash is not defined.  Changed in
+	OutputTemplate().
+
+2000-09-26 23:12  golda
+
+	* cgi-bin/wgarcmin, lib/CommandWeb.pm: Allow manage archive with
+	empty roots array (empty archive.cfg file)
+
+2000-09-26 23:05  golda
+
+	* cgi-bin/wgarcmin: [no log message]
+
+2000-09-26 23:02  golda
+
+	* cgi-bin/wgarcmin, lib/CommandWeb.pm: Use parent $::lastError
+	variable in CommandWeb.pm rather than local var
+
+2000-09-26 22:24  golda
+
+	* templates/tmplManageArch.html: Added warning before deleting an
+	archive.
+
+2000-08-10 00:53  golda
+
+	* templates/: arcmin, .pm, tmplManageAll.html, tmplManageArch.html:
+	Added some really cool code for making an extra window pop up with
+	results of building an archive.
+
+2000-08-09 23:19  golda
+
+	* lib/: nh, bin/webglimpse, bin/wgarcmin, CommandWeb.pm, wgConf.pm,
+	wgSiteConf.pm: Adding code for domain support
+
+2000-07-04 13:04  golda
+
+	* rmarc: Added rmarc from wg 1.7.8
+
+2000-07-04 12:57  golda
+
+	* cgi-bin/: , T, , , , odules, h, mfs, webglimpse, wgarcmin: Adding
+	files from wg 1.7.8
+
+2000-07-04 12:55  golda
+
+	* wgarcmin: Moving to cgi-bin directory.
+
+2000-07-04 12:49  golda
+
+	* lib/: CustomOutputTool.pm, InputSyntax.pm, OutputTool.pm,
+	RankHits.pm, html2txt.c, html2txt.pl, httpget.c, htuml2txt.c,
+	htuml2txt.pl, parsefields.pl, utils.h: Added needed libs from WG
+	1.7.8  --GV
+
+2000-07-04 12:38  golda
+
+	* lib/: cmin, utils.pl: Removed obsolete utils.pl lib.	Functions
+	incorporated into CommandWeb.pm.
+
+2000-07-04 12:35  golda
+
+	* lib/: nh, cmin, wgRoot.pm, wgSiteConf.pm: 1st fully functional
+	version - makenh able to use new lib functions.
+
+2000-06-23 22:23  golda
+
+	* templates/: dWeb.pm, .pm, .pm, .pm, tmplDomain.html,
+	tmplLocalDomain.html: Split into tmplLocalDomain.html and
+	tmplRemoteDomain.html
+
+2000-06-21 23:41  golda
+
+	* templates/tmplManageAll.html: Added "Add Domain" button, enabled
+	domain list.
+
+2000-06-21 23:40  golda
+
+	* templates/: tmplLocalDomain.html, tmplRemoteDomain.html: Split
+	domain configuration into two different screens, one for local
+	other for remote.
+
+2000-06-21 23:39  golda
+
+	* lib/: cmin, CommandWeb.pm, wgSite.pm, wgSiteConf.pm: Adding
+	Domain Configure functionality to web interface.
+
+2000-06-12 18:44  golda
+
+	* lib/: CommandWeb.pm, wgArch.pm, wgHeader.pm, wgSite.pm,
+	wgSiteConf.pm: Added SaveSites/LoadSites routines.
+
+2000-06-09 14:27  golda
+
+	* lib/: wgArch.pm, wgSite.pm, wgSiteConf.pm: Working on
+	site-related modules for handling path/url translations
+
+2000-06-06 13:12  golda
+
+	* lib/wgSiteConf.pm: wgSiteConf.pm contains info from all known
+	domains, aliases, paths, etc. wgSiteConf.pm also reads the
+	.wgsiteconf file.
+
+2000-06-06 13:11  golda
+
+	* lib/wgSite.pm: wgSite.pm <=> virtual domain (w/unique docroot)
+
+2000-06-05 13:08  golda
+
+	* lib/: nh, wgSite.pm: Working on wgSite module to handle domain
+	objects
+
+2000-06-04 15:20  golda
+
+	* lib/AllowDeny.pm: Changed AllowDeny to object
+
+2000-06-04 14:58  golda
+
+	* dist/: min, wgall.html, wgbox.html, wgindex.html: [no log
+	message]
+
+2000-06-04 14:57  golda
+
+	* lib/: wgArch.pm, wgRoot.pm: copy wgindex.html, wgbox.html,
+	wgall.html as templates; also standardize error handling
+
+2000-06-04 14:54  golda
+
+	* templates/: tmplAddSite.html, tmplNewArch.html, wgall.html,
+	wgbox.html, wgindex.html: Moved wg*.html from dist to templates
+	because need var replacements
+
+2000-06-02 12:59  golda
+
+	* lib/: cmin, AllowDeny.pm, wgConf.pm: Don't error exit if
+	.archives file doesn't exist yet on create archive.
+
+2000-06-02 12:56  golda
+
+	* lib/wgSite.pm: Starting module wgSite to handle domains
+
+2000-06-02 12:55  golda
+
+	* lib/: cmin, AllowDeny.pm: Changed default screen, added build
+	action
+
+2000-06-02 12:54  golda
+
+	* templates/wgreindex: Adding template for cronfile wgreindex --GV
+
+2000-05-16 00:26  golda
+
+	* lib/: nh, wgArch.pm, wgHeader.pm, wgRoot.pm: Getting makenh to
+	work with new wgRoot & wgArch objects.	Currently works in easy
+	cases, still needs better error handling & domain translation. 
+	--GV
+
+2000-05-09 20:32  golda
+
+	* templates/: tmplManageAll.html, tmplManageArchs.html: Changed
+	name from tmplManageArchs to tmplManageAll, to manage all archives
+	--GV
+
+2000-05-09 20:31  golda
+
+	* wgarcmin, lib/wgArch.pm, lib/wgConf.pm,
+	templates/tmplManageArch.html: Now will do Manage Arch, Manage All
+	archs. --GV
+
+2000-05-09 15:31  jp
+
+	* tests/wgA_T.pl: [no log message]
+
+2000-05-06 22:57  golda
+
+	* templates/tmplAddTree.html: Working tree template --GV
+
+2000-05-06 22:57  golda
+
+	* templates/: tmplAddSite.html, tmplEditDir.html,
+	tmplManageArch.html: Fixes, JP made working Site template --GV
+
+2000-05-06 22:56  golda
+
+	* lib/: cmin, CommandWeb.pm, wgArch.pm, wgConf.pm, wgRoot.pm: Added
+	Edit, Remove root actions --GV
+
+2000-05-03 22:25  golda
+
+	* templates/: , tmplAddDir.html, tmplManageArch.html: Update to
+	make manage archive screen work --GV
+
+2000-05-03 22:25  golda
+
+	* lib/: wgConf.pm, wgRoot.pm: Updates to make manage archive screen
+	work. --GV
+
+2000-05-03 21:56  golda
+
+	* lib/CommandWeb.pm: Fixed OutputTemplate.pm module - original was
+	lost? --GV
+
+2000-05-01 10:44  golda
+
+	* templates/: tmplAddDir.html, tmplNewArch.html: Correcting
+	variable names
+
+2000-05-01 10:44  golda
+
+	* lib/: CommandWeb.pm, wgArch.pm, wgHeader.pm, wgRoot.pm: Fixes so
+	Create & Add now work from the interface...
+
+2000-05-01 10:44  golda
+
+	* dist/: glimpse-eye.jpg, glimpse_filters, wgall.html, wgbox.html,
+	wgfilter-box, wgfilter-index, wgindex.html, wginputfields,
+	wgoutput.cfg, wgoutputfields, wgrankhits.cfg: Checking in
+	distribution files
+
+2000-05-01 10:44  golda
+
+	* wgarcmin: Create & Add now work...
+
+2000-04-24 23:48  golda
+
+	* templates/tmplAddDir.html: Updated variables names, increased
+	width of URL & Dir fields, added Nextpage & Action hidden inputs.
+
+2000-04-24 23:48  golda
+
+	* lib/wgHeader.pm: [no log message]
+
+2000-04-24 23:47  golda
+
+	* wgarcmin: making templates work...
+
+2000-04-23 23:29  golda
+
+	* lib/: CommandWeb.pm, wgArch.pm: Minor debug message changes
+
+2000-04-23 22:59  jp
+
+	* tests/: Gen_T.pl, wgR_T.pl: [no log message]
+
+2000-04-21 00:39  golda
+
+	* lib/: CommandWeb.pm, wgArch.pm, wgConf.pm, wgErrors.pm,
+	wgHeader.pm: Now able to run thru web & make archive dir
+
+2000-04-21 00:38  golda
+
+	* wgarcmin: Calls CommandWeb correctly now...
+
+2000-04-21 00:06  golda
+
+	* tests/: en_T.pl, RL_T.pl, estpod.pl, mplAddDir.html,
+	mplAddSite.html, mplAddTree.html, mplDomain.html, mplEditDir.html,
+	mplManageArch.html, mplManageArchs.html, mplNewArch.html,
+	mplTestTrans.html, gR_T.pl, tes/tmplAddDir.html,
+	tes/tmplAddSite.html, tes/tmplAddTree.html, tes/tmplDomain.html,
+	tes/tmplEditDir.html, tes/tmplManageArch.html,
+	tes/tmplManageArchs.html, tes/tmplNewArch.html,
+	tes/tmplTestTrans.html, Gen_T.pl, URL_T.pl, wgR_T.pl: Moving files
+	around: templates in /templates, test progs in /tests, only files
+	to be copied to each archive in /dist
+
+2000-04-21 00:05  golda
+
+	* wgarcmin: Working...
+
+2000-04-20 23:41  golda
+
+	* lib/GenPage.pm: Moved functionality to CommandWeb.pm module.
+
+2000-04-20 23:40  golda
+
+	* lib/CommandWeb.pm: Added GenPage functionality here
+	(OutputTemplate, OutputToWeb and OutputToFile)
+
+2000-04-20 22:51  jp
+
+	* dist/wgR_T.pl: [no log message]
+
+2000-04-20 15:18  golda
+
+	* lib/wgRoot.pm: Fixed prob setting limitprefix
+
+2000-04-19 18:10  golda
+
+	* lib/URL.pl: Adding utils for URL handling.
+
+2000-04-19 14:16  jp
+
+	* dist/: test.pl, test_wgRoot.pl, Gen_T.pl, URL_T.pl, wgR_T.pl: [no
+	log message]
+
+2000-04-19 13:47  jp
+
+	* dist/test_wgRoot.pl: [no log message]
+
+2000-04-19 12:25  golda
+
+	* lib/wgRoot.pm: Use substr instead of // for checking LimitPrefix.
+	--GV
+
+2000-04-19 12:05  golda
+
+	* lib/wgRoot.pm: Fixed dropping last variable prob in new() --GV
+
+2000-04-19 11:13  golda
+
+	* lib/: CommandWeb.pm, wgArch.pm, wgConf.pm, wgErrors.pm,
+	wgHeader.pm, wgRoot.pm: Fix for limitprefix as regexp --GV
+
+2000-04-19 11:13  golda
+
+	* wgarcmin: Updating cvs..
+
+2000-04-17 10:28  jp
+
+	* dist/test_wgRoot.pl: [no log message]
+
+2000-04-16 00:36  golda
+
+	* lib/CommandWeb.pm: Adding routine for building an array of
+	anonymous hashes --GV
+
+2000-04-16 00:36  golda
+
+	* wgarcmin: Added a few more screens...  --GV
+
+2000-04-16 00:13  golda
+
+	* dist/tmplEditDir.html: Adding template for edit Dir-type roots. 
+	Similar pages need to be built for Site and Tree types.  --GV
+
+2000-04-16 00:12  golda
+
+	* lib/: CommandWeb.pm, wgHeader.pm: Added BuildHash routine in
+	CommandWeb, no change to wgHeader. --GV
+
+2000-04-16 00:12  golda
+
+	* dist/tmplManageArch.html: [no log message]
+
+2000-04-16 00:11  golda
+
+	* wgarcmin: Added calls to BuildHash to generate screens from
+	templates. --GV
+
+2000-04-15 18:40  golda
+
+	* lib/: CommandWeb.pm, wgConf.pm, wgRoot.pm: Adding to repository
+
+2000-04-13 20:55  golda
+
+	* lib/: GenPage.pm, wgArch.pm, wgConf.pm, wgErrors.ph, wgErrors.pm,
+	wgHeader.ph, wgHeader.pm: Now these are .pm files --GV
+
+2000-04-12 01:29  jp
+
+	* lib/GenPage.pm: [no log message]
+
+2000-04-12 01:18  jp
+
+	* lib/GenPage.pm: [no log message]
+
+2000-04-03 03:15  golda
+
+	* lib/: wgArch.pm, wgConf.pm, wgErrors.pm, wgHeader.pm, wgRoot.pm:
+	Now it is possible to load an archive & roots from a (new-style)
+	config file.  --GV
+
+2000-03-31 15:09  golda
+
+	* lib/: wgErrors.pm, wgHeader.pm: Added entries for wgArch --GV
+
+2000-03-31 13:39  golda
+
+	* lib/wgRoot.pm: All basic functions complete.	To use still need
+	wgArch or other outside program to set params.	--GV
+
+2000-03-24 15:14  golda
+
+	* dist/test.pl: 
+	change lib path
+
+2000-03-23 17:51  jp
+
+	* lib/GenPage.pm: [no log message]
+
+2000-03-23 17:41  jp
+
+	* dist/test.pl: [no log message]
+
+2000-03-16 17:50  golda
+
+	* lib/utils.pl: Removed UseVars routine, instead we will use
+	Exporter --GV
+
+2000-03-16 17:50  golda
+
+	* lib/wgRoot.pm: Importing symbols from wgHeader & wgErrors --GV
+
+2000-03-16 17:49  golda
+
+	* lib/wgErrors.pm: Error codes & messages for all modules --GV
+
+2000-03-16 17:48  golda
+
+	* lib/wgHeader.pm: Using proper export tags. --GV
+
+2000-03-16 16:54  vineel
+
+	* makenh: Tested and working version. During the test, had some
+	problems with glimpse.
+
+2000-03-16 16:48  vineel
+
+	* lib/wgHeader.pm: Adding the whHeader.ph module
+
+2000-03-16 15:58  vineel
+
+	* lib/AllowDeny.pm: tested and fixed some bugs
+
+2000-03-16 14:28  golda
+
+	* lib/wgErrors.ph: Adding module with error constants and message
+	hash --GV
+
+2000-03-16 13:54  golda
+
+	* lib/: utils.pl, wgArch.pm, wgHeader.ph, wgRoot.pm: Working on
+	libs... --GV
+
+2000-03-15 01:30  vineel
+
+	* makenh: Separated the statements in Initialize routine.
+
+2000-03-13 13:03  vineel
+
+	* makenh: changed the new_traverse routine.
+
+2000-03-10 15:27  jp
+
+	* dist/testpod.pl, dist/tmplManageArch.html, lib/GenPage.pm: [no
+	log message]
+
+2000-03-10 13:06  jp
+
+	* dist/testpod.pl: [no log message]
+
+2000-03-09 21:51  jp
+
+	* lib/GenPage.pm: [no log message]
+
+2000-03-09 17:44  jp
+
+	* dist/: archive.html, page2.html, page3.html, page4.html,
+	page5.html, submit1.html, submit2.html, submit3.html,
+	tmplAddDir.html, tmplAddSite.html, tmplAddTree.html,
+	tmplDomain.html, tmplManageArch.html, tmplManageArchs.html,
+	tmplNewArch.html, tmplTestTrans.html: [no log message]
+
+2000-03-09 04:29  golda
+
+	* wgHeader.ph, wgarcmin: wgarcmin is the archive administration
+	script wgHeader.ph moved to the lib subdirectory.
+
+2000-03-09 04:25  golda
+
+	* lib/wgConf.pm: wgConf has user interface code.  wgArch represents
+	an archive, wgRoot represents a set of pages to index.	--GV
+
+2000-03-09 04:24  golda
+
+	* lib/: utils.pl, wgArch.pm, wgHeader.ph, wgRoot.pm: utils.pl has
+	generic "black-box" subroutines fleshing out wgArch & wgRoot
+	objects
+
+2000-03-09 02:25  golda
+
+	* lib/wgHeader.ph: Added use vars() for global constants --GV
+
+2000-03-08 21:14  golda
+
+	* lib/wgHeader.ph: Added vars from wgConf, wgArch, wgarcmin --GV
+
+2000-03-08 13:01  jp
+
+	* dist/testpod.pl, lib/GenPage.pm: [no log message]
+
+2000-03-07 17:29  jp
+
+	* lib/: GenPage.pm, GenPage.pm: [no log message]
+
+2000-03-07 16:42  jp
+
+	* dist/GenPage.pm: [no log message]
+
+2000-03-07 16:26  jp
+
+	* dist/GenPage.pm, dist/archive.html, dist/page2.html,
+	dist/page3.html, dist/page4.html, dist/page5.html,
+	dist/submit1.html, dist/submit2.html, dist/submit3.html,
+	dist/testpod.pl, lib/GenPage.pm: [no log message]
+
+2000-03-07 14:56  vineel
+
+	* makenh: Added AllowDeny module and also created the initialize
+	file
+
+2000-03-07 14:47  golda
+
+	* lib/: wgArch.pm, wgRoot.pm: Testing repository.  --GV
+
+2000-03-07 14:45  vineel
+
+	* lib/AllowDeny.pm: AllowDeny module is added into lib directory.
+	This decides what files and links are to be indexed   3/7/2000 -GV
+
+2000-03-03 14:38  golda
+
+	* lib/wgHeader.ph: Added a few constants for wgRoot.pm. --GV
+
+2000-03-03 14:20  golda
+
+	* lib/: wgArch.pm, wgHeader.ph, wgRoot.pm: Starting work on
+	Webglimpse v2.	wgArch represents an entire archive.  wgRoot
+	represents a particular directory or tree of links to traverse. 
+	wgHeader.ph contains constants used by many modules in the system. 
+	--GV
+
+2000-03-03 14:14  vineel
+
+	* makenh, wgHeader.ph: Added header. initially contains, the lines
+	from makenh. -VG
+
+2000-02-25 12:27  golda
+
+	* confarc, makenh: Starting respository for Webglimpse version 2. 
+	We will check in one file at a time for modification.  --GV
+

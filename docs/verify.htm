@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Configuring and customizing</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Configuration Files to Verify   </h3>
+</div>
+<hr align="left" width="65%" />
+<p>&nbsp;</p>
+<p class="SubHeading2">Configuration Files to Verify</p>
+<p>In addition to the files mentioned in the previous section <a href="troubleshooting.htm#problems">Common Problems with Indexes</a>  in <a href="troubleshooting.htm">Section VI - Troubleshooting</a>, you should also verify your configuration files to ensure that your indexing is responding the way you have intended to set it up. </p>
+<p><a name="archivecfg" id="archivecfg"></a><a href="samples.htm#archivecfg"><strong>archive.cfg</strong></a> - This is the configuration file for your indexed archive. For each archive you create you will have a corresponding archive.cfg file. For each option that you select in the Webglimpse administration interface, there will be a setting in this configuration file. If you find that your archives are not being indexed as you expected, this would be a good place to start to explore what is happening. </p>
+<p>Settings contained within this file, include:</p>
+<ul>
+  <li><strong> title String</strong>	- Title of search as placed in wgindex.html<br />
+  </li>
+    <li> <strong>urlpath</strong> - URL to archive directory (unused in v1.6 &amp; above)<br />
+  </li>
+    <li><strong>traverse_type</strong> - 0 for Traversal of local links only, 1 for Traversal of remote and local links, 2 for Subdirectory-based archive<br />
+  </li>
+   <li> <strong>explicit_only</strong> - 0 for traversal of any link, explicit or non-explicit, 1 for traversal of only explicit links to remote sites<br />
+  </li>
+   <li> <strong>numhops</strong> - # of hops to traverse from starting page<br />
+  </li>
+    <li><strong>nhhops</strong>  - # of hops to allow for each neighborhood<br />
+  </li>
+   <li><strong> local_limit</strong> - maximum # of local pages to index<br />
+  </li>
+   <li><strong> remote_limit</strong> - maximum # of remote pages to index<br />
+  </li>
+    <li><strong>addboxes</strong> - 0 to NOT ADD search boxes to all indexed pages, 1 to ADD search boxes to all indexed pages<br />
+  </li>
+   <li><strong> vhost</strong> 	- name of virtual host to use for this index<br />
+  </li>
+   <li> <strong>usemaxmem</strong> - 0 to NOT USE maximum available memory, 1 to USE maximum memory to speed up indexing<br />
+  </li>
+   <li> <strong>urllist</strong> - List of starting URL's or Directories to index </li>
+</ul>
+<p><a name="wgsitesconf" id="wgsitesconf"></a><a href="samples.htm#wgsitesconf"><strong>wgsitesconf</strong></a> - This file defines settings for your Webglimpse application on a site level. The settings contained in this file control how Webglimpse works for each archive contained on your site. </p>
+<p>Settings contained within this file, include:</p>
+<ul>
+  <li><strong class="BulletList">SERVER</strong> - your domain name <br /></li>
+      <li><strong>PORT</strong> - the port your Webglimpse application runs on <br /></li>
+      <li><strong>DOCUMENTROOT</strong> - Your web servers document root home <br /></li>
+      <li><strong>USERDIR</strong> - the default public html directory <br /></li>
+      <li><strong>DIRECTORYINDEX</strong> - the name of the default html page for your webserver <br />
+      </li>
+      <li><strong>ALIAS</strong> - web directory alias for your optional use (for example, an alias to your icon directory) <br /></li>
+    <li>  <strong>ALIAS</strong> - web directory alias for your optional use (for example, an alias to your msql directory) <br /></li>
+   <li> <strong>SCRIPTALIAS</strong> - the alias directory to your cgi-bin directory</li>
+</ul>
+<p>&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="howtos.htm">&lt;&lt;How-To's     </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="faqs.htm">Frequently Asked Questions     &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

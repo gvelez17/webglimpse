@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>
+How to add search forms to your site
+</TITLE>
+</HEAD>
+<BODY bgcolor="#76AAAA">
+<center>
+<table cellpadding="3" bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+
+        <tr><td align=center valign=middle><font size="+1">Adding search forms to your website</font><br>
+</td></tr>
+<tr><td>
+
+Adding a search form to your site is very simple.  Just copy any of these search forms
+<blockquote>
+<PRE>
+<A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=wgindex.html">Default search form:</A> |DIR|/wgindex.html
+<A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=wgsimple.html">Simplified version:</A> |DIR|/wgsimple.html
+<A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=wgverysimple.html">Bare query box:</A> |DIR|/wgverysimple.html</A>
+</PRE>
+</blockquote>
+
+into your web directory and place a link to it.  You can edit this file cosmetically if you like, just leave the FORM tag and the INPUT tags the same. If you want fewer input tags, make the ones you don't want to appear TYPE="HIDDEN" and they will disappear from the screen. 
+<p>
+<hr width="30%" align=center>
+<p>
+To incorporate a simple search box into an existing page, just copy this code:
+<blockquote>
+<PRE>
+
+	&lt;FORM method=get ACTION="|WEBGLIMPSE|"&gt;
+	&lt;INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|"&gt;
+	&lt;INPUT TYPE=HIDDEN NAME="cache" VALUE="yes"&gt; 
+ 	&lt;INPUT TYPE=submit VALUE="Search: "&gt;&lt;INPUT NAME=query size=30&gt;
+	&lt;/FORM&gt;
+
+</PRE>
+</blockquote>
+This is a general search box to search the entire index, if you want neighborhood searching see'Adding neighborhood search boxes to your site'.
+<p>
+If you are using filters to index non-English text, or non-ascii files such as PDF or Word, you will also want to add the tag
+<blockquote>
+<PRE>
+	&lt;INPUT TYPE=HIDDEN NAME="nonascii" VALUE="yes"&gt;
+</PRE>
+</blockquote>
+<p>
+
+<p>
+        </td></tr>
+</table>
+<A HREF="|WGARCMIN|">Back to WGmin home</A>
+</center>
+</BODY>
+</HTML>

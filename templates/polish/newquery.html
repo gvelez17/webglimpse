@@ -1,0 +1,24 @@
+<table border=5><tr><td>
+
+   <FORM  ACTION="/|CGIBIN|/webglimpse.cgi" METHOD=GET>
+	<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+       Nowe Wyszukiwanie: <INPUT NAME="query" VALUE="|QUERY|">
+
+	<!-- Keep options from original search -->
+	[HIDDENTAGS]
+
+       <INPUT TYPE=SUBMIT VALUE="Szukaj">
+
+<!-- # TODO: keep original ranking option -->
+	Sortuj wed³ug:
+	<SELECT name="rankby">
+<OPTION VALUE="DEFAULT">Wynik kombinowany
+<OPTION VALUE="AGE">Najnowsze pliki
+<OPTION VALUE="LINKPOP">Popularno¶æ
+<OPTION VALUE="TITLE_AND_META">Tytu³ i metatagi
+	</SELECT>
+
+    </FORM>
+
+</td></tr>
+</table>

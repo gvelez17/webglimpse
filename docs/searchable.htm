@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Making a Searchable Site</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Making A Searchable Site  </h3>
+</div>
+<hr align="left" width="65%" />
+<p class="Sub-Heading">Making A Searchable Site </p>
+<p>This section assumes you have successfully installed Webglimpse and are now ready to configure an archive to be searched. </p>
+<p>Let's talk now about archives. What is an archive? 
+  We use the term 'archive' for the collection of documents to be indexed, along with the index itself and associated archive configuration files. By default, Webglimpse will store the indexes and archive-specific configuration files in the directory &quot;/[webglimpse_home]/archives/[N]&quot;  
+where 'N' is the number of the archive. You can create multiple archives with a single installation of Webglimpse; and each archive may include local files from your server's hard drive, remote files retrieved from other servers, and/or files retrieved from your local server thru its web interface. </p>
+<p>Before creating your archive, it is a good idea to have a clear picture of exactly which documents you want indexed and have a plan in place. While this may sound obvious, it is not always so. You should ask yourself the following questions:</p>
+<ul>
+  <li><span class="BulletList">
+    Do you want to index all the files linked in your site, all the files in a certain directory, all links from your site to other sites?
+    </span>
+    <ul>
+      <li class="BulletList">If indexing by directory, do you have 'junk' laying around, that you will need to either clean up or exclude from the index? </li>
+    </ul>
+  </li>
+  <li><span class="BulletList">Do you want to index by site? </span>
+    <ul>
+      <li class="BulletList"> If indexing by site, is there a clear definition of the files in your 'site' ?</li>
+      <li class="BulletList"> Is it everything starting with http://yourdomain.com and linked to from that starting page (in any number of clicks)? </li>
+    </ul>
+  </li>
+  <li><span class="BulletList"> Do you want to index only .html files, or also PDF, doc or compressed files?
+    </span>
+    <ul>
+      <li class="BulletList"> If you will need to index PDF or .doc files, please see the <a href="catdoc.htm">how to for word</a> or the <a href="pdf.htm">how to for pdf</a> instructions on installing the helper programs (filters) needed.</li>
+    </ul>
+  </li>
+</ul>
+<p class="Sub-Heading"><a name="indexing" id="indexing"></a>Indexing Your Website</p>
+<p class="SubHeading2">Using the web interface to create an archive:</p>
+<p><strong>Login: </strong>Open your web browser and point it to your administration page,  <strong>wgarcmin.cgi</strong></p>
+<p>  (At the completion of the install, you should have been given the URL where you chose to install wgarcmin.cgi, most likely something like </p>
+<p>http://yourserver.com/cgi-bin/wgarcmin.cgi &nbsp;&nbsp;or  &nbsp;&nbsp;http://yourserver.com/cgi-bin/wg2/wgarcmin.cgi ) </p>
+<p>You will be prompted for the administrator name and password you set during the install. (if you've forgotten the administrator login name or password, you can view the<a href="troubleshooting.htm"> troubleshooting information</a> page. </p>
+<p>Once you have logged into the administration module, you will see the initial 'Manage Archives' screen. If this is your first time in the administration area, then the drop-down list will be empty. </p>
+<p>Press the <strong>Add New Archive button</strong>: at the top of the screen to configure a new archive. </p>
+<p><strong>Enter any Title, Category and Description</strong> you choose for the new archive. The Title you enter will be displayed in the search forms and result page. You may also choose a language at this time. <a name="figure14" id="figure14"></a>(Figure 14) </p>
+<p align="center"><img src="images/8379f1.jpg" alt="Figure 14" width="518" height="399" /><br />
+</p>
+<p class="SubHeading2">Choose Your Indexing Method </p>
+<p>You need to choose which indexing method you want: &quot;Index by Directory&quot;, &quot;Index by Site&quot;, or &quot;Index by Traversing Link&quot;. This is the main decision you need to make when creating an archive - how to determine the files to be indexed. Here are some things to consider in making that determination: </p>
+<p><strong><a href="#stepsdirectory">Index by Directory</a></strong> - a good choice if all the files you want to index are in a local directory on your server, and if there is not a bunch of other junk in that directory that you do NOT want indexed. Indexing by directory will save time and space, as static files do not need to be retrieved thru the web interface. In another screen you can specify any dynamic filetypes, such as .php and .cgi extensions, that should be run thru the web interface. You can also exclude files from the index by later editing the <a href="samples.htm#wgfilterindex"><strong>.wgfilter-index</strong></a> file in the archive directory, to specifically exclude any files or subdirectories you do not want indexed. </p>
+<p><strong><a href="#stepssite">Index by Site</a></strong> - probably the easiest choice for most websites, this is a good option if you want to index all the pages under a specific domain or website directory, and if all those pages are linked in some way from the starting page. That is, if you want to index everything under http://yoursite.com/, and if the user could get to all pages in your site by browsing starting with the first page. </p>
+<p><strong><a href="#stepstraverse">Index by Traversing Links</a></strong> - if you want to index a selection of remote pages and sites, this is the option to choose. You will have flexible options on the next page for exactly which remote pages to retrieve - whether to get only those you specifically link to, or all pages on those sites you link to, or to just follow a set number of 'hops' regardless of where those hops lead. </p>
+<p><strong><a name="stepsdirectory" id="stepsdirectory"></a></strong>If you chose Index by Directory, you will be presented with the screen as displayed in <a name="figure15" id="figure15"></a>Figure 15:</p>
+<p align="center"><img src="images/8379f14.jpg" alt="Figure 15" width="471" height="201" /> </p>
+<p align="left"><strong>Directory Path</strong> specifies the location in the filesystems of the files   to be indexed. All files within the specified directory will be indexed, except   those denied by .wgfilter-index.   The list of files is generated by `find . -type f -follow -print ` </p>
+<p><strong>Equivalent URL</strong> tells Webglimpse what URL on your server corresponds to   the directory being indexed. This should be a full URL starting with &quot;http://&quot;   and ending with the directory or alias. It should not end with index.html or   other html file name. </p>
+<p><strong>Max # Pages</strong> tells Webglimpse the maximum # of pages to index from this   directory. For example, if this is set to 100, then only the first 100 pages   returned by `find` will be indexed. </p>
+<p>&nbsp;</p>
+<p><a name="stepssite" id="stepssite"></a>If you chose Index by Site, you will be presented with the screen as displayed in <a name="figure16" id="figure16"></a>Figure 16:</p>
+<p align="center"><img src="images/8379f15.jpg" alt="Figure 16" width="426" height="188" /> </p>
+<p><strong>Site URL:</strong> specifies the starting page for the index. The domain of   this starting page will be used to limit the pages included in the index. </p>
+<p><strong>Max # Pages</strong> sets the maximum # of pages to index for this site. For   example, if this is set to 100, then only the first 100 pages traversed will be   indexed. </p>
+<p><strong>Max # Hops</strong> limits the depth to which links will be traversed. For   example, if this is set to 1, then only pages directly linked to from the   starting page will be indexed. For a <strong>Site</strong> type root, this can be safely   set to a large value since pages on other servers will not be gathered or   indexed. <strong></strong></p>
+<p>&nbsp;</p>
+<p><a name="stepstraverse" id="stepstraverse"></a>If you chose Index by Traversing Links, you will be presented with the screen as displayed in <a name="figure17" id="figure17"></a>Figure 17:</p>
+<p align="center"><img src="images/8379f16.jpg" alt="Figure 17" width="436" height="296" /> </p>
+<p><strong>Start URL:</strong> specifies the starting page for the index. </p>
+<p><strong>Max # Hops</strong> limits the depth to which links will be traversed. For a <strong>Tree</strong> type root, this should NOT be set too high; usually a value of   1 or 2 is sufficient.</p>
+<p><strong>Follow links </strong> these checkboxes give you fairly precise control over how   the traversing spider should behave.</p>
+<p><strong>Max # Local Pages</strong> sets the maximum # of pages to index from the local   server. The storage requirements are lower for indexing local pages because they   do not need to be copied to the local machine before being indexed. </p>
+<p><strong>Max # Remote Pages</strong> sets the maximum # of pages to gather and index   from remote servers. These pages are actually retrieved and stored on the local   server as well as being indexed. </p>
+<p><strong>Reindex Freq</strong> is NOT actually functional as of version 2.0.04. It will   be used to create a crontab fragment that can be manually included in a users'   crontab to reindex regularly. </p>
+<p>Now that you've set up an archive, you will automatically be placed in the archive management area. Most likely you will need to configure your <strong>local domain </strong>now. By    clicking on the &quot;Update Status&quot; link at the top of the Manage Archive screen, it will alert you if this should be your next step. To configure the local domain, you should click the &quot;Back to WgMin Home&quot; link towards the bottom of the screen. </p>
+<p>&nbsp;</p>
+<p>Next, click on the &quot;Configure Local Domain&quot; button in the middle of the administrator screen. </p>
+<p><a name="figure18" id="figure18"></a>Figure 18 displays the Configure Local Domain screen. </p>
+<p align="center"><img src="images/8379f17.jpg" alt="Figure 18" width="680" height="426" /></p>
+<p>You must enter the proper <strong>Server Name</strong>. This should be your server name including your domain information. For example, if your server name is &quot;myserver&quot; and your domain is &quot;home.com&quot; the correct information to enter into the server name field is myserver.home.com</p>
+<p>The <strong>Document Root</strong> must be the actual path to your webservers document root directory. The other settings are optional and can probably be left alone. </p>
+<p>The <strong>UserDir</strong> is used only for sites of the form 
+  &quot;http://yourdomain.com/~user&quot; and corresponds to the Apache UserDir directive. <br />
+(see documentation at <a href="http://apache.org/">http://apache.org/</a> for further explanation)</p>
+<p>The <strong>Script Alias &amp; Extensions</strong> setting is a way to make sure that 
+  dynamic pages are retrieved via http and not indexed on the filesystem. You 
+  can enter regular expressions corresponding to any dynamically generated 
+pages on your site.</p>
+<p>  <strong>Directory Aliases</strong> are only needed if you are indexing files directly, but 
+  some directories are really aliased to a different URL than would be expected 
+  by the DocumentRoot setting. If you don't know if you are doing this, you 
+  probably are not and can leave it blank.</p>
+<p>Once you are done, you should save the entries by pressing the &quot;Save &amp; Validate Changes&quot; button.</p>
+<p><a name="remote" id="remote"></a><span class="SubHeading2">Indexing A Set Of Remote Websites </span></p>
+<p>If you are indexing remotes site(s) you will now need to configure the remote locations by clicking on the &quot;Configure Remote Domain&quot; button on the administration page.</p>
+<p><a name="figure19" id="figure19"></a>Figure 19 shows what the remote domain configuration screen looks like.</p>
+<p align="center"><img src="images/8379f18.jpg" alt="Figure 19" width="700" height="311" /></p>
+<p>You must enter the url to the remote domain. You do not need to include the &quot;http://&quot; in this field. Typically, the port that is used is port 80, if you know that is incorrect, you should enter the correct port.</p>
+<p>If you have a domain alias you should enter that in the &quot;Domain Alias&quot; field. (this is not a required field) </p>
+<p>If the remote site requires a cookie-based login, you should place a check in the box and enter the additional information required.</p>
+<p>Once finished, you should save the entries you made by pressing the &quot;Save &amp; Validate Changes&quot; button.</p>
+<p><a href="searchable2.htm">Continue to Next Page  &gt;&gt;</a> </p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="install.htm">&lt;&lt; Installation and Configuration </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="configure.htm">Configuring and Customizing   &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

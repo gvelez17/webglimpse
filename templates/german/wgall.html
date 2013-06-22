@@ -1,0 +1,96 @@
+<HTML>
+<HEAD>
+<title>Vollsuche im Glimpse-Archiv |TITLE| </title>
+</head>
+
+<body  bgcolor="#ffffdd"><center>
+
+
+
+<table border=5 bgcolor="#ffffff">
+<tr><td align=center valign=middle>
+    <a href="http://webglimpse.net"><img src="/|CGIBIN|/showimg.cgi" alt="Webglimpse Logo" align=middle height=34 width=60></A>
+</td>
+<td align=center valign=middle>
+   <font size=+3>
+   <a href="http://webglimpse.net">WebGlimpse</a>
+   Search<br></font>
+</td>
+</tr>
+
+<!-- Admins - local copy pointers have been eliminated as of v1.6. If this bothers you e-mail gberns@tucson.com and complain -->
+
+<tr><td colspan=2 align=center>
+
+<FORM method=get ACTION="/|CGIBIN|/webglimpse.cgi">
+<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+Suche &#252;ber das ganze Archiv: |TITLE|
+</td></tr>
+
+<tr><td colspan=2>
+Suchbegriff: <INPUT NAME=query size=30>
+<INPUT TYPE=submit VALUE=Submit>
+<br>
+
+Suche Directory:<SELECT NAME="filter">
+
+|DIRECTORYOPTIONS|
+
+</SELECT>
+
+<INPUT NAME=case TYPE=checkbox>Gro&#223;-/Kleinschreibung
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=whole TYPE=checkbox>teilweise &#220;bereinstimmung
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=lines TYPE=checkbox>Zeilen anzeigen&#32;
+<br>
+<SELECT NAME=errors align=right>
+<OPTION>0
+<OPTION>1
+<OPTION>2
+</SELECT>
+Rechtschreibfehler ignorieren
+
+<INPUT NAME=nonascii TYPE=HIDDEN VALUE="on"> <!-- required for recognizing html char codes -->
+<br>
+</center>
+Nur Dateien anzeigen, die innerhalb der letzten <INPUT NAME=age size=5>
+Tage ge&#228;ndert wurden.&#32;
+<br>
+Maximale Dateianzahl je Suche:
+<SELECT NAME=maxfiles>
+<OPTION>10
+<OPTION selected>50
+<OPTION>100
+<OPTION>1000
+</SELECT>
+<br>Maximale Treffer je Datei:&#32;:
+<SELECT NAME=maxlines>
+<OPTION>10
+<OPTION selected>30
+<OPTION>50
+<OPTION>500
+</SELECT>
+<br>Maximale Zeichenanzeige je Datei:&#32;:
+<INPUT NAME="maxchars" VALUE=10000>
+<br>
+<!-- Admins - remove this line to stop caching next hits -->
+<INPUT NAME="cache" VALUE="yes" TYPE="HIDDEN">
+
+</FORM>
+</td></tr>
+<tr><td colspan=2>
+<center>
+<font size=-2>
+<a href="http://webglimpse.org">Glimpse</a> und&#32;
+<a href="http://webglimpse.net">WebGlimpse</a>, 
+Copyright &copy; 1996, 
+University of Arizona
+</center>
+</font></td></tr>
+</table>
+
+
+</body>
+</html>

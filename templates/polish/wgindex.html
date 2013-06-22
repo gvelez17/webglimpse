@@ -1,0 +1,107 @@
+<HTML>
+<HEAD>
+<title>Pe³ne wyszukiwanie w archiwum |TITLE| </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+</head>
+
+<body  onLoad="document.wgform.query.focus()" bgcolor="#ffffdd"><center>
+
+
+
+<table border=5 bgcolor="#ffffff">
+<tr><td align=center valign=middle>
+    <a href="http://webglimpse.net"><img src="/|CGIBIN|/showimg.cgi" alt="Webglimpse Logo" align=middle height=34 width=60></A>
+</td>
+<td align=center valign=middle>
+   <font size=+3>
+   <a href="http://webglimpse.net">WebGlimpseII</a>
+   Szukaj<br></font>
+</td>
+</tr>
+
+<!-- Admins - local copy pointers have been eliminated as of v1.6. If this bothers you e-mail gberns@iwhome.com and complain -->
+
+<tr><td colspan=2 align=center>
+
+<FORM method=get NAME="wgform" ACTION="/|CGIBIN|/webglimpse.cgi">
+<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+Szukaj w ca³ym archiwum |TITLE| korzystaj±c z Webglimpse
+</td></tr>
+
+<tr><td colspan=2>
+Szukane wyra¿enie: <INPUT NAME=query size=30>
+<INPUT TYPE=submit VALUE=Submit>
+<br>
+Sortuj wed³ug: 
+<SELECT name="rankby">
+<OPTION VALUE="DEFAULT">Wynik kombinowany
+<OPTION VALUE="AGE">Najnowsze pliki
+<OPTION VALUE="LINKPOP">Popularno¶æ
+<OPTION VALUE="TITLE_AND_META">Tytu³ i metatagi
+</SELECT>
+<br>
+
+<INPUT NAME=case TYPE=checkbox> Uwzglêdniaj wielkie literyy <!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=whole TYPE=checkbox>Czê¶æ s³owa
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=lines TYPE=checkbox>Skocz do linii
+<br>
+<SELECT NAME=errors align=right>
+<OPTION>0
+<OPTION>1
+<OPTION>2
+</SELECT> dopuszczalne b³êdy
+
+<!-- Admins - "Use filters" must be checked for field-based searching, 
+any kind of files that were filtered when indexed (such as PDF/Word/Excel), 
+and non-English characters.  If it is required for your index, 
+you may want to turn the following checkbox on by default or even make 
+it a hidden tag with value="on" -->
+
+<!-- SPACES-->&#160;&#160;&#160;&#160;&#160;&#160;
+<INPUT NAME=nonascii TYPE=checkbox>Zastosuj filtry
+<br>
+</center>
+Poka¿ tylko pliki zmodyfikowane w ostatnich <INPUT NAME=age size=5>
+  dniach.
+<br>Maksymalna ilo¶æ wyników:
+<SELECT NAME=maxfiles>
+<OPTION>10
+<OPTION selected>50
+<OPTION>100
+<OPTION>1000
+</SELECT>
+<br>Maksymalna ilo¶æ trafieñ w pliku:
+<SELECT NAME=maxlines>
+<OPTION>10
+<OPTION selected>30
+<OPTION>50
+<OPTION>500
+</SELECT>
+<br>Maksymalna ilo¶æ znaków zwracanych w wyniku:
+<INPUT NAME="maxchars" VALUE=3000>
+<br>
+<input type=checkbox name="sentence"> Pokazuj tylko zdania zawieraj±ce s³owa kluczowe.
+<br>
+<input type=checkbox name="limit"> Aby przyspieszyæ wyszukiwanie, pokazuj tylko jedn± stronê wyników. Zostan± pokazane tylko najnowsze wyniki.
+<br><i>(this option only functional with commercial version; works in tandem with full result caching)</i>
+<!-- Admins - remove this line to stop caching next hits -->
+<INPUT NAME="cache" VALUE="yes" TYPE="HIDDEN">
+
+</FORM>
+</td></tr>
+<tr><td colspan=2>
+<center>
+<font size=-2>
+<a href="http://webglimpse.org">Glimpse</a> oraz
+<a href="http://webglimpse.net">WebGlimpse</a>, 
+Copyright &copy; 1996 
+University of Arizona, &copy; 1998 Internet WorkShop
+</center>
+</font></td></tr>
+</table>
+
+
+</body>
+</html>

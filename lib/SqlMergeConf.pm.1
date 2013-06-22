@@ -1,0 +1,60 @@
+# SqlMergeConf.pm
+# Edit this file to set up database access 
+
+package SqlMergeConf;
+
+require Exporter;
+use vars qw( @ISA @EXPORT);
+@ISA = qw(Exporter);
+
+
+##  VARIABLES TO MODIFY   #########################
+
+# TODO: make archive-specific or at least protect from upgrades
+
+
+# Database containing the wg_tags table
+$DBNAME = '';   # for our user data
+$DBUSER = '';   # read/write access required
+$DBPASS = '';
+$WGTABLE = 'wg_tags';   # default name for our tags
+			# fields are keyword, URL, rank
+
+$MAX_SQL_HITS = 100;   # Just to keep common queries from getting out of control
+		       # DB hits are supposed to be more specific
+		       # TODO: this should be controlled in wgoutput.cfg
+
+# Database(s) to apply user queries to
+%DB1  = ();
+%DB2 = ();
+@DBLIST = (\%DB1, \%DB2);
+
+# If there is only one...
+$DEFAULT_DBTAG = 'rcats';
+
+# Example structure, please edit
+%DB1 = (
+	
+    'DBTAG' => 'rcats',	# for use in wgoutput.cfg ; has nothing to do with wg_tags
+    'DBNAME' => 'rcats',     # database user, read-only access ok
+    'DBUSER' => 'rcats',
+    'DBPASS' => 'meoow',
+    'TABLENAME' => 'rcatdb_items',  # what table are we querying against
+    'MATCHFIELD' => 'name', # which field should match the user query
+    'SELECTFIELDS' => 'id,url,short_content',   # which fields should we display
+    'ALTQUERY' => ' select rcatdb_items.id, rcatdb_items.name, rcatdb_items.url, rcatdb_items.short_content, ab_biz_org.phone, ab_biz_org.addr,ab_biz_org.zip from rcatdb_items, ab_biz_org where rcatdb_items.name = [QUERY] and rcatdb_items.id = ab_biz_org.id limit 20',   # for multiple-table queries, provide query 
+			# instead of matchfield
+    'OUTPUTLINE' => '<A HREF=[URL]>[NAME]</A><br>[ADDR] [ZIP]<br>[PHONE]<p>',  # unused
+	# see OutputMatches in SqlMerge.pm for actual output line
+
+);
+
+
+# Databases containing extra info to modify raw wg output
+
+
+@EXPORT = qw( $DEFAULT_DBTAG $DBNAME $DBUSER $DBPASS $WGTABLE @DBLIST $MAX_SQL_HITS %DB1 %DB2 );
+
+## ENDVARS ###########################
+
+1;

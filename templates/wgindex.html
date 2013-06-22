@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+<title>Full search on archive |TITLE| </title>
+</head>
+
+<body  onLoad="document.wgform.query.focus()" bgcolor="#ffffdd"><center>
+
+
+
+<table border=5 bgcolor="#ffffff">
+<tr><td align=center valign=middle>
+    <a href="http://webglimpse.net"><img src="/|CGIBIN|/showimg.cgi" alt="Webglimpse Logo" align=middle height=34 width=60></A>
+</td>
+<td align=center valign=middle>
+   <font size=+3>
+   <a href="http://webglimpse.net">WebGlimpseII</a>
+   Search<br></font>
+</td>
+</tr>
+
+<!-- Admins - local copy pointers have been eliminated as of v1.6. If this bothers you e-mail gberns@iwhome.com and complain -->
+
+<tr><td colspan=2 align=center>
+
+<FORM method=get NAME="wgform" ACTION="/|CGIBIN|/webglimpse.cgi">
+<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+Search the full archive: |TITLE|
+</td></tr>
+
+<tr><td colspan=2>
+String to search for: <INPUT NAME=query size=30>
+<INPUT TYPE=submit VALUE=Submit>
+<br>
+Rank by: 
+<SELECT name="rankby">
+<OPTION VALUE="DEFAULT">Combined score
+<OPTION VALUE="AGE">Most recent first
+<OPTION VALUE="LINKPOP">Link Popularity
+<OPTION VALUE="TITLE_AND_META">Title and Meta matches
+</SELECT>
+<br>
+
+<INPUT NAME=case TYPE=checkbox>Case&#160;sensitive
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=whole TYPE=checkbox>Partial&#160;match
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=lines TYPE=checkbox>Jump&#160;to&#160;line
+<br>
+<SELECT NAME=errors align=right>
+<OPTION>0
+<OPTION>1
+<OPTION>2
+</SELECT>
+misspellings&#160;allowed
+
+<!-- Admins - "Use filters" must be checked for field-based searching, 
+any kind of files that were filtered when indexed (such as PDF/Word/Excel), 
+and non-English characters.  If it is required for your index, 
+you may want to turn the following checkbox on by default or even make 
+it a hidden tag with value="on" -->
+
+<!-- SPACES-->&#160;&#160;&#160;&#160;&#160;&#160;
+<INPUT NAME=nonascii TYPE=checkbox>Use filters
+<br>
+</center>
+Return only files modified within the last <INPUT NAME=age size=5>
+days.
+<br>
+Maximum number of files returned:
+<SELECT NAME=maxfiles>
+<OPTION>10
+<OPTION selected>20
+<OPTION>50
+<OPTION>100
+<OPTION>1000
+</SELECT>
+<br>Maximum number of matches per file returned:
+<SELECT NAME=maxlines>
+<OPTION selected>10
+<OPTION>30
+<OPTION>50
+<OPTION>500
+</SELECT>
+<br>Maximum number of characters output per file:
+<INPUT NAME="maxchars" VALUE=2000>
+<br>
+<input type=checkbox name="sentence"> Try to print only sentences containing keywords.
+<br>
+<input type=checkbox name="limit"> Return only one page of hits for maximum speed.  Only most recent files will be returned.
+<br>
+For boolean queries, require that all keywords appear within <input name=wordspan> words of each other.  (Makes sense with AND type queries)
+<br><i>(this option only functional with commercial version; works in tandem with full result caching)</i>
+<!-- Admins - remove this line to stop caching next hits -->
+<INPUT NAME="cache" VALUE="yes" TYPE="HIDDEN">
+
+<!-- Admins - use these optional hidden tags to generate modified URLs for results, generally needed for shopping cart applications -->
+<INPUT NAME="prepath" VALUE=""> <!-- is inserted into result URL where a match is found to 'insertbefore' value  -->
+<INPUT NAME="insertbefore" VALUE=""> <!-- matches location in result URL to insert prepath -->
+<INPUT NAME="postpath" VALUE=""> <!-- is appended to result URL -->
+
+</FORM>
+</td></tr>
+<tr><td colspan=2>
+<center>
+<font size=-2>
+<a href="http://webglimpse.net/">Glimpse and 
+WebGlimpse Local Search Engine</a>, 
+Copyright &copy; 1996 
+University of Arizona, &copy; 1998 Internet WorkShop
+</center>
+</font></td></tr>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>
+Reindexing regularly from your crontab
+</TITLE>
+</HEAD>
+<BODY bgcolor="#76AAAA">
+<center>
+<table cellpadding="3" bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+
+        <tr><td align=center valign=middle><font size="+1">Reindexing regularly from your crontab</font><br>
+</td></tr>
+<tr><td>
+
+The reindexing script is designed to be run from the crontab.  The path to this archive's reindex script is
+<blockquote>
+<PRE>
+	|DIR|/wgreindex
+</PRE>
+</blockquote>
+To avoid status messages when running from cron, use the -q switch.  For example to reindex nightly, you might add the following line to your crontab:
+<blockquote>
+<PRE>
+	0 1 * * * nice |DIR|/wgreindex -q &
+</PRE>
+</blockquote>
+(Documentation for how to edit your crontab is beyond the scope of this document; read the <i>man cron</i> and <i>man crontab</i> pages.)
+<p>
+Note, if you want to be able to both reindex automatically and by pressing the "Build Index" button, you should add the above line to the crontab of the web user.  
+<p>
+        </td></tr>
+</table>
+<A HREF="|WGARCMIN|">Back to WGmin home</A>
+</center>
+</BODY>
+</HTML>

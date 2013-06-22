@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<title>Search Tips for Webglimpse</title>
+</head>
+
+<body  bgcolor="#ffffdd">
+<H2>Search Tips for Webglimpse</H2>
+<p>
+Webglimpse supports boolean queries and wildcards, as well as some 
+limited regular expressions. 
+Words separated by spaces are treated as a phrase.
+You can use the keywords AND, OR and NOT, along with 
+parenthesis, and the '#' character for wildcard matching.
+<p>
+<H3>Example boolean queries:</H3>
+<form>
+<blockquote>
+	<table border=0>
+	<tr><td>
+	<input  name="ex1" value="tree AND leaf" size=30>
+	</td><td>
+	will match documents containing the words "tree" and "leaf" anywhere in the document
+	</td></tr>
+	<tr><td colspan=2><hr width="67%"></td></tr>
+
+	<tr><td>
+	<input  name="ex2" value="tree AND leaf AND NOT binary" size=30>
+	</td><td>
+	will match documents containing the words "tree" and "leaf" but not the word "binary"
+	</td></tr>
+	<tr><td colspan=2><hr width="67%"></td></tr>
+	<tr><td>
+	<input  name="ex3" value="open source OR shareware" size=30>
+	</td><td>
+	will match documents containing the phrase "open source" or the word "shareware"
+	</td></tr>
+	</table>
+</blockquote>
+<H3>Example use of wildcard <b>#</b>: </H3>
+<blockquote>
+	<table border=0 cellspacing=5>
+	<tr><td>
+	<input  name="ex4" value="lang#" size=30> 
+	</td><td>
+	will match 'language' and 'languages' but not 'slang' or 'clangs'.  This is different than checking the 'partial match' box in the query form,
+which would match all three patterns.  
+	</td></tr>
+	<tr><td colspan=2><hr width="67%"></td></tr>
+	<tr><td>
+	<input name="ex5"  value="#lang#" size=30>
+	</td><td>will match all patterns mentioned above - 'languages', 'language', 'slang' and 'clangs'.
+This is the same effect as checking the 'partial match' box, but checking the box would be faster.
+	</td></tr>
+	<tr><td colspan=2><hr width="67%"></td></tr>
+	<tr><td>
+	<input name="ex6" value="www.#.com" size=30>
+	</td><td>
+	will match patterns like www.anything.com
+	</td></tr>
+	</table>
+</blockquote>
+When using complex queries like the above, you may sometimes get matches to code inside HTML tags instead of 
+to the visible text in the file.  To avoid this, check the "Use Filters" box in the search options form.  (You should always
+check this box when searching non-ascii type documents, like PDF or Word files.  If you don't see it on the form, it may have
+been automatically checked for you in a hidden tag.)
+<p>
+<H3>There's more...</H3>
+
+The above examples cover the most common types of queries.  Webglimpse (and glimpse) also 
+can accept a limited form of regular expressions, including support for the '|', '*', '[]' characters and 
+parentheses.  Please see <A HREF="http://webglimpse.net/glimpsehelp.html#sect7">the Glimpse man page Patterns section</A> for all the gory details.
+You will need to know that Webglimpse calls glimpse with the switches  -U -W -j -y -z , plus others determined by the checkboxes on the form.  View the source
+of the results page for the exact call to glimpse made by a particular webglimpse query.
+
+<p>
+<i>Note: The above document is for the commercial/contributors version of Webglimpse.  EDU and demo versions that do not have the translator module have to use
+the original ',' for OR, ';' for AND, and '~' for NOT</i>
+
+
+<hr>
+<A HREF="http://webglimpse.net/docs/">Docs and Howtos</A>
+<p>
+</BODY>
+</HTML>

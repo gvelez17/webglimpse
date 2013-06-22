@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Filtering and Filetypes</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>wgfilter-index</h3>
+</div>
+<hr align="left" width="65%" />
+<p class="Sub-Heading">wgfilter-index </p>
+<p><a name="problems" id="problems"></a><strong class="SubHeading2">Common Problems With Indexes</strong></p>
+<p>Permissions issues and incorrect paths are the most common reasons for problems with indexing. Listed below are some of the more typical problems people run into when indexing for the first time, along with possible solutions.</p>
+<p><a name="zerobyte" id="zerobyte"></a>Zero byte files - There could be a few reasons why you are getting zero byte files when you index. For example, the path to your perl executable may be incorrect or Webglimpse may not be able to find it's library files. </p>
+<p><a name="zerofiles" id="zerofiles"></a>Zero files indexed - Perhaps you've used an incorrect path for your executables or the permissions are not set properly for web user, eg. 'apache' or 'nobody'. Try <a href="troubleshooting.htm#manually">reindexing manually</a> to view the error output. </p>
+<p><strong>Files To Examine </strong></p>
+<p><a name="wglog" id="wglog"></a>.wg_log - maintains a list of all collected files and URLs. </p>
+<p><a name="wgerr" id="wgerr"></a>.wg_err - a list of error messages </p>
+<p>If you find that the log and error log output is not giving you the error output that you need, the best way to find out exactly where the errors are, is to run ./wgreindex on a command line, or if you must run from cron remove the -q switch. This will force the errors to be displayed on the screen when you re-run your wgreindex. </p>
+<p>Most likely any problems you encounter will be due to a path or permission problem. The list below represents a step-by-step approach to isolating the source of the problem: </p>
+<ol>
+  <li>
+    <p>Troubleshoot by running </p>
+    <blockquote>
+      <p><strong>./wgreindex </strong></p>
+    </blockquote>
+    <p>on the command line from the archive directory as an appropriately privileged user. Examine the command output,</p>
+  </li>
+  <blockquote>
+    <p><strong> .wg_log and .wg_err files. </strong></p>
+  </blockquote>
+  <li>
+    <p>Try turning off prefiltering (unless you are indexing PDFs or other binary files) by unchecking the prefiltering box in wgarcmin. </p>
+  </li>
+  <li>
+    <p>Check that the paths and URLs in the </p>
+  </li>
+  <blockquote><strong>.wg_toindex </strong> </blockquote>
+  <p>file are correct. If retrieving remote files, check the contents of files in the<a name="remote" id="remote"></a><strong> .remote</strong> subdirectory. </p>
+  <li>
+    <p>Check the extensions of the files to be indexed against the list of allowed extensions in the file </p>
+  </li>
+  <blockquote>
+    <p><a name="wgfilterindex" id="wgfilterindex"></a><strong>.wgfilter-index </strong></p>
+  </blockquote>
+  <li>
+    <p>If the files to be indexed are not plain text, make sure they have a working filter installed in the file </p>
+  </li>
+  <blockquote>
+    <p><a name="glimpsefilters" id="glimpsefilters"></a><strong>.glimpse_filters </strong></p>
+  </blockquote>
+  <li>
+    <p>If you are configured to use an alternate file end mark (in order to <a href="filtering.htm#spaces">index files with spaces in the names</a>), make sure you have made the matching modification to both Glimpse and Webglimpse. </p>
+  </li>
+  <li>
+    <p>From the web administration's main page, you can use the &quot;Test Path Translation&quot; program to ensure that the webglimpse path matches the web URL that you have specified. As seen below in <a name="figure21" id="figure21"></a>Figure 21, you would enter the URL that you designated and click the &quot;URL 2 File&quot; button. If the URL that you specified is correct and accessible by your web server, the file path will be displayed in the File field. Similarly, if you want to test the file path translation, you would enter it into the File field and click the &quot;File 2 URL&quot; button. If it is accessible, the corresponding URL will be displayed in the URL field.</p>
+    <p>You also can check the canonical aliasing of your domain name from this screen. </p>
+  </li>
+</ol>
+<p align="center"><img src="images/8379f22.jpg" width="874" height="256" /></p>
+<p class="PageHeading">&nbsp;</p>
+<p class="SubHeading2">Format of .wgfilter-index</p>
+<p>The file .wgfilter-index can be used to include and exclude files based on many patterns, not only filetype. It is probably most commonly used to exclude subdirectories from the indexing.</p>
+<p>A copy of <b>.wgfilter-index</b> is placed in each archive directory by <b>confarc</b>. You can edit this file to selectively include/exclude files and directories from your index. </p>
+<p>The format is: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allow|Deny regexp Each line of the file should begin with Allow or Deny, followed by some whitespace, then the regular expression matching the files to be included or excluded from the index. So for example, the line </p>
+<blockquote>
+  <pre>	Deny  (^|/)secret
+</pre>
+</blockquote>
+<p>excludes any file whose path contains the string "/secret" or whose path begins with "secret". For more information on regular expressions, see any Perl reference book, or type "man regexp", or see the on-line docs on <a 
+href="/phpscripts/rlink.php?link=http://www.perl.com/CPAN-local/doc/manual/html/pod/perlre.html">Perl regular expressions</a>. </p>
+<p>The lines of <strong>.wgfilter-index</strong> are processed in order, with earlier lines having precedence over later ones. So to index only files ending in .htm or .html, you could use a .wgfilter-index file containing the lines </p>
+<p> </p>
+<blockquote>
+  <pre>	Allow \.html?$
+	Deny .*
+</pre>
+</blockquote>
+<p><strong>Note:</strong> .wgfilter-index is read by <strong>makenh</strong> when creating the list of files to be indexed. It is not read by glimpse or glimpseindex directly.</p>
+<p class="Sub-Heading">&nbsp;</p>
+<p class="SubHeading2">&nbsp; </p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td><div align="left">
+          <p><a href="filtering.htm" target="main">&lt;&lt; Filtering and Filetypes</a></p>
+      </div></td>
+      <td><div align="center">
+          <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td><div align="right">
+          <p><a href="troubleshooting.htm">Troubleshooting &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

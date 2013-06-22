@@ -1,0 +1,630 @@
+#!/usr/bin/perl
+
+# wgcmd - command-line replacement for confarc. Controls flow of webglimpse management interface.
+#
+# Run on command line only, wgarcmin.cgi is the cgi-script version
+#
+# Uses package CommandWeb (generic, useful for dual command-line/web interfaces)
+# Includes functions   
+#
+#	ParseCommandLine	Builds hash from command line options
+#	ValidatePassword	Check password vs encrypted file
+#	PromptUser		Command line prompts for inputting archive settings
+#
+# Uses packages wgConf, wgArch  (specific to Webglimpse)
+#	wgConf handles the user interface
+#	wgArch represents an archive
+#
+my $REVISION = '$Id $';
+
+BEGIN {
+	$WEBGLIMPSE_LIB = '|WEBGLIMPSE_LIB|';
+	unshift(@INC, "$WEBGLIMPSE_LIB");			# Find the rest of our libs
+}
+BEGIN {
+	use wgHeader qw( :all );
+	use wgTextMsgs qw( :wgarcmin );
+	use wgErrors;
+}
+
+my $debug = 0;
+my $demomode = 0;
+
+# Public libraries we need installed
+use CGI qw(:cgi-lib);
+
+# Our own libraries/modules
+use wgConf;
+use wgArch;
+use wgSite;
+use wgSiteConf;
+use CommandWeb;
+use CatTree;
+
+# Initialize variables and load domain information
+$WEBGLIMPSE = '/'.$CGIBIN.'/webglimpse.cgi';
+&wgSiteConf::LoadSites;
+my $srvname = $wgSiteConf::LocalServerName || 'localhost';
+$WGARCMIN = "http://$srvname/$CGIBIN/wgarcmin.cgi";
+
+# Customize messages for command-line version
+$wgTextMsgs::CONFIGURE_DOMAIN = $wgTextMsgs::CONFIGURE_DOMAIN_CMD;
+
+
+my ($next,  $continue, $wgConf);
+my $USEUPPER = 1;
+my %in = ();
+my $cmdtemplatefile;
+my %templatehash = ();
+$lastError = '';
+
+
+# We may store some vars in templatehash from the next as well as 
+my %templatehash = ();
+my @getfromuser = ();
+my @catarr = ();	# Array of category hashes (has to be structured this way for CommandWeb)
+
+$continue = 1;
+$auto = 0;
+$menulevel = 0;
+$ArchID = 0;		# working archive - global
+$ArchDir = '';
+$Query = '';
+$LastStatus = '';	# status of last next - global
+
+my $mArch = 0;	 # Global archive object so we don't have to re-load
+
+# We may be called from install to create new archive
+if ($ARGV[0] eq 'N') {
+	$next = 'N';
+	$auto = 1;
+} else {
+	print $MSG_INTRO;
+}
+
+#&CommandWeb::ParseCommandLine(\%in);
+
+#
+# We have Menus and Actions
+#
+# Menus:
+#
+#  L = List archives
+#  
+# Actions:
+#  N = New archive
+#  A = Add site/dir/tree to current archive
+#  B = Build current archive
+#  D = Delete current archive
+#  E = Edit archive settings (not implemented)
+#  ? = Help
+#  X = Exit program  
+
+
+while ($continue) {
+
+	# print relevent menu
+	if (! $auto) {
+		$next = &MenuOut($menulevel);
+	}
+
+	# may need data from user into global %in
+	&GetMoreInput;
+
+	if ($auto) {
+		$auto = 0;
+	}
+
+	# do something (and possibly set auto=1 to do something else next)
+	&DoIt($next);
+
+	# print status of last action unless automatically continuing
+  	if (!$auto) {
+		&PrintStatus;	
+	} 
+}
+
+1;
+
+
+sub SetArchiveTo {
+	$num = shift;
+
+	$mArch = &wgConf::GetArch($num);
+	if ($mArch) {
+		$ArchID = $num;
+		$ArchDir = $mArch->Get('Dir');
+	}
+	else {
+		 $LastStatus = "$num is not a valid archive ID";
+		 $ArchID = 0;
+	}
+}
+
+
+sub PrintStatus {
+	if ($LastStatus) {
+		print "\n$LastStatus\n";
+		$LastStatus = '';
+	}
+	if ($ArchID && $mArch) {
+		print "\n Current working archive: # $ArchID : ",$mArch->Get('Title')," : ",$mArch->Get('StatusMsg'),"\n\n";
+	}
+	return 1;
+}
+
+sub DoIt {
+	my $action = shift;
+
+	##############################################################
+	# Create Archive - check and save settings passed to script
+	#			create files associated with archive
+	#  On command line, this may happen as part of New or Edit
+	if ($action eq 'N') {
+		# Its ok if we can't load archives, maybe there aren't any yet.
+		&wgConf::LoadArchs();
+		$ArchID = &wgConf::GenArchID() || print("wgConf::GenArchID: $lastError") && return(0);
+		$mArch = wgArch->new($ArchID) || print("wgArch::new: $lastError. Arch id was $ArchID") && return(0);
+		&CommandWeb::AssignInputs(\%in, $mArch, \@wgArch::members) || print("CommandWeb::AssignInputs failed on archive $ArchID") && return(0);
+		# $mArch->Validate();
+		$mArch->Create() || print("wgArch::Create:  $ret: $lastError") && return(0);
+		# if main archive dir is web-writable, make this one so too
+	        $ArchDir = $mArch->Get('Dir');
+		MakeWebWritableIf($ArchDir);
+
+		$auto = 1;
+		$next = 'A';
+	}
+
+
+	# Adding a Root to an archive
+	elsif ($action eq 'A') {
+		if (!$ArchID) {
+			$LastStatus = "Cannot add root, no archive is defined";
+			return 0;
+		}
+	
+		$mArch = &wgConf::GetArch($ArchID) || ($LastStatus = "wgConf::GetArch: $lastError, Arch ID was $ArchID") && return(0);
+
+		$type = $in{'TYPE'};
+		$mRoot = new wgRoot;
+		&CommandWeb::AssignInputs(\%in, $mRoot, \@wgRoot::members) || print("CommandWeb::AssignInputs failed on root") && return(0);
+
+		$mRoot->Validate() || print("wgRoot:Validate: $lastError") && return(0);
+
+		$mArch->LoadRoots || print("wgArch::LoadRoots: $lastError") && return(0);
+
+		$mArch->AddRoot($mRoot) || print ("wgArch::AddRoot: $lastError") && return(0);
+
+		$mArch->SaveRoots || print("wgArch::SaveRoots: $lastError") && return(0);
+
+		MakeWebWritableIf($mArch->{Dir},$mArch->{Dir});
+
+		$auto = 1;
+		$next = 'B';
+	}
+
+	# Save changes to an archive
+	elsif ($action eq 'E') {
+		if (!$ArchID) {
+			$LastStatus = "Cannot edit, no archive is defined";
+			return 0;
+		}
+	
+		if (! $mArch) {  # Should have been loaded in GetUserInputs
+			$LastStatus = "Archive $ArchID is not loaded\n";
+			$next = '';
+			next;
+		}
+
+		&CommandWeb::AssignInputs(\%in, $mArch, \@wgArch::members)  || print("CommandWeb::AssignInputs failed on arch $ArchID") && return(0);
+
+		$mArch->MakeArchFiles;	# Rebuild template files with new info
+
+		&wgConf::SaveArch($mArch)  || print("wgConf::SaveArch: $lastError, archive id was $ArchID") && return(0);
+
+
+	}
+
+
+	elsif ($action =~ /^[0-9]+$/) {
+		SetArchiveTo($action);
+
+	}
+
+	##############################################################
+	# Search archive using Glimpse
+	elsif (($action eq 'S') || ($action eq 'G')) {
+
+		if (!$ArchID) {
+			$LastStatus = "Cannot search, no archive is defined";
+			return 0;
+		}
+		if (!$Query) {
+			$LastStatus = "Nothing to search for!";
+			return 0;
+		}
+		
+		$mArch = &wgConf::GetArch($ArchID) || print("wgConf::GetArch: $lastError, id was $ArchID") && return(0);
+		my $cmd = "$GLIMPSE_LOC -U -X -j -y -i -w -H ".$mArch->{Dir}." '$Query'";
+
+		print "Search Results:\n\n";
+		print `$cmd`;
+
+		$LastStatus = "Ran search using command: $cmd \n";
+
+	}
+
+	##############################################################
+	# Build Archive - run wgreindex, if we have permissions to
+	elsif ($action eq 'B') {
+                if (!$ArchID) {
+                        $LastStatus = "Cannot build, no archive is defined";
+                        return 0;
+                }
+		$mArch = &wgConf::GetArch($ArchID) || print("wgConf::GetArch: $lastError, id was $ArchID") && return(0);
+
+		$mArch->Validate || print("wgArch::Validate: $lastError") && return(0);
+		
+		# We may want to output the build results to an extra output window 
+		my $extrawin = '';
+
+		if ($mArch->Build) {
+			$LastStatus = 'Build in progress. (Running in background)';
+		} else {
+			$LastStatus = 'Error building archive: $lastError';
+		}
+
+		MakeWebWritableIf($mArch->{Dir},$mArch->{Dir});
+
+# Might put in an option to do this later; for now building in the background.
+	#	if ($extrawin) {
+	#		$templatehash{'EXTRAWIN'} = $extrawin;
+	#	}
+
+		$auto = 1;
+		$next = '?S';
+
+	}
+
+	################################################################
+	# Delete archive
+	elsif ($action eq 'D') {
+
+		if (!$ArchID) {
+			$LastStatus = "Cannot delete, no archive is defined";
+			return 0;
+		}
+		$mArch = &wgConf::GetArch($ArchID) || print("wgConf::GetArch: $lastError, id was $ArchID") && return(0);
+		if ($mArch->Destroy) {
+			$LastStatus = "Archive # $ArchID deleted.\n";
+			$ArchID = 0;
+		} else {
+			$LastStatus = "wgArch::Destroy: $lastError";	
+		}			
+	}
+
+
+	################################################################
+	# Exit
+	elsif ($action eq 'X') {
+		$continue = 0;
+	}
+
+	################################################################
+	# Unknown action code
+	elsif ($action) {
+
+	}
+
+	################################################################
+	# No action
+	else {
+
+	}
+	return 1;
+}
+
+
+
+sub MenuOut {
+	$lvl = shift;
+
+	if ($ArchID) {
+        	$mprompt = &subvars($PROMPT_NEXT_CMD);
+	} else {
+		$mprompt = &subvars($PROMPT_FIRST_CMD);
+	}
+
+	$next = &CommandWeb::prompt($mprompt);
+
+	if (($next =~ /^([A-Z#])\s+([0-9]+)$/i) && ($1 ne 'S')) {
+		$next = uc($1);
+		SetArchiveTo($2);
+	} 
+	# Special patterns for search command
+	elsif (($next =~ /^S\s+\'([^\']+)\'\s*([0-9]*)$/) || ($next =~ /^S\s+(\S+)\s*([0-9]*)$/)) {  
+		$next = 'S';
+		$Query = $1;
+		if ($2) { SetArchiveTo($2); }
+	} elsif ($next =~ /^S\s+([0-9]+)\s+(\S*\D+\S*)$/) {  # other order ok, if not searching for digits only
+		$next = 'S';
+		$Query = $2;
+		SetArchiveTo($1);
+	} else {
+		$next = uc($next);
+	}
+
+	return($next);
+}
+
+##############################################################
+##############################################################
+
+sub LoadArchive {
+	
+	my $march;
+
+	# Did user pass Archive ID or path?  Check local dir.
+	my $id = shift || $ArchID || $in{'ID'} || $in{'ARCHID'};
+	if (defined($id)) {	# User-specified archive
+		$march = &wgConf::GetArch($id);	
+	} elsif (defined($in{'ARCHDIR'})) {	# User-specified directory
+		$march = &wgConf::GetArchbyPath($in{'ARCHDIR'});
+	} elsif (!$CalledFromWeb) {				# Try local dir
+		$march = &wgConf::GetArchbyPath('.');	
+	}
+	
+	return($march);
+}
+
+sub mygetlist {
+	foreach $var (@_) {
+		$in{$var} = myget($var);
+	}
+}
+
+
+sub myget {
+	my $var = shift;
+	my $def = shift || '';
+	my $prompt = shift || $Prompts{$var} || "Value for $var";
+	return($in{$var} = &CommandWeb::prompt($prompt,$def));
+}	
+
+# Prompt user for inputs needed
+#
+# Actions:
+#  N = New archive
+#  A = Add site/dir/tree to current archive
+#  B = Build current archive
+#  D = Delete current archive
+#  E = Edit archive settings (not implemented)
+#  ? = Help
+#  X = Exit program  
+#
+# Would be nice if we could do these things through text templates somehow, the way
+# we do for web interface...
+
+sub GetMoreInput {
+
+	if ($next eq 'A') {
+		if (!defined($ArchID) || ($ArchID < 1) ) {
+			print "First you must create an archive or select an existing archive from the list\n";
+			return '';
+		}
+		$type = &myget('TYPE','D');
+		if ($type =~ /^D/i ) {
+			$in{'TYPE'} = 'DIR';
+			myget('STARTDIR','','Directory to index:');
+			myget('STARTURL','','Equivalent URL:');
+			myget('MAXLOCAL',250);
+		} elsif ($type =~ /^S/i ) {
+			$in{'TYPE'} = 'SITE';
+			myget('STARTURL','','Site URL:');
+			myget('MAXLOCAL',250);
+			myget('HOPS',10);
+		} elsif ($type =~ /^T/i ) {
+			$in{'TYPE'} = 'TREE';
+			myget('STARTURL','','Starting URL for link traversal:');
+			mygetlist('HOPS', 'MAXLOCAL','MAXREMOTE', 'FOLLOWTOREMOTE', 'FOLLOWSAMESITE', 'FOLLOWALL');
+		}	
+	} elsif ($next eq 'N') {
+		$ArchID = $in{'ID'} = &wgConf::GenArchID() || print("wgConf::GenArchID: $lastError") && return(0);
+		&myget('TITLE');
+	} elsif ($next eq 'B') {
+		# Nothing to do here, build is all done in DoIt
+		if ($auto) {
+			#  confirm build if running on autopilot
+			my $yesno = &CommandWeb::prompt('Build archive now?','Y');
+			if ($yesno !~ /^[yY]/) {
+				$next = '';
+				$auto = 0;
+			}
+		}
+
+
+	} elsif ($next eq 'I') {
+		if ($ArchID && $mArch) {
+		
+			my $fname = $mArch->{Dir}.'/'.$CONFIGFILE;
+			print "Archive configuration from $fname:\n";
+			open(F,$fname);
+			print <F>;
+			close F;
+# TODO: just read first line of .glimpse_filenames instead!!
+			my $wc = trim(`wc $mArch->{Dir}/.glimpse_filenames`) - 1;
+			@_ = split(/\s+/,$wc);
+			print "\nNumber of files indexed: $_[0]\n\n";
+		} else {
+			$LastStatus .= "\nFor which archive?  Use 'L' to get a list of available archives.\n";
+		}
+	} elsif ($next eq 'S') {
+		# done in DoIt
+
+	} elsif ($next eq 'L') {
+
+		&wgConf::LoadArchs;
+		print "\nAvailable archives:\n";
+		my @arr = sort { $a->{ID} <=> $b->{ID} } (values  %wgConf::Archives);
+		foreach $march (@arr) {
+			print $march->Get('ID'),"\t: ",$march->Get('Title'),"\t: ",$march->Get('StatusMsg'),"\n";
+		}
+		print "\n";
+
+	} elsif ($next eq 'D') {
+		if ($ArchID) {
+			if (myget('verify','N',"Are you sure you want to delete archive # $ArchID? ") !~ /^y/i) {
+				$next = '';
+				return;
+			}
+		} else {
+			myget('ID',$ArchID,'ID of archive to delete: ');
+			SetArchiveTo($ArchID);
+		}
+	} elsif ($next eq 'X') {
+		print "$MSG_EXITING";
+		$continue = 0;
+	} elsif ($next eq '?') {
+		print "$MSG_HELP";
+	} elsif ($next eq '?E') {
+		print &subvars($MSG_EDIT_ARCHIVECFG);
+	} elsif ($next eq '?M') {
+		print &subvars($MSG_EDIT_ARCHIVECFG);
+	} elsif ($next eq '?H') {
+		print &subvars($MSG_EDIT_WGSITES);
+	} elsif ($next eq '?O') {
+		print &subvars($MSG_EDIT_ARCHIVES);
+	} elsif ($next eq '?S') {
+		print &subvars($MSG_WGINDEXHTML);
+	} elsif ($next eq '?G') {
+		print &subvars($MSG_GLIMPSE);
+	} elsif ($next eq '?W') {
+		print &subvars($MSG_WEB_INTERFACE);
+	}
+
+	return $next;
+}
+
+
+
+# Substitute our local vars into prompts & messages
+sub subvars {
+        my $msg = shift;
+
+        # substitute our vars as needed
+
+        # We always have these
+        $msg =~ s/\|LASTERROR\|/$lastError/g;
+	$msg =~ s/\|DOCURL\|/$DOCURL/g;
+        $msg =~ s/\|VERSION\|/$VERSION/g;
+        $msg =~ s/\|WGHOME\|/$WGHOME/g;
+        $msg =~ s/\|WGARCHIVE_DIR\|/$WGARCHIVE_DIR/g;
+        $msg =~ s/\|CGIBIN_DIR\|/$CGIBIN_DIR/g;
+        $msg =~ s/\|CGIBIN\|/$CGIBIN/g;
+        $msg =~ s/\|LEGALOS\|/$LEGALOS/g;
+        $msg =~ s/\|WGSITECONF\|/$wgSiteConf::CfgFile/g;
+	$msg =~ s/\|WGARCMIN\|/$WGARCMIN/g;
+
+        # Other vars may be available
+        $srvname     && ($msg =~ s/\|SERVERNAME\|/$srvname/g);
+        $docroot        && ($msg =~ s/\|DOCROOT\|/$docroot/g);
+        $webuser        && ($msg =~ s/\|WEBUSER\|/$webuser/g);
+
+	$ArchID		&& ($msg =~ s/\|ID\|/$ArchID/g);
+	$ArchDir	&& ($msg =~ s/\|DIR\|/$ArchDir/g);
+	$Title		&& ($msg =~ s/\|TITLE\|/$Title/g);
+
+        # remove any vars we don't use
+        $msg =~ s/\|[^\|\n]*\|//g;
+
+        return $msg;
+}
+
+
+sub CErrorExit {
+	my $msg = shift;
+	print "Content-type: text/html\n\n";
+	&ErrorExit($msg);
+}
+
+
+
+sub ErrorExit {
+
+        my $msg = shift;
+
+	$msg = &subvars($msg);
+
+        print STDERR scalar localtime, "$msg";
+
+        print "ERROR: $msg\n\n";
+
+        if ($debug) {
+                my $name;
+                print "Inputs were: <p>\n";
+                foreach $name (keys (%in)) {
+                        print "$name = $in{$name} <p>\n";
+                }
+        }
+
+        exit 0;
+}
+
+sub nexthour {
+    my @months = ("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug",
+               "Sep","Oct","Nov","Dec");
+    my @days = ("Sun","Mon","Tue","Wed","Thu","Fri","Sat");
+
+    my ($sec,$min,$hr,$mday,$mon,$yr,$wday,$yday,$isdst) = gmtime(time + 3600);
+
+    # format must be Wed, DD-Mon-YYYY HH:MM:SS GMT
+    my $timestr = sprintf("%3s, %02d-%3s-%4d %02d:%02d:%02d GMT",
+        $days[$wday],$mday,$months[$mon],$yr+1900,$hr,$min,$sec);
+    return $timestr;
+}
+
+
+sub MakeHostList {
+
+	my $aref = shift;
+
+		my @carray = ();
+		my @members = ();
+		if (&wgSiteConf::LoadSites) {
+			@carray = values (%wgSiteConf::Sites);
+			@members = @wgSite::members;
+			push(@members, 'IsLocal');
+			push(@members, 'BaseUrl');
+			push(@members, 'NotDefault');
+			&CommandWeb::BuildHashArray($aref, \@carray,\@members,$USEUPPER) || &ErrorExit("CommandWeb::BuildHashArray failed on Sites array: ".$CommandWeb::lastError);
+		} else {
+			print "Couldn't load sites, last error was $lastError\n<p>";
+		}
+
+	return 1;
+}
+
+# For compatibility with web interface
+# if the main archive dir is web-writable, attempt to make this dir & contents web-writable too
+sub MakeWebWritableIf {
+	my $mdir = shift;
+	my $cmpdir = shift || $WGARCHIVE_DIR;
+
+	my $own = (stat $cmpdir)[4];
+	if ($own == $WWWUID) {
+		system("chown -R $own $mdir");
+	}
+	print "notice: Keeping $mdir web-writable for compatibility with web interface\n";
+}
+
+sub trim {
+	my $s = shift;
+
+
+	$s =~ s/^\s+//g;
+	$s =~ s/\s+$//g;
+
+	return $s;
+}
+

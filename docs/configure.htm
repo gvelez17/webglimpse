@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Configuring and customizing</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Configuring and Customizing </h3>
+</div>
+<hr align="left" width="65%" />
+<p class="Sub-Heading">Configuring and Customizing</p>
+<p class="SubHeading2">Introduction</p>
+<p>Webglimpse has two parts : Glimpse, the fast C engine which does the text indexing and pattern matching, and Webglimpse proper, the flexible Perl spider, archive manager and user interface script. </p>
+<p>When you build an index, you first specify some rules for which files should be included. You might index by directory, by following links from a starting page, or a combination of both. The indexing script first makes a complete list of all files to be indexed, and retrieves any remote links. Then it feeds this list to the glimpseindex program, which builds a keyword index for fast searching. </p>
+<p>When a user runs a search, the webglimpse.cgi script first gets the query, checks all the options and does some pre-processing. Then it sends the query to glimpse for a fast search of the index and files. Finally, it parses the raw results, formats them nicely according to the customized format on that site, ranks them, highlights keywords and presents the results back to the user. </p>
+<p>Webglimpse 2.X has been out for almost two years and is in wide use, with new development continuing steadily and new releases about once a month.</p>
+<p class="SubHeading2"><a name="overview" id="overview"></a>Configuration File Overview</p>
+<p>Starting in March of 2006, all users are allowed and recommended to upgrade 
+  to the Advanced version of Webglimpse, which has several modules for 
+  customization. Educational and Government users and nonprofits who installed 
+  prior to 3/06 may have a more limited version that was provided in the past, 
+  but are now free to upgrade to the full Advanced version. 
+</p>
+<p>[maybe put a link here to 'philosophy' explaining why...that may come later] </p>
+<p><strong>Note:</strong> (version 1.X is no longer recommended for new installs. It does not have any 
+      of the web management features and is missing many bugfixes.<br />
+  <br />
+  <a name="resultsout" id="resultsout"></a>Using wgoutput.cfg , you have control over each piece of text output by webglimpse in the results page. Listed below, is a sample wgoutput.cfg file. This file is shipped as the default output configuration in version 1.7.4. Note, however, that in versions prior to 2.1 the file is named .wgoutput.cfg so it is hidden from the directory listing. Each line in the wgoutput.cfg file starts with a special variable name or a + character to continue the previous record. The variables are used as follows to generate <strong>customized results output</strong>: </p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <table width="493" border="0">
+        <tr>
+          <td width="168">begin_html</td>
+          <td width="286">output once at the beginning of results</td>
+        </tr>
+        <tr>
+          <td>neigh_msg<br />
+          noneigh_msg</td>
+          <td>output once if this is a neighborhood search<br />
+output once if not a neighborhood search</td>
+        </tr>
+        <tr>
+          <td>lines_msg<br />
+          nolines_msg</td>
+          <td>output once if using jump to line<br />
+output once if not using jump to line</td>
+        </tr>
+        <tr>
+          <td>begin_files</td>
+          <td>output once if any files match query</td>
+        </tr>
+        <tr>
+          <td>begin_file_marker</td>
+          <td>output at start of each file match, <br />
+          before the actual link to the file</td>
+        </tr>
+        <tr>
+          <td>begin_lines</td>
+          <td>output before first matching line of each file,<br />
+but after the actual link to the file</td>
+        </tr>
+        <tr>
+          <td>begin_single_line</td>
+          <td>output before each matching line of each file</td>
+        </tr>
+        <tr>
+          <td>end_single_line</td>
+          <td>output after each matching line of each file</td>
+        </tr>
+        <tr>
+          <td>end_lines</td>
+          <td>output after all matching lines of each file</td>
+        </tr>
+        <tr>
+          <td>end_file_marker</td>
+          <td>output after end_lines</td>
+        </tr>
+        <tr>
+          <td>end_files		output</td>
+          <td>after all matching files (if any)</td>
+        </tr>
+        <tr>
+          <td>end_html</td>
+          <td>output at end of results page</td>
+        </tr>
+      </table>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p><strong>Using patterns in Results output</strong><br />
+Starting in version 1.7.4, it is also possible to substitute user-defined and pre-defined variables from the matched document into the results set. Variables are denoted by  &nbsp;&nbsp;[VARNAME]&nbsp;&nbsp;in the wgoutput.cfg file.</p>
+<p>  Pre-defined variables are as follows: </p>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p>[QUERY]			The original user query</p>
+      <p>[SEARCHTITLE]		Optional form variable in wgindex.html </p>
+      <p>[MATCHED_LINES]		Number of matching lines <br />
+        (Can ONLY be used in end_html variable above)</p>
+      <p>[MATCHED_FILES]		Number of matching files<br />
+        (Can ONLY be used in end_html variable above) </p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<p>User-defined variables are set up in the .wgoutputfields file. The format is <br />
+  TYPE&lt;tab&gt;NAME&lt;tab&gt;REGEXP</p>
+<p>where TYPE may be FILE, to look for value in the actual matching file, or PATH, to look for the value in the directory path <br />
+  NAME should match a variable [NAME] in the wgoutput.cfg file in the archive directory. TITLE is a special name, and will be used for the linked text. </p>
+<p>The value will be set to the first matching ()'s (using the $1 variable after a match) </p>
+<p>For example, the .wgoutputfields line: FILE   REFNO   ^Reference Number:\s+(.+)$</p>
+<p>will cause each file returned by Glimpse to be parsed for the regular expression /^Reference Number:\s+(.+)$/, and if a match occurs, the subexpression corresponding to the ()'s is substituted for <br />
+  [REFNO]</p>
+<p>wherever that variable appears in the output text specified in wgoutput.cfg. Note, only one subexpression should be enclosed in parentheses. </p>
+<p>Here is an example of a path-based variable. This line in .wgoutputfields: <br />
+  PATH   LASTSUBDIR      \/([^\/]+)\/[^\/]+$</p>
+<p>will cause the path to each returned file, to be parsed for the regular expression /\/([^\/]+)\/[^\/]+$/. If a match occurs, the subexpression corresponding to the ()'s, in this case the last subdirectory containing the file, is substituted for &nbsp;&nbsp;&nbsp;&nbsp;
+[LASTSUBDIR]&nbsp;&nbsp;&nbsp;&nbsp;as it appears in wgoutput.cfg. </p>
+<p><span class="SubHeading2"><a name="ranking" id="ranking"></a>Customized Search Results Order (ranking)</span><br />
+  Four built-in ranking schemes are available   to the user as they search your site: rank by most recent first, by matches in   title and meta tags, by link popularity, or by a combination of all these (the   default). As the administrator, you can create your own ranking formula using   all the available information about the match, and make your own customized   ranking schemes available to your users (or limit them to one scheme of your   choice). Re-sorting and ranking of hits is an extremely powerful tool that   allows users to find the hits most relevant to them. <br />
+META tag support allows you to include any meta tag explicitly in your ranking formulas. This   gives you precise control over ordering of your hit results, if you so desire. </p>
+<p>Glimpse actually does not use any ranking algorithm, except for ordering by most recent first, however Webglimpse allows the administrator to create their own ranking formula based on the available variables:</p>
+<p># Available variables are:<br />
+  #<br />
+  # $N # of times the word appears in the record<br />
+  # $LineNo Where in the file the word appears<br />
+  # $TITLE # of times the word appears in the TITLE tag<br />
+  # $FILE # of times the word appears in the file path<br />
+  # $Days Date (how many days old the file is)<br />
+  # $META Total # of times the word appears in any META tag<br />
+  # $LinkPop Link popularity in the site<br />
+  # %MetaHash Hash with the # of times the word appears in each META tag,<br />
+  # indexed by the NAME= parameter of the meta tag.<br />
+  # $LinkString actual url of link<br />
+</p>
+<p>By editing the .wgrankhits.cfg file in each archive you can create one or more named ranking formulas. So, in effect, you can actually let the end user choose a specific named ranking formula on each search. (If you invent new ranking formulas 
+rather than modifying the default, you also need to edit the search form to make the names match)</p>
+<p><span class="SubHeading2"><a name="metatags" id="metatags"></a>Structured Input - Supporting metatags</span></p>
+<p>Field-based searching will allow you to make a query such as 'subject=Things ' when you have defined "subject" as a field, and you have indexed a file containing the line.
+'subject: Things'. For example, search for "subject=Things" at the demo page <a 
+href="/phpscripts/rlink.php?link=http://iwhome.com/wgarchives/demo/fields/wgindex.html">http://iwhome.com/wgarchives/demo/fields/wgindex.html</a> <br />
+<b>You must check the box 'Use Filters' </b> Note, you can also do combination searches, such as 'subject=Things;New Test'. This will search for all files containing the text "New Test" and the line "subject: Things". The allowed # of spelling errors and partial match criteria apply only to the field value "Things" and not to the field name. </p>
+<p>Okay, now you have a little bit of a background on structured input - supporting metatags and how it works, so how do you implement this into your Webglimpse configuration? It's fairly simple, read on! </p>
+<p>First, be sure you have installed updated versions of both Webglimpse and Glimpse. For versions of glimpse 4.14 or above, build as follows:&nbsp;&nbsp;&nbsp;&nbsp;<strong>./configure --enable-structured-queries make clean make make install </strong></p>
+<p>  If you are upgrading from a version prior to 1.7.5, for 1.X run <strong>confarc</strong> to configure (or re-configure) an archive. This should copy over the new distribution files, including <strong>.wginputfields</strong>. For 2.X press the 'Save Changes' button in the manage archive screen. <br />
+</p>
+<p>Next, edit the <strong>.wginputfields</strong> file in your archive directory. Enter one field name per line, no spaces. </p>
+<p>Check that the files you are indexing contain the field data in the format&nbsp;&nbsp;&nbsp;&nbsp;<strong>  fieldName: fieldValue </strong>&nbsp;&nbsp;&nbsp;  where &quot;fieldName&quot; is at the very beginning of the line. </p>
+<p>Now, edit the <strong>.glimpse_filters</strong> file. Add a line for the type of files you want to index with fields such as: </p>
+<p><strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*.EXT /WEBGLIMPSE_HOME/lib/parsefields.pl &lt; </strong></p>
+<p>  Where &quot;EXT&quot; is the real extension on the files to be indexed this way, and &quot;WEBGLIMPSE_HOME&quot; is the real path on your system to the Webglimpse home directory. </p>
+<p>Finally, edit the <strong>wgreindex</strong> file. Make sure the <strong>-z</strong> and <strong>-s</strong> options are present on both glimpseindex command lines. You may only need to add the -s option. </p>
+<p>Run <strong>./wgreindex</strong> to rebuild your archive. </p>
+<p>Use the wgindex.html file to perform a field-based search. Make sure to check the 'Use Filters' checkbox.</p>
+<p>There you have it, a structured input searchable archive! </p>
+<p>&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="searchable.htm">&lt;&lt;Making A Searchable Site   </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="filtering.htm">Filtering and Filetypes    &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

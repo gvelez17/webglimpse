@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<h3 class="Sub-Heading">Comparison of Webglimpse vs HtDig</h3>
+<p>Prepared in 2003 at a client's request. Please <a href="http://webglimpse.net/contact.php">notify us</a> if you believe this comparison is in any way inaccurate or is now outdated.
+</p>
+<p>Project Fundamentals
+</p>
+<table border="1" bordercolor="#666666" bgcolor="#E5E5E5">
+
+
+<tbody><tr>
+<th width="71"><p><br>
+</p></th>
+<th width="65"><p>Last Modified</p></th>
+<th width="52"><p>Known Security Holes</p></th>
+<th width="59"><p>Security features</p></th>
+<th width="86"><p>Program language</p></th>
+<th width="94"><p>Specification of Files to Index</p></th>
+<th width="84"><p>File Types Supported</p></th>
+<th width="82"><p>Code availability, Licensing</p></th>
+<th width="99"><p>Tech Support</p></th>
+</tr>
+<tr><th><p>HtDig</p></th>
+<td nowrap="nowrap"><p align="left">2002-02-01</p></td>
+<td><p align="center"><font color="#800000">Yes</font>-beta<sup><a href="#sechole">*</a></sup></p></td>
+<td><p align="center">Not known</p></td>
+<td><p align="center">C only</p></td>
+<td><p align="center">Site<a href="#ht_filespec"><sup>*</sup></a></p></td>
+<td><p align="center">HTML, text <a href="#ht_filetype"><sup>*</sup></a></p></td>
+<td><p align="center">GPL</p></td>
+<td><p>mailing list</p></td>
+</tr>
+
+<tr><th><p>Webglimpse</p></th>
+<td nowrap="nowrap"><p align="left">2003-05-16</p></td>
+<td><p align="center">No</p></td>
+<td><p align="center">perl -T</p></td>
+<td><p align="center">C for indexing and search; <br>
+  Perl for web presentation.</p></td>
+<td><p align="center">Site, Directory <br />
+  or Tree<a href="#wg_filespec"><sup>*</sup></a></p></td>
+<td><p align="center">HTML, text, PDF, MSWord, .gz, .zip <a href="#ht_filetype"><sup>*</sup></a></p></td>
+<td><p align="center">open code,<br />
+  but requires license</p></td>
+<td><p><font color="#800000">Yes</font>. Guaranteed successful install <br />
+  and config with all purchased licenses.</p></td>
+</tr>
+</tbody></table>
+<p>User Interface</p>
+<table border="1" bordercolor="#666666" bgcolor="#E5E5E5">
+
+<tbody><tr><th><p><br>
+</p></th><th><p align="center">Boolean queries</p></th>
+<th><p align="center">Phrase searches</p></th>
+<th><p align="center">Fuzzy/approx matching</p></th>
+<th><p align="center">Easy search interface with
+  <br>
+  "ALL, ANY or PHRASE" choice</p></th>
+<th><p align="center">Wildcard searches</p></th>
+<th><p align="center">Language Templates Available</p></th>
+<th><p align="center">Limit search by...</p></th>
+<th><p align="center">Re-Rank Hits (user choice of criteria)</p></th>
+<th><p align="center">Keyword Highlighting</p></th>
+<th><div align="center">Combine results from multiple archives</div></th>
+</tr>
+<tr><th><p>HtDig</p></th>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center">No</p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center">No</p></td>
+<td><p align="center">No</p></td>
+<td><p align="center">English</p></td>
+<td><p align="center">URL pattern</p></td>
+<td><p align="center">No</p></td>
+<td><p align="center">No</p></td>
+<td><div align="center">No</div></td>
+</tr>
+<tr><th><p>Webglimpse</p></th>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center">Hebrew, German, Spanish, Italian, French, Finnish, Norwegian, Portuguese and Estonian
+  (Russian just received 6/02/03)</p></td>
+<td><p align="center">URL pattern or Subdirectory</p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><div align="center"><b><font color="#800000">Yes</font></b></div></td>
+</tr>
+</tbody></table>
+<p></p>
+<p>Administration</p>
+<table border="1" bordercolor="#666666" bgcolor="#E5E5E5">
+<tbody><tr><th><p><br>
+</p></th><th><p align="center">Web-ministration interface</p></th>
+<th><p align="center">Customizable Search output</p></th>
+<th><p align="center">Customizable Ranking formulas</p></th>
+<th><p align="center">Query Log (what are users searching for?)</p></th>
+<th><p align="center">Statistics on gathered pages</p></th>
+<th><p align="center">Email to administrator on index failure</p></th>
+<th><p align="center">Meta tag support</p></th>
+</tr>
+<tr><th><p>HtDig</p></th>
+<td><p align="center">No</p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center">No</p></td>
+<td><p align="center">No</p></td>
+<td><p align="center">No</p></td>
+<td><p align="center">Not known</p></td>
+<td><p align="center">Not known</p></td>
+</tr>
+<tr><th><p>Webglimpse</p></th>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+<td><p align="center"><b><font color="#800000">Yes</font></b></p></td>
+</tr>
+</tbody></table>
+<p>Technical details</p>
+<table border="1" bordercolor="#666666" bgcolor="#E5E5E5">
+<tbody><tr><th><p><br>
+</p></th><th><p align="center">Indexing algorithm</p></th>
+<th><p align="center">Options for Speed</p></th>
+<th><p align="center">Options for Size</p></th>
+<th><p align="center">Options for returned text</p></th>
+<th><p align="center">Platforms tested on</p></th>
+</tr>
+<tr><th><p>HtDig</p></th>
+<td><p align="center">Not known</p></td>
+<td><p align="center">Not known</p></td>
+<td><p align="center">Not known</p></td>
+<td><p align="center">Not known; but depends on retrieving all files, even local ones. According to the htdig site, the database may
+  frequently be larger than the actual files indexed.</p></td>
+<td><p align="center">Linux, Solaris, SunOS, HP/UX, IRIX, freeBSD, Mac OS X</p></td>
+</tr>
+
+<tr><th><p>Webglimpse</p></th>
+<td><p align="center">block-level inverted index</p></td>
+<td><p align="center">caching of search results; ability to limit number of hits returned for extremely fast search (&lt;1s on 2Gb of data)</p></td>
+<td><p align="center">Tiny, medium or large index; pre-filtering of files.  Index takes typically 5-15% of total file size.  Local files do
+  not need to be gathered.</p></td><td><p align="center">find sentences; limit by chars; limit by lines</p></td>
+<td><p align="center">Linux, Solaris, SunOS, HP/UX, freeBSD, AIX, IRIX, OSF, Mach, Mac OS X</p></td>
+</tr>
+</tbody></table>
+<p>
+</p>
+</p>
+<p>Some Users</p>
+<table border="1" bordercolor="#666666" bgcolor="#E5E5E5">
+<tbody><tr><th><p>HtDig</p></th>
+<td><p>NASA, Tennessee Valley Authority, Valley Internet, Together Networks, many
+  Linux and GNU-related sites, many universities. </p></td>
+</tr>
+
+<tr><th><p>Webglimpse</p></th>
+<td><p>NASA, Los Alamos Natl Labs, Altohiway, Texas Workforce Commission, Baystate Health System, Intel, Hewlitt-Packard,
+  AT&amp;T, many small businesses, universities, and government agencies </p></td>
+</tr>
+</tbody></table>
+<p> </p>
+<p>Notes</p>
+<p><a name="sechole"></a>
+  HtDig has a known security hole in the latest beta version 3.2.0b3, currently downloadable from the site
+  http://htdig.org.  There is a fix in the latest stable version, 3.1.16, and in the code snapshot.  The previous stable
+  version, 3.1.15, also had the security hole.  This beta version with known security problems has apparently been available for
+  download since 2001-10-15.  According to <a href="/phpscripts/rlink.php?link=http://www.htdig.org/htdig-dev/2000/02/0238.html">these notes</a>, "This hole can allow remote users to read any file on your system that
+  the UID running your webserver can read."
+</p>
+<p>
+  <a name="ht_filespec"></a>
+  HtDig selects the files to index by gathering links from one or more starting URLs.  It will gather links that are on the
+  same site as the starting ones by matching a simple set of string patterns.</p>
+<p>
+  <a name="wg_filespec"></a>
+  Webglimpse can index files by Site, essentially the same as HtDig; by Directory (all files within a specified directory
+  on the server, whether or not they are linked); and by Tree (all files with a certain number of 'mouse clicks' or 'hops'
+  away from one or more starting points.  Webglimpse can also include or exclude files by regexp patterns and can accept
+  information about synonymous virtual domains and alias directories in order not to gather duplicate links.</p>
+<p>
+  <a name="ht_filetype"></a>
+  According to the 'Features and Requirements' page on the http://htdig.org website, " Both HTML documents and plain text
+  files can be searched. Searching of other file types will be supported in future versions.".  However, there are
+  references to searching PDF files in the FAQ area; this may refer only to the beta version which currently is released
+  with a security hole.  Possibly by getting the new beta code snapshot you might successfully be able to index PDF using the xpdf
+  add-on.</p>
+<p>
+  <a name="ht_filetype"></a>
+  Webglimpse supports indexing any file that can be filtered to text by an external program.  Free and reliable external
+  programs are known for PDF, MSWord, and all compressed file formats.  By pre-filtering files before indexing (and
+  filtering on download) searches are quite fast even on these filetypes.  Pre-filtering also saves a great deal of space
+  when indexing remote files.  Several scripts to filter HTML tags are provided, including ones which convert HTML
+  character codes such as &aacute; = <amp>aacute; for effective searching in non-English languages.
+  </amp>
+</p>
+<p> </p>
+</body>
+</html>

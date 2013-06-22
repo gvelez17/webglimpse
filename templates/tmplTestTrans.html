@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+<TITLE>Archive Search</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<table bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+<FORM method=GET action="|WGARCMIN|">
+	
+	<tr><td align=center valign=middle colspan=3><font size="+1">Test Path Translations</font><br><font size="0">More than half of all archive configuration<br>problems relate to correct URL<-> file translations.<br>Test here to isolate possible errors</font></td></tr>
+	<tr><td align=center valign=middle colspan=3>
+		<table>
+			<tr><td align=center colspan=1>URL</td>
+			    <td align=center colspan=1>&nbsp;</td>
+			    <td align=center colspan=1>File</td>
+			</tr>
+			<tr><td valign=middle align=center colspan=1><input type=text size=45 value="|URL|" name=URL></td>
+			    <td valign=middle align=center colspan=1>
+				<input type=submit name=URL2FIL onClick="this.form.FILE.value=''" value="URL 2 File -->">
+			        <input type=submit name=FIL2URL onClick="this.form.URL.value=''" value="<-- File 2 URL"></td>
+			    <td valign=middle align=center colspan=1><input type=text size=45 value="|FILE|" name=FILE></td>
+			</tr>
+		</table>
+	</td></tr>
+	<tr><td align=left colspan=3> 
+		<table width="100%">
+			<tr><td align=center valign=middle colspan=3><font size="+1">Check Domain Aliasing</font></td>
+			</tr>
+			<tr><td align=center><input type=text size=40 value="|DOMAIN|" name="DOMAIN"></td>
+			    <td align=center><input type=submit value="Canonicalize -->"></td>
+			    <td align=center><input type=text size=40 value="|CANON|" name="CANON"></td>
+			</tr>
+		</table>
+	</td></tr>
+	<tr><td align=center colspan=3><a href = "|WGARCMIN|">Back to WgMin Home</a></td>
+	</tr>
+
+<INPUT TYPE=HIDDEN NAME=ACTION VALUE=''>
+<INPUT TYPE=HIDDEN NAME=NEXTPAGE VALUE='T'>
+
+
+</FORM>
+</table>
+</center>
+</BODY>
+</HTML>

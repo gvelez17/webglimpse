@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Filtering and Filetypes</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Filtering and Filetypes  </h3>
+</div>
+<hr align="left" width="65%" />
+<p class="SubHeading2">Indexing Word and Excel documents using catdoc</p>
+<p class="SubHeading2"><a name="word" id="word"></a>Word Files </p>
+<p><strong>catdoc</strong> is a text extracting program. It doesn't try to preserve Word character formatting, it's goal is simply to extract the document text.<br />
+You will need to download and install catdoc version 0.90 or later from <a href="http://www.45.free.net/~vitus/software/catdoc/">http://www.45.free.net/~vitus/software/catdoc/</a> &nbsp;&nbsp;</p>
+<p>Next, you need to add the following filter information to the file <strong>.glimpse_filters</strong></p>
+<blockquote>
+  <pre>*.doc	/webglimpsehome/catdoc &lt;  	<br />*.DOC	/webglimpsehome/catdoc &lt;</pre>
+</blockquote>
+ <p>Edit the <strong>wgreindex</strong> file in each archive that needs to access   non-ascii files. Change both glimpseindex command lines to add the <strong>-z</strong> option, like so:</p>
+
+<blockquote>
+  <pre>/bin/cat /home/WWW/proj/test/.wg_toindex | /usr/local/bin/glimpseindex -n -H /home/WWW
+/proj/test -o -t -h -X -U -f -C -F -z &gt; /dev/null
+
+/bin/cat /home/WWW/proj/test/.wg_toindex | /usr/local/bin/glimpseindex -n -H /home/WWW 
+/proj/test -o -t -h -X -U -f -C -F -</pre>
+</blockquote>
+<p class="SubHeading2"><a name="excel" id="excel"></a>Excel Files</p>
+<p><strong>xls2csv</strong>  is a program which converts an Excel spreadsheet into   a comma-separated value file (csv). It is included in the <a href="http://www.45.free.net/~vitus/software/catdoc/">catdoc</a> program listed above, so if you've already downloaded and installed it, you can move on to add the filter information below. <strong>xls2csv</strong> extracts data while omitting any formatting info or formulas.</p>
+<p>Just as you did with the word filter above, you will need to modify the  file <strong>.glimpse_filters</strong> to include these filters:</p>
+<blockquote>
+  <pre>*.xls	/webglimpsehome/xls2csv &lt;  	<br />*.XLS	/webglimpsehome/xls2csv &lt;</pre></blockquote>
+  
+<p>Edit the <strong>wgreindex</strong> file in each archive that needs to access   non-ascii files. Change both glimpseindex command lines to add the <strong>-z</strong> option, like so:</p>
+<blockquote>
+  <pre>/bin/cat /home/WWW/proj/test/.wg_toindex | /usr/local/bin/glimpseindex -n -H /home/WWW 
+/proj/test -o -t -h -X -U -f -C -F -z &gt; /dev/null
+
+/bin/cat /home/WWW/proj/test/.wg_toindex | /usr/local/bin/glimpseindex -n -H /home/WWW  
+/proj/test -o -t -h -X -U -f -C -F -z
+
+</pre>
+</blockquote>
+<p><a href="zip.htm">Continue to Next Page &gt;&gt;</a></p>
+<p>&nbsp; </p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="configure.htm">&lt;&lt;Configuring and Customizing    </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="howtos.htm">How-To's &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

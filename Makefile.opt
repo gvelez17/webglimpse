@@ -1,0 +1,42 @@
+# This will get called from the wginstall script.
+# Sunos, Linux use gcc
+# Solaris requires specifying the nsl and socket libaries
+# OSF uses cc
+# 'another-config' uses gcc and the libraries
+
+# If your OS isn't supported, try compiling (using make) for each
+# option; if it compiles cleanly for one of the supported options,
+# htuml2txtc should work from the command line
+
+# Good luck!
+
+
+
+CC = gcc
+
+OSFCC = cc
+IRIXCC = cc
+
+linux:
+	$(CC) -O -o lib/htuml2txtc lib/htuml2txt.c
+
+sco:
+	$(CC) -Dsco -DSYSV -s -O -o lib/htuml2txtc lib/htuml2txt.c -lsocket
+
+sunos:
+	$(CC) -O -o lib/htuml2txtc lib/htuml2txt.c
+
+solaris:
+	$(CC) -O -o lib/htuml2txtc lib/htuml2txt.c -lnsl -lsocket
+
+osf:
+	$(OSFCC) -O -o lib/htuml2txtc lib/htuml2txt.c
+
+hpux:
+	$(OSFCC) -D_HPUX_SOURCE -Aa -O -o lib/htuml2txtc lib/htuml2txt.c
+
+irix:
+	$(IRIXCC) -O -o lib/htuml2txtc lib/htuml2txt.c -lnsl -lsocket
+
+another-config:
+	$(CC) -O -o lib/htuml2txtc lib/htuml2txt.c -lnsl -lsocket

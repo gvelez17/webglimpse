@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<TITLE>Configure Local Domain</TITLE>
+
+<SCRIPT language="Javascript">
+<!--
+
+function validate (mform) {
+
+	if (mform.SERVERNAME.value == '') {
+		alert("Server Name is a required field");
+		return false;
+	}
+	else if (mform.DOCROOT.value == '') {
+		alert("Document Root is a required field for a local domain");
+		return false;
+	} else {
+		this.form.ACTION.value='H';	
+		return true;
+	}
+}
+//-->
+</script>
+
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<form method=GET onSubmit="return validate(this)" action="|WGARCMIN|">
+<input type=HIDDEN name="BASEURL" value="|BASEURL|">
+<table border=1 bgcolor="#EBEACA"> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+		<tr><td align=left valign=middle colspan=3><center><font size="+1">Configure Local Domain</font></center>
+			<font size="+1">Server Name:</font> <input name=SERVERNAME value="|SERVERNAME|"> 
+<!-- &nbsp;&nbsp;&nbsp; <input type=button value="Guess values from server config"> -->
+<p>
+			<font size="+1">Document Root:</font><input type=text name=DOCROOT value="|DOCROOT|" size=30> &nbsp; <font size="+1">Port:</font><input type=text name="PORT" value="|PORT|" size=5> &nbsp; <font size="+1">Protocol:</font><input type=text name="PROT" value="|PROT|" size=5><p>
+			<font size="+1">Domain Aliases:</font><input name="DOMAINALIASES" value="|DOMAINALIASES|" size=60><br>
+(synonyms for the canonical domain, please enter as space-separated list)<p>
+
+			<font size="+1">User Dir:</font><input type=text name=USERDIR value="|USERDIR|" size=30><p>
+			<font size="+1">Directory Index Files:</font><input type=text name=INDEXFILES value="|INDEXFILES|" size=60><br>
+(For example, <b>index.html index.htm index.shtml</b> might be common entries.)<p>
+			<font size="+1">ScriptAlias & Extensions:</font><input name=DYNAMIC value="|DYNAMIC|" size=60><br>
+			(Relative URLs & regexps matching scripts or dynamically generated files.  For example,
+			<b>/cgi-bin/ \.cgi$ \.pl$ \.shtml$</b> might be common entries.)<p>
+
+			<table><tr><td><font size="+1">Directory Aliases</font></td>
+			<TD align=left><b>Relurl</b></td><td align=right><b>Directory Path</b></td></tr>
+			<tr><td> </td><td colspan=2>
+			<textarea name="DIRALIAS" cols=60>|DIRALIAS|</textarea>
+			<br>
+			(Enter one line for each alias, of the form <b>relurl &nbsp;&nbsp; dirpath</b>) <p>
+			</td></tr></table>
+			<p>
+
+			<input type=hidden name=NEXTPAGE value="O">
+
+			<input type=hidden name=ACTION value="H">
+
+			<input type=submit value="Save & Validate Changes"> 
+			<input type=button onClick="this.form.ACTION.value=''; this.form.submit()" value="Cancel">
+</td></tr>
+</table>
+</form>
+</center>
+<hr>
+<A HREF="|WGARCMIN|">Back to WGmin home</A>
+</BODY>
+</HTML>

@@ -1,0 +1,28 @@
+  <script>
+    if (listings != null && listings.length > 0) {
+    document.write("<table>");
+      for (i = 0; i < listings.length; i++) {
+        var sTitle = listings[i].title;
+        var sDesc = listings[i].description;
+        var sUrl = listings[i].url;
+        var sUri = listings[i].uri;
+        var fBid= Math.round(100*listings[i].bid)/100;
+        var sBid = '';
+        if (fBid > 0) {
+          sBid = "(Bid Amount: <a target='_blank' class='middleFont' href='http://www.searchfeed.com/rd/AdvertiserInfo.jsp?pID=15105'>" + fBid + "</a>)";
+        }
+
+        document.write("<tr>");
+        document.write(" <td align='right' valign='top' class='middleFont'><b>" + ((numRes*(page-1)) + i+1) + ".</b></td>");
+        document.write(" <td valign='top'><a target='_self' href='" + sUri + "' class='middleFontTitle'><b>" + sTitle + "</b></a>");
+        document.write("     <br><font class='middleFont'>" + sDesc + "</font>");
+        document.write("     <br><font class='middleFont'><b>URL:</b> " + sUrl + "</font>");
+        document.write("     <font class='middleFont'> " + sBid + "</font><br><br>");
+        document.write(" </td>");
+        document.write("</tr>");
+      }
+   document.write("</table>");
+   } else {
+     document.write("<font class='middleFontHead'><b>&nbsp;&nbsp;&nbsp;No Results Found</b><br><br><br></font>");
+   }
+   </script>

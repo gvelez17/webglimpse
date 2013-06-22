@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<TITLE>Configure Remote Domain</TITLE>
+<SCRIPT language="Javascript">
+<!--
+
+function validate (mform) {
+
+        if (mform.SERVERNAME.value == '') {
+                alert("Server Name is a required field");
+                return false;
+        } else {
+                this.form.ACTION.value='H';
+                return true;
+        }
+}
+//-->
+</script>
+
+</HEAD>
+
+<BODY bgcolor="#76AAAA">
+<center>
+<form name=RemoteDomain method=GET onSubmit="return validate(this)" action="|WGARCMIN|">
+<input type=HIDDEN name="BASEURL" value="|BASEURL|">
+<table border=1 bgcolor="#EBEACA"> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+		<tr><td align=left valign=middle colspan=3><center><font size="+1">Configure Remote Domain</font></center>
+<p>
+<!--
+		Protocol: <select name="PROT">
+		<option value="|PROT|" SELECTED>|PROT|
+		<option value="ftp">ftp
+		<option value="http">http
+		</select>
+-->
+		Protocol: http
+		<input name="PROT" type="HIDDEN" value="http">
+
+		Remote domain: <input size=35 name=SERVERNAME value="|SERVERNAME|">
+		Port: <input size=5 name="PORT" value="|PORT|">
+		</td></tr>
+
+		<tr><td colspan=3 align=center>
+<p>
+
+			<font size="+1">Domain Aliases:</font><input name="DOMAINALIASES" value="|DOMAINALIASES|" size=60><br>
+(Synonyms for the canonical domain, please enter as space-separated list.)
+
+			<p>
+Here you may enter any login information needed to access files on this remote server:
+<textarea name="LOGIN" cols=60>|LOGIN|</textarea>
+<br>
+Enter one line for each login needed, of the form <b>/relative/url 
+&nbsp;&nbsp; username:password</b>.  For example, if this site requires a username and password for 
+all directories, you could enter
+<blockquote>
+	/ &nbsp;&nbsp;fooname:foopass
+</blockquote> 
+If no username or password is required, leave this area blank.
+<br>
+<hr>
+<br>
+Cookie-based login required?  <input type=checkbox value="Y" name="NeedCookie" #NEEDCOOKIE# onChange="location.reload()">
+<br>
+		<script>
+		<!--
+	if (document.RemoteDomain.NeedCookie.checked) {
+		document.write('<br>Relative URL requiring login: <input name="CookiePath" value="/" size=30 value="|COOKIEPATH|">');
+		document.write('<br>URL of form action (cgi script) to post to: <input name="LoginCGI" size=30 value="|LOGINCGI|">');
+		document.write('<br>NAME of input tag to accept username: <input name="UserInput" size=20 value="|USERINPUT|">');
+		document.write('<br>NAME of input tag to accept password: <input name="PassInput" size=20 value="|PASSINPUT|">');
+		document.write('<br>Username: <input name="CookieUser" size=20 value="|COOKIEUSER|">');
+		document.write('<br>Password: <input name="CookiePass" size=20 value="|COOKIEPASS|">');
+		document.write('<p>');
+	}
+		//-->
+		</script>
+
+
+			<input type=hidden name=NEXTPAGE value="O">
+
+			<input type=hidden name=ACTION value="H">
+
+			<input type=submit value="Save & Validate Changes"> <input type=reset value="Restore Defaults">  <input type=submit value="Cancel" onClick="this.form.ACTION.value=''">
+
+
+</td></tr>
+</table>
+</form>
+<hr>
+<A HREF="|WGARCMIN|">Back to WGmin home</A>
+</BODY>
+</center>
+</HTML>

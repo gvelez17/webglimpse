@@ -1,0 +1,27 @@
+New commercial modules available with Webglimpse v1.6:
+
+ResultCache.pm:  If present, results will be cached on the server in the /tmp
+directory, so that users can request the "next N lines" from a search. Caching
+can be turned off by removing the line
+
+	<INPUT NAME="cache" VALUE="yes" TYPE="HIDDEN">
+
+from the wgindex.html file
+
+
+CustomOutputTool.pm:  If present, the search results will be customized 
+according to the settings in .wgoutput.cfg
+
+
+Note: In order to use CustomOutputTool with an existing archive, you must remove the
+file  archive.cfg  and then run confarc again to re-configure the archive. (You do 
+not have to reindex.)
+
+
+InputSyntax.pm:  If present, user queries will be translated from standard format:
+	keywordA AND keywordB OR keywordC
+to the glimpse query format
+	keywordA;keywordB,keywordC
+
+This allows users to enter queries in a more intuitive format.  See the source for more
+details.

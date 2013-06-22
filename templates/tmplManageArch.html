@@ -1,0 +1,186 @@
+<HTML>
+<HEAD>
+<TITLE>Manage Archive |TITLE|</TITLE>
+
+<Script Language="Javascript">
+<!--
+
+function doDelete(mform) {
+
+	msg = 	"\nThis will delete all the files in the archive directory\n " +
+		"\n		|DIR| \n" +
+		"\nAre you sure you want to delete this archive?\n";
+
+	if (confirm(msg)) {
+		mform.ACTION.value='D';
+		mform.NEXTPAGE.value='O';
+	} else {
+		mform.ACTION.value='';
+		mform.NEXTPAGE.value='M';
+	}
+
+	return true;
+}
+
+
+function VisitRoot (mform) {
+	var wname = 'WG_VISIT_ROOT';
+	var w, murl, mind;
+
+
+	mind = mform.STARTURL.selectedIndex;
+	if (mind >= 0) {
+		murl = mform.STARTURL.options[mind].value;
+		window.open(murl,wname);
+		return true;
+	} else { 
+		return false;
+	}
+}
+
+
+function ExtraWin() {
+
+        var contents = "|EXTRAWIN|";    // Set at run-time by wgarcmin script
+
+        var wname = 'WGEXTRA';
+
+        var w;
+
+        if (contents != '') {
+
+                w = window.open("", wname, "resizable, status, width=400, height=400");
+
+                w.document.write(contents);
+
+                w.document.close();
+
+        }
+
+        return true;
+}
+
+
+//-->
+</Script>
+
+
+</HEAD>
+
+<BODY bgcolor="#76AAAA" onLoad="ExtraWin()"> 
+<table bgcolor="#EBEACA" border=1 align=center> 
+	<CAPTION><font size="+2"><EM>Webglimpse Administration</EM></font></CAPTION>
+<FORM name="manage" method=GET action="|WGARCMIN|">
+	<input type=hidden name=ID value=|ID|>
+	<tr><td colspan=2 align=center valign=middle><font size="+1"><b>Manage Archive #|ID|: |TITLE|</b></font><br>
+		<i>Status:</i> |STATUSMSG|  <A HREF="|WGARCMIN|?NEXTPAGE=M&ID=|ID|">Update Status</A>
+	</td></tr>
+	<tr><td valign=top>
+		<table>
+			<tr><td colspan=2 align=left width="100%">
+				<font size="+1">Roots in Archive:</font>
+			</td></tr>
+			<tr><td>
+				<select name=STARTURL size=6>
+				~ROOTS~ <option value='|STARTURL|'>|TYPE|:|STARTURL|
+				</select></td>
+			 <td valign=center align=left>
+				<input type=submit onClick="this.form.NEXTPAGE.value='E'" value="Edit Root"><br>
+				<input type=submit onClick="this.form.ACTION.value='R'" value="Remove">
+				<br>
+				<input type=button onClick="VisitRoot(this.form)" value="Visit">
+			</td>
+			</tr>
+			<tr><td colspan=2 align=left>
+				<input type=submit onClick="this.form.NEXTPAGE.value = 'A'; this.form.TYPE.value='DIR'" value="Add Dir">
+				<input type=submit onClick="this.form.NEXTPAGE.value = 'A'; this.form.TYPE.value='SITE'" value="Add Site">
+				<input type=submit onClick="this.form.NEXTPAGE.value = 'A'; this.form.TYPE.value='TREE'" value="Add Linktree">
+			</td>
+			</tr>
+
+			<tr><td colspan=2> 
+			Add search boxes to pages <input type=checkbox name="ADDBOXES" value='Y' #ADDBOXES# > 
+<A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=docAddBoxes.html" TARGET="docwin">Help</A>
+<br>
+			Prefilter filetypes for speed: <input size=10 name="PREFILTER" value='|PREFILTER|'> 
+<A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=docPreFilter.html" TARGET="docwin">Help</A>
+<br><small><i>Note: prefiltering for HTML type files will only take effect if you chose <b>htuml2txt.pl</b> as your filter program.  See help for details.</small></i>
+			</td></tr>
+
+		</table>
+
+	    </td>
+	    <td valign=top>
+		 Title :<input type=text name=TITLE VALUE="|TITLE|" size=30><br>
+		Category : <b>|CATSTRING|</b><br>
+		<input type=HIDDEN name=CATCODE value="|CATCODE|">
+		Language : <b>|PROPERLANG|</b>
+		<input type=HIDDEN name=LANG value="|LANG|">
+		<br>
+                Description:<br>
+               	<textarea name=DESCRIPTION rows=3 cols=28>|DESCRIPTION|</textarea><br>
+               	Archive Dir:<input type=text name=DIR size=30 VALUE="|DIR|">
+		
+		<table bgcolor="#FCFBDA"><tr><td>
+		Optional - include Sponsored SearchFeed links: <input type=checkbox
+		name="USESF" value='Y' #USESF# onChange="this.form.ACTION.value='S'; this.form.submit()">
+
+		<script>
+		<!--
+	if (document.manage.USESF.checked) {
+		document.write('<br><A HREF="http://www.searchfeed.com/rd/Gateway.jsp?id=WorkShopAff" target="sfwin">Set up/manage Account</A><br>');
+		document.write('SF partner ID: <input size=8 name="SFPID" value="|SFPID|"><br>');
+		document.write('SF track ID: <input size=20 name="SFTRACKID" value="|SFTRACKID|"><br>');
+		document.write('Number of results to include: <input name="SFNUM" value="|SFNUM|" size=5><br>');
+		document.write('Additional relevence keywords for this archive:<br>');
+		document.write('<input name="SFKEYWORDS" value="|SFKEYWORDS|" size=50> ');
+	}
+		//-->
+		</script>
+		
+		</td></tr></table>
+		
+		
+	</td>
+	</tr>
+	<tr><td colspan=2 align=center valign=middle>
+
+	<input type=submit name=SEARCH value=" Search Archive " onClick="this.form.NEXTPAGE.value='S'">
+
+        <input type=submit onClick="alert('Note: this will cause your archive configuration files to be rebuilt.  If you have hand-customized files such as wgoutput.cfg, go to another window and back up your manual changes now.'); this.form.ACTION.value='S'" value="Save Changes">
+	<input type=submit onClick="this.form.ACTION.value='B'" value="Build Index">
+	<input type=submit onClick="doDelete(this.form)"
+value="Delete Archive">
+	<center><a href="|WGARCMIN|">Back to WgMin Home</a>
+				&nbsp;&nbsp; |WUSAGELINK|</center>
+	</td></tr>
+
+	<tr><td colspan=2 align=center>
+
+       <i>
+	For security reasons, some changes cannot be made through the web interface.  <br>The following tasks must be done through a telnet session:
+	</i>
+		<table width="80%">
+			<tr><td align=left><A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=docMakeForms.html" TARGET="docwin">Add a search box or page to your website</A></td>
+
+			    <td align=right><A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=docCrontab.html" TARGET="docwin">Reindex automatically from your crontab</A></td>
+			</tr>
+<!--
+			<tr><td align=left><A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=docMakeNeigh.html" TARGET="docwin">Add neighborhood search boxes to all pages in your site</a></td>
+			    <td align=right><A HREF="|WGARCMIN|?NEXTPAGE=D&ID=|ID|&DOC=docNonascii.html" TARGET="docwin">Enable indexing of PDF, Word or Excel files</A></td>
+
+			</tr>
+-->
+		</table>
+	</td></tr>
+</table>
+
+
+<INPUT TYPE=HIDDEN NAME=TYPE VALUE=''>
+<INPUT TYPE=HIDDEN NAME=ACTION VALUE=''>
+<INPUT TYPE=HIDDEN NAME=NEXTPAGE VALUE='M'>
+
+
+</FORM>
+</BODY>
+</HTML>

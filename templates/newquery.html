@@ -1,0 +1,19 @@
+   <FORM ACTION="/|CGIBIN|/webglimpse.cgi" METHOD=GET>
+	<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+       New Query: <INPUT NAME="query" VALUE="">
+
+	<!-- Keep options from original search -->
+	[HIDDENTAGS]
+
+       <INPUT TYPE=SUBMIT VALUE="Search">
+
+<!-- # TODO: keep original ranking option -->
+	Rank by:
+	<SELECT name="rankby">
+	<OPTION VALUE="DEFAULT">Combined score
+	<OPTION VALUE="AGE">Most recent first
+	<OPTION VALUE="LINKPOP">Link Popularity
+	<OPTION VALUE="TITLE_AND_META">Title and Meta matches
+	</SELECT>
+
+    </FORM>

@@ -1,0 +1,36 @@
+COMMERCIAL WEBGLIMPSE MODULES v 2.0.11
+
+REQUIRES: Webglimpse v2.0.5 or above.  
+
+If you have downloaded these modules separately from the main Webglimpse 
+package, first copy all the .pm files to the /lib subdirectory of the
+webglimpse home directory.
+
+	cp  *.pm   WEBGLIMPSE_HOME/lib
+
+where WEBGLIMPSE_HOME is the directory you have installed webglimpse, such as
+/usr/local/webglimpse.
+
+Second, copy the wg* files to the /dist subdirectory of the webglimpse home 
+directory.
+
+	cp  wg*   WEBGLIMPSE_HOME/dist
+
+Lastly, either click the 'Save Changes' button using the webministration interface for each archive, or copy the wg* files manually:
+
+	cp  wgfields  YOUR_ARCHIVE_DIR/.wgfields
+	cp  wgoutput.cfg  YOUR_ARCHIVE_DIR/.wgoutput.cfg
+
+Note the initial "."   Then edit .wgoutput.cfg and .wgfields as needed to customize
+your results output.  See
+
+	http://webglimpse.net/docs/howto_customizeoutput.html
+
+for more details.
+
+It is not necessary to rebuild your archives when adding the commercial modules; but 
+if you also upgraded all of Webglimpse at the same time, then you should rebuild.
+
+Send questions, comments, suggestions, fixes to gvelez@iwhome.com.
+
+

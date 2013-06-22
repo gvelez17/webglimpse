@@ -1,0 +1,111 @@
+<HTML>
+<HEAD>
+<TITLE>Archive Search</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<table bgcolor="#EBEACA" border=1> <CAPTION><font size=+1><EM>Web Glimpse Administration</EM></font></CAPTION>
+<FORM method=GET action="|WGARCMIN|">
+<input type=hidden name=ID value=|ID|>
+<input type=hidden name="TYPE" value="TREE">
+	<tr><td align=center valign=middle><font size=+1>Add Link Tree to Archive # |ID|: |TITLE|</font><br>
+	 <A HREF="|WGARCMIN|?NEXTPAGE=D&DOC=docAddTree.html"TARGET="docwin">help how does this work?</a></td></tr>
+	<tr><td align=left valign=middle><font size=+1>Start URL :</font><input type=text name=STARTURL value="http://" size=50><br>
+	Index the starting URL? <input type=checkbox name=INDEXTRUNK value=1 checked><br>
+	<font size=+1>#hops :</font><input type=text name=HOPS size=7 value=2><br>
+	<font size=+1>Follow links :
+		<br> to remote pages </font><input type=checkbox name=FOLLOWTOREMOTE value=1><font size=+1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; on remote sites </font><input type=checkbox name=FOLLOWSAMESITE value=1><br>
+		<font size=+1> from remote sites to other remote sites </font><input type=checkbox name=FOLLOWALL value=1><br>
+	<font size=+1>Max #Local Pages :</font><input type=text name=MAXLOCAL size=7 value=1000><br>
+	<font size=+1>Max #Remote Pages :</font><input type=text name=MAXREMOTE size=7 value=250><br>
+<!--
+		<table>
+			<tr><td align=center valign=middle><font size="+1">Reindex Freq</font>:</td>
+		    	<td>
+				<table>
+			       		<tr><td align=center valign=middle>day</td>
+				   	    <td align=center valign=middle>hrs</td>
+				   	    <td align=center valign=middle>min</td>
+				   	    <td align=center valign=middle>date</td></tr>
+			       	   	<tr><td><select name=FREQ>
+			 		   	<option> Sun
+			  		   	<option> Mon
+				    	   	<option> Tue
+				    	   	<option> Wed
+				    	   	<option> Thu
+				    	   	<option> Fri
+				    	   	<option> sat
+			        	   	</select></td>
+			           	    <td><select name=HRS>
+					   	<option> 00
+					   	<option> 01
+					   	<option> 02
+					   	<option> 03
+  					        <option> 04
+					   	<option> 05
+					   	<option> 06
+					   	<option> 07
+					   	<option> 08
+					   	<option> 09
+					   	<option> 10
+					   	<option> 11
+					   	<option> 12
+					   	<option> 13
+					   	<option> 14
+					   	<option> 15
+					   	<option> 16
+					   	<option> 17
+					   	<option> 18
+					   	<option> 19
+					   	<option> 20
+					   	<option> 21
+					   	<option> 22
+					   	<option> 23
+					   	</select></td>
+			       		    <td><input type=text name=MIN value=00 size=4></td>
+			           	    <td><select name=DATE>
+					   	<option> any
+					   	<option> 01
+					   	<option> 02
+					   	<option> 03
+					   	<option> 04
+					   	<option> 05
+					   	<option> 06
+					   	<option> 07
+					   	<option> 08
+					   	<option> 09
+					  	<option> 10
+					   	<option> 11
+					   	<option> 12
+					   	<option> 13
+					   	<option> 14
+					   	<option> 15
+					   	<option> 16
+					   	<option> 17
+					   	<option> 18
+					   	<option> 19
+					   	<option> 20
+					   	<option> 21
+					   	<option> 22
+					   	<option> 23
+					   	<option> 24
+					   	<option> 25
+					   	<option> 26
+					   	<option> 27
+					   	<option> 28
+					   	<option> 29
+					   	<option> 30
+					   	<option> 31
+					   	</select></td></tr></table></td></tr></table>
+-->
+	<tr><td align=center valign=middle><input type=submit name=CONTINUE value=continue></td></tr>
+
+<INPUT TYPE=HIDDEN NAME=ACTION VALUE='A'>
+<INPUT TYPE=HIDDEN NAME=NEXTPAGE VALUE='M'>
+
+</FORM>
+</table>
+</center>
+</BODY>
+</HTML>

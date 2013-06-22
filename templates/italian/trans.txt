@@ -1,0 +1,72 @@
+%%Searchline%%: Cerchi l'archivio
+%%usingwebg%%: usando Webglimpse
+%%VerySimpleSearch%%:   molto ricerca semplice dell'archivio 
+%%SimpleSearch%%:   ricerca semplice dell'archivio 
+%%searchfor%%:    Ricerca di
+%%lookfor%%:     Cerchi  
+%%typedabove%%:  scritto sopra. 
+
+%%allwords%%:  TUTTE LE parole
+%%anyword%%:  C'È NE delle parole
+%%exactphrase%%: FRASE ESATTA
+%%rankby%%:  Rank vicino
+%%combinedscore%%: Segno unito
+%%mostrecent%%:  Primo il più recente
+%%linkpop%%:  Popolarità Di Collegamento
+%%titlemeta%%:  Fiammiferi del meta e di titolo
+%%verysimple%%:  molto semplice
+%%go%%:   Vada
+%%withoutwords%%:    Facoltativo - trovi soltanto i fiammiferi SENZA le parole: 
+%%advancedsearch:       La ricerca avanzata permette che generiate la vostra propria espressione booleana, regexps di uso, che specifica gli errori d'ortografia facoltativi, il fiammifero parziale, la sensibilità di caso ed altre opzioni. 
+%%justlinks%%:     Appena i collegamenti a questa pagina
+%%entirearchive%%:    Intero archivio
+%%selectone%%:     Selezioni uno o più di suddetti archivi.
+%%availablearchs%%: archivi disponibili su questo assistente
+%%examplesearch%%: Ricerca di esempio in italiano
+--------------------------------------------------------------------------------
+%%fullsearch%%:  Ricerca completa sull'archivio
+%%search%%:  Ricerca
+%%searchfull%%:  Cerchi l'archivio pieno: 
+%%stringto%%:  Stringa da cercare:
+%%casesensitive%%: Caso sensibile
+%%partialmatch%%: Partial match
+%%jumptoline%%:  Parziale di Fiammifero
+%%misspellings%%: gli errori d'ortografia hanno conceduto
+%%usefilters%%:  Utilizzi i filtri
+%%returnfiles%%: Restituisca soltanto le lime modificate all'interno dell'ultimo -- giorni.
+%%maxfiles%%:  Il numero massimo delle lime ha rinviato:
+%%maxmatches%%:  Numero massimo dei fiammiferi per la lima restituita:
+%%maxchars%%:  Il numero massimo dei caratteri ha prodotto per la lima:
+%%onlykeywords%%: Provi a stampare soltanto le frasi che contengono le parole chiavi.
+%%onepage:  Restituisca soltanto una pagina dei colpi per velocità massima. Soltanto la maggior parte delle lime recenti saranno restituite.
+%%and%%:  e
+%%copyright%%:  Copyright
+%%uofa%%:  Università de Arizona
+--------------------------------------------------------------------------------
+%%searchresults%%:      Risultati Di Ricerca
+%%lookingfor%%:  Ricerca
+%%in%%:   in
+%%Found%%:  Trovato
+%%matchesin%%:  fiammiferi dentro
+%%files%%:  lime.
+%%showingres%%:  mostrare i risultati
+%%neighof%%:         vicinanza di
+%%newquery%%:  nuova domanda
+%%limitof%%:  limite di
+%%filesreached%%: lime raggiunte
+%%linesreached%%: le linee raggiunte, linee di corrispondenza supplementari non sono indicate
+--------------------------------------------------------------------------------
+%%introtitle%%: Introduzione Italiana Di Webglimpse
+%%welcome%%: Welcome to Webglimpse.Net 
+
+%%intro1%%: Webglimpse ed il glimpse sono motori di ricerca di UNIX.  Potete usare il glimpse per spostare ad incrementi le lime localmente sul vostro azionamento duro e Webglimpse per spostare ad incrementi i websites e renderli reperibili sul Internet.
+
+%%intro2%%: La maggior parte di questo luogo è ancora soltanto in inglese, ma Webglimpse in se può essere usato per spostare ad incrementi i documenti in tutta la lingua di singolo-byte, compreso italiano.  La persona che installa e che configura Webglimpse probabilmente dovrà conoscere l'inglese, ma gli utenti che cercano il vostro luogo non avranno bisogno di.  La forma di ricerca e l'uscita di risultati possono essere generate in italiano.
+
+%%intro3%%: Webglimpse ed il glimpse sono liberi per uso senza scopo di lucro e dagli istituti scolastici.  Altri utenti sono chiesti di comprare un'autorizzazione, o di scambiare un certo lavoro per uno.  Abbiamo bisogno dei traduttori - in modo da 5 pagine di documentazione tradotte in tutta la lingua che non abbiamo è buone per un'autorizzazione commerciale!
+
+%%docs%%: Documentazione 
+%%downloads%%: Downloads 
+%%demos%%: Demo In linea 
+%%devnews%%: Notizie Di Sviluppo 
+%%buy%%: Acquisto 

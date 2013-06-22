@@ -1,0 +1,291 @@
+#!/bin/bash
+
+# Script configures BibGlimpse for
+# running WebGlimpse installations
+# 
+# (c) Boku Bioinformatics,
+#     Thomas Tuechler, 2006
+
+# Output verbosity: '' or '-v'
+V='';
+
+echo "";
+echo "WELCOME TO BIBGLIMPSE INSTALLATION SCRIPT";
+echo "----------------------------------------------------------------";
+echo "";
+echo "";
+
+
+# 0) Glimpse installation
+# -----------------------------------------------------------------------------
+# make sure that Glimpse is configured with the following two flags:
+echo "Are you sure that glimpse was configured with the following two flags:";
+echo "   ./configure --with-file-end-mark='\t'";
+echo "               --enable-structured-queries;";
+echo "If not, please recompile glimpse first, else press enter to continue...";
+read goon;
+
+
+# 1) getting the paths
+# -----------------------------------------------------------------------------
+
+# getting the WG2LIB installation path
+while [ ! -s "$WG2LIB"/lib/wrMedline.pl ];
+do
+  echo "Please specify the path of the Webglimpse installation (/usr/local/lib/wg2):";
+  read WG2LIB;
+  
+  if [ ! -s "$WG2LIB"/lib/wrMedline.pl ]; then
+      echo "'$WG2LIB' does not contain the BibGlimpse modules!";
+  fi
+done;
+
+
+# getting the WG2CGI path
+while [ ! -s "$WG2CGI"/wrrepos.cgi ];
+do
+  echo "Please specify the cgi-bin path (/usr/local/lib/apache/cgi-bin):";
+  read WG2CGI;
+
+  if [ ! -s "$WG2CGI"/wrrepos.cgi ]; then
+      echo "'$WG2CGI' does not contain the BibGlimpse modules!";
+  fi
+done;
+
+
+# getting the WG2ARC path
+while [ ! -d "$WG2ARC" ] && [ -z "$WG2ARC" ];
+do
+  echo "Please specify the archive path (/usr/local/lib/apache/wg2/archives):";
+  read WG2ARC;
+
+  if [ ! -d "$WG2ARC" ]; then
+      echo "'$WG2ARC' is not a directory!";
+  fi
+done;
+
+
+# getting the USRBIN path
+while [ ! -d "$USRBIN" ] && [ -z "$USRBIN" ];
+do
+  echo "Please specify the archive path (/usr/local/bin):";
+  read USRBIN;
+
+  if [ ! -d "$USRBIN" ]; then
+      echo "'$USRBIN' is not a directory!";
+  fi
+done;
+
+
+# 2) $WG/lib/(wr)usexpdf.sh
+# -----------------------------------------------------------------------------
+# use the advanced pdf filtering tool wrusexpdf.sh instead of the old one
+# and include the correct binaries path for pdftotext, md5sum etc.
+echo "";
+echo "Including the special PDF filter 'wrusexpdf.sh'...";
+
+mv $V "$WG2LIB"/lib/usexpdf.sh "$WG2LIB"/lib/old.usexpdf.sh;
+
+sed "s^export PATH\=\/usr\/local\/bin\:\$PATH\;^export PATH\=$USRBIN\:\$PATH\;^" < "$WG2LIB"/lib/wrusexpdf.sh > "$WG2LIB"/lib/usexpdf.sh;
+
+[ -s "$WG2LIB"/lib/usexpdf.sh ] && rm $V "$WG2LIB"/lib/wrusexpdf.sh;
+
+chmod +x "$WG2LIB"/lib/usexpdf.sh;
+
+
+# 3) $WG/templates/.glimpse_filters
+# -----------------------------------------------------------------------------
+# add the paths to usexpdf.sh to the .glimpse_filters template. this will
+# make the program index pdf files as well.
+echo "Setting the '.glimpse_filters' to use 'usexpdf.sh'...";
+
+echo -e "*.pdf\t|WGHOME|/lib/usexpdf.sh\n*.PDF\t|WGHOME|/lib/usexpdf.sh" >> "$WG2LIB"/templates/.glimpse_filters;
+
+
+# 4) $WG/dist/wgfilter-index
+# -----------------------------------------------------------------------------
+# adapt this template file such that it accepts *.pdf's by replacing and adding
+echo "Setting the 'wgfilter-index' to allow PDFs...";
+
+mv $V "$WG2LIB"/dist/wgfilter-index "$WG2LIB"/dist/old.wgfilter-index;
+sed -e "s^Deny \\\\.pdf\\$^Allow \\\\.pdf\\$\nAllow \\\\.PDF\\$^" -e "s^Allow \\\\..?html?\\$^Deny \\\\.s?html?\\$^" < "$WG2LIB"/dist/old.wgfilter-index > "$WG2LIB"/dist/wgfilter-index;
+
+echo -e "Deny \.pl$\nDeny \.sh$\nDeny \.tmp$\nDeny \.ag\.\nDeny \.bib\$\nDeny \.medline\$\nDeny \.medl\$\nDeny \.suppl\$\nDeny \.pubmed\$\nDeny \.anno\$\nDeny \.htaccess\nDeny README\.txt" >> "$WG2LIB"/dist/wgfilter-index;
+
+# 5) $WG/templates/wgreindex
+# -----------------------------------------------------------------------------
+# enable the glimpseindex building with structured fields with -s and -z flag:
+echo "Enabling indexbuilding with structured queries in 'wgreindex'...";
+
+mv $V "$WG2LIB"/templates/wgreindex "$WG2LIB"/templates/old.wgreindex;
+sed -e "s^-H |INDEXDIR| -t -o^-H |INDEXDIR| -s -z -t -o^g" < "$WG2LIB"/templates/old.wgreindex > "$WG2LIB"/templates/wgreindex;
+
+
+# 6) $WG/lib/wgHeader.pm
+# -----------------------------------------------------------------------------
+# Change the $FILE_END_MARK=" " definition in the $WG/lib/wgHeader.pm file
+# to "\t". in accordance with the --file-end-mark='\t' flag used in the
+# Glimpse installation. This will allow filenames with spaces.
+echo "Enabling the BibGlimpse features in 'wgHeader.pm'...";
+
+mv $V "$WG2LIB"/lib/wgHeader.pm "$WG2LIB"/lib/old.wgHeader.pm;
+sed -e "s^\$FILE_END_MARK = \" \"^\$FILE_END_MARK = \"\\\t\"^" -e "s^\$WRREPOS = 0^\$WRREPOS = 1^" < "$WG2LIB"/lib/old.wgHeader.pm > "$WG2LIB"/lib/wgHeader.pm;
+
+
+# 7) $CGI/wrrepos.cgi
+#    $CGI/wrsearch.cgi
+# -----------------------------------------------------------------------------
+# Specify path to webglimpse libraries (eg. to '/bi/arch/lib/wg2'):
+echo "Linking 'wrrepos.cgi' and 'wrsearch.cgi' to the WebGlimpse libraries...";
+
+sed "s^\$WEBGLIMPSE_LIB='';^\$WEBGLIMPSE_LIB='$WG2LIB/lib';^" < "$WG2CGI"/wrrepos.cgi > "$WG2CGI"/new.wrrepos.cgi;
+mv $V "$WG2CGI"/new.wrrepos.cgi "$WG2CGI"/wrrepos.cgi;
+chmod +x "$WG2CGI"/wrrepos.cgi;
+
+sed "s^\$WEBGLIMPSE_LIB='';^\$WEBGLIMPSE_LIB='$WG2LIB/lib';^" < "$WG2CGI"/wrsearch.cgi > "$WG2CGI"/new.wrsearch.cgi;
+mv $V "$WG2CGI"/new.wrsearch.cgi "$WG2CGI"/wrsearch.cgi;
+chmod +x "$WG2CGI"/wrsearch.cgi;
+
+# 8) $CGI/logout/logout.cgi
+# -----------------------------------------------------------------------------
+# If you want to restrict access to your repository by means of .htaccess,
+# create a logout directory within $CGI, that has a separate .htaccess
+# file containing:
+#
+#  AuthName "Logout"
+#  AuthUserFile /your/path/to/.htpasswd 
+#  Require user logout
+#
+# which allows for the user 'logout' only. Do not forget to provide
+# a user 'logout' with password logout in your .htpasswd file!
+# All this provides a basic logout option using .htaccess user control.
+
+echo "";
+echo "If you want to have a logout button for .htaccess access";
+echo "control included on the web, please consult the corresponding";
+echo "instructions in the BibGlimpse.README. Press enter to";
+echo "continue standard installation... ";
+read goon;
+
+mkdir $WG2CGI/logout;
+cat > "$WG2CGI"/logout/logout.cgi << EOF
+#!/usr/bin/perl -w
+use strict;
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+my \$q = new CGI;
+print \$q->header();
+my $user = \$ENV\{REMOTE_USER\};
+print
+    "You are now logged out!<br />",
+    "Current REMOTE_USER is set to \$user.<br />",
+    "<br />",
+    "(On some browsers you still need to close the browser,<br />",
+    " to ensure that the previous pages can not be reloaded!)";
+EOF
+chmod +x "$WG2CGI"/logout/logout.cgi
+
+
+# *************************************************************************** #
+#  The optional modifications regarding the layout of the search results      #
+#  are not implemented within this basic installation script.                 #
+# *************************************************************************** #
+
+echo "If you want to customize the format of the search results,";
+echo "please refer to the optional points in the BibGlimpse.README.";
+echo "Press enter to continue standard installation... ";
+read goon;
+
+
+# *************************************************************************** #
+#  The configuration of the archives is best done on the wgarcmin webinter-   #
+#  face and is thus to be done there.                                         #
+# *************************************************************************** #
+
+# 11) configure archive via webinterface
+# -----------------------------------------------------------------------------
+
+echo "To configure the archive it is best to use the webingerface.";
+echo "Please open a browser and go the wgarcmin.cgi you have just";
+echo "installed on your server.";
+echo "Use YOUR settings filling in the forms described below:";
+echo "";
+echo " NOTE: You need to create two archives: One archive is to be";
+echo "       accessed from the web all the time (the 'main' archive),";
+echo "       whilst the other one is for stealthly reindexing in background.";
+echo "       Check for correct permissions! Webuser must have full access";
+echo "       to the directories to index!";
+echo ""
+echo " Edit domain configureation:";
+echo "   Server Name: your.server.com";
+echo "   Document Root: /your/servers/htdocs";
+echo "   Port: xxxx";
+echo "   Protocol: http";
+echo "   User Dir: public_html";
+echo "   Directory Index Files: index.html index.htm index.shtml index.php";
+echo "   ScriptAlias & Extensions: \.php.?(\?|$) \/cgi";
+echo "";
+echo " Add new Archive";
+echo "   Title: Your_prints_repository_main";
+echo "   Description: Prints repository";
+echo "   Index by Directory";
+echo "     Directory Path: /your/servers/htdocs/prints";
+echo "     Equivalent URL: http://your.server.com:xxxx/prints";
+echo "     Max #Pages: 99999";
+echo "";
+echo " Add new Archive";
+echo "   Title: Your_prints_repository_stealth";
+echo "   Description: Prints repository";
+echo "   Index by Directory";
+echo "     Directory Path: /your/servers/htdocs/prints";
+echo "     Equivalent URL: http://your.server.com:xxxx/prints";
+echo "     Max #Pages: 99999";
+echo "";
+echo " Press enter to continue when webconfiguration is done...";
+read goon;
+
+
+# 12) Reindexing in background
+# -----------------------------------------------------------------------------
+# From the above you should now have two directories in $ARC,
+# namely $ARC/1 and $ARC/2.
+# To keep the working archive $ARC/1 searchable while reindexing
+# wrwgreindex will mirror $ARC/1 to $ARC/2, build the index there
+# and then port the resulting index back to $ARC/1.
+# To do so, we need to replace the standard wgreindex script in $ARC/1.
+# Set $ARC to your full archive path and execute the commands below:
+# Note that reindexing can also be called from Crontab, as described
+# in the WebGlimpse documentation!
+#
+# ATTENTION: Take care that sym-links are not interpolated:
+#            /your/archives/1 must not become
+#	     /your/somewhere/else/because/of/symlink/arch/...
+#            or the 'sed' command in wrwgreindex will fail
+#            and the abra retrieval in wrrepos.cgi will
+#            silently produce crap!
+echo "Implementing reindexing in background...";
+
+
+WG2ARC_MAIN="$WG2ARC/1";
+WG2ARC_STEALTH="$WG2ARC/2";
+
+cat > "$WG2ARC_MAIN"/wgreindex << EOF
+#!/bin/sh
+
+# Since this is the visible archive we will not do any
+# reindexing here. instead we will move the reindexing
+# to the stealth twin of this archive.
+# 
+# (c) Boku Bioinformatics
+#     Thomas Tuechler, David Kreil 2006
+#
+
+rm -f /tmp/.wg*;
+"$WG2ARC_MAIN"/wrwgreindex \$1 "$WG2ARC_STEALTH";
+EOF
+
+chmod +x $WG2ARC_MAIN/wgreindex;
+
+echo "Finished installation. Start indexing with:";
+echo "$WG2ARC/1/wgreindex;";
+echo "";

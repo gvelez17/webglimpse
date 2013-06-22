@@ -1,0 +1,32 @@
+<HTML>
+<HEAD>
+<title>Very Simple search of archive |TITLE| </title>
+</head>
+
+<body  bgcolor="#ffffdd"><center>
+
+<!-- Usually the code in this page is just cut & pasted into an existing website -->
+
+<FORM method=get ACTION="/|CGIBIN|/webglimpse.cgi">
+<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+<!-- Admins - you can tweak behaviour by adjusting these hidden tags -->
+
+<INPUT TYPE=HIDDEN NAME=nonascii VALUE='off'>  <!-- set to 'on' if using filters -->
+<INPUT TYPE=HIDDEN NAME=maxfiles VALUE='20'>   <!-- number of results per page -->
+<INPUT TYPE=HIDDEN NAME=maxlines VALUE='10'>   <!-- matching lines per file -->
+<INPUT TYPE=HIDDEN NAME=maxchars VALUE='2000'> <!-- num characters to print per match -->
+<INPUT TYPE=HIDDEN NAME=cache VALUE='yes'>     <!-- make a Next Hits toolbar -->
+<INPUT TYPE=HIDDEN NAME=autosyntax VALUE="ALL"> <!-- AND together all words instead of exact phrase -->
+<INPUT TYPE=HIDDEN NAME=limit VALUE="500:100"> <!-- limit results to most recent 100 files, 500 matches for speed -->
+
+<!-- End admin configuration section -->
+
+<INPUT NAME=query size=40> <INPUT TYPE=submit VALUE=Go>
+<p>
+<A HREF="/|CGIBIN|/webglimpse.cgi?ID=|ID|">Advanced search</A>
+</FORM>
+</BODY>
+</HTML>
+
+

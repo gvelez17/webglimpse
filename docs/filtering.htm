@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Filtering and Filetypes</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Filtering and Filetypes  </h3>
+</div>
+<hr align="left" width="65%" />
+<p>&nbsp;</p>
+<p class="Sub-Heading"><span class="SubHeading2"><a name="why" id="why"></a>Why we filter: index the text, not the tags</span></p>
+<p>Basically, webglimpse crawls each document slated to be indexed in order to gather each and every word. Since you don't need to index the HTML codes, it automatically excludes them. Filtering also allows us to index documents such as PDF or Microsoft Word, by
+  using publicly available programs to convert those files to text.&nbsp; In 
+  addition, filtering files provides us the opportunity to exclude text such   as 
+  repeated headers and footers and perform other custom processing.&nbsp; A   custom 
+  filter script must be written to perform these operations, but you   will find 
+some possibly helpful subroutines in wgFilter.pm.</p>
+
+
+<p><a name="glimpse_filters" id="prefiltering"></a><span class="SubHeading2">Controlling which filetypes are indexed with .glimpse_filters and .wgfilter-index</span></p>
+<p>
+The actual filter script used for each type of document is set in the file <b>.glimpse_filters</b> in the archive directory.  Note that each extension likely to be encountered in your site should have a corresponding entry in .glimpse_filters.
+</p><p>
+Example of a .glimpse_filters file that has entries added for .pdf and .PDF file extensions:
+<blockquote><pre>
+.pdf   /home/sites/natlaw/scripts/usexpdf.sh &lt;
+*.PDF   /home/sites/natlaw/scripts/usexpdf.sh &lt;
+*.html  /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.ht    /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.shtml /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.sht   /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.php   /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.PHP   /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.asp   /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.ASP   /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.php3  /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.php4  /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.htm   /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.HTM   /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.HTML  /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+*.jhtml /home/sites/natlaw/scripts/htuml2txt.pl &lt;
+</pre>
+</blockquote>
+<p>
+In addition, which files are indexed at all is controlled by the file <b>.wgfilter-index</b> (also in the archive directory).  .wgfilter-index can be used to control inclusion or exclusion of subdirectories, files by glob pattern, and include or exclude specific filetypes.  For efficiency, processing of .wgfilter-index stops at the first match.  A generally efficient technique is to include first Deny lines by directory, then Allow lines by filetype, then Deny everything else. 
+<p>
+Example of a .wgfilter-index file that will index URLs ending in .htm, .html, .txt, .php, .php3, .phpX, .pdf and /, except for anything in a /cgi-bin/ directory or the Webglimpse search forms themselves; and will not attempt to follow mailto: or javascript links.  
+<blockquote><pre>
+Deny (^|/)wgindex\.html$
+Deny (^|/)wgall\.html$
+Deny (^|/)wgany\.html$
+Deny (^|/)wgsimple\.html$
+Deny (^|/)wgverysimple\.html$
+Deny (^|/)cgi-bin(/|$)
+Deny ^mailto:
+Deny (^|/)JavaScript:
+Allow \.s?html?$
+Allow \.php.?$
+Allow \.pdf$
+Allow \.asp$
+Allow \.txt$
+Allow \/$
+Deny .
+</pre></blockquote>
+
+The default .wgfilter-index file automatically generated in your archive directory is longer and does not have the fallback Deny line, in order to support a wide variety of sites.  
+<p><a name="prefiltering" id="prefiltering"></a><span class="SubHeading2">Speeding Up Searches Using Prefiltering</span></p>
+<p>Webglimpse 2.7.4 and above have a new setting that allows <strong>prefiltering</strong> of PDF and even HTML files, greatly increasing search speed for large indexes.   Indexing is also significantly faster; and for remote files, storage needs are   actually reduced. For local files, storage requirements increase by about 20% of   the total size of files indexed. It works by simply keeping around the pure-text   version of the file that glimpse needs to index and search, rather than   generating it on-the-fly as needed. Remote file storage is reduced by storing   the filtered version rather than the original. Extra meta information can now be   stored in the filtered file (such as line numbers, for jump-to-line), which will   allow administrators to add meta information about specific files even if they   do not own those files. </p>
+  <p>Be sure that you have the correct filters installed in .glimpse_filters.   If you are already indexing PDF files, no change should be needed to the PDF   filter. For HTML, please use <strong>htuml2txt.pl</strong> as the filter program so that   &lt;TITLE&gt; tags and other essential information will be preserved. Your   .glimpse_filters file may look something like this: </p>
+  <blockquote>
+  *.pdf   /usr/local/bin/usexpdf.sh   &lt;<br />
+  *.PDF   /usr/local/bin/usexpdf.sh   &lt;  <br />
+  *.html  /usr/local/wgdemo/lib/htuml2txt.pl &lt;  <br />
+  *.htm   /usr/local/wgdemo/lib/htuml2txt.pl &lt;<br />  
+  ...more filetypes here... 
+  </blockquote>
+  <p>Note, if you have not yet indexed PDF files, please see <a href="pdf.htm">How To Index PDF Documents   using XPDF</a>. </p>
+  <p>Go into the archive management screen and enter '<strong>all</strong>' in the new   &quot;Prefilter file types:&quot; input area. This is the default for new archives. </p>
+  <p>Rebuild your archive. You may do this either by running</p>
+  <ol>
+    <blockquote>
+      <p>/path/to/your/archive/wgreindex </p>
+    </blockquote>
+  </ol>
+  <p>manually or by pressing   the 'Build Index' button in the web interface. <strong>Note</strong>, once you rebuild it   manually, you may have permissions problems doing it from the web in the future   unless you reset ownership to the web user. Generally you should pick one method   or the other and be consistent in order to avoid problems. </p>
+  <p>Now search   your rebuilt archive, and see the speed improvement! (That is, unless it was   already fast before - but you can still be happy that the CPU load on your   server is less.)</p>
+
+<p class="SubHeading2"><a name="repetitive" id="repetitive"></a>Eliminating Repetitive Text</p>
+ Often documents in a repository have a section of text that is repeated across many or all documents, that is not desireable to search on.  Standard headers and footers are the most common example, that produce repetitive and uninformative search output when the user happens to query on a keyword that is part of the standard toolbar, for instance.
+<p>
+To filter out such repetitive text requires some customization of the HTML filter.  The easiest way to remove simple text blocks is probably to modify the <b>htuml2txt.pl</b> filter script to use the provided <b>wgFilter.pm</b> module and make use of the <b>SkipTag</b> or <b>SkipSection</b> routines.  A detailed description of how to create a custom script is beyond the scope of this document; if you run into problems try subscribing to the <A HREF="http://webglimpse.net/subdocs/lists.html" target="_top">users mailing list</A>
+
+<p class="Sub-Heading"><span class="SubHeading2"><a name="filetypes" id="filetypes">Filetypes</a></span></p>
+
+Webglimpse does not actually have a fixed list of supported filetypes.  Rather, any filetype which can be filtered to ascii text by an external filter is supported.  We've tested with for HTML (or XML), PDF, Word, Excel, and Zip files, documented in the next section.
+
+
+
+<p>Now, let's talk about the details of setting up filtering for pdf, word, excel and zip files. </p>
+<p><a href="pdf.htm">Continue to Next Page &gt;&gt;</a> </p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="configure.htm">&lt;&lt;Configuring and Customizing    </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="howtos.htm">How-To's    &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

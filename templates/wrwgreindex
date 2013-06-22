@@ -1,0 +1,160 @@
+#!|SHELL|
+
+
+# CRONFILE FOR ARCHIVE IN DIRECTORY |INDEXDIR|
+
+# abbreviations
+N=/dev/null;
+
+# functions
+if which rsync >$N 2>&1; then
+    function __syncDir() {
+	from="$1";
+	to="$2";
+	rsync --delete --exclude='searches.*' \
+	      --exclude='*wgreindex' --exclude='*.html' -Wau \
+	    "$from" "$to";
+    }
+    function __copyDir() {
+	from="$1";
+	to="$2";
+	rsync --exclude='searches.*' --exclude='.wrRMabras' \
+	      --exclude='*wgreindex' --exclude='*.html' -Wau \
+	    "$from" "$to";
+    }
+else
+    ##TODO: include all the exclude flags from rsync in a precise way
+    function __syncDir() {
+	from="$1";
+	to="$2";
+	tmp="./bak-$$";
+	|MKDIR| $tmp;
+	|CP| -pR "$to"/wgreindex* $tmp/;
+	|RM| -rf "$to";
+	|CP| -pR "$from" "$to";
+	|CP| -pR $tmp/* "$to/";
+	|RM| -rf $tmp;
+    }
+    function __copyDir() {
+	from="$1";
+	to="$2";
+	|CP| -pR "$from"/* "$from"/.[!.]* "$to/";
+    }
+fi
+
+
+
+# some config vars
+idxDir=|INDEXDIR|;
+idxReqFlag="$idxDir/indexing-required"
+thisBusyFlag="$idxDir/indexing-in-progress"
+stealthBusyFlag="$idxDir/stealth-indexing-in-progress"
+
+
+#
+# configuration by command line parameter
+#
+
+quiet=""
+if [ "$1" = "-q" ] ; then
+  quiet="-q";
+  shift;
+fi
+
+stealthDir="$1";
+if [ -z "$stealthDir" ]; then
+    |CAT| >&2 <<EOF
+usage: $0 stealthDir
+
+  stealthDir  directory of the "stealth" webglimpse archive that is
+                used to build the index of this archive,
+                  "$idxDir",
+                stealthily
+
+Copyright (C) 2006 D Kreil & T Tuechler,  boku@kreil.org
+
+EOF
+    exit
+fi
+
+
+
+#
+# locks ...
+#
+if [ -s "$idxReqFlag" ]; then
+    # already waiting
+    exit;
+fi
+
+log="$0 ($$) for "`whoami`"@"`hostname`" at "`date`" in "`pwd`
+
+if [ -s "$stealthBusyFlag" ]; then
+    echo "$log" >"$idxReqFlag";
+    exit;
+fi
+
+echo "$log" >"$stealthBusyFlag";
+echo "$log" >"$idxReqFlag";
+
+PWD=`pwd`;
+
+while [ -s "$idxReqFlag" ]; do
+
+    cd "$PWD";
+
+    |RM| -f "$idxReqFlag";
+    
+    __syncDir $idxDir/ $stealthDir/
+
+    cd "$stealthDir";
+
+    # WARNING: We are not fixing .glimpse_filehash because we do not know how
+    #          to easily rebuild .glimpse_filehash_index; it might not be
+    #          needed, we hope...
+    for n in .glimpse_filenames .wgmapfile; do
+	m=$n-$$.new;
+	|SED| -e "s^$idxDir^$stealthDir^g" <$n >$m;
+	|MV| -f $m $n;
+    done
+
+    # if reindexing after anno edition, remove corresponding abras!
+    while read rmAbra; do
+	|RM| -f "$stealthDir/.cache/$rmAbra";
+    done < "$stealthDir/.wrRMabras";
+    |RM| -f "$idxDir/.wrRMabras";
+
+    ./wgreindex $quiet
+
+    # WARNING: We are not fixing .glimpse_filehash because we do not know how
+    #          to easily rebuild .glimpse_filehash_index; it might not be
+    #          needed, we hope...
+    for n in .glimpse_filenames .wgmapfile; do
+	m=$n-$$.new;
+	|SED| -e "s^$stealthDir^$idxDir^g" <$n >$m;
+	|MV| -f $m $n;
+    done
+
+    # Recreate index for .glimpse_filenames
+    if [ "$quiet" = "-q" ] ; then
+	|CAT| $stealthDir/.wg_toindex | glimpseindex -H $stealthDir -R -s -t -o -h -n -X -U -C -F > $N
+    else
+	|CAT| $stealthDir/.wg_toindex | glimpseindex -H $stealthDir -R -s -t -o -h -n -X -U -C -F
+    fi
+    
+    echo "$log" >"$thisBusyFlag";
+    __copyDir $stealthDir/ $idxDir/
+
+    # remove old abra files that have been recreated in the meantime
+    while read rmAbra; do
+	x=`grep "/$rmAbra" "$idxDir/.glimpse_filenames"`;
+	if [ -z "$x" ]; then
+		|RM| -f "$idxDir/.cache/$rmAbra";
+	fi;
+    done < "$stealthDir/.wrRMabras";
+
+    |RM| -f "$thisBusyFlag";
+
+done
+
+|RM| -f "$stealthBusyFlag";

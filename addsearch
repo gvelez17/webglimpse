@@ -1,0 +1,281 @@
+#!/usr/local/bin/perl 
+##########################################################################
+# Created March/April 1996, Michael D. Smith 
+# Part of WebGlimpse (GlimpseHTTP) research with Udi Manber
+# Glimpse mailing list: glimpse@cs.arizona.edu
+# WebGlimpse home page: http://glimpse.cs.arizona.edu/webglimpse
+#
+# Modified by Dachuan Zhang, May 22, 1996
+# Some bugs fixed.
+#
+# 3/98  Added search-by-subdirectory section (wgall.html) --GB
+# 6/98  Fixed search-by-subdirectory when urllist != archivedir --GB
+#	Added -w switch & cleaned up.  Added .wgfilter_index check.
+#
+# 1/01  Moved wgall.html, wgindex.html into wgArch.pm for version 2.X
+#
+#       We are keeping a separate script only to add search boxes to 
+# 	files probably not owned by the web user
+##########################################################################
+
+##########################################################################
+## SETTINGS 
+##########################################################################
+BEGIN {
+        # This is the only variable set by wginstall:
+        $WEBGLIMPSE_LIB = '|WEBGLIMPSE_LIB|';
+        unshift(@INC, "$WEBGLIMPSE_LIB");        # Find the rest of our libs
+}
+BEGIN {
+        use wgHeader qw( :makenh :general );
+        use wgErrors;
+}
+
+use wgConf;
+use wgArch;
+use AllowDeny;
+
+##########################################################################
+## GLOBALS
+##########################################################################
+$archid = shift(@ARGV);	
+@filelist=();
+@THEBOX=();
+
+
+##########################################################################
+## ENTRY POINT
+##########################################################################
+
+my $mArch = &wgConf::GetArch($archid) || &err_exit($lastError);
+
+
+my $archivepwd = $mArch->{Dir};
+my $archivetitle = $mArch->{Title};
+
+# Prepare to include/exclude files by our rules
+my $mAllow = new AllowDeny("$archivepwd/$WGINDEX");
+$mAllow->LoadAllowDeny;
+
+## Cleaner handling of options as per M. Ernst. --GB 9/24/97
+$removing = 0;
+$keep_nh = 0;
+$quiet = 0;
+
+while (defined($arg = shift(@ARGV))) {
+	if ($arg eq "-r") {
+		$removing = 1;
+	} elsif ($arg eq "-k") {
+		$keep_nh = 1;
+	} elsif ($arg eq "-q") {
+		$quiet = 1;
+	} else {
+		die "Bad argument $arg (remaining args @ARGV)";
+	}
+}
+## End option handling change --GB 9/24/97 
+
+
+#Double check if we are supposed to add boxes to this archive
+if (($mArch->{AddBoxes} !~ /^[yY]/) && ! $removing) {
+	exit(1);
+}
+
+my $madenh = "$archivepwd/$MADENH";
+my $searchbox = "$archivepwd/$SEARCHBOX";
+
+# open the .wg_madenh
+open(FILELIST, "$madenh") || &err_exit("Cannot open $madenh for reading.");
+
+# get the filelist from the file
+@filelist = <FILELIST>;
+close FILELIST;
+
+# read the search box
+if($removing==0){
+	&read_search_box($searchbox) || $quiet || warn("Could not read search box $searchbox");
+}
+
+# make the additions to the corefiles
+&add_search_box(@filelist);
+
+1;
+
+
+
+
+##########################################################################
+### PROCEDURES
+##########################################################################
+
+
+##########################################################################
+sub read_search_box{
+	local($file)=@_;
+
+	open(FILE, $file) || die "Cannot open $file for reading.\n";
+
+	@THEBOX = <FILE>;
+
+	close(FILE);
+}
+
+##########################################################################
+sub add_search_box{
+	local(@filelist) = @_;
+	local($file, $left,$mid,$right,$did_box);
+
+	print "Adding search box to ",scalar(@filelist)," files\n";
+
+	# for each file
+	foreach $file(@filelist){
+		chomp($file);  # remove \n if exists
+
+		# I can ONLY modify .html files
+		next if ($file !~ /$HTMLFILE_RE/);
+
+		# stat the file
+		my(@statinfo) = stat($file);
+
+		# Changed 9/16/97 to keep existing permissions
+		# First we make a backup, then write into the real file.
+
+		$bakfile = "$file.bak";
+		system("cp $file $bakfile");
+
+		# open the backup file for reading
+		eval {
+			open(INPUT, $bakfile);
+		};
+		if ($@){
+			warn "Cannot open file $bakfile: $@\n";
+			next;
+		}
+
+		eval {
+			open(OUTPUT, ">$file");
+		};
+		if ($@) {
+			warn "Cannot open file $file for writing: $@\n";
+			system("cp $bakfile $file");
+			close(INPUT);
+			next;
+		}
+
+		$did_box=0;
+		$rid_box=0;
+		while(<INPUT>){
+			# copy until we see either </body>, </html>, or <!--GH_SEARCH-->
+			if($did_box==0 && /(.*)(<\/body>|<\/html>|<\!--GH_SEARCH-->)(.*)/i){
+
+				$left = $1;
+				$mid = $2;
+				$right = $3;
+	
+				# if we have <!GH_SEARCH>, skip through <!GH_END>
+				if($mid =~ /^<\!--GH_SEARCH-->$/i){
+					while(<INPUT>){
+						/(.*)(<\!--GH_END-->)(.*)/i || next;
+						$right=$3;
+						last;
+					}
+					($left eq "") || print OUTPUT "$left\n";
+					if ($removing == 1 && $rid_box == 0)	{
+						&do_box($file);
+						print OUTPUT "<!--GH_SEARCH-->\n";
+						$s = localtime;
+						print OUTPUT "<!-- $s -->\n";
+						print OUTPUT "<!--GH_END-->\n";
+						$rid_box = 1;
+					} elsif ($removing == 1)	{
+						;
+					} else	{
+						&do_box($file);
+						$did_box = 1;
+					}	
+					($right eq "")||print OUTPUT "$right\n";
+				} else	{
+					$right = "$mid$right";
+					($left eq "") || print OUTPUT "$left\n";
+					if ($removing != 1 && $did_box == 0)	{
+						&do_box($file);
+						$did_box = 1;
+					}
+					($right eq "")||print OUTPUT "$right\n";
+				}
+				# set the box var to true
+			}else{
+				print OUTPUT $_;
+			}
+		}
+
+		if($did_box==0 && $rid_box==0){
+			&do_box($file);
+		}
+			
+		# close the two files
+		close OUTPUT;
+		close INPUT;
+
+		### TO DO -- don't do this
+		# rename the original into .wgbackup
+		# system("mv $file $file$BACKUPEXT");
+
+		# copy the temp file into the original
+		#system("mv -f $tempfile $file");
+		#chmod (0644, $file);  # DO NOT CHANGE THE MODE!!  IT MIGHT ALREADY HAVE BEEN SET FOR A REASON!! --GB 
+
+		# Instead of the above we now just delete the bakup file. -GB 9/16/97
+		system("rm $bakfile");
+		
+		# modify the access time back to the original
+		utime($statinfo[8], $statinfo[9], $file);
+
+	}
+}
+
+##########################################################################
+sub do_box{
+	local($file)=@_;
+	local($realline, $line, $newfile);
+
+	# if we're removing, try to delete the neighborhood, too
+	if($removing==1){
+		# might as well kill the neighborhood if no one will refer to it!
+		# prepend the .nh_
+		$newfile = $file;
+   		$newfile =~ s/([^\/]+)$/$nh_pre$1/;
+		if (!$quiet) { print "removing $newfile\n"; }
+		if($keep_nh==0){
+		   unlink("$newfile");
+		}
+		return;
+	}
+
+	print OUTPUT "<!--GH_SEARCH-->\n";
+	$s = localtime;
+	print OUTPUT "<!-- $s -->\n";
+
+	# output the contents of THEBOX
+	foreach $realline(@THEBOX){
+		$line = $realline;
+		# do the substitutions and output
+		$line =~ s/\|ID\|/$archid/g;
+		$line =~ s/\|TITLE\|/$archivetitle/g;
+		$line =~ s/\|ARCHIVEPWD\|/$archivepwd/g;
+		$line =~ s/\|CGIBIN\|/$CGIBIN/g;
+		$line =~ s/\|FILE\|/$file/g;
+		print OUTPUT $line;
+	}
+
+	print OUTPUT "<!--GH_END-->\n";
+}
+
+
+sub err_exit {
+	$msg = shift;
+
+	print $msg,"\n\n";
+
+	exit 0;
+}

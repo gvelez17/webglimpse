@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Ground-zero install script for webglimpse
+# Tries to find location of perl and execute wginstall
+
+perl_loc=`which perl`
+
+if [ -z $perl_loc ]
+then
+    perl_loc='/usr/local/bin/perl'
+    echo "Which not found, trying perl at $perl_loc"
+    if test ! -f $perl_loc  
+    then
+	perl_loc='/usr/bin/perl'
+	echo "Perl not found yet, trying $perl_loc"
+	if test ! -f $perl_loc  
+	then
+		echo "Please enter a full path to the perl executable (ie /usr/bin/perl)"
+		read perl_loc
+	fi
+    fi
+fi
+
+echo "Using $perl_loc"
+$perl_loc ./wginstall.pl $perl_loc $1 

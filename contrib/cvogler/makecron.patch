@@ -1,0 +1,12 @@
+diff -Naur webglimpse-1.7.1.orig/makecron webglimpse-1.7.1/makecron
+--- webglimpse-1.7.1.orig/makecron	Tue Jan 12 23:42:07 1999
++++ webglimpse-1.7.1/makecron	Tue May 18 06:42:49 1999
+@@ -61,7 +61,7 @@
+ 
+ # options for Glimpseindex
+ #$GLIMPSEIDX_OPTIONS = "-o -t -F"; Added -h -X -U -f -C --> bgopal oct/6/96
+-$GLIMPSEIDX_OPTIONS = "-o -t -h -X -U -f -C -F";
++$GLIMPSEIDX_OPTIONS = "-z -o -t -h -X -U -f -C -F";
+ 
+ # Added options for convert --> bgopal oct/6/1996
+ # Made -M switch optional --> GB 7/22/97

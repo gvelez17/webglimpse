@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0038)http://www.webglimpse.net/wgindex.html -->
+
+<HTML><HEAD>
+<TITLE>Webglimpse חיפוש ב on |TITLE| </TITLE>
+<META content="text/html; charset=windows-1255" http-equiv=Content-Type>
+</HEAD>
+<BODY bgcolor="#ffffdd"><center>
+<TABLE border=5 WIDTH="90%"  bgcolor="#ffffff">
+  <TR>
+    <TD align=middle><a href="http://webglimpse.net"><img src="/|CGIBIN|/showimg.cgi" alt="Webglimpse Logo" align=middle height=34 width=60></A>
+     </TD>
+  <td align=center valign=middle>
+   <font size=+3>
+   <a href="http://webglimpse.net">WebGlimpse</a>
+    חיפוש ב<br></font>
+  </td>
+  </TR>
+  <TR>
+    <TD align=middle colSpan=2>
+
+
+  <tr><td colspan=2 align=center>
+
+     <FORM method=get ACTION="/|CGIBIN|/webglimpse.cgi">
+     <INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+     חפש בארכיב השלם: |TITLE|
+
+  </TD></TR>
+  <TR>
+    <TD colSpan=2>
+      <P align=right><INPUT type=submit value=Submit>
+
+      <INPUT name=query size=30> מילה/אותיות לחיפוש</P>
+
+     <P align=right dir=rtl>
+
+<INPUT name=case type=checkbox>
+הבדל בין אותיות גדולות לקטנות (באנגלית) 
+&nbsp;&nbsp; 
+<INPUT name=whole type=checkbox>
+ התאמה חלקית 
+&nbsp;&nbsp; 
+<!--<INPUT name=lines type=checkbox>
+קפוץ לשורה --> <!-- Jump-to-line is not working in Hebrew for some reason -->
+&nbsp;&nbsp;<BR>
+מספר שגיאות כתיב המותר במציאת התאמה 
+<SELECT name=errors size=1>
+<OPTION selected>0</OPTION> 
+<OPTION>1</OPTION>
+<OPTION>2</OPTION>
+</SELECT>
+<BR>אחזור קבצים ששונו ב- 
+      	<INPUT name=age size=5>ימים אחרונים בלבד 
+<BR>הגבל את מספר הקצבים לאחזור למקסימום 
+	<SELECT name=maxfiles size=1> <OPTION>10</OPTION> <OPTION 
+        selected>50</OPTION> <OPTION>100</OPTION> <OPTION>1000</OPTION></SELECT>
+<BR>הגבל את מספר ההתאמות לקובץ למקסימום 
+	<SELECT name=maxlines size=1> 
+        <OPTION>10</OPTION> <OPTION selected>30</OPTION> <OPTION>50</OPTION> 
+        <OPTION>500</OPTION></SELECT>
+<BR>הגבל את מספר התווים המוצגים בתוצאות (עבור כל דף מתאים) למקסימום: 
+	<INPUT name=maxchars size="10" value=10000>
+<!-- Admins - remove this line to stop caching next hits -->
+<INPUT NAME="cache" VALUE="yes" TYPE="HIDDEN">
+
+<!-- This line causes use of .glimpse_filters to remove HTML tags -->
+<INPUT NAME="nonascii" VALUE="yes" TYPE="HIDDEN">
+
+</FORM>
+ </P></TD></TR>
+  <TR>
+    <TD colSpan=2>
+
+<center>
+<font size=-2>
+<a href="http://webglimpse.org">Glimpse</a> and 
+<a href="http://webglimpse.net">WebGlimpse</a>, 
+Copyright &copy; 1996, 
+University of Arizona
+</font>
+</center>
+
+</TD></TR></TABLE>
+
+</BODY></HTML>

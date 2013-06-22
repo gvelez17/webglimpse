@@ -1,0 +1,69 @@
+.IndexLevel-1 {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 12px;
+	font-weight: bold;
+	list-style-type: upper-roman;
+}
+.IndexLevel-2 {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 11px;
+	font-weight: normal;
+	list-style-type: upper-alpha;
+    text-indent: 5px;
+	list-style-position: outside;
+}
+.IndexLevel-3 {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 10px;
+	font-weight: normal;
+	list-style-type: lower-alpha;
+    text-indent: 5px;
+	list-style-position: outside
+}
+.IndexLevel-4 {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 10px;
+	font-weight: normal;
+	list-style-type: lower-alpha;
+	text-indent: 5px;
+}
+.PageHeading {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 18px;
+	font-weight: bold;
+}
+p {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 12px;
+}
+.Sub-Heading {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 15px;
+	font-weight: bold;
+}
+.BulletList {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 12px;
+	list-style-type: square;
+}
+.SubHeading2 {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 13px;
+	font-weight: bold;
+}
+ul {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 12px;
+}
+.answer {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 12px;
+	padding: 2px;
+}
+.question {
+	font-family: Arial, Helvetica, Geneva, Swiss, "sans serif";
+	font-size: 12px;
+	padding: 2px;
+	list-style-type: square;
+	background-color: #E5E5E5;
+}

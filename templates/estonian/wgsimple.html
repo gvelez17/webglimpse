@@ -1,0 +1,44 @@
+<HTML>
+<HEAD>
+<title>Simple search of archive |TITLE| </title>
+</head>
+
+<body  bgcolor="#ffffdd"><center>
+
+<!-- Decorative banner -->
+<table border=0><tr><td valign=center><a href="http://webglimpse.net"><img src="/|CGIBIN|/showimg.cgi" alt="Webglimpse Logo" align=middle height=34 width=60 border=1 valign=center></A></td>
+<td><font size="+2">Search <b>|TITLE|</b> with <a href="http://webglimpse.net">WebGlimpseII</a></font></td>
+</tr></table>
+<!-- End decoration -->
+
+<FORM method=get ACTION="/|CGIBIN|/webglimpse.cgi">
+<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+<!-- Admins - you can tweak behaviour by adjusting these hidden tags -->
+
+<INPUT TYPE=HIDDEN NAME=nonascii VALUE='off'>  <!-- set to 'on' if using filters -->
+<INPUT TYPE=HIDDEN NAME=maxfiles VALUE='20'>   <!-- number of results per page -->
+<INPUT TYPE=HIDDEN NAME=maxlines VALUE='20'>   <!-- matching lines per file -->
+<INPUT TYPE=HIDDEN NAME=maxchars VALUE='1000'> <!-- num characters to print per match -->
+<INPUT TYPE=HIDDEN NAME=cache VALUE='yes'>     <!-- make a Next Hits toolbar -->
+
+<!-- End admin configuration section -->
+
+<INPUT TYPE=submit VALUE="Otsi:">&nbsp;<INPUT NAME=query size=40>&nbsp;<INPUT TYPE=submit VALUE=Go>
+<br>
+Leia <SELECT NAME="autosyntax">
+<OPTION VALUE="ALL">ALL the words
+<OPTION VALUE="ANY">ANY of the words
+<OPTION VALUE="EXACT">EXACT PHRASE
+</SELECT> nagu n&auml;idatud eelpool.
+<p>
+Valikuline - leia ILMA s&otilde;nadeta: <INPUT NAME="autonegate" size=40>
+<p>
+<A HREF="/|CGIBIN|/webglimpse.cgi?ID=|ID|">Vingem otsing</A> v&otilde;imaldab sul kasutada kahend- ja regulaaravaldisi,
+lubada kirjavigu, osalist kattuvust, suurt- ja v&auml;iket&auml;he
+s&otilde;ltuvust ja muud sellist.
+</FORM>
+</BODY>
+</HTML>
+
+

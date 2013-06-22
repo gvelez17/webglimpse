@@ -1,0 +1,57 @@
+# Output configuration file for use with Contributors/Commercial version
+#
+# NOTE - if you have Demo/Trial/EDU version, this file has no effect
+#
+# now supports [INCLUDE: filename] in begin_html and end_html areas
+#
+
+begin_html	<HTML><HEAD><TITLE>Webglimpse Search Results</TITLE>
++		|METACHARSET|
++		</HEAD>
++		<BODY BGCOLOR="#ffffff">
++		<font size="+1"><b>|TITLE| Search Results:</b></font><p>
++		<font size="-1">Looking for <b>[QUERY]</b> in [NEIGH] - Found [MATCHED_LINES] matches in [MATCHED_FILES] files 
++		<br>Showing results [STARTING_FROM] - [ENDING_AT]</font>
+
+end_html	</BODY></HTML>
+
+begin_files		<hr>
+end_files		<p>
+
+begin_file_marker	<table border=0 width="100%"><TR><TD BGCOLOR='#ffff66'><font color="#600000"><b>[LINK]</b>, [DATE]
+end_file_marker		</font></TD></TR>
+
+begin_lines		<TR><TD BGCOLOR='#ffffcc'>
+end_lines		</TD></TR></table>
+
+begin_single_line	
+end_single_line		<p>
+
+neigh_msg		neighborhood of <tt>[SEARCHTITLE]</tt>
+noneigh_msg		entire archive
+
+newquery		New Query
+newquerybutton		Search
+
+# The "New Query" search box is customized by editing the separate
+# file "newquery.html" in the archive directory (starting with WG v 2.4.8)
+
+files_exceeded		<br>Limit of [MAXFILES] files reached.
+lines_exceeded		<br><i>...limit of [MAXLINES] lines reached, additional matching lines are not shown...</i>
+
+# Code to highlight matched words from the query
+begin_highlight		<font color="#ff0000"><b>
+end_highlight		</b></font>
+
+
+#
+#
+#
+#<SELECT name="rankby">
+#<OPTION VALUE="DEFAULT">Order hits by
+#<OPTION VALUE="DEFAULT">Combined score
+#<OPTION VALUE="AGE">Most recent first
+#<OPTION VALUE="LINKPOP">Link Popularity
+#<OPTION VALUE="TITLE_AND_META">Title and Meta matches
+#</SELECT>
+#

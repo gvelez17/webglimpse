@@ -1,0 +1,48 @@
+This is WebGlimpse, developed by Udi Manber, Michael Smith,
+and Burra Gopal at the University of Arizona.
+
+Version 2.X developed by Golda Velez of Internet Workshop and
+many individual contributors.
+
+All information about Glimpse and WebGlimpse can be found on the web at
+http://webglimpse.net
+and at
+http://webglimpse.net
+
+----------------------------------------------------------
+Webglimpse requires Glimpse.  If you don't have Glimpse, 
+go to http://webglimpse.net/download.php and get a copy.  
+----------------------------------------------------------
+To install Webglimpse, 
+
+0) Extract the distribution files into a temporary directory 
+(You probably already did this since you're reading this file)
+
+1) Run wginstall and answer the questions
+
+2) Point your browser to the URL given at the end
+of the installation.
+
+3) Create a new archive using the web interface.
+
+4) The search form called wgindex.html will be 
+created in the archive directory.  You can copy 
+this form into your own pages and format it as you like.
+
+5) The reindex script called wgreindex will also be
+in the archive directory.  If you want the archive
+reindexed regularly you can put this in a crontab.  Otherwise
+you can reindex from the web interface by hand.
+
+
+------------------------------------------------------------
+
+NOTE:  If you are installing in place of an old version, AND you 
+have changed the home webglimpse directory, please 
+
+	rm  .glimpse*
+	rm  .wg*
+	rm  archive.cfg
+	rm  wgreindex
+
+in all of your previously indexed directories.

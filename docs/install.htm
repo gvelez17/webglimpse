@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Installation &amp; Configuration</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Installation and Configuration </h3>
+</div>
+<hr align="left" width="65%" />
+<p>&nbsp;</p>
+<p><a name="prepare" id="prepare"></a><span class="Sub-Heading">Preparing for Installation</span></p>
+<p>This documentation is written with the assumption that you are familiar with the unix/linux environment at the beginner level or better. Some familiarity with web administration would be beneficial, although not necessary. If you are new to the UNIX-style operating systems (such as Linux), it would be beneficial to have some type of reference material available. You will need to know enough about UNIX to understand how to compile and install software and/or troubleshoot any problems that may occur, if you are installing via a unix/linux shell. (This will be discussed more later in the section) </p>
+<p>Now is a good time to collect the information that you will need to install Webglimpse, so lets talk about the <a name="require" id="require"></a>requirements:</p>
+<table width="85%" border="1" align="center" bordercolor="#666666" bgcolor="#E5E5E5">
+  <tr>
+    <td width="265" nowrap="nowrap" class="BulletList">
+      <ul>
+        <li> ssh access  to your web server</li>
+    </ul></td>
+    <td width="363"><p>You will need to run the install script in a Unix shell.  This generally means having ssh access to your web server.  This is a one-time task and can be done by your system administrator if you are not an experienced Unix user.</p></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap" class="BulletList">
+      <ul>
+        <li><span class="BulletList">Writable directory and writable cgi area</span></li>
+    </ul></td>
+    <td><p>The installation process attempts to automatically download the software application to your web server and install it, so it will need temporary writable access to these areas.</p></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap" class="BulletList">
+      <ul>
+        <li><span class="BulletList"><a name="webuser" id="webuser"></a>Web user</span></li>
+    </ul></td>
+    <td><p>The installation process sets  the files to be owned by the user ID that the web server is running as.
+    Examples of this user are &quot;apache&quot; or &quot;nobody&quot;. You can change the username or group the server runs as by modifying the httpd.conf file.</p></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap" class="BulletList">
+      <ul>
+        <li><span class="BulletList"><a name="permissions" id="permissions"></a>permissions</span></li>
+    </ul></td>
+    <td><p>Be sure to take note of the permissions currently set on your web servers document root directory and cgi-bin directory before you change the permissions! For security purposes, you will want to restore the appropriate permissions once the installation has completed. *This is geared toward the web install </p></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap" class="BulletList">
+      <ul>
+        <li><span class="BulletList"><a name="directories" id="directories"></a>directory</span></li>
+    </ul></td>
+    <td><p>The Webglimpse software installation will create a directory under your web server's root directory and under the cgi-bin directory. You need to know the path to your web servers root directory. Examples: &quot;/var/www/html&quot;  or  &quot;/user/server/apache&quot;. Optionally, you should determine what your naming schema will be or you can accept the default directory name, &quot;wg2&quot;.</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<!--
+<p><a name="webinstall" id="webinstall"></a><span class="Sub-Heading">Installing Webglimpse 3.0 Using the Web Installer</span> </p>
+<p>To begin, you should download the installer file by pointing your browser to: <a href="http://cpanel.webglimpse.net">http://cpanel.webglimpse.net</a> You will be prompted for a place to save the installer file. Be sure to make note of the location of this file as you will need to FTP it to your web server. You can now FTP the file to your web server using a typical FTP application such as <a href="http://www.cuteftp.com/">cuteFTP</a> for a unix server or <a href="http://winscp.net/eng/index.php">winSCP</a> for a linux server. You should place the the install file into the document root of your web server. </p>
+<p>Once the installer file has been ftp'd to your web server, you can open a browser and type in the location of your web site followed by &quot;install.php&quot; ( Example: http://www.myserver.com/install.php ) to begin the installation. </p>
+<p align="left"><a name="figure4" id="figure4"></a>Figure 4 shown below is what you will see.</p>
+<p align="center">  <img src="images/8379f4.jpg" alt="Figure 4" width="593" height="329" /></p>
+<p align="center">&nbsp;</p>
+<p align="left"><a name="figure5" id="figure5"></a>Clicking the &quot;Next&quot; button will display the following informational screen: (Figure 5) </p>
+<p align="center">  <img src="images/8379f5.jpg" alt="Figure 5" width="581" height="327" /></p>
+<p align="center">&nbsp;</p>
+<p>Clicking the &quot;Continue with Installation&quot; button will present you with three installation options to choose from, as shown in the table below: </p>
+<table width="85%" border="1" bordercolor="#666666" bgcolor="#E5E5E5">
+  <tr>
+    <td width="251" nowrap="nowrap"><p>Create a new Webglimpse installation </p></td>
+    <td><p>If you choose this option WebGlimpse will be installed from scratch into the target directory you specify. If an existing installation is already present in that directory its settings and archives will not be preserved. This option is the correct one if you are installing WebGlimpse for the first time or if you wish to create a separate installation in a new directory.</p></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"><p>Upgrade a current Webglimpse installation </p></td>
+    <td><p>If you choose this option the Installer will try to upgrade your current version of WebGlimpse to the latest one. The Installer will attempt to preserve all settings and existing archives. Note, if you are upgrading from a version prior to Webglimpse 2.0, we may not be able to preserve all settings. <br />
+    This option is the correct one if you already have an installation of WebGlimpse and you wish to upgrade to the latest version.</p></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"><p>Remove Webglimpse </p></td>
+    <td><p>This option will remove your WebGlimpse installation completely. Please be warned that you might lose all of your WebGlimpse settings and indexes, and if you still use the WebGlimpse search engine on your site it will no longer function. This option is the correct one if you want to remove WebGlimpse search functionality from your site and you want to delete all files created by Webglimpse.</p></td>
+  </tr>
+</table>
+<p>Choose the option that is appropriate for your installation and click the &quot;Next&quot; button.</p>
+-->
+<p><a href="install4.htm">Continue to Next Page  &gt;&gt;</a> </p>
+
+<p>&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="simpletutorial.htm">&lt;&lt; Simple Tutorial </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="searchable.htm">Making A Searchable Site  &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

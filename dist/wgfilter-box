@@ -1,0 +1,3 @@
+# Allow/deny list for adding search boxes to local pages
+# format is the same as .wgfilter-index
+# by default all local pages indexed can have boxes added by the addsearch script

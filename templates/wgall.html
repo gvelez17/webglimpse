@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<title>Search by subdirectory on archive |TITLE| </title>
+</head>
+
+<body><center>
+<table border=5>
+<tr><td align=center valign=middle>
+    <a href="http://webglimpse.net"><img src=".glimpse-eye.jpg" alt="Webglimpse Logo" align=middle height=34 width=60></A>
+</td>
+<td align=center valign=middle>
+   <font size=+3>
+   <a href="http://webglimpse.net">WebGlimpseII</a>
+   Search<br></font>
+</td>
+</tr>
+
+<!-- Admins - local copy pointers have been eliminated in v1.6.  If this bothers you, e-mail gberns@tucson.com -->
+
+<tr><td colspan=2 align=center>
+
+<FORM method=get ACTION="/|CGIBIN|/webglimpse.cgi">
+<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+Search archive |TITLE| by directory
+</td></tr>
+
+<tr><td colspan=2>
+String to search for: <INPUT NAME=query size=30>
+<INPUT TYPE=submit VALUE=Submit>
+<br>
+Search Directory:<SELECT NAME="filter">
+
+|DIRECTORYOPTIONS|
+
+</SELECT>
+<br>
+<INPUT NAME=case TYPE=checkbox>Case&#160;sensitive
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=whole TYPE=checkbox>Partial&#160;match
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=lines TYPE=checkbox>Jump&#160;to&#160;line
+<!-- SPACES -->&#160;&#160;&#160;
+<SELECT NAME=errors align=right>
+<OPTION>0
+<OPTION>1
+<OPTION>2
+</SELECT>
+misspellings&#160;allowed
+
+<!-- Admins - "Use filters" must be checked for field-based searching,
+any kind of files that were filtered when indexed (such as PDF/Word/Excel),
+and non-English characters.  If it is required for your index,
+you may want to turn the following checkbox on by default or even make
+it a hidden tag with value="on" -->
+
+<!-- SPACES-->&#160;&#160;&#160;&#160;&#160;&#160;
+<INPUT NAME=nonascii TYPE=checkbox>Use filters
+<br>
+</center>
+Return only files modified within the last <INPUT NAME=age size=5>
+days.
+<br>
+Maximum number of files returned:
+<SELECT NAME=maxfiles>
+<OPTION>10
+<OPTION selected>50
+<OPTION>100
+<OPTION>1000
+</SELECT>
+<br>Maximum number of matches per file returned:
+<SELECT NAME=maxlines>
+<OPTION>10
+<OPTION selected>30
+<OPTION>50
+<OPTION>500
+</SELECT>
+<br>
+<br>Maximum number of characters output per file:
+<INPUT NAME="maxchars" VALUE=10000>
+<br>
+<!-- Admins - remove this line to stop caching next hits -->
+<INPUT NAME="cache" VALUE="yes" TYPE="HIDDEN">
+
+</FORM>
+</td></tr>
+<tr><td colspan=2>
+<center>
+<font size=-2>
+<a href="http://webglimpse.net">Glimpse and 
+WebGlimpse</a>, 
+Copyright &copy; 1996, 
+University of Arizona,
+Copyright &copy; 1998 Internet WorkShop
+</center>
+</font></td></tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<title>Recherche complète dans l'archive |TITLE| </title>
+|METACHARSET|
+</head>
+
+<body  onLoad="document.wgform.query.focus()" bgcolor="#ffffdd"><center>
+
+
+
+<table border=5 bgcolor="#ffffff">
+<tr><td align=center valign=middle>
+    <a href="http://webglimpse.net"><img src="/|CGIBIN|/showimg.cgi" alt="Webglimpse Logo" align=middle height=34 width=60></A>
+</td>
+<td align=center valign=middle>
+   <font size=+3>
+   <a href="http://webglimpse.net">WebGlimpseII</a>
+   Rechercher<br></font>
+</td>
+</tr>
+
+<!-- Admins - local copy pointers have been eliminated as of v1.6. If this bothers you e-mail gberns@iwhome.com and complain -->
+
+<tr><td colspan=2 align=center>
+
+<FORM method=get NAME="wgform" ACTION="/|CGIBIN|/webglimpse.cgi">
+<INPUT TYPE=HIDDEN NAME="ID" VALUE="|ID|">
+
+rechercher dans toute l'archive: |TITLE|
+</td></tr>
+
+<tr><td colspan=2>
+Chaîne à chercher: <INPUT NAME=query size=30>
+<INPUT TYPE=submit VALUE=Allez-y>
+<br>
+Ranger par:
+<SELECT name="rankby">
+<OPTION VALUE="DEFAULT">Résultat combiné
+<OPTION VALUE="AGE">Le plus récent en premier
+<OPTION VALUE="LINKPOP">Popularité du lien
+<OPTION VALUE="TITLE_AND_META">Le titre et méta correspondent
+</SELECT>
+<br>
+
+<INPUT NAME=case TYPE=checkbox>Tenir compte de la case
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=whole TYPE=checkbox>Concordance partielle
+<!-- SPACES -->&#160;&#160;&#160;
+<INPUT NAME=lines TYPE=checkbox>Sauter à la ligne
+<br>
+<SELECT NAME=errors align=right>
+<OPTION>0
+<OPTION>1
+<OPTION>2
+</SELECT>
+Fautes d'ortographe acceptées
+
+<!-- Admins - "Use filters" must be checked for field-based searching, 
+any kind of files that were filtered when indexed (such as PDF/Word/Excel), 
+and non-English characters.  If it is required for your index, 
+you may want to turn the following checkbox on by default or even make 
+it a hidden tag with value="on" -->
+
+<!-- SPACES-->&#160;&#160;&#160;&#160;&#160;&#160;
+<INPUT NAME=nonascii TYPE=checkbox>Utiliser les filtres
+<br>
+</center>
+Recupère seulement les fichiers modifiès les --- derniers jours. <INPUT NAME=age size=5> [|days|].
+<br>
+Nombre maximal de fichiers recupérés:
+<SELECT NAME=maxfiles>
+<OPTION>10
+<OPTION selected>20
+<OPTION>50
+<OPTION>100
+<OPTION>1000
+</SELECT>
+<br>Nombre maximal de concordances per fichier retourné:
+<SELECT NAME=maxlines>
+<OPTION selected>10
+<OPTION>30
+<OPTION>50
+<OPTION>500
+</SELECT>
+<br>Nombre maximal de caractères per fichier:
+<INPUT NAME="maxchars" VALUE=3000>
+<br>
+<input type=checkbox name="sentence"> Imprimer seulement les phrases qui contient des mots-clé
+<br>
+<input type=checkbox name="limit"> [|onepage|]
+<br><i><!-- Limit to one page is only functional with commercial version --></i>
+<!-- Admins - remove this line to stop caching next hits -->
+<INPUT NAME="cache" VALUE="yes" TYPE="HIDDEN">
+
+</FORM>
+</td></tr>
+<tr><td colspan=2>
+<center>
+<font size=-2>
+<a href="http://webglimpse.org">Glimpse</a> et 
+<a href="http://webglimpse.net">WebGlimpse</a>, 
+Copyright &copy; 1996 
+University of Arizona, &copy; 1998 Internet WorkShop
+</center>
+</font></td></tr>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Installation &amp; Configuration</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Installation and Configuration </h3>
+</div>
+<hr align="left" width="65%" />
+<p>&nbsp;</p>
+<p class="Sub-Heading"><a name="unixinstall" id="unixinstall"></a>Installing Webglimpse 2.X or 3.X Using the Unix/Linux Shell </p>
+<p>The list below are the steps required to install Webglimpse using the unix/linux shell. The installation steps must be completed in the following order:</p>
+<p><a href="#Step1">Download Glimpse &amp; Extract the files</a><br />
+  <a href="#Step2">Configure &amp; Install Glimpse</a><br />
+  <a href="#Step3">Download Webglimpse &amp; Extract the files</a><br />
+  <a href="#Step4">Install Webglimpse</a><br />
+  <a href="#Step5">Configure Your archive</a></p>
+<p>&nbsp;</p>
+<!--
+There now are extensions available for the provision of a repository
+of PDF reprints of scientific papers. Download glimpse and webglimpse
+as shown below, then follow the instructions in the file
+<strong>wrREADME</strong> of the webglimpse distribution. Use of the
+files as part of a webglimpse installation is subject to the same
+conditions as outlined in the webglimpse license. For other use please
+contact the authors.
+-->
+<p class="SubHeading2"><a name="Step1" id="Step1"></a>Step 1 - Download Glimpse and Extract the Files </p>
+<p><strong>*Important Note About Upgrading: </strong>Users upgrading an existing installation can follow the same steps as outlined below. The only difference will be that when running <strong>./wginstall</strong>, you will have the option to keep existing configuration and a lot less questions will be asked. The only thing to watch out for, is that files in <strong>/usr/local/wg2/templates</strong> and <strong>/usr/local/wg2/dist</strong> will be replaced with newer versions, so if you had customized your copies, you will need to make backups before upgrading. Individual archive files will only be replaced if you press the 'Save Changes' button for that archive in the archive manager program (<strong>http://yourserver/cgi-bin/wg2/wgarcmin.cgi</strong>).
+</p>
+<p>All users may download Glimpse from <a 
+href="http://webglimpse.net/trial/glimpse-latest.tar.gz">http://webglimpse.net/trial/glimpse-latest.tar.gz</a> Glimpse is 'honor system' or shareware distribution, no password is required for download. See the <a 
+href="licensing.htm">Licensing</a> page for more information.
+</p>
+<p class="SubHeading2">Extracting the Glimpse Files</p>
+<p>Create a temporary directory to place the  tarball, then execute the following command to untar and extract the files:</p>
+<blockquote>
+  <p> <strong>tar -xzvf glimpse-latest.tar.gz</strong>
+  </p>
+</blockquote>
+<p class="SubHeading2"><a name="Step2" id="Step2"></a>Step 2 - Configure &amp; Install Glimpse</p>
+<p>While still  in your temporary directory, execute the following command:</p>
+<blockquote>
+  <p> <strong>cd glimpse-[VERSION]<br />
+    ./configure<br /> 
+    make<br /> 
+    make install</strong></p>
+</blockquote>
+<p>Note: *If you are running as a non-root user, you may need to copy the files by hand to another location. <br />
+By default the above steps will install glimpse binaries to /usr/local/bin. </p>
+<p>To copy the binaries to another location, try the following </p>
+<blockquote>
+  <p><strong>mkdir ~/glimpsebins <br />
+    cp bin/* ~/glimpsebins </strong></p>
+</blockquote>
+<p>Then, type </p>
+<blockquote>
+  <p><strong>ls -slagd ~/glimpsebins </strong></p>
+</blockquote>
+<p>and note the full path. You'll need to give this full path to Webglimpse to tell it the location of the glimpse binaries. Make sure NOT to tell Webglimpse a path including the '~' character, because that refers to 'your home directory' and it most likely will not be available when running through a web browser.</p>
+<p class="SubHeading2"><a name="Step3" id="Step3"></a>Download Webglimpse and Extract the Files </p>
+<p>Depending on your license (commercial, EDU-only, or trial), you may need to use a different link for download. See <a 
+href="http://webglimpse.net/download.php">Downloads</a> page for all current download links. </p>
+<p><strong>Extracting the Webglimpse Files</strong></p>
+<p>  Create a temporary directory to place the tarball, then execute the following command to untar and extract the files:</p>
+<blockquote>
+  <p><strong>tar -xzvf wg-latest.tar.gz </strong></p>
+  <p><strong>ls -l </strong></p>
+  <p><strong>cd wg-[VERSION]</strong></p>
+</blockquote>
+<a name="Step4" id="Step4"></a><span class="SubHeading2">Install Webglimpse</span>
+<p>While still in your temporary directory, execute the following command:</p>
+<blockquote>
+  <p><strong>./wginstall</strong></p>
+</blockquote>
+<p>This program will check the operating system and the location of several required programs, including <b>glimpse</b>, <b>glimpseindex</b> and <b>wgconvert</b>. If these are not found in the path, you will be prompted for their locations. Both glimpse and wgconvert should have been installed with the Glimpse package. </p>
+<p>You will be asked a series of questions about your server configuration. For most questions you can accept the default, especially if wginstall is successful in parsing your httpd.conf file. Experienced users can probably just run wginstall without reading the example below. </p>
+<p>The install process will vary somewhat depending on your choices, but it will be something like the following:</p>
+<table width="85%" border="0" bordercolor="#666666" bgcolor="#E5E5E5">
+  <tr>
+    <td><p>First, I'll need a Webglimpse home directory, where most of the libraries and executables will be stored. This directory should be readable by the user the web server runs as, but for greatest security should NOT be under document root or the cgi-bin area.<br />
+  Please enter Webglimpse home directory [/usr/local/wg2]:</p>
+      <blockquote>
+        <p><strong>Should NOT be the current directory. Make sure it is an absolute path, ie starts with a "/", not a "."</strong></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Please enter the path to the web server configuration file that contains your ServerName, DocRoot and VirtualHost settings For apache servers, this file is usually named httpd.conf.<br />
+Path to configuration file [/etc/httpd/conf/httpd.conf]:</p>
+        <blockquote>
+          <p><strong>The installation program will attempt to parse some server configuration settings out of this file. You will have a chance to override them. In no case are any changes made to your httpd.conf file, this is a read-only process!</strong></p>
+      </blockquote>
+        <pre>Parsed the following settings from the server config file:
+        ServerName = localhost
+        DocumentRoot = /home/WWW
+ plus others.  All these settings can be edited from the web administration tool
+ after the install has completed.
+ Please enter 'Y' to keep these settings for later editing
+ or 'N' to forget all parsed values and reenter them now
+        </pre>
+Keep parsed values from server config? [Y]:
+<blockquote>
+  <p><span class="answer"><strong>If you enter N, you will be able to reenter these settings now. If you enter Y or just hit return, you won't be prompted for them now, but you can later edit the file <em>wgsites.conf</em> in the archives directory (set below) to change or add values.</strong></span></p>
+</blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Next, I'll need a directory for storing indexes and other archive-related files. To use the web administration interface, this directory will need to be made writable by the web user. It should NOT be placed under document root or the cgi-bin area.<br />
+  Please enter Webglimpse Archive directory [/usr/local/wgnew1/archives]:</p>
+      <blockquote>
+        <p><span class="answer"><strong>In versions 1.X, archives were stored all over the place, often along with the files being indexed. With all 2.X versions, we default to keeping all archive files in one place, but you still will have the option later through the web interface to place each archive wherever you want.</strong></span></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Now, I'll need a directory that IS under your cgi-bin area to place the webglimpse cgi scripts. This should be a directory where scripts can execute from the web.<br />
+  Please enter full directory path to Webglimpse cgi area [/home/httpd/cgi-bin/]:</p>
+      <blockquote>
+        <p><span class="answer"><strong>This is important; you must have a directory where cgi scripts can run in order to run webglimpse and wgarcmin. In versions 2.0.9 and above, the scripts are called webglimpse.cgi and wgarcmin.cgi so that they will run on servers requiring that extension. If you have a scriptalias cgi-bin directory, you may want to create a subdirectory specifically for the webglimpse scripts.</strong></span></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>What is the script alias (relative url) for this directory? [/cgi-bin/]: <br />
+      <br />
+    </p>
+    </td>
+  </tr>
+  <tr>
+    <td><p>What username does the web server run as? [nobody]: <br />
+      <br />
+    </p></td>
+  </tr>
+  <tr>
+    <td><p>Searches may be logged to a file in a format usable by web usage analysis software such as wusage by boutell.com. <br />
+  Do you have wusage installed (and would you like to use it)? [N]: </p>
+      <blockquote>
+        <p><span class="answer"><strong>versions 2.0.9 and above only</strong></span></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>What is the path to wusage? [/usr/local/bin/wusage]: <br />
+      <br />
+    </p></td>
+  </tr>
+  <tr>
+    <td><p>Wusage will generate HTML reports showing the terms users have searched for. These reports generally are placed somewhere in HTML document space, possibly in a password-protected area. <br />
+  What directory should the reports be stored in? [/home/WWW/wusage]: </p>
+    <p><pre>Now you need to choose a program to filter tags out of HTML files
+If you don't need non-English language support, probably you will pick choice 1
+The choices are as follows: 
+        1 - html2txt            The fast, simple, original conversion program
+        2 - htuml2txt.pl        Slow perl script handles HTML character codes
+        3 - htuml2txt           Faster lex script also handles char codes 
+        4 - htuml2txtc          Experimental C program to do same as above. (not installed!)
+ Please enter your choice [1]:
+</pre>
+    <blockquote>
+      <p>
+        </p>
+      </p>
+      <p class="answer"><strong>If your site is in a language other than English, you'll want to use one of the choices 2-4. If you choose 4, go to the /lib subdirectory of your webglimpse home directory, and compile htuml2txt.c by hand. <br />
+        Something as simple as <em>gcc -o htuml2txtc htuml2txt.c</em> works on most systems. </strong></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Should I now make nobody the owner of /usr/local/wgnew1/archives so that you can administer archives from the web? [Y]: </p>
+      <blockquote>
+        <p><span class="answer"><strong>Currently you have to allow this in order to administer your archives in version 2.X. We plan to have a future version that allows administration either from command-line or web interface.</strong></span></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Should I also make nobody the owner of /home/WWW/wusage so that usage reports can be created from the web interface? [Y]: </p>
+    <p>Now I am going to compile the filter program you chose, and also httpget, a very short C program needed by Webglimpse. Please choose the OS closest to your system. You may want to examine the available Makefiles to see which one would work best. What OS are you running (must be one of linux sco hpux sunos solaris osf irix)? [linux]: </p>
+    <p><pre>gcc -O -o lib/httpget lib/httpget.c 
+gcc -O -o lib/html2txt lib/html2txt.c
+make: `htuml2txt' is up to date.
+Copying files to /usr/local/wgnew1 and /home/httpd/cgi-bin/</pre>
+    <blockquote>
+      <p><strong>If you have any problems compiling these short programs, take a look at the switches in the Makefile in the main webglimpse home directory, and see if any may need to be changed for your system. </strong></p>
+      </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Unless you are already on a secure intranet, you will want to set up some security for the admin interface. The best way is to use your httpd server's built-in security, usually by creating .htaccess and .htpasswd files. Depending on your server configuration, you may need to move the wgarcmin script to a cgi-enabled directory under DocumentRoot. If you are not the sysadmin, you may or may not be able to do this. If in doubt, you can always use cookie-based authentication for now. We encrypt the password combined with a timestamp so it is not that bad. </p>
+    <p>Set up cookie-based authentication? [Y]: </p>
+    <blockquote>
+      <p class="answer"><em><strong>wgarcmin</strong></em><strong> will automatically check if the user is authenticated by the webserver, and if they match one of the entries in the .wgpasswd file. So even if you say Y to this question, you can later set up authentication through your webserver and cookies will automatically be turned off. If you say N, you will need to set up your own authentication independently, it will not be done by the install.</strong></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Enter administrative username []:admin </p>
+      <blockquote>
+        <p><span class="answer"><strong>One of the few questions you actually have to type something no matter what, since there is no default</strong></span></p>
+    </blockquote></td>
+  </tr>
+  <tr>
+    <td><p>Enter administrative password []: </p>
+      <p>Done with install! You may use <strong>/usr/local/bin/wgcmd</strong><br />
+      or<br />
+      <strong>http://localhost/cgi-bin/wgarcmin.cgi</strong><br />
+    to configure archives. <br />
+    </p>
+      <p>Run wgcmd to manage your archives now? [Y]: </p>
+      <blockquote>
+        <p class="answer"><strong>At this point, all the webglimpse-related files are copied to your webglimpse home directory, with appropriate changes made for your system, and the scripts are in the cgi-bin directory you specified. When you create each archive, some files are copied again into each archive directory, so they can be customized for that archive.</strong></p>
+        <p class="answer"><strong>You can answer 'Y' to the last question, and the archive manager will be started automatically.</strong><br />
+        </p>
+      </blockquote>      </td>
+  </tr>
+</table>
+<p>Congratulations, you have successfully installed Webglimpse! You are now ready to configure your first archive. </p>
+<p><a name="Step5" id="Step5"></a><span class="SubHeading2">Configure Your Archive </span></p>
+<p>Both <b>wgcmd</b> (command line) and <b>wgarcmin.cgi</b> (web interface) have context-sensitive help and instructions. Start by running either one, as prompted at the end of the install. If running wgcmd, type '?' for help. If running wgarcmin.cgi through your browser, look for the 'Help on...' link at the top of each page. </p>
+<p class="answer">The section <a href="searchable.htm">Making A Searchable Site</a> contains more information and detailed steps for making your archives. </p>
+<p align="left">Next, we will talk about installing Webglimpse into a cPanel server. </p>
+<p><a href="install5.htm">Continue to Next Page  &gt;&gt;</a> </p>
+<p class="answer">&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="simpletutorial.htm">&lt;&lt; Simple Tutorial </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="searchable.htm">Making A Searchable Site  &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

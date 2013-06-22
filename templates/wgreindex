@@ -1,0 +1,65 @@
+#!|SHELL|
+
+
+# CRONFILE FOR ARCHIVE IN DIRECTORY |INDEXDIR|
+
+quiet=""
+if [ "$1" = "-q" ] ; then
+  quiet="-q"
+fi
+
+# set language environment variables (will be blank for English)
+LANG=|LC|
+LC_ALL=|LC|
+
+export LANG
+export LC_ALL
+
+# create a file to insure that no one searches during an index
+touch |INDEXDIR|/indexing-in-progress
+
+# delete the search boxes in all current files (filelist may change)
+|WGHOME|/addsearch |ID| -r $quiet
+
+# Do the retrieving
+|WGHOME|/makenh |INDEXDIR| $quiet
+
+# put the search box in the html files -- will check config file
+#  and will not do anything if not wanted
+|WGHOME|/addsearch |ID| $quiet
+
+cd |INDEXDIR|
+
+# Do the indexing
+if [ "$quiet" = "-q" ] ; then
+   |CAT| |INDEXDIR|/.wg_toindex | |GLIMPSEIDX_LOC| -H |INDEXDIR| -t -o -h -n -X -U -F > /dev/null
+
+else
+   |CAT| |INDEXDIR|/.wg_toindex | |GLIMPSEIDX_LOC| -H |INDEXDIR| -t -o -h -n -X -U -F
+
+fi
+
+# Compress neighborhood files
+if [ "$quiet" = "-q" ] ; then
+  |CAT| |INDEXDIR|/.wg_madenh | |CONVERT_LOC| -H |INDEXDIR| -U -P .nh. -F -ni | grep -v "^hash_misses=0"
+else
+  |CAT| |INDEXDIR|/.wg_madenh | |CONVERT_LOC| -H |INDEXDIR| -U -P .nh. -F -ni
+fi
+
+# set the permissions
+chmod a+r .glimpse_*
+chmod -R a+r |INDEXDIR|
+
+# remove the locking file
+|RM| -f |INDEXDIR|/indexing-in-progress
+
+# Optional - update search logs
+unset GATEWAY_INTERFACE
+|WUSAGE| -c |INDEXDIR|/wusage.conf
+mv |INDEXDIR|/searches.log |INDEXDIR|/searches.lastlog
+touch |INDEXDIR|/searches.log
+
+# Check and see if the index got built!
+if [ ! -s |INDEXDIR|/.glimpse_index ] ; then
+   echo -e "Subject: indexing error\nFailed to build index in |INDEXDIR|\n" | |SENDMAIL| |ADMIN_EMAIL|
+fi

@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation - Miscalleny</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>How-To's</h3>
+</div>
+	
+<p>&nbsp;</p>
+<hr align="left" width="65%" />
+<p class="SubHeading2"><a name="logging" id="logging"></a>Logging User Searches</p>
+        <p>User searches are logged to the file <strong>searches.log</strong> in the archive directory, using common log format. You can use any standard <br />
+        web analysis software to analyze this log file. Webglimpse has built in 
+        support for <strong>wusage, </strong>a web site statistics program that can help you determine who is viewing your search archives and how they are using them. Webglimpse can be configured to be compatible with this program. You can find more information on wusage by visiting their website:   <a href="http://www.boutell.com/wusage/">http://www.boutell.com/wusage/ </a></p>
+            <blockquote>
+              <p align="left"><strong>wusage.conf </strong>- is the configuration file for the logging user searches. </p>
+            </blockquote>
+          </ol>
+        <p class="SubHeading2"><a name="sponsored" id="sponsored"></a>Adding Sponsored Links</p>
+        <p>On the Manage Archive screen using the web administrator, check the
+      box labeled <strong>Optional - Include Sponsored Searchfeed links</strong>. (See <a name="figure20" id="figure20"></a>Figure 20 below) </p>
+        <p align="center"><img src="images/8379f21.jpg" alt="Figure 20" width="301" height="44" /></p>
+        <p>Next, click
+        on <strong>Set up/manage Account</strong>, which is a link to set up an account with
+        <a href="http://www.searchfeed.com">Searchfeed.com</a>. An on-line advertising and content provider company,
+        Searchfeed.com provides sponsored search results that are supposed
+        to be relevant to the keywords on which the user searches. Once your
+        account is set up, simply enter the partner ID and track ID provided
+        by Searchfeed.com and choose how many ads should appear at the top of
+        your search results. </p>
+        <p>A user account is pretty simple to set up. To get the most
+        out of your ads, you can use the suite of on-line tools provided by
+        Searchfeed.com to monitor what keywords users are searching on, which
+        ads they are clicking on and how much you make from each click. </p>
+        <p class="SubHeading2"><a name="searchtips" id="searchtips"></a>Search Tips for the End User</p>
+        <p>Webglimpse supports boolean queries and wildcards, as well as some limited 
+      regular expressions. Words separated by spaces are treated as a phrase. You can 
+      use the keywords AND, OR and NOT, along with parenthesis, and the '#' character 
+      for wildcard matching. </p>
+        <p><strong>Example boolean queries:</strong>
+        </p>
+            <TABLE border=0>
+              <TBODY>
+                <TR>
+                  <TD><p>
+                    <INPUT size=30 value="tree AND leaf" name=ex1> 
+                    </p></TD>
+                  <TD>will match documents containing the words "tree" and "leaf" anywhere 
+                    in the document </TD>
+                </TR>
+                <TR>
+                  <TD colSpan=2>
+                    <HR width="67%">      </TD>
+                </TR>
+                <TR>
+                  <TD><p>
+                    <INPUT size=30 value="tree AND leaf AND NOT binary" name=ex2> 
+                    </p></TD>
+                  <TD><p>will match documents containing the words "tree" and "leaf" but not 
+                    the word "binary" </p></TD>
+                </TR>
+                <TR>
+                  <TD colSpan=2>
+                    <HR width="67%">      </TD>
+                </TR>
+                <TR>
+                  <TD><p>
+                    <INPUT size=30 value="open source OR shareware" name=ex3> 
+                    </p></TD>
+                  <TD><p>will match documents containing the phrase "open source" or the word 
+        "shareware" </p></TD>
+                </TR>
+              </TBODY>
+            </TABLE>
+          </ol>
+        <p>
+</p>
+        </p>
+        <p><strong>Example use of wildcard #: </strong></p>
+            <table cellspacing="5" border="0">
+              <tbody>
+                <tr>
+                  <td><p>
+                    <input size="30" value="lang#" name="ex4" />
+                    </p></td>
+                  <td><p>will match 'language' and 'languages' but not 'slang' or 'clangs'. 
+                      This is different than checking the 'partial match' box in the query 
+                    form, which would match all three patterns. </p></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><hr width="67%" />      </td>
+                </tr>
+                <tr>
+                  <td><p>
+                    <input size="30" value="#lang#" name="ex5" />
+                    </p></td>
+                  <td><p>will match all patterns mentioned above - 'languages', 'language', 
+                      'slang' and 'clangs'. This is the same effect as checking the 'partial 
+                    match' box, but checking the box would be faster. </p></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><hr width="67%" />      </td>
+                </tr>
+                <tr>
+                  <td><p>
+                    <input size="30" value="www.#.com" name="ex6" />
+                    </p></td>
+                  <td><p>will match patterns like www.anything.com </p></td>
+                </tr>
+              </tbody>
+            </table>
+          </ol>
+        <p>When using complex queries like the 
+      above, you may sometimes get matches to code inside HTML tags instead of to the 
+      visible text in the file. To avoid this, check the &quot;Use Filters&quot; box in the 
+      search options form. (You should always check this box when searching non-ascii 
+      type documents, like PDF or Word files. If you don't see it on the form, it may 
+      have been automatically checked for you in a hidden tag.) </p>
+        <p class="SubHeading2">There's more...</p>
+        <p>The above examples cover the most common types of 
+        queries. Webglimpse (and glimpse) also can accept a limited form of regular 
+        expressions, including support for the '|', '*', '[]' characters and 
+        parentheses. Please see <a 
+href="http://webglimpse.net/gdocs/glimpsehelp.html#sect7">the Glimpse man page 
+          Patterns section</a> for all the gory details. You will need to know that 
+        Webglimpse calls glimpse with the switches -U -W -j -y -z , plus others 
+        determined by the checkboxes on the form. View the source of the results page 
+        for the exact call to glimpse made by a particular webglimpse query.</p>
+        <p><i>Note: The above document is for the commercial/contributors version of 
+        Webglimpse. EDU and demo versions that do not have the translator module have to 
+        use the original ',' for OR, ';' for AND, and '~' for NOT</i></p>
+            <blockquote></blockquote>
+
+        <p class="SubHeading2"><a name="language" id="language"></a>Language Issues</p>
+        <p>Glimpse can index any language that is single-byte encoded - that includes all European languages such as Spanish, French, etc. (Currently we cannot do double-byte encoded languages such as Chinese, or with special rules for word breaks such as Thai.) By using the included filter program, the special &uml;aut; characters are correctly indexed whether they appear as html character entities or actual upper-ascii characters. </p>
+        <p>Thanks to contributions from our users, we have incorporated search forms and result templates in the following languages:<br />
+        Hebrew, German, Spanish, Italian, Finnish, Portuguese and Estonian. Creating a search interface that searches and displays correctly in these languages is just a single click! </p>
+        <p>Licensed users can easily add their own templates in any language with the <a href="configure.htm#overview">Custom Output Module</a> .</p>
+        <p>&nbsp;</p>
+        <p class="SubHeading2"><a name="spaces" id="spaces"></a>Indexing Files with Spaces in the Names</p>
+        <p><b>Step 1:</b> You will make the following change in one or two files, depending on the version of Webglimpse you have. Change </p>
+
+            <blockquote>
+              <blockquote>
+                <p> $FILE_END_MARK = &quot; &quot;; </p>
+              </blockquote>
+              <p>to something other than a space. For example, set it to</p>
+              <blockquote>
+                <p> $FILE_END_MARK = &quot;\t&quot;; </p>
+              </blockquote>
+              <p>to use a tab character. (Then you can't index files with tabs in the names, but those are typically uncommon)</p>
+            </blockquote>
+
+        <p> The file(s) you need to change are:</p>
+
+            <table border="1" align="center" cellpadding="4" bordercolor="#666666" bgcolor="#E5E5E5">
+              <tr>
+                <th width="50%"><p>Webglimpse 2.0 and above</p></th>
+                <th width="50%"><p>Webglimpse 1.X</p></th>
+              </tr>
+              <tr>
+                <td><p>/your/webglimpse/home/lib/<b>wgHeader.pm</b> <a name="wgheaderpm" id="wgheaderpm"></a></p></td>
+                <td><p>/your/webglimpse/home/<b>makenh</b> <a name="makenh" id="makenh"></a></p>
+                    <p> and </p>
+                    <p> <b>webglimpse</b> (installed somewhere under your cgi-bin area) </p></td>
+              </tr>
+            </table>
+
+        <p> <b>Step 2:</b> A corresponding change must be made in glimpse and glimpseindex: (*<strong>Note</strong>: This will require that you recompile the glimpse binaries) </p>
+
+            <blockquote>
+              <p>Edit <b>glimpse.h</b> (in the /index subdirectory of the glimpse sources) to set a matching value in glimpse itself. <br />
+              Change the line </p>
+              <blockquote>
+                <p> #define FILE_END_MARK ' ' </p>
+              </blockquote>
+              <p>to match the value you set in makenh, for example, change it to </p>
+              <blockquote>
+                <p> #define FILE_END_MARK '\t'; </p>
+              </blockquote>
+              <p> Recompile glimpse. Copy the binaries to wherever you keep them, normally somewhere in your path. </p>
+</blockquote>
+
+        <p>&nbsp;</p>
+
+            <table border="1" align="center" cellpadding="4" bordercolor="#666666" bgcolor="#E5E5E5">
+              <tr>
+                <th width="100%" colspan="2"><p>Glimpse 4.18.0 and above</p></th>
+              </tr>
+              <tr>
+                <td width="100%" colspan="2"><p>From the directory where you extracted glimpse sources, run </p>
+                    <blockquote>
+                      <p> ./configure --with-file-end-mark='\t'<br />
+                        make clean<br />
+                        make<br />
+                      make install </p>
+                  </blockquote></td>
+              </tr>
+              <tr>
+                <th width="50%"><p>Glimpse 4.14 thru 4.17.4</p></th>
+                <th width="50%"><p>Glimpse 4.13.2 and below</p></th>
+              </tr>
+              <tr>
+                <td valign="top"><p>From the directory where you extracted glimpse sources, run </p>
+                    <blockquote>
+                      <p> ./configure --file-end-mark='\t'<br />
+                        make clean<br />
+                        make<br />
+                      make install </p>
+                  </blockquote></td>
+              </tr>
+            </table>
+          </ol>
+        <p> <b>Step 3:</b> Reindex your archive with <b>wgreindex</b> </p>
+        <p><a href="integrate.htm">Continue to Next Page &gt;&gt;</a></p>
+        <p class="SubHeading2">&nbsp;</p>
+        <div align="right">
+              <table width="700" border="0" align="center">
+                <tr>
+                  <td width="243"><div align="left">
+                    <p>&lt;&lt;<a href="filtering.htm" target="main">Filtering and Filetypes</a></p>
+                  </div></td>
+                  <td width="176"><div align="center">
+                    <p><a href="TOC.htm">Table of Contents</a></p>
+                  </div></td>
+                  <td width="246"><div align="right">
+                    <p><a href="troubleshooting.htm">Troubleshooting &gt;&gt;</a></p>
+                  </div></td>
+                </tr>
+              </table>
+</div>
+          </ol>
+        <p>&nbsp;</p>
+</body>
+</html>

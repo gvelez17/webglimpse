@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>cPanel WG Installer for Administrators</TITLE>
+</HEAD>
+<BODY>
+<H2>cPanel WG Installer for Administrators</H2>
+
+In order to use the Webglimpse cPanel module, the server administrator must first place the AddOn script in the correct location and make sure some simple prerequisites are met.
+<p>
+<b>I. Prerequisites</b>
+<OL>
+<LI>Addon Script Manager
+<br>
+	You need to have "Addon Script Manager" installed (menu "Add-ons") in your administrator cPanel.
+	If not, you can find it at: menu "cPanel 1x.x.x" -> "Addon Modules" and make sure
+	that "addonupdates" is selected.
+
+<LI> CGI Script Alias
+<br>
+	Make sure that all accounts that would like to use Webglimpse search engine have working	cgi-bin directories and they are properly configured.
+	You may like to enable CGI Script Alias in "Server Configuration" -> "Basic cPanel/WHM Setup".
+
+<LI> Enable/Disable SuExec
+<br>
+	To work Webglimpse properly and securely you need to have SuExec enabled. That will allow Webglimpse to generate archives with user's ownership and prevent other users from modifying files.
+	To do that please follow: menu "Service Configuration" -> "Enable/Disable SuExec" -> "Enable".
+</OL>
+
+<b>II. Installation</b>
+<blockquote>
+<PRE>
+# Download the Webglimpse tarball 
+wget http://cpanel.webglimpse.net/cpanel-addons/webglimpse-cpanel-addon.tar.gz
+
+# Unpack the files
+tar -xzf webglimpse-cpanel-addon.tar.gz
+
+# Make a Webglimpse addon directory
+mkdir /usr/local/cpanel/addons/Webglimpse	
+
+# Put the files into /usr/local/cpanel/addons
+mv Webglimpse/* /usr/local/cpanel/addons/Webglimpse
+
+# this places the Webglimpse logo where users can see it from the Script Library tool
+cp /usr/local/cpanel/addons/Webglimpse/*.png /usr/local/cpanel/base/frontend/x/addoncgi/
+
+# We also need Glimpse
+# Choose the correct glimpse binary for your OS.  Please view the list at
+#  http://webglimpse.net/download.php
+wget http://webglimpse.net/bindist-glimpse/glimpse-4.18.5.bin.Linux-2.6.9-22.0.1.ELsmp-x86_64.tar.gz
+
+# Move it to where Webglimpse can find it
+mv glimpse-4.18.5.bin.Linux-2.6.9-22.0.1.ELsmp-x86_64.tar.gz /usr/local/cpanel/addons/Webglimpse/pkg.tar.gz
+</PRE>
+</blockquote>
+
+<b>III. Verify whether package is installed.</b>
+<p>
+	Go again to Administrator cPanel interface and check in "Addon Script Manager" whether "Webglimpse"
+	is available in scripts list. Press "Update All Installs" -> Update.
+<p>	
+	Now you can login through user cPanel interface and you can find Webglimpse installer available in:
+	"Scripts Library" -> "Webglimpse"
+<p>
+<b>IV. Removal Instructions</b>  (if you want to remove Webglimpse - not necessary for installation!)
+<p>
+	Due to limitations of the cPanel 10.X interface, Webglimpse script is not able
+	to remove all files that it creates.
+	cPanel auto remover will remove only directory where http://user_domain/dir is located, but script
+	also create http://user_domain/cgi-bin/cwg and HOME/cwg directories that should be removed manually.
+
+</BODY>
+</HTML>

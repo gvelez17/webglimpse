@@ -1,0 +1,65 @@
+# Output configuration file for use with Contributors/Commercial version
+#
+# NOTE - if you have Demo/Trial/EDU version, this file has no effect
+#
+# now supports [INCLUDE: filename] in begin_html and end_html areas
+#
+
+begin_html	<HTML><HEAD><TITLE>Webglimpse %%searchresults%%</TITLE>
++		|METACHARSET|
++		<style type="text/css">
++		<!-- 
++		body,td,div,a {font-family:arial,sans-serif; font-size:10pt; } 
++		a:link {color:#000080}
++		div.results {border-top:thin ridge #008000; padding-top: .3em; }
++		-->
++		</style>
++		</HEAD>
++		<BODY BGCOLOR="#ffffff">
++		<H3>|TITLE| %%searchresults%%:</b></H3>
++		<font size="-1">%%lookingfor%%<b>[QUERY]</b> %%in%% [NEIGH] -
++		%%Found%% [MATCHED_LINES] %%matchesin%% [MATCHED_FILES] %%files%% 
++		<br>%%showingres%% [STARTING_FROM] - [ENDING_AT]</font>
+
+end_html	</BODY></HTML>
+
+begin_files		<div class=results>
+end_files		</div>
+
+begin_file_marker	<b>[LINK]</b>, [DATE]
+end_file_marker		<br>
+
+begin_lines		
+end_lines		<p>
+
+begin_single_line	
+end_single_line		<br>
+
+neigh_msg		%%neighof%% <tt>[SEARCHTITLE]</tt>
+noneigh_msg		%%entirearchive%%
+
+newquery		%%newquery%%
+newquerybutton		%%search%%
+
+# The "New Query" search box is customized by editing the separate
+# file "newquery.html" in the archive directory (starting with WG v 2.4.8)
+
+files_exceeded		<br>%%limitof%% [MAXFILES] %%filesreached%%.
+lines_exceeded		<i>...%%limitof%% [MAXLINES] %%linesreached%%...</i>
+
+# Code to highlight matched words from the query
+begin_highlight		<font color="#ff0000"><b>
+end_highlight		</b></font>
+
+
+#
+#
+#
+#<SELECT name="rankby">
+#<OPTION VALUE="DEFAULT">%%rankby%%
+#<OPTION VALUE="DEFAULT">%%combinedscore%%
+#<OPTION VALUE="AGE">%%mostrecent%%
+#<OPTION VALUE="LINKPOP">%%linkpop%%
+#<OPTION VALUE="TITLE_AND_META">%%titlemeta%%
+#</SELECT>
+#

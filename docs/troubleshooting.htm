@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Troubleshooting</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Troubleshooting  </h3>
+</div>
+<hr align="left" width="65%" />
+<p>&nbsp;</p>
+<p><a name="techniques" id="techniques"></a><span class="SubHeading2">Troubleshooting Techniques</span></p>
+<p>This section contains tips and helpful information on troubleshooting methods and techniques. </p>
+<p><a name="shell" id="shell"></a><strong>Running Glimpse from a Shell</strong></p>
+<p> If you have shell access, the best way to troubleshoot problems with the 
+  search is to run the equivalent glimpse command in a command shell. To find 
+  this command, View the Source of your search results page (even if it is 
+blank) and look for the comment line near the top, something like:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&nbsp;&lt;!-- Glimpse command: /usr/local/bin/glimpse -U -W -j -y -i -w 
+  -H /home/wgdemo/4 'test' | --&gt;</strong></p>
+<p>Then go to a command shell and run</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>/usr/local/bin/glimpse -U -W -j -y -i -w -H /home/wgdemo/4 'test'</strong></p>
+<p><em>(do not include the '|' character at the end of the command, that is a Unix 
+  pipe for sending the results of the command to Webglimpse)</em></p>
+<p>This will give you the raw search results that Webglimpse sees, and may return 
+  error codes if the archive is not correctly indexed.</p>
+<p>For example, you if the Glimpse executable is located in your /usr/local/bin directory and you wanted to search for 'Arizona' you would enter the following command:</p>
+<blockquote>
+  <p><strong>/usr/local/bin/glimpse Arizona</strong></p>
+</blockquote>
+<p>Glimpse has multiple switches that can be used to further refine your query searches. For more information including a list of the switches available, see the <a href="http://webglimpse.net/gdocs/glimpsehelp.html">Glimpse Man Page</a>. </p>
+<p><strong><a name="manually" id="manually"></a>Manually Reindexing Your Archive</strong></p>
+<p>Manually reindexing your archive in order to troubleshoot can usually quickly resolve whatever  problem you are having because you will be able to see the output on your screen in real time. To manually index your archive, go to the 
+archive directory and run &nbsp;.<strong>/wgreindex</strong> manually. </p>
+<p><a name="wgtoindex" id="wgtoindex"></a><strong>What Exactly is being Indexed? Viewing the<a name="wgtoindex" id="wgtoindex"></a> .wg_toindex file</strong></p>
+<p>The .wg_toindex file contains a mapping of all the files  indexed in your archive. It contains both the internal path and the external web url along with the number of hops used. An example of this is seen below:</p>
+<blockquote>
+  <p><strong>/var/www/html/document1.html &nbsp;&nbsp;http://myserver.domain.com/document1.html &nbsp;1<br />
+    /var/www/html/document2.html &nbsp;&nbsp;http://myserver.domain.com/document2.html &nbsp;1<br />
+    /var/www/htmldocument3.html&nbsp;&nbsp; &nbsp;http://myserver.domain.com/document3.html &nbsp;1<br />
+    /var/www/html/document4.html &nbsp;&nbsp;http://myserver.domain.com/document4.html&nbsp; 1<br />
+    /var/www/html/document5.html &nbsp;&nbsp;http://myserver.domain.com/document5.html&nbsp;&nbsp;1</strong></p>
+</blockquote>
+<p>In this example, the left side contains the servers internal path to the document, the right side is the web url to it and at the end is the link popularity of the document, ie how many other 
+  documents in the index link to it
+. The file is space delimited.</p>
+<p><a name="errors" id="errors"></a><strong>Common Errors During Installation</strong></p>
+<p>If you are installing Webglimpse through the web interface, the most common problem would  be incorrect permissions or that the files are not owned by the web user. </p>
+<p>Webglimpse needs temporary write access to a a cgi bin area where scripts 
+  can execute in order to install the files. Note that for security reasons 
+  Webglimpse should NOT be installed entirely under document root or a cgi 
+area! </p>
+<p> If you want to use the web administration interface, the /archives
+  subdirectory of the webglimpse home should be made web writable. The best 
+  way to do this is to make it owned by the web user (the username that your 
+  web server runs as). For example, if your web server runs as 'nobody' and 
+you installed webglimpse to /usr/local/wg2, this would be achieved by running</p>
+<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chmod -R nobody /usr/local/wg2/archives</strong></p>
+<p>The install attempts to run this command but depending on the permissions of 
+the user running the install, it may or may not be able to do so.<br />
+</p>
+<p>You also may need to change the permissions of the install.php script, in order to make it executable. If you are using an ftp application such as<strong> WS-FTPpro</strong>, you can simply right click on the file you need to change and choose 'chmod(UNIX)', as in the left side picture in <a name="figure19" id="figure19"></a>Figure 19 below. Similarly, if you are using the <strong>WINscp3</strong> ftp client, highlighting the file you want to change and clicking the F9 button on the bottom of your screen will bring up the permission box, as in the figure on the right side. (the unix/linux man pages contain further information about the chmod command.) </p>
+<table width="370" border="0" align="center" cellpadding="2" cellspacing="2">
+  <tr>
+    <td width="160"><p><img src="images/8379f20.jpg" alt="Figure 19" width="150" height="297" /></p>
+    <p align="center"><strong>WS-FTPpro</strong></p></td>
+    <td width="160"><p>&nbsp;</p>
+        <p align="center">&nbsp;</p>
+      <p align="center">&nbsp;</p>
+      <p align="center">&nbsp;</p>
+      <p align="center">&nbsp;</p>
+      <p align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></td>
+    <td width="30"><p align="center"><img src="images/8379f20b.jpg" alt="Figure 19" width="354" height="441" /></p>
+      <p align="center"><strong>WINscp3</strong></p>
+    </td>
+  </tr>
+</table>
+<p align="left">If you are using your cpanel host to upload and change documents, you should use whichever method they recommend to change permissions. </p>
+<p>If you have installed Webglimpse via the unix/linux shell, you may run into problems such as an inability to compile Glimpse. We do have a limited number of Glimpse executables for some of the more common operating systems and versions. Please check our <a href="http://www.webglimpse.net/downloads/">downloads</a> area for availability for your particular system.</p>
+<p>&nbsp; </p>
+<p class="SubHeading2"><a name="security" id="security"></a>Security Considerations</p>
+<p>&nbsp; </p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="howtos.htm">&lt;&lt;How-To's     </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="verify.htm">Configuration Files to Verify     &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

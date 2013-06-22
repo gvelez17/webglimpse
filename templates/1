@@ -1,0 +1,61 @@
+
+This is glimpse version 4.18.5, 2006.
+
+usage:   [-#abceghijklnprstwxyBCDEGIMNPQSVWZ] [-d DEL] [-f FILE] [-F PAT] [-H DIR] [-J HOST] [-K PORT] [-L X[:Y:Z]] [-R X] [-T DIR] [-Y D] pattern [files]
+List of options (see http://webglimpse.net/ for more details):
+
+-#: find matches with at most # errors
+-a: print attribute names (useful only for Harvest SOIF format)
+-b: print the byte offset of the record from the beginning of the file
+-B: best match mode: find the closest matches to the pattern
+-c: output the number of matched records
+-C: send queries to glimpseserver
+-d DEL: define record delimiter DEL
+-D x: adjust the cost of deletions to x
+-e: for patterns starting with -
+-E: print matching lines as they appear in the index (useful in -EQNg)
+-f FILE: restrict the search to files whose names appear in FILE
+-F PAT: restrict the search to files matching PAT
+-g: print the file number (in the index)
+-G: output the (whole) files that contain a match
+-h: do not output file names before matched record
+-H DIR: the glimpse index is located in directory DIR
+-i: case-insensitive search, e.g., 'a' = 'A'
+-I x: adjust the cost of insertions to x
+-j: output file modification dates (if -t was used for the indexing)
+-J HOST: send queries to glimpseserver at HOST
+-k: use the pattern as is (no meta characters)
+-K PORT: send queries to glimpseserver at TCP port number PORT
+-l: output only the names of files that contain a match
+-L X[:Y:Z]: limit the output to X records [Y files, Z matches per file]
+-n: output record prefixed by record number
+-N: search only the index (may not be precise for some queries) 
+-o: delimiter is output at the beginning of the matched record
+-O: file names are printed only once per file
+-p FILE:off:len:endian: restrict the search to the files whose names
+	are specified as a bit-field OR sparse-set in FILE
+-P: print the pattern that matched before the matched record
+-q: print the offsets of the beginning and end of each matched record
+-Q: (with -N) print offsets of matches from (only the large) index
+-r: (used only for agrep) - recursive search
+-R X: set the maximum size of a record to X
+-s: display nothing except error messages
+-S x: adjust the cost of substitutions to x
+-t: use in combination with -d DEL so that the delimiter DEL appears
+	at the end of each output record instead of the beginning
+-T DIR: temporary files are put in directory DIR (instead of /tmp)
+-u: do not output matched records (useful in -qbug)
+-U: interpret .glimpse_filenames when -U / -X option is used in glimpseindex
+-v: (works ONLY for agrep) - output all records that do not contain a match
+-V,--version: print the current version of glimpse
+-w: pattern has to match as a word, e.g., 'win' will not match 'wind'
+-W: the scope of Booleans is the whole file (except for structured queries)
+-x: the pattern must match the whole line
+-X: if an indexed file that matches 'pattern' doesn't exist, print its name
+-y: no prompt
+-Y D: output only matches in files that were updated in the last D days
+-z: customizable filtering using the .glimpse_filters file
+-Z: no op
+--help: this message
+
+For questions about glimpse, please contact: `glimpse-mail@webglimpse.net'

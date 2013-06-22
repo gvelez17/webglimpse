@@ -1,0 +1,26 @@
+<HTML>
+<HEAD>
+<TITLE>Add Search Boxes Help Page</TITLE>
+</HEAD>
+
+<BODY bgcolor="#76AAAA"> 
+<center>
+<table cellpadding="3" bgcolor="#EBEACA" border=1> <CAPTION><font size="+2"><EM>Web Glimpse Administration</EM></font></CAPTION>
+
+	<tr><td align=center valign=middle><font size="+1">Help for Add Search Boxes<font><br>
+</td></tr>
+<tr><td>
+
+The <b>Add search boxes</b> checkoff tells the reindexing script to add a small query form to the bottom of each local page indexed, if permissions allow.  In order to make this happen, the reindexing script <b>wgreindex</b> must be run as a user who has permissions to edit the local pages.
+<p>
+For example, if you are the owner of your own web pages, and you would like search boxes added, then after checking the "Add search boxes" checkbox, you should run
+<blockquote>
+	|DIR|/wgreindex
+</blockquote>
+manually in a telnet session.  You will need to index this way instead of by pressing the 'Build Index' button on the website, so that the indexing script will run with the appropriate permissions.  You can also put the above command in your personal crontab.  Type 'man crontab' for more information about that solution.
+        </td></tr>
+</table>
+<A HREF="|WGARCMIN|">Back to WGmin home</A>
+</center>
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Filtering and Filetypes</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Filtering and Filetypes  </h3>
+</div>
+<hr align="left" width="65%" />
+<p class="Sub-Heading"><a name="pdf" id="pdf"></a>Indexing PDF Files using xpdf </p>
+<p>To index PDF files with<a name="xpdf" id="xpdf"></a> <strong>xpdf</strong>, you will need to:</p>
+<table width="85%" border="0">
+  <tr>
+    <td width="670" bordercolor="#666666" bgcolor="#E5E5E5"><p>Download and install pdftotext, it is part of the xpdf package: <a href="ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.00.tar.gz">xpdf-3.00</a> <br />
+    (see <a href="/phpscripts/rlink.php?link=http://www.foolabs.com/xpdf/">xpdf home   page</a> for more information)</p></td>
+  </tr>
+  <tr>
+    <td bordercolor="#666666" bgcolor="#E5E5E5"><p>Place the provided script, <strong><a href="usexpdf.sh.txt">usexpdf.sh</a></strong>,   somewhere accessible, and add these lines: <strong></strong> </p>
+      <p><strong> *.pdf	/path/to/usexpdf.sh   &lt;   	<br />
+      *.PDF	/path/to/usexpdf.sh   &lt;   	<br />
+      *.pdf.gz	/path/to/usexpdf.sh -z	&lt;  	<br />
+      *.PDF.gz	/path/to/usexpdf.sh -z	&lt; </strong></p>
+      <p>to the <strong>.glimpse_filters</strong> file in your archive directory. </p>
+      <p>NOTE: usexpdf.sh assumes <strong>pdftotext</strong> is in   your path, if not you will need to edit the script accordingly. <br />
+        NOTE2: when saving usexpdf.sh from the link above, you   should delete the .txt extension. It is just there <br />
+        so you can view the script   conveniently from your browser. </p>
+      <p>The reason we use usexpdf.sh, is because .glimpse_filters works on STDIN, but   pdftotext requires an <br />
+    input file for random access. </p></td>
+  </tr>
+  <tr>
+    <td bordercolor="#666666" bgcolor="#E5E5E5"><p>On the Manage Archive page, enter 
+        </p>
+      <p> all  or  	pdf PDF </p>
+      <p>in the field labeled&quot;Prefilter filetypes for speed:&quot; </p>
+      <p>Prefiltering is recommended for efficiency and speed. However, if you prefer   to filter files on the fly in order to save space, then edit the <strong>wgreindex</strong> file in each archive that needs to access PDF files. You will   need to add the -z switch to both glimpseindex command lines. </p></td>
+  </tr>
+  <tr>
+    <td bordercolor="#666666" bgcolor="#E5E5E5"><p>Make sure .pdf files aren't being excluded from the indexing! Check the <strong>.wgfilter-index</strong> file and delete any line <br />
+    with .pdf or .PDF in it. </p></td>
+  </tr>
+  <tr>
+    <td bordercolor="#666666" bgcolor="#E5E5E5"><p>Important Add a line </p>
+      <p> rm /tmp/xpdf* </p>
+    <p>either to your crontab or the end of the wgreindex script. The xpdf filter   tends to leave around tmp files and these <br />
+    can fill up your hard drive if not   regularly deleted. </p></td>
+  </tr>
+  <tr>
+    <td bordercolor="#666666" bgcolor="#E5E5E5"><p>Run ./wgreindex in your archive directory to regenerate the indexes. To   search, make sure the &quot;Use Filters&quot; box is <br />
+    checked in the search form. You may   want to make it checked by default or make it a hidden tag.</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p><a href="catdoc.htm">Continue to Next Page &gt;&gt;</a> </p>
+<p>&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="configure.htm">&lt;&lt;Configuring and Customizing    </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="howtos.htm">How-To's &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Frequently Asked Questions (FAQ's)</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div align="center" class="PageHeading">
+  <h3>Frequently Asked Questions    </h3>
+</div>
+<p>&nbsp;</p>
+<hr align="left" width="65%" />
+<table width="85%" border="0">
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+        <p class="question">Can I configure Webglimpse to work with Softcart and Google Analytics?</p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td width="12%" class="answer"><p>&nbsp;</p></td>
+    <td width="88%" class="answer"><p>Yes, Webglimpse can be used with <strong>Softcart </strong>and <strong>Google Analytics</strong>, you can find the <a href="integrate.htm#google">configuration</a> information in our <a href="howtos.htm">how-to's</a> section. </p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+    <p class="question">I have forgotten my webglimpse administrator password, how can I reset it?</p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><p>&nbsp;</p></td>
+    <td><p class="answer">If you have forgotten the webglimpse administrator password, you can set a new one using the htpasswd utility that comes with apache webserver. Run:<br />
+    &nbsp;&nbsp;<strong> htpasswd /[webglimpse_home]/.wgpasswd [newuser] </strong> &nbsp;<br />
+    &nbsp;You will need to run this command as the user that installed the program, or as root. You can also add additional admin users if desired. </p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li><p class="question">I use image maps on my site, can I still index them? </p></li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><p>&nbsp;</p></td>
+    <td><p class="answer">Yes, &quot;Traversing links&quot; means following &lt;A HREF...&gt; and similar tags, just as   if the program were a user clicking on links on the page. &lt;FRAME&gt; and   &lt;IMAGEMAP&gt; tags are also traversed.</p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+        <p class="question">Can I convert HTML codes to upper-ASCII characters for indexing?</p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><p>&nbsp;</p></td>
+    <td><p class="answer">Yes, support for upper-ASCII characters is built into Webglimpse 2.1.01 and above; no manual changes are necessary.</p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+        <p class="question">I have a very large database that I need to index. Can I prefilter to speed up the search times? </p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td><p>&nbsp;</p></td>
+    <td><p class="answer">Absolutely! Webglimpse 2.7.4 and above has a new setting that allows <a href="filtering.htm#options">prefiltering</a> of   PDF and even HTML files, greatly increasing search speed for large indexes.</p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+        <p class="question">I originally installed the edu version but I would like to upgrade to get the custom modules. How do I do this? </p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td class="answer">You should view our <a href="licensing.htm">licensing</a> page to determine which license you should purchase. </td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+        <p class="question">I'm trying to index only part of a web page, but nothing I try works. How can I do this? </p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><p class="answer">Currently we can only configure to exclude whole documents, by adding a </p>
+      <p class="answer">        Deny [regexp]</p>
+      <p class="answer">        line to the .wgfilter-index file.</p>
+      <p class="answer">However, you can edit the script that pre-processes the files for indexing <br />
+        (specified in .glimpse_filters), and modify the code to skip <br />
+&lt;noindex&gt;...&lt;/noindex&gt; sections. If you have Webglimpse 2.13.2 or above, you <br />
+        should have a library module named wgFilter.pm that has a function called <br />
+        SkipSection that will help do what you want. Use htfilter.pl in place of <br />
+      htuml2txt.pl, and add a line such as</p>
+      <p class="answer">&amp;SkipSection(&quot;&lt;noindex&gt;&quot;,&quot;&lt;/noindex&gt;&quot;,\@lines)</p>
+      <p class="answer">    right before the main @lines loop.</p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+        <p class="question">I see that in the glimpse man pages you can use the -f or -F options to specify a pattern in the filenames. Is it possible to have similar functionality with webglimpse? If so, how do I do it?</p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><p class="answer">Just use an input tag named 'filter'. For example:<br />
+      <br />
+      Search   Directory:&lt;SELECT NAME=&quot;filter&quot;&gt;<br />
+      <br />
+  &lt;OPTION   VALUE=&quot;^/my/docroot/&quot;&gt; Whole site<br />
+  &lt;OPTION   VALUE=&quot;^/my/docroot/dir1/&quot;&gt;Dir 1<br />
+  &lt;OPTION   VALUE=&quot;^/my/docroot/dir/2&quot;&gt;Dir 2<br />
+      ...<br />
+  &lt;/SELECT&gt;</p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li>
+        <p class="question">I am  having difficulty figuring out how to properly configure  my 
+        subdirectory index so it will return the correct URL, including the name of   the 
+        subdirectory in which the search starts. Where do I start? </p>
+      </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td height="123">&nbsp;</td>
+    <td><p class="answer">The key is to correctly configure the DocumentRoot for your domain. You can do this thru the web-ministration 
+      interface by pressing the 'Configure Local Domain' button, or directly edit the <a href="samples.htm#wgsitesconf">wgsites.conf</a> file in the archives directory, by default that is /usr/local/wg2/archives.</p>
+    <p class="answer">Once the DocumentRoot setting is correct, then the directory paths will be translated to URLs automatically. You can actually test URL-&gt;filename translations by using the &quot;<strong>Test Path Translations</strong>&quot; button at the bottom of the main administration screen.</p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li class="question">I don't understand how to make my Webglimpse application use a ranking order for the search results. </li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><p class="answer">Glimpse actually does not use any ranking algorithm, except for ordering by most recent first. Webglimpse allows the administrator to create their own ranking formula based on the available variables in the .wgrankhits.cfg file. For more details view the <a href="configure.htm">Configuring and Customizing</a> section on <a href="configure.htm#metatags">supporting metatags</a>. </p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li class="question">I'm having some indexing problems, what is the best way to debug?</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><p class="answer">To debug your search results, try viewing the 
+      source code of the results web page to get the actual glimpse   command line, and test it from a shell.<br />
+      <br />
+      In the source, you will see a   line like this<br />
+      <br />
+  &lt;!-- Glimpse command: /usr/local/bin/glimpse -U -W -j   -y -i -w -H 
+      /home/wgdemo/3 'test' | --&gt;<br />
+      <br />
+      You may cut and paste the   actual command into a shell like so:<br />
+      <br />
+    /usr/local/bin/glimpse -U -W -j -y   -i -w -H /home/wgdemo/3 'test'</p></td>
+  </tr>
+  <tr>
+    <td colspan="2"><ul>
+      <li class="question">I've edited my .wgfilter-index file to include several allow/deny lines, but it only seems to work with the first few lines, why?</li>
+    </ul></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><p class="answer">The most common misconception involving the .wgfilter-index  file is about the combination of <br />
+allow and deny. It works this way: the first matching Allow or Deny 
+applies at which point reading of the file stops. Consequently, later Allow or Deny lines will not 
+have any affect if an earlier line is matched.</p></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="troubleshooting.htm">&lt;&lt;Toubleshooting</a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="support.htm">Support      &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,77 @@
+%%Searchline%%:		Rechercher dans l'archive 
+%%usingwebg%%:		comment utiliser Webglimpse
+%%SimpleSearch%%:       Simple recherche dans une archive
+%%VerySimpleSearch%%:   Très simple recherche dans une archive
+%%searchfor%%:   	Rechercher
+%%lookfor%%:   		Chercher
+%%typedabove%%: 	écrit ci-dessus. 
+
+%%allwords%%:		TOUS les mots
+%%anyword%%:		N'IMPORTE quel mot
+%%exactphrase%%:	PHRASE EXACTE
+%%rankby%%:		Ranger par
+%%combinedscore%%:	Résultat combiné
+%%mostrecent%%:		Le plus récent en premier
+%%linkpop%%:		Popularité du lien
+%%titlemeta%%:		Le titre et méta correspondent
+%%verysimple%%:		très simple
+%%go%%:			Allez-y
+%%withoutwords%%:   	Optionnel - trouvé SANS les mots:
+%%advancedsearch:       La recherche avancée vous permet de créer vos propres expressions booléenes,
+			d'utiliser les expressions régulières, spécifier les erreurs de typo,
+			concordance partielle, tenir compte de la case et autres options.
+%%justlinks%%:	   	Seulement les liens de cette page
+%%entirearchive%%:   	Toute l'archive
+%%selectone%%:	   	Choisissez une ou plusieurs archives
+%%availablearchs%%:	archives disponibles sur ce serveur
+%%examplesearch%%:	Exemple de recherche en français
+
+%%fullsearch%%:		Recherche complète dans l'archive
+%%search%%:		Rechercher
+%%searchfull%%:		rechercher dans toute l'archive
+%%stringto%%:		Chaîne à chercher
+%%casesensitive%%:	Tenir compte de la case
+%%partialmatch%%:	Concordance partielle
+%%jumptoline%%:		Sauter à la ligne
+%%misspellings%%:	Fautes d'ortographe acceptées
+%%usefilters%%:		Utiliser les filtres
+%%returnfiles%%:	Recupère seulement les fichiers modifiès les --- derniers jours.
+%%maxfiles%%:		Nombre maximal de fichiers recupérés:
+%%maxmatches%%:		Nombre maximal de concordances per fichier retourné:
+%%maxchars%%:		Nombre maximal de caractères per fichier:
+%%onlykeywords%%:	Imprimer seulement les phrases qui contient des mots-clé
+%%onepage:		Renvoie seulement une page pour avoir la vitesse maximale
+			Renvoie seulement la liste de fichiers les plus récents
+%%and%%:		et
+%%copyright%%:		Copyright
+%%uofa%%:		Université d'Arizona
+
+%%searchresults%%:      Rechercher les résultats
+%%lookingfor%%:		Chercher
+%%in%%:			dans
+%%Found%%:		Trouvé
+%%matchesin%%:		concorances dans
+%%files%%:		fichiers.
+%%showingres%%:		montrer les résultats
+%%neighof%%:        	voisinage de
+%%newquery%%:		nouvelle recherche
+%%limitof%%:		limite de
+%%filesreached%%:	fichiers trouvés
+%%linesreached%%:	lignes trouvées, les lignes supplémentaires qui concordent ne sont pas montrées
+
+%%introtitle%%: Introduction en français à Webglimpse
+
+%%welcome%%: Bienvenu à Webglimpse.Net
+
+%%intro1%%: Webglimpse et Glimpse sont des moteurs de recherche Unix. Vous pouvez utiliser glimpse pour indexer les fichiers de votre disque dur, et Webglimpse pour indexer les sites Web et les faire ensuite disponibles depuis l'Internet.
+
+%%intro2%%: La plupart de ce site est en anglais, mais Webglimpse peut être utilisé pour indexer des documents dans n'importe quel langue pourvu qu'elle utilise un seul octet pour les caractères, donc le français. La personne qui installe et configure Webglimpse aura probablement besoin de connaître l'anglais, mais les utilisateurs qui recherchent sur votre site non. Le formulaire de recherche et le résultat de sortie peuvent être générés en français.
+
+%%intro3%%: Webglimpse et Glimpse sont gratuits pour un usage sans bénéfice matériel et pour les institutions éducatives. Autres utilisateurs doivent aquérir une license, ou donner en echange un peu de travail pour en avoir. Nous avons bésoin de traducteurs - et donc 5 pages de documentation traduites dans une langue que nous n'avons pas représente une license commerciale!
+
+%%docs%%: Documentation
+%%downloads%%: Téléchargements
+%%demos%%: Démonstration en ligne
+%%devnews%%: Infos de développement
+%%buy%%: Acheter
+

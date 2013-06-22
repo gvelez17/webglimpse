@@ -1,0 +1,8 @@
+#
+# This file specifieds field names to be used in 
+# field-based queries.  Used by parsefields.pl.
+#
+# One field name per line, no spaces
+#
+#title
+#subject

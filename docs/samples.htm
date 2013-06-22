@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<p class="Sub-Heading">Sample File Contents</p>
+<p><a name="archivecfg" id="archivecfg"></a>
+#<span class="SubHeading2"> archive.cfg</span> (Archive configuration, normally edited through the web interface) <br />
+  #<br />
+  # Archive Configuration file for Webglimpse<br />
+  #<br />
+  # title String		= Title of search as placed in wgindex.html<br />
+  #<br />
+  # urlpath http://domain.com/path  	= URL to archive directory <br />
+  # 					(unused in v1.6 &amp; above)<br />
+  #<br />
+  # traverse_type n	= 0 for Traversal of local links only<br />
+  #			= 1 for Traversal of remote and local links<br />
+  #			= 2 for Subdirectory-based archive<br />
+  #<br />
+  # explicit_only n	= 0 for traversal of any link, explicit or non-explicit<br />
+  #			= 1 for traversal of only explicit links to remote sites<br />
+  #<br />
+  # numhops n		= # of hops to traverse from starting page<br />
+  #<br />
+  # nhhops n		= # of hops to allow for each neighborhood<br />
+  #<br />
+  # local_limit n		= maximum # of local pages to index<br />
+  #<br />
+  # remote_limit n	= maximum # of remote pages to index<br />
+  #<br />
+  # addboxes n		= 0 to NOT add search boxes to all indexed pages<br />
+  #			= 1 to add search boxes to all indexed pages<br />
+  #<br />
+  # vhost Hostname	= name of virtual host to use for this index<br />
+  #<br />
+  # usemaxmem 0		= 0 to NOT use maximum available memory<br />
+  #			= 1 to use maximum memory to speed up indexing<br />
+  #<br />
+  # urllist Url1,Url2,..	= List of starting URL's or Directories to index<br />
+  #<br />
+#</p>
+<p>title My Search Page<br />
+  urlpath http://myserver.com/path/to/directory<br />
+  traverse_type 0<br />
+  explicit_only 1<br />
+  numhops 2<br />
+  nhhops 1<br />
+  local_limit 99999<br />
+  remote_limit 250<br />
+  addboxes 0<br />
+  vhost myserver.com<br />
+  usemaxmem 0<br />
+  urllist http://myserver.com/directory1,http://myserver.com.directory2</p>
+<hr align="left" width="65%" />
+<p><a name="wgsitesconf" id="wgsitesconf"></a><span class="SubHeading2">wgsites.conf</span></p>
+<p>SERVER tucson.com<br />
+  PORT 80<br />
+  DOCUMENTROOT /home/WWW<br />
+  USERDIR public_html<br />
+  DIRECTORYINDEX index.html index.htm index.shtml<br />
+  ALIAS /icons/ /home/httpd/icons/<br />
+  ALIAS /msql/  /home/msql/docs/<br />
+SCRIPTALIAS /cgi-bin/ /home/httpd/cgi-bin/</p>
+<hr align="left" width="65%" />
+<p><span class="SubHeading2"><a name="wgfilterindex" id="wgfilterindex"></a>wgfilter-index</span></p>
+<p>Deny (^|/)JavaScript:<br />
+  Deny \.gif$<br />
+  Deny \.jpeg$<br />
+  Deny \.mpeg$<br />
+  Deny \.jpg$<br />
+  Deny \.ppt$<br />
+  Deny \.PPT$<br />
+  Deny \.au$<br />
+  Deny \.wav$<br />
+  Deny \.mov$<br />
+  Deny \.htm$<br />
+  Deny \.html$<br />
+  Deny \.gz$<br />
+  Deny \.Z$<br />
+  Deny \.tgz$<br />
+  Deny \.txt$<br />
+  Deny \.zip$<br />
+  Deny \.ps$<br />
+  Deny \.exe$<br />
+  Deny (^|/)wgindex\.html$<br />
+  Deny (^|/)wgall\.html$<br />
+  Deny \.wg<br />
+Deny \.glimpse_<br />
+Deny (^|/)indexing-in-progress$<br />
+Deny (^|/)wgreindex$<br />
+Deny (^|/)archive.cfg$<br />
+Deny (^|/)\.nh\.<br />
+Deny ~$<br />
+Deny (^|/)_vti<br />
+Deny (^|/)\.htpasswd$<br />
+Deny (^|/)\.htgroup$</p>
+<hr align="left" width="65%" />
+<p><a name="wgtoindex" id="wgtoindex"></a><span class="SubHeading2">wg_toindex</span></p>
+<p>/var/www/html/document1.html &nbsp;&nbsp;http://myserver.domain.com/document1.html   &nbsp;1<br />
+  /var/www/html/document2.html &nbsp;&nbsp;http://myserver.domain.com/document2.html   &nbsp;1<br />
+  /var/www/htmldocument3.html&nbsp;&nbsp; &nbsp;http://myserver.domain.com/document3.html   &nbsp;1<br />
+  /var/www/html/document4.html &nbsp;&nbsp;http://myserver.domain.com/document4.html&nbsp;   1<br />
+  /var/www/html/document5.html   &nbsp;&nbsp;http://myserver.domain.com/document5.html&nbsp;&nbsp;1</p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# .wgoutputfields
+# Special replacement variables for output
+# TYPE<tab>NAME<tab>STRING
+#
+# where TYPE may be one of
+#
+#	FILE = treat STRING as a regular expression applied to the contents of the matching file
+#			The value will be set to the first matching ()'s 
+#			(using the $1 variable after a match) 	
+#  	PATH = treat STRING as a regular expression applied to the directory path of the matching file
+#			The value will be set to the first matching ()'s
+#	VARTEXT = treat STRING as text with possible replacement variables inside []
+#			variables may include [TITLE],[HREF],[DATE],[MATCHED_LINES],[MATCHED_FILES],
+#			[MATCHED_LINES_SHOWN],[MATCHED_FILES_SHOWN],[QUERY]
+#
+# NAME should match a variable [NAME] in the wgoutput.cfg file in the archive
+# directory.
+#
+# TITLE is a special name, and will be used for the linked text 
+
+# EXAMPLES.  You should change these to your own definitions.  Remove the 
+# initial "#" to uncomment.  
+# 
+
+#FILE	TITLE	^TITLE:\s+(.+)$
+#FILE	REFNO	^Reference Number:\s+(.+)$
+
+#PATH	LASTSUBDIR	\/([^\/]+)\/[^\/]+$
+
+#VARTEXT    LINK    <A HREF="[HREF]">[HREF]</A>   

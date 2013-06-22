@@ -1,0 +1,336 @@
+# *************************************************************************** #
+#  BibGlimpse, the Web Repository                                             #
+# *************************************************************************** #
+#
+#
+# If you want to use WebGlimpse as a scientific reprints repository
+# follow these instructions installing Glimpse and WebGlimpse.
+# Apart from two flags that need to be set during Glimpse installation,
+# everything else is done after WebGlimpse has been successfully installed.
+#
+# (c) Boku Bioinformatics, Vienna, Austria
+#     Thomas Tuechler 2006
+
+
+
+# 0) Glimpse installation
+# -----------------------------------------------------------------------------
+# make sure that Glimpse is configured with the following two flags:
+
+./configure --with-file-end-mark='\t' --enable-structured-queries;
+
+
+
+# *************************************************************************** #
+#  BibGlimpse specific modifications                                          #
+# *************************************************************************** #
+#
+# you may do the BibGlimpse installation manually, by goint through the
+# points below, or you may simply call the BibGlimpse.SETUP script to
+# take you through the procedure:
+
+./BibGlimpse.SETUP
+
+
+
+
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Manual installation instructions:
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+# 1) some abbreviations
+# -----------------------------------------------------------------------------
+# We will refer to some WebGlimpse installation paths as follows:
+#
+# $WG  = WebGlimpse installation directory (eg. /usr/lib/wg2)
+# $ARC = your archive directory (eg. /usr/lib/wg2/archives)
+# $CGI = your cgi-bin directory (eg. /usr/lib/apache/cgi-bin/wg2)
+#
+# If you set these as variables in your shell, you can directly copy,
+# paste the commands given here.
+
+
+
+# 2) $WG/lib/(wr)usexpdf.sh
+# -----------------------------------------------------------------------------
+# Use the advanced pdf filtering tool wrusexpdf.sh instead of the old one:
+
+mv $V $WG/lib/usexpdf.sh $WG/lib/old.usexpdf.sh;
+mv $V $WG/lib/wrusexpdf.sh $WG/lib/usexpdf.sh;
+
+# Adjust bin $PATH in usexpdf.sh to include the directory where the
+# binaries for pdftotext, md5sum and so on can be found on your system.
+# (here we change it to /bi/arch/bin):
+
+# old:   export PATH=/usr/local/bin:$PATH;
+# new:   export PATH=/bi/arch/bin:$PATH;
+
+emacs $WG/lib/usexpdf.sh &
+
+
+
+# 3) $WG/templates/.glimpse_filters
+# -----------------------------------------------------------------------------
+# Add the paths to usexpdf.sh to the .glimpse_filters template. This
+# will make the program index pdf files as well.
+# 
+
+# new:   *.pdf	|WGHOME|/lib/usexpdf.sh
+# new:   *.PDF	|WGHOME|/lib/usexpdf.sh
+
+emacs $WG/templates/.glimpse_filters &
+
+
+
+# 4) $WG/dist/wgfilter-index
+# -----------------------------------------------------------------------------
+# Adapt the filters such that it accepts *.pdf's by replacing and adding
+
+# old:   Deny \.pdf$
+# new:   Allow \.pdf$
+# new:   Allow \.PDF$
+
+# old:   Allow \..?html?$
+# new:   Deny \.s?html?$
+
+# new:   Deny \.pl$      
+# new:   Deny \.sh$      
+# new:   Deny \.tmp$     
+# new:   Deny \.ag\.     
+# new:   Deny \.bib$     
+# new:   Deny \.medline$ 
+# new:   Deny \.medl$    
+# new:   Deny \.suppl$   
+# new:   Deny \.pubmed   
+# new:   Deny \.anno$    
+# new:   Deny \.htaccess 
+# new:   Deny README\.txt
+
+emacs $WG/dist/wgfilter-index &
+
+
+
+# 5) $WG/templates/wgreindex
+# -----------------------------------------------------------------------------
+# Enable structured queries with -s and -z flag in glimpseindex commands:
+
+# old:   |CAT| |INDEXDIR|/.wg_toindex | |GLIMPSEIDX_LOC| -H |INDEXDIR| -t -o -h -n -X -U -C -F > /dev/null
+# new:   |CAT| |INDEXDIR|/.wg_toindex | |GLIMPSEIDX_LOC| -H |INDEXDIR| -s -z -t -o -h -n -X -U -C -F > /dev/null
+
+# old:   |CAT| |INDEXDIR|/.wg_toindex | |GLIMPSEIDX_LOC| -H |INDEXDIR| -t -o -h -n -X -U -C -F
+# new:   |CAT| |INDEXDIR|/.wg_toindex | |GLIMPSEIDX_LOC| -H |INDEXDIR| -s -z -t -o -h -n -X -U -C -F
+
+# ATTENTION: Take care that emacs does not introduced a new newline
+#            in the middle of the glimpseindex command line!
+
+emacs $WG/templates/wgreindex &
+
+
+
+# 6) $WG/lib/wgHeader.pm
+# -----------------------------------------------------------------------------
+# Change the $FILE_END_MARK=" " definition in the $WG/lib/wgHeader.pm file
+# to "\t". in accordance with the --file-end-mark='\t' flag used in the
+# Glimpse installation. This will allow filenames with spaces.
+
+# old:   $FILE_END_MARK=" ";
+# new:   $FILE_END_MARK="\t";
+
+# set a flag that we use WebGlimpse as a Web Repository:
+
+# old:   $WRREPOS = 0;    # to use WebGlimpse as a scientific reprints repository [TT]
+# new:   $WRREPOS = 1;    # to use WebGlimpse as a scientific reprints repository [TT]
+
+emacs $WG/lib/wgHeader.pm &
+
+
+
+# 7) $CGI/wrrepos.cgi
+#    $CGI/wrsearch.cgi
+# -----------------------------------------------------------------------------
+# Specify path to webglimpse libraries (eg. to '/bi/arch/lib/wg2'):
+
+# old:   my $WEBGLIMPSE_LIB='';
+# new:   my $WEBGLIMPSE_LIB='/bi/arch/lib/wg2/lib';
+
+emacs $CGI/wrrepos.cgi &
+emacs $CGI/wrsearch.cgi &
+
+
+
+# *************************************************************************** #
+#  Begin of OPTIONAL modifications 8) - 10)                                   #
+# *************************************************************************** #
+
+
+# OPTIONAL 8) $CGI/logout/logout.cgi
+# -----------------------------------------------------------------------------
+# If you want to restrict access to your repository by means of .htaccess,
+# create a logout directory within $CGI, that has a separate .htaccess
+# file containing:
+#
+#  AuthName "Logout"
+#  AuthUserFile /your/path/to/.htpasswd 
+#  Require user logout
+#
+# which allows for the user 'logout' only. Do not forget to provide
+# a user 'logout' with password logout in your .htpasswd file!
+# All this provides a basic logout option using .htaccess user control.
+
+mkdir $CGI/logout;
+cat > "$CGI"/logout/logout.cgi << EOF
+#!/usr/bin/perl -w
+use strict;
+use CGI;
+use CGI::Carp qw(fatalsToBrowser);
+my \$q = new CGI;
+print \$q->header();
+my $user = \$ENV\{REMOTE_USER\};
+print
+    "You are now logged out!<br />",
+    "Current REMOTE_USER is set to \$user.<br />",
+    "<br />",
+    "(On some browsers you still need to close the browser,<br />",
+    " to ensure that the previous pages can not be reloaded!)";
+EOF
+chmod +x "$CGI"/logout/logout.cgi
+
+
+# OPTIONAL 9) $WG/templates/wgindex.html
+#             $WG/templates/wgall.html	
+#             $WG/templates/wgany.html
+# ------------------------------------------------------------------------------
+# Changes in the template html files allow you to customize the standard
+# settings for the search results page upfront. We suggest to first
+# adjust the matches per file, but feel free to make changes as you like:
+
+#        <br>Maximum number of matches per file returned:
+#        <SELECT NAME=maxlines>
+# old:   <OPTION selected>10
+# new:   <OPTION selected>1
+
+# Modesty also for the maximum characteroutput per file:
+
+#        <br>Maximum number of characters output per file:
+# old:   <INPUT NAME="maxchars" VALUE=2000>
+# new:   <INPUT NAME="maxchars" VALUE=250>
+
+# Another make-it-look-nicer feature (for wgindex.html only):
+
+# old:   <input type=checkbox name="sentence"> Try to print only sentences ...
+# new:   <input type=checkbox name="sentence" value="on"> Try to print ...
+
+emacs $WG/templates/wgindex.html &
+emacs $WG/templates/wgall.html &
+emacs $WG/templates/wgany.html &
+
+
+
+# OPTIONAL 10) $WG/templates/wgoutput.cfg
+# -----------------------------------------------------------------------------
+# This is also an optional modification. If you want to modify the output,
+# remove the limit lines reached line. Again, its up to you to choose the
+# setting you like best. This should just point you to the user configurable 
+# parts of the code:
+
+# old:   lines_exceeded		<i>...limit of [MAXLINES] lines reached, additional matching lines are not shown...</i>
+# new:   lines_exceeded		<i></i>
+
+emacs $WG/templates/wgoutput.cfg &
+
+
+# *************************************************************************** #
+#  End of optional modifications, the following is required again...          #
+# *************************************************************************** #
+
+
+
+# 11) configure archive via webinterface
+# -----------------------------------------------------------------------------
+# configure archive with wgarcmin.cgi via the web
+# with two archives as using YOUR settings
+# 
+# NOTE: one archive is the one to be accessed from the web all the time,
+#       the other one is for stealthly reindexing in background.
+#       check for correct permissions! Webuser must have full access
+#       the directories to index!
+# 
+# Edit domain configureation:
+#   Server Name: your.server.com
+#   Document Root: /your/servers/htdocs
+#   Port: xxxx
+#   Protocol: http
+#   User Dir: public_html
+#   Directory Index Files: index.html index.htm index.shtml index.php
+#   ScriptAlias & Extensions: \.php.?(\?|$) \/cgi
+# 
+# Add new Archive
+#   Title: Your_prints_repository_main
+#   Description: Prints repository
+#   Index by Directory
+#     Directory Path: /your/servers/htdocs/prints
+#     Equivalent URL: http://your.server.com:xxxx/prints
+#     Max #Pages: 99999
+# 
+# Add new Archive
+#   Title: Your_prints_repository_stealth
+#   Description: Prints repository
+#   Index by Directory
+#     Directory Path: /your/servers/htdocs/prints
+#     Equivalent URL: http://your.server.com:xxxx/prints
+#     Max #Pages: 99999
+# 
+# Build Indices for both archives
+
+
+
+# 12) Reindexing in background
+# -----------------------------------------------------------------------------
+# From the above you should now have two directories in $ARC,
+# namely $ARC/1 and $ARC/2.
+# To keep the working archive $ARC/1 searchable while reindexing
+# wrwgreindex will mirror $ARC/1 to $ARC/2, build the index there
+# and then port the resulting index back to $ARC/1.
+# To do so, we need to replace the standard wgreindex script in $ARC/1.
+# Set $ARC to your full archive path and execute the commands below:
+# Note that reindexing can also be called from Crontab, as described
+# in the WebGlimpse documentation!
+
+ARC_MAIN="$ARC/1";
+ARC_STEALTH="$ARC/2";
+
+cat > "$ARC_MAIN"/wgreindex << EOF
+#!/bin/sh
+
+# Since this is the visible archive we will not do any
+# reindexing here. instead we will move the reindexing
+# to the stealth twin of this archive.
+# 
+# (c) Boku Bioinformatics
+#     Thomas Tuechler, David Kreil 2006
+#
+
+rm -f /tmp/.wg*;
+"$ARC_MAIN"/wrwgreindex \$1 "$ARC_STEALTH";
+EOF
+
+chmod +x $ARC_MAIN/wgreindex;
+
+# ATTENTION: Take care that sym-links are not interpolated:
+#            /your/archives/1 must not become
+#	     /your/somewhere/else/because/of/symlink/arch/...
+#            or the 'sed' command in wrwgreindex will fail
+#            and the abra retrieval in wrrepos.cgi will
+#            silently produce crap!
+
+
+
+# 13) final test
+# -----------------------------------------------------------------------------
+# Build Index from command line:
+
+$ARC/1/wgreindex
+
+# Test if archive is searchable from webinterface. Enjoy!

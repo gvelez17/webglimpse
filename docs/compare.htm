@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Webglimpse Documentation-Feature Comparison</title>
+<link href="index.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<p align="center" class="PageHeading">Features : Ease of Use, Speed, Power, and 
+Flexibility</p>
+<table cellspacing="0" cellpadding="7" width="100%" border="0">
+  <tbody>
+    <tr>
+      <td>
+        <p><b>Webglimpse</b> is a feature-rich search 
+          engine that has been used on thousands of sites, all different 
+          flavors of Unix, and in countries from Nigeria to Norway, 
+          Chile to Canada. Nearly everything about Webglimpse is 
+          configurable: how to select the files to index, how to search 
+          them, and how to present the results to the user. Yet, we have 
+          tried to keep the install simple and quick so that you can get 
+          your search up and running today.        </p>
+        <p><b>Glimpse</b> is the powerful indexing and query system 
+          inside of Webglimpse. It can also be used as a stand-alone 
+          program in a Unix environment. Glimpse and glimpseindex are 
+          written in C for speed, while most of the management and 
+          interface parts of Webglimpse are written in Perl. </p>
+        <p>Specific features are listed below. Features with a red 
+          check are available in the commercial version; ones with a 
+          green check are also available in the free version for 
+          educational institutions. Click on the question mark to the 
+          right for detailed instruction on how to enable each feature. </p>
+        <p><a href="#ease">Ease  of Use</a> | 
+		<a href="#speed">Speed  &amp; Power</a> | 
+		<a href="#flex">Flexibility</a> | 
+		<a href="#lang">Languages</a> | 
+	  <a href="#sysreq">System Requirements</a>      </p></td>
+    </tr>
+  </tbody>
+</table>
+<hr align="left" width="450" />
+<p>&nbsp;</p>
+<p class="Sub-Heading"><a name="ease" id="ease"></a>Ease of Use</p>
+<TABLE width="90%" border=1 cellPadding=3 cellSpacing=0 bordercolor="#666666">
+  <TBODY>
+  <TR>
+    <TH bgcolor="#E5E5E5"><p>Com</p></TH>
+    <TH bgcolor="#E5E5E5"><p>Edu</p></TH>
+    <TH class="Sub-Heading">Features included</TH>
+    </TR>
+  <TR>
+    <TD bgcolor="#E5E5E5"><IMG 
+      src="images/smredcheck.gif" width="20" height="16" align="middle"></TD>
+    <TD bgcolor="#E5E5E5">&nbsp;</TD>
+    <TD><p><B>Guaranteed install</B>: if you purchase a license, 
+      we guarantee a successful install on your site. We will walk you through 
+      configuration on your server, and if desired will perform a remote install 
+      for you. </p></TD>
+    </TR>
+  <TR>
+    <TD bgcolor="#E5E5E5"><IMG src="images/smredcheck.gif" align="middle"></TD>
+    <TD bgcolor="#E5E5E5">&nbsp;</TD>
+    <TD><p><B>Web-ministration Interface</B>: Manage all your archives 
+      (searchable sites) through a single web interface. Context-sensitive help 
+      tells you exact directory paths on your system where all configuration 
+      files are located. </p></TD>
+    </TR>
+  <TR>
+    <TD bgcolor="#E5E5E5"><IMG 
+      src="images/smredcheck.gif" align=middle></TD>
+    <TD bgcolor="#E5E5E5">&nbsp;</TD>
+    <TD><p><B>Automated Search Form</B>: simple form allows users 
+      to search for ANY KEYWORDS, ALL KEYWORDS or EXACT PHRASE, and to find only 
+      matches WITHOUT certain words. Automatically generates correct boolean 
+      expression and sends to glimpse. </p></TD>
+    </TR>
+  <TR>
+    <TD bgcolor="#E5E5E5"><IMG src="images/smredcheck.gif"></TD>
+    <TD bgcolor="#E5E5E5"><IMG src="images/smgreencheck.gif" width="20" height="16"></TD>
+    <TD><p><B>Search From Any Page of your Site</B>: optional search box can be 
+      added to all pages of your site, so that users can search from anywhere. 
+      They can also search just the links on the page they are looking at, so 
+      that the hits are more likely to be relevant.</p></TD>
+    </TR></TBODY></TABLE>
+<p><a name="speed" class="Sub-Heading" id="speed">Speed and Power</a></p>
+<table width="90%" border="1" cellpadding="3" cellspacing="0" bordercolor="#666666">
+  <tbody>
+    <tr>
+      <th width="26" bgcolor="#E5E5E5"><p>Com</p></th>
+      <th width="30" bgcolor="#E5E5E5"><p>Edu</p></th>
+      <th width="665" class="Sub-Heading">Features included</th>
+    </tr>
+    <tr>
+      <td valign="top" bgcolor="#E5E5E5"><img 
+      src="images/smredcheck.gif" align="middle"></td>
+      <td valign="top"  nowrap="nowrap" bgcolor="#E5E5E5"><img 
+      src="images/smgreencheck.gif" align="top">*</td>
+      <td ><p><b>Fast Searching</b>: Glimpse builds a keyword index 
+        in advance for very fast searching (though it can also access individual 
+        files for complex boolean queries). Uncommon words will be found rapidly 
+        even in a very large fileset, up to several Gigabytes. Common words (with 
+        100's or 1000's of matches) will take longer, but if the number of hits 
+        returned can be limited, even those will be very fast. The core index and 
+        search programs are written in C. </p>
+        <p>&nbsp;Glimpse uses a small index - typically less than 5% of the total data size - so it 
+          can usually be entirely loaded into memory. </p>
+        <p><b>Sample Search Times</b> on a dual 400MHz processor running Linux 
+          (run on command line to not include page load time) <br />
+        </p>
+        <table width="100%" border="1" bordercolor="#E5E5E5">
+                <tbody>
+                  <tr>
+                    <td><p>dataset size</p></td>
+                    <td><p>index size</p></td>
+                    <td><p>number of times keyword appears</p></td>
+                    <td><p>Search Time</p></td>
+                  </tr>
+                  <tr>
+                    <td><p>12608 files, 1.5Gb</p></td>
+                    <td><p>3.1Mb</p></td>
+                    <td><p>4</p></td>
+                    <td><p><b>1 sec</b></p></td>
+                  </tr>
+                  <tr>
+                    <td><p>12608 files, 1.5Gb</p></td>
+                    <td><p>3.1Mb</p></td>
+                    <td><p>606</p></td>
+                    <td><p><b>31 sec</b> to return all hits; <br />
+                      <b>1 sec</b> to return 
+                      only top 20 hits</p></td>
+                  </tr>
+                  <tr>
+                    <td><p>499 files, 64Mb</p></td>
+                    <td><p>300Kb</p></td>
+                    <td><p>49</p></td>
+                    <td><p><b>1 sec</b></p></td>
+                  </tr>
+                </tbody>
+        </table>
+        <p>* Edu version will search fast 
+          for small numbers of returned hits; but when searching for common words 
+          the performance may be degraded.</P>
+        </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img src="images/smredcheck.gif"></td>
+      <td bgcolor="#E5E5E5"><img src="images/smgreencheck.gif" align="middle"></td>
+      <td><p><b>Large Data Sets:</b> Glimpse is used to handle data sets up to 9 Gigabytes, to our knowledge. Because of the two-level search design that 
+        localizes keywords to a 'block' of data, the index footprint is quite 
+        small, typically less than 5% of the total data set size. The speed of the 
+        search scales with the number of matches to the keyword and only 
+        secondarily with the total size of the indexed data. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5">&nbsp;</td>
+      <td><p><b>Result Caching/Large # of Hits:</b> Webglimpse 
+        maintains a cache of recent searches, which allows even those searches 
+        returning a very large number of hits to return quickly if they are 
+        commonly performed. The cache also allows rapid navigation using a <b>Next 
+          Hits</b> toolbar, which lets the user jump to any page of hits returned. </p></td>
+    </tr>
+  </tbody>
+</table>
+<p><a name="flex" id="flex"></a><span class="Sub-Heading">Flexibility</span></p>
+<p><i>Probably Webglimpse's Strongest Point - Extremely 
+Flexible, Configurable rules for which files to index,<br />
+</i><i>how to search, pattern 
+  matching, result ranking, and more</i></p>
+<table width="90%" border="1" cellpadding="3" cellspacing="0" bordercolor="#666666">
+  <tbody>
+    <tr>
+      <th bgcolor="#E5E5E5"><p>Com</p></th>
+      <th bgcolor="#E5E5E5"><p>Edu</p></th>
+      <th class="Sub-Heading">Features included</th>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5">&nbsp;</td>
+      <td><p><b>Customized Results Output</b>: using a template 
+        file, the webglimpse administrator can control every aspect of the 'search 
+        results' page, from backgrounds and font colors to demarcations between 
+        individual hits. Results can be displayed using any valid HTML tags - in a 
+        list, a table, multiple individual tables, etc. They can be displayed by 
+        title, by filename or even by pulling a specific pattern out of the 
+        matching file.
+      </p>        <p><b>Keyword highlighting</b> and amount of context returned are also 
+          under administrative control. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5">&nbsp;</td>
+      <td><p><b>Customized Ranking of Hits</b>: four built-in ranking schemes are 
+        available to the user as they search your site: rank by most recent first, 
+        by matches in title and meta tags, by link popularity, or by a combination 
+        of all these (the default). As the administrator, you can create your own 
+        ranking formula using all the available information about the match, and 
+        make your own customized ranking schemes available to your users (or limit 
+        them to one scheme of your choice). Re-sorting and ranking of hits is an 
+        extremely powerful tool that allows users to find the hits most relevant 
+        to them. <br />
+        <b>META tag support</b> allows you to include any meta tag 
+        explicitly in your ranking formulas. This gives you precise control over 
+        ordering of your hit results, if you so desire. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smgreencheck.gif" align="middle"></td>
+      <td><p><b>Index Local and Remote Pages</b>: Webglimpse is not 
+        limited to searching only your own data! The Spider program has flexible 
+        rules for gathering pages from remote sites. It can gather all the pages 
+        under a specified domain, or traverse a set number of 'hops' from a 
+        starting page regardless of domain, or a combination of these rules. You 
+        can even make a single archive, searchable from one form, that combines 
+        local data on your hard drive and multiple remote sites you specify. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img src="images/smredcheck.gif"  align="middle"></td>
+      <td bgcolor="#E5E5E5"><img src="images/smgreencheck.gif"  align="middle"></td>
+      <td><p><b>Boolean Expressions, Wildcards, Misspellings &amp; more</b>: 
+        Extremely powerful agrep engine allows users to specify partial or 
+        whole-word matches; use regular expressions, boolean combinations, 
+        specify number of spelling errors allowed, case-sensitive or insensitive. 
+        The administrator can modify the search form to pre-set these values for 
+        optimum searching, or allow the user to choose at the time of search. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smredcheck.gif" align="middle"></td>
+      <td  bgcolor="#E5E5E5"><img 
+      src="images/smgreencheck.gif" align="middle"></td>
+      <td><p><b>HTML, PDF, Word, other formats</b>: any filetype 
+        that can be converted to text can be indexed. On-the-fly conversion saves 
+        drive space, or you can create permanent text versions for speed. 
+        3rd-party format converters are easily configured into the system. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5"><img src="images/smgreencheck.gif" align="middle"></td>
+      <td><p><b>Dynamically Generated Pages</b>: PHP and database-driven sites are 
+        hard for many indexing programs to handle. Webglimpse allows you to handle 
+        both dynamically created and static pages in a single index. Dynamically 
+        generated pages are passed through the web server before indexing, so 
+        Webglimpse indexes exactly what a browser would see, rather than the 
+        source code used to generate the page. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smgreencheck.gif" align="middle"></td>
+      <td><p><b>&quot;Neighborhood&quot; Searching</b>: Once your site is 
+        indexed, users can search the entire site, any subdirectory, or just the 
+        links on the current page. For large sites with many different areas, this 
+        is an essential tool to help users quickly find the most relevant 
+        results.As the site administrator, you control what options to provide. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5">&nbsp;</td>
+      <td><p><b>Query Log</b>: all the keywords users enter are logged in a the 
+        'common log' format, which is compatible with standard log analysis tools 
+        such as wusage. See how users are actually interacting with your site, and 
+        find out which words and phrases are most commonly searched for. This 
+        information can help you optimize the design of your site. </p></td>
+    </tr>
+  </tbody>
+</table>
+<p><a name="lang" id="lang"></a><span class="Sub-Heading">Languages</span></p>
+<table width="90%" border="1" cellpadding="3" cellspacing="0" bordercolor="#666666">
+  <tbody>
+    <tr>
+      <th bgcolor="#E5E5E5"><p>Com</p></th>
+      <th bgcolor="#E5E5E5"><p>Edu</p></th>
+      <th class="Sub-Heading">Features included</th>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smredcheck.gif" align="middle"></td>
+      <td bgcolor="#E5E5E5"><img 
+      src="images/smgreencheck.gif" align="middle"></td>
+      <td><p><b>Index Any Single-Byte Language</b>: Glimpse can 
+        index any language that is single-byte encoded - that includes all 
+        European languages such as Spanish, French, etc. Currently we cannot do 
+        double-byte encoded languages such as Chinese, or with special rules for 
+        word breaks such as Thai. By using the included filter program, the 
+        special &uml;aut; characters are correctly indexed whether they appear as html 
+        character entities or actual upper-ascii characters. </p></td>
+    </tr>
+    <tr>
+      <td bgcolor="#E5E5E5"><img src="images/smredcheck.gif" /></td>
+      <td bgcolor="#E5E5E5">&nbsp;</td>
+      <td><p><b>Preset Results Output and Search Forms</b>: Thanks to contributions 
+        from our users, we have incorporated search forms and result templates in 
+        the following languages:<br>
+        <b>Hebrew, German, Spanish, Italian, Finnish, 
+          Portuguese and Estonian</b>.<br>
+        Creating a search interface that searches 
+        and displays correctly in these languages is just a single click!
+      </p><p>Licensed users with the Custom Output Module can easily add their own 
+      templates in any language. </p></td>
+    </tr>
+  </tbody>
+</table>
+<p><a name="sysreq" id="sysreq"></a><span class="Sub-Heading">System Requirements</span></p>
+<p></A>Unix server, ssh/telnet access; if user does not 
+  have experience installing Unix applications then our free <br />
+  remote install may be 
+  helpful. Root access is not required.</p>
+<p><b>Platforms:</b> Linux, Solaris, SunOS, HP/UX, freeBSD, AIX, IRIX, OSF, 
+  Mach, Rhapsody (Mac OS X). </p>
+<p>Glimpse has now been reported to compile and run using the CygWin compiler 
+  for Windows, but we have not yet <br />
+  tested on any Win32 platforms. </p>
+<span class="Sub-Heading">Disk space requirements </span>
+<p>From 5-15% of the indexed filespace will be 
+  required for the index; additional space will be required during indexing <br />
+  as 
+  scratch space. Remote files must be retrieved and stored locally for indexing. 
+  The program itself takes about 5Mb.</p>
+<p><a href="wgvshtdig.htm">A comparison with 
+HtDig</a></p>
+<p>&nbsp;</p>
+<div align="right">
+  <table width="700" border="0" align="center">
+    <tr>
+      <td width="243"><div align="left">
+        <p><a href="gettingstarted.htm">&lt;&lt; Getting Started </a></p>
+      </div></td>
+      <td width="176"><div align="center">
+        <p><a href="TOC.htm">Table of Contents</a></p>
+      </div></td>
+      <td width="246"><div align="right">
+        <p><a href="install.htm"><a href="simpletutorial.htm">Simple tutorial &gt;&gt;</a></p>
+      </div></td>
+    </tr>
+  </table>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>
